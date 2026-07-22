@@ -121,6 +121,66 @@ pkill cloudflared
 
 ---
 
+## 2.5 Postgres'e Dışarıdan Bağlanma (SSH tüneli)
+
+Bulut veritabanına kendi bilgisayarından (pgAdmin/DBeaver/psql) bağlanmak için.
+Port internete açılmaz; trafik SSH ile şifrelenir.
+
+### VM'de: portu sadece localhost'a aç
+
+```bash
+cd ~/Flowrate5.0CloudDemo/helpdesk-rag
+
+cat > pg-expose.override.yml <<'EOF'
+services:
+  postgres:
+    ports:
+      - "127.0.0.1:5432:5432"
+EOF
+
+docker compose -f docker-compose.demo.yml -f pg-expose.override.yml up -d
+
+# doğrula: localhost:postgresql (LISTEN) görünmeli
+sudo lsof -i :5432
+```
+
+`127.0.0.1:` öneki kritik — bu olmadan port internete açılır.
+
+### Yerel makinede: gcloud kur ve tüneli aç
+
+```bash
+brew install --cask google-cloud-sdk
+
+gcloud auth login
+gcloud config set project project-5f4ad3d5-b31a-423d-a9e
+
+# zone'u öğrenmek için (VM'de):
+#   curl -s -H "Metadata-Flavor: Google" \
+#     http://metadata.google.internal/computeMetadata/v1/instance/zone
+
+# Tünel — bu terminal AÇIK KALMALI
+gcloud compute ssh ai-data-prep-vm --zone=europe-central2-a -- -L 5433:localhost:5432
+```
+
+Yerel port **5433** seçildi çünkü 5432'de Postgres.app çalışıyor.
+
+### Bağlan (AYRI bir terminalde)
+
+```bash
+PGPASSWORD=demopw /Applications/Postgres.app/Contents/Versions/latest/bin/psql \
+  -h 127.0.0.1 -p 5433 -U helpdesk -d helpdesk -c "\dt"
+```
+
+GUI istemcilerde: Host `127.0.0.1`, Port `5433`, DB `helpdesk`,
+Kullanıcı `helpdesk`, Şifre `demopw`.
+
+**İki tuzak:**
+- `localhost` yerine **`127.0.0.1`** kullan — `localhost` IPv6'ya (`::1`) çözülüp
+  tünele ulaşamayabilir (`fe_sendauth` hatası).
+- Tünel terminali kapanırsa bağlantı kopar.
+
+---
+
 ## 3. Günlük Kullanım Komutları
 
 ```bash
