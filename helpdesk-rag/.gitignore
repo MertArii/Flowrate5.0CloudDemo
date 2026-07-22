@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.pyc
+data/docs/*
+!data/docs/.gitkeep
+.venv/
+.env.prod
+backups/

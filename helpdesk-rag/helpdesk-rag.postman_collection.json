@@ -1,0 +1,99 @@
+{
+  "info": {
+    "name": "Helpdesk RAG",
+    "description": "Yerel Qwen3.5 + pgvector help desk RAG API. baseUrl değişkenini kullanır (varsayılan http://localhost:8000).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        },
+        "description": "Servis ayakta mı kontrolü."
+      }
+    },
+    {
+      "name": "Ingest (doküman yükle)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": [],
+              "description": "PDF veya .txt dosyası seç"
+            },
+            {
+              "key": "title",
+              "value": "SSS",
+              "type": "text",
+              "description": "Doküman başlığı (opsiyonel)"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/ingest",
+          "host": ["{{baseUrl}}"],
+          "path": ["ingest"]
+        },
+        "description": "Doküman yükleyip indeksler. body -> form-data -> 'file' anahtarını File tipine çevirip dosya seç. Redis varsa (prod) yanıt {mod:'kuyruk', job_id} döner; yoksa (dev) senkron indeksler ve {mod:'senkron', document_id} döner."
+      }
+    },
+    {
+      "name": "Job durumu (kuyruklu ingest)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/jobs/JOB_ID_BURAYA",
+          "host": ["{{baseUrl}}"],
+          "path": ["jobs", "JOB_ID_BURAYA"]
+        },
+        "description": "Ingest yanıtında job_id döndüyse (prod/Redis varsa) durumunu buradan takip et. Redis yoksa 503 döner."
+      }
+    },
+    {
+      "name": "Ask (soru sor)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"question\": \"Yıllık izin talebini nasıl oluştururum?\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/ask",
+          "host": ["{{baseUrl}}"],
+          "path": ["ask"]
+        },
+        "description": "RAG ile soru sorar; kaynaklı cevap döner."
+      }
+    }
+  ]
+}

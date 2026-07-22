@@ -1,0 +1,51 @@
+{
+  "_aciklama": "Kategori -> ekip -> uzman eşlemesi. Sınıflandırıcı bu kategori listesinden birini seçer. Ekipleri/uzmanları kendi organizasyonunuza göre düzenleyin.",
+  "guven_esigi": 0.6,
+  "kategoriler": {
+    "SAP-FI": {
+      "aciklama": "Finans ve muhasebe (fatura, hesap belirleme, mizan, kapanış)",
+      "ekip": "SAP Finans",
+      "uzmanlar": ["ayse.k", "mehmet.d"]
+    },
+    "SAP-MM": {
+      "aciklama": "Malzeme yönetimi / satınalma (sipariş, mal girişi, stok)",
+      "ekip": "SAP Lojistik",
+      "uzmanlar": ["can.h"]
+    },
+    "SAP-SD": {
+      "aciklama": "Satış ve dağıtım (müşteri siparişi, teslimat, faturalama)",
+      "ekip": "SAP Lojistik",
+      "uzmanlar": ["can.h", "elif.y"]
+    },
+    "SAP-Basis": {
+      "aciklama": "Sistem yönetimi, yetkiler, performans, transport",
+      "ekip": "SAP Basis",
+      "uzmanlar": ["okan.t"]
+    },
+    "SAP-Yetki": {
+      "aciklama": "Kullanıcı yetkileri, rol atama, erişim engeli",
+      "ekip": "SAP Basis",
+      "uzmanlar": ["okan.t"]
+    },
+    "IT-Ag": {
+      "aciklama": "Ağ, VPN, internet erişimi bağlantı sorunları",
+      "ekip": "IT Altyapı",
+      "uzmanlar": ["burak.s"]
+    },
+    "IT-Donanim": {
+      "aciklama": "Bilgisayar, yazıcı, monitör, donanım arızası/talebi",
+      "ekip": "IT Destek",
+      "uzmanlar": ["deniz.a"]
+    },
+    "IT-Hesap": {
+      "aciklama": "Parola sıfırlama, hesap kilidi, e-posta erişimi",
+      "ekip": "IT Destek",
+      "uzmanlar": ["deniz.a"]
+    },
+    "Diger": {
+      "aciklama": "Yukarıdakilere uymayan / belirsiz talepler",
+      "ekip": "Triyaj Kuyruğu",
+      "uzmanlar": []
+    }
+  }
+}
