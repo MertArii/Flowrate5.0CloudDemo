@@ -1,0 +1,63 @@
+# Ollama Docker'DA DEĞİLDİR — Mac host'unda native çalışır (Metal GPU için).
+# Kurulum: `brew install ollama` -> `ollama serve` -> `ollama pull qwen3.5:9b`
+#          `ollama pull bge-m3`  (embedding modeli)
+# Container'lar Ollama'ya http://host.docker.internal:11434 ile ulaşır.
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: helpdesk-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-helpdesk}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      POSTGRES_DB: ${POSTGRES_DB:-helpdesk}
+    ports:
+      # Host'ta Postgres.app 5432'de olduğu için container'ı 5433'e eşliyoruz.
+      # Container'lar arası iletişim yine iç ağda 5432 üzerinden.
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/01_init.sql:ro
+      - ./db/tickets.sql:/docker-entrypoint-initdb.d/02_tickets.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-helpdesk}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build: ./app
+    container_name: helpdesk-api
+    env_file: .env
+    environment:
+      # Host'taki Ollama'ya container içinden erişim
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      DATABASE_URL: postgresql://${POSTGRES_USER:-helpdesk}:${POSTGRES_PASSWORD:-changeme}@postgres:5432/${POSTGRES_DB:-helpdesk}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/code/app        # geliştirme için hot-reload
+      - ./data:/code/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # Hazır sohbet arayüzü — kendi arayüzün gelene kadar. Ollama'yı doğrudan da,
+  # api katmanını da bağlayabilirsin.
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: helpdesk-webui
+    ports:
+      - "3000:8080"
+    environment:
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+    volumes:
+      - webui:/app/backend/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  pgdata:
+  webui:

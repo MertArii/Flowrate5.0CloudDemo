@@ -1,0 +1,71 @@
+{
+  "description": "Help desk RAG değerlendirme seti. Her madde: soru + tip + beklenenler. Gerçek dokümanlar geldikçe bu listeyi büyütün (hedef 30-50 madde).",
+  "items": [
+    {
+      "id": "izin-1",
+      "question": "Yıllık izin talebini nasıl oluştururum?",
+      "type": "answerable",
+      "expected_source": "ornek_sss.txt",
+      "must_include": ["portal", "İzin"],
+      "reference": "İK portalına giriş yapıp İzin Talepleri > Yeni Talep adımları izlenir; yönetici onayına düşer."
+    },
+    {
+      "id": "izin-2",
+      "question": "Acil izin için kime ulaşmalıyım?",
+      "type": "answerable",
+      "expected_source": "ornek_sss.txt",
+      "must_include": ["1450"],
+      "reference": "Acil izinler için İK'ya dahili 1450'den ulaşılır."
+    },
+    {
+      "id": "parola-1",
+      "question": "Parolamı unuttum, ne yapmalıyım?",
+      "type": "answerable",
+      "expected_source": "ornek_sss.txt",
+      "must_include": ["sifirla.sirket.local"],
+      "reference": "sifirla.sirket.local üzerinden kendi kendine sıfırlama yapılır."
+    },
+    {
+      "id": "parola-2",
+      "question": "Hesabım kilitlendi, ne kadar beklemeliyim?",
+      "type": "answerable",
+      "expected_source": "ornek_sss.txt",
+      "must_include": ["15"],
+      "reference": "3 başarısız denemeden sonra 15 dakika beklenir veya IT dahili 1200'e başvurulur."
+    },
+    {
+      "id": "vpn-1",
+      "question": "VPN'e nasıl bağlanırım?",
+      "type": "answerable",
+      "expected_source": "ornek_sss.txt",
+      "must_include": ["GlobalProtect", "vpn.sirket.local"],
+      "reference": "GlobalProtect kurulur, sunucu vpn.sirket.local girilir, kurumsal kimlikle giriş yapılır."
+    },
+    {
+      "id": "donanim-1",
+      "question": "Yeni bir monitör nasıl talep ederim?",
+      "type": "answerable",
+      "expected_source": "ornek_sss.txt",
+      "must_include": ["Donanım", "IT portal"],
+      "reference": "IT portalından Donanım Talebi formu doldurulur; 5-7 iş günü."
+    },
+    {
+      "id": "reddet-1",
+      "question": "Şirketin kaç şubesi var?",
+      "type": "should_refuse",
+      "reference": "Bağlamda yok; reddetmeli."
+    },
+    {
+      "id": "reddet-2",
+      "question": "CEO'nun maaşı ne kadar?",
+      "type": "should_refuse",
+      "reference": "Bağlamda yok; reddetmeli."
+    },
+    {
+      "id": "selam-1",
+      "question": "Merhaba, nasılsın?",
+      "type": "smalltalk",
+      "reference": "Selamlaşmaya kibar karşılık vermeli, reddetmemeli."
+    }
+  ]
+}

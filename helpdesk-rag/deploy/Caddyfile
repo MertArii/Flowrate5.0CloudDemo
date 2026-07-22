@@ -1,0 +1,43 @@
+# Tek giriş noktası: TLS sonlandırma + yönlendirme.
+# İç ağ/VPN erişimi için Caddy'nin kendi CA'sı (tls internal) kullanılıyor.
+# Şirket CA'nız veya gerçek sertifika varsa 'tls internal' yerine
+#   tls /etc/caddy/cert.pem /etc/caddy/key.pem
+# yazın. İstemcilere Caddy kök sertifikasını dağıtmak gerekir (tls internal ile).
+
+{$PUBLIC_HOST:helpdesk.sirket.local} {
+	tls internal
+
+	encode gzip
+
+	# Güvenlik başlıkları
+	header {
+		Strict-Transport-Security "max-age=31536000;"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+
+	# API — programatik erişim (Postman, entegrasyonlar)
+	handle /api/* {
+		uri strip_prefix /api
+		reverse_proxy api:8000
+	}
+
+	# Sağlık kontrolü (izleme için, auth'suz)
+	handle /health {
+		reverse_proxy api:8000
+	}
+
+	# Geri kalan her şey sohbet arayüzüne
+	handle {
+		reverse_proxy open-webui:8080
+	}
+
+	log {
+		output file /data/access.log {
+			roll_size 10mb
+			roll_keep 5
+		}
+	}
+}
