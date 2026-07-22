@@ -1,0 +1,96 @@
+# DEMO kurgusu — Linux VM / Cloud Shell (CPU-only, GPU yok).
+#
+# Mac'teki "Ollama host'ta native" kuralı BURADA GEÇERLİ DEĞİL: Linux'ta
+# kaybedilecek Metal GPU yok, o yüzden Ollama da container'da. Böylece tüm
+# sistem TEK KOMUTLA ayağa kalkar, .env düzenlemeye gerek yok.
+#
+# Çalıştırma:
+#   docker compose -f docker-compose.demo.yml up -d --build
+#   # modeller ilk açılışta otomatik indirilir (ollama-pull servisi)
+#   # ~5 GB indirme; ilk açılış birkaç dakika sürer.
+#
+# Sunum: Open WebUI -> :3000, API -> :8000
+# Cloudflare tünel:  cloudflared tunnel --url http://localhost:3000
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ollama:/root/.ollama
+    ports:
+      - "11434:11434"
+    restart: unless-stopped
+
+  # Modelleri bir kez indirir, sonra çıkar. CPU demosu için 4b seçildi
+  # (9b/27b bu makinede çok yavaş olur).
+  ollama-pull:
+    image: ollama/ollama:latest
+    depends_on:
+      - ollama
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+    entrypoint: >
+      sh -c "sleep 3 &&
+             ollama pull qwen3.5:4b &&
+             ollama pull bge-m3 &&
+             echo 'Modeller hazir.'"
+    restart: "no"
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: helpdesk
+      POSTGRES_PASSWORD: demopw
+      POSTGRES_DB: helpdesk
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/01_init.sql:ro
+      - ./db/tickets.sql:/docker-entrypoint-initdb.d/02_tickets.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U helpdesk"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  api:
+    build: ./app
+    environment:
+      OLLAMA_BASE_URL: http://ollama:11434
+      DATABASE_URL: postgresql://helpdesk:demopw@postgres:5432/helpdesk
+      LLM_MODEL: qwen3.5:4b
+      TRIAGE_MODEL: qwen3.5:4b
+      EMBED_MODEL: bge-m3
+      EMBED_DIM: "1024"
+      CHUNK_SIZE: "800"
+      CHUNK_OVERLAP: "120"
+      TOP_K: "5"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/code/app
+      - ./data:/code/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+    restart: unless-stopped
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    environment:
+      OLLAMA_BASE_URL: http://ollama:11434
+      WEBUI_AUTH: "false"
+    ports:
+      - "3000:8080"
+    volumes:
+      - webui:/app/backend/data
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+volumes:
+  ollama:
+  pgdata:
+  webui:
