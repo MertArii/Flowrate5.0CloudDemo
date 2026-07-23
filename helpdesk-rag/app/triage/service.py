@@ -19,9 +19,9 @@ def _save_ticket(text: str, c: dict, r: dict, cozum: str | None) -> int:
         cur.execute(
             """
             INSERT INTO tickets
-                (metin, modul, oncelik, ozet, guven, ekip, atanan_uzman,
-                 otomatik_atandi, onerilen_cozum, durum)
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING id
+                (sorun_aciklamasi, modul, oncelik, ozet, guven, ekip,
+                 atanan_kisi, otomatik_atandi, onerilen_cozum, durum)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING ticket_id
             """,
             (
                 text, c["modul"], c["oncelik"], c["ozet"], c["guven"],
