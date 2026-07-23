@@ -1,0 +1,27 @@
+# Düşük kaynaklı VM için performans ayarları (Postman/API demosu).
+#
+# Kullanım:
+#   docker compose -f docker-compose.demo.yml -f perf.override.yml up -d
+#   docker compose -f docker-compose.demo.yml stop open-webui
+#
+# Neden gerekli: 2 fiziksel çekirdek / 7.8 GB RAM'li bir VM'de qwen3.5:4b'nin
+# prompt işleme hızı ~5.8 token/sn ölçüldü. RAG prompt'u ~1600 token olunca
+# sadece prompt okuması ~280 sn sürüyor ve istek timeout'a düşüyor.
+#
+# İki kaldıraç birlikte kullanılıyor:
+#   - Daha küçük model (0.8b, ~5x hızlı prompt işleme)
+#   - Daha az bağlam (TOP_K 5 -> 2, prompt ~1600 -> ~700 token)
+#
+# Kalite düşer; gerçek çözüm daha güçlü CPU veya GPU'lu bir makinedir.
+
+services:
+  api:
+    environment:
+      LLM_MODEL: qwen3.5:0.8b
+      TRIAGE_MODEL: qwen3.5:0.8b
+      TOP_K: "2"
+
+  # Open WebUI bizim RAG API'mizi KULLANMAZ (doğrudan Ollama'ya bağlanır).
+  # Postman/`/docs` üzerinden demo yapıldığı için kapatıldı; ~640 MB kazanç.
+  open-webui:
+    profiles: ["disabled"]

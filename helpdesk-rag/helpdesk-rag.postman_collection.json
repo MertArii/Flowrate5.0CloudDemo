@@ -94,6 +94,33 @@
         },
         "description": "RAG ile soru sorar; kaynaklı cevap döner."
       }
+    },
+    {
+      "name": "Triage (L1 ticket yönlendirme)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"text\": \"Fatura kaydinda hesap belirleme hatasi aliyorum, muhasebe kaydi olusmuyor.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/triage",
+          "host": ["{{baseUrl}}"],
+          "path": ["triage"]
+        },
+        "description": "Ticket'ı sınıflandırır (modül + öncelik + güven), doğru ekibe/uzmana yönlendirir ve mümkünse RAG ile otomatik çözüm önerir. Sonuç tickets tablosuna kaydedilir. İki model çağrısı yaptığı için /ask'tan yavaştır."
+      }
     }
   ]
 }
