@@ -32,9 +32,15 @@ CREATE TABLE IF NOT EXISTS tickets (
     cozum_tarihi     TIMESTAMPTZ,
 
     durum            TEXT DEFAULT 'acik',   -- acik | atandi | cozuldu | kapandi
-    created_at       TIMESTAMPTZ DEFAULT now()
+    created_at       TIMESTAMPTZ DEFAULT now(),
+
+    -- Ticket metninin embedding'i — geçmiş ticket'lar arasında benzerlik
+    -- araması (kim benzer sorunu çözdü) için. bge-m3 -> 1024 boyut.
+    embedding        vector(1024)
 );
 
+CREATE INDEX IF NOT EXISTS tickets_embedding_idx
+    ON tickets USING hnsw (embedding vector_cosine_ops);
 CREATE INDEX IF NOT EXISTS tickets_modul_idx           ON tickets(modul);
 CREATE INDEX IF NOT EXISTS tickets_durum_idx           ON tickets(durum);
 CREATE INDEX IF NOT EXISTS tickets_kullanici_maili_idx ON tickets(kullanici_maili);

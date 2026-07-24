@@ -6,31 +6,37 @@ ticket'lardan öğrenme' (benzerlik tabanlı yönlendirme) için veri tabanı ol
 from __future__ import annotations
 
 import psycopg
+from pgvector.psycopg import register_vector
 
 from app.config import settings
-from app.rag import pipeline
+from app.rag import ollama_client, pipeline
 from app.triage import classifier, router
 
 REFUSAL_MARK = "elimde bilgi yok"
 
 
-def _save_ticket(text: str, c: dict, r: dict, cozum: str | None) -> int:
-    with psycopg.connect(settings.database_url) as conn, conn.cursor() as cur:
-        cur.execute(
-            """
-            INSERT INTO tickets
-                (sorun_aciklamasi, modul, oncelik, ozet, guven, ekip,
-                 atanan_kisi, otomatik_atandi, onerilen_cozum, durum)
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING ticket_id
-            """,
-            (
-                text, c["modul"], c["oncelik"], c["ozet"], c["guven"],
-                r["ekip"], r["atanan_uzman"], r["otomatik_atandi"],
-                cozum, "acik",
-            ),
-        )
-        tid = cur.fetchone()[0]
-        conn.commit()
+def _save_ticket(
+    text: str, c: dict, r: dict, cozum: str | None, embedding: list[float]
+) -> int:
+    with psycopg.connect(settings.database_url) as conn:
+        register_vector(conn)  # vector tipini tanıt
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO tickets
+                    (sorun_aciklamasi, modul, oncelik, ozet, guven, ekip,
+                     atanan_kisi, otomatik_atandi, onerilen_cozum, durum,
+                     embedding)
+                VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING ticket_id
+                """,
+                (
+                    text, c["modul"], c["oncelik"], c["ozet"], c["guven"],
+                    r["ekip"], r["atanan_uzman"], r["otomatik_atandi"],
+                    cozum, "acik", embedding,
+                ),
+            )
+            tid = cur.fetchone()[0]
+            conn.commit()
     return tid
 
 
@@ -43,7 +49,9 @@ async def triage(ticket_text: str) -> dict:
     cozuldu = REFUSAL_MARK not in rag["answer"].lower()
     onerilen_cozum = rag["answer"] if cozuldu else None
 
-    tid = _save_ticket(ticket_text, c, r, onerilen_cozum)
+    # Ticket metninin vektörü — geçmişten öğrenme (benzerlik) için saklanır.
+    emb = await ollama_client.embed(ticket_text)
+    tid = _save_ticket(ticket_text, c, r, onerilen_cozum, emb)
 
     return {
         "ticket_id": tid,
