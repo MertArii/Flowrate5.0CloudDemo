@@ -23,6 +23,10 @@ class AskRequest(BaseModel):
 
 class TriageRequest(BaseModel):
     text: str
+    customer_email: str = "demo@sirket.com"
+    recipient_email: str = "destek@sirket.com"
+    subject: str | None = None
+    region: str | None = None
 
 
 @app.get("/health")
@@ -55,11 +59,11 @@ async def ingest_endpoint(
 
     # Redis yok -> senkron indeksle (geliştirme ortamı)
     try:
-        doc_id = await ingest.ingest_file(path, source=source, title=doc_title)
+        parca = await ingest.ingest_file(path, source=source, title=doc_title)
     finally:
         if os.path.exists(path):
             os.unlink(path)
-    return {"mod": "senkron", "document_id": doc_id, "filename": source}
+    return {"mod": "senkron", "parca_sayisi": parca, "filename": source}
 
 
 @app.get("/jobs/{job_id}")
@@ -79,5 +83,12 @@ async def ask(req: AskRequest):
 
 @app.post("/triage")
 async def triage(req: TriageRequest):
-    """L1 triyaj: ticket'ı sınıflandır, uzmana yönlendir, mümkünse otomatik çöz."""
-    return await triage_service.triage(req.text)
+    """L1 triyaj: ticket'ı sınıflandır, uzmana yönlendir, mümkünse otomatik çöz.
+    tickets + routing_logs tablolarına kaydeder."""
+    return await triage_service.triage(
+        req.text,
+        customer_email=req.customer_email,
+        recipient_email=req.recipient_email,
+        subject=req.subject,
+        region=req.region,
+    )

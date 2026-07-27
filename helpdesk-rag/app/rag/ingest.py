@@ -25,7 +25,9 @@ def read_file(path: str) -> str:
 
 
 async def ingest_file(path: str, source: str, title: str) -> int:
+    """Dokümanı parçalayıp attachment_vectors'e (RAG Katman 2) yazar.
+    Eklenen parça sayısını döner."""
     raw = read_file(path)
     pieces = chunk_text(raw, settings.chunk_size, settings.chunk_overlap)
     embedded = [(p, await ollama_client.embed(p)) for p in pieces]
-    return store.add_document(source, title, embedded)
+    return store.add_knowledge_chunks(source or title, embedded)
