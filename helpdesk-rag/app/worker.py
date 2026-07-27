@@ -19,11 +19,11 @@ from app.rag import ingest
 async def ingest_file_task(ctx, path: str, source: str, title: str) -> dict:
     """Bir dosyayı indeksler ve geçici kopyayı siler."""
     try:
-        doc_id = await ingest.ingest_file(path, source=source, title=title)
+        parca = await ingest.ingest_file(path, source=source, title=title)
     finally:
         if os.path.exists(path):
             os.unlink(path)
-    return {"document_id": doc_id, "source": source}
+    return {"parca_sayisi": parca, "source": source}
 
 
 class WorkerSettings:

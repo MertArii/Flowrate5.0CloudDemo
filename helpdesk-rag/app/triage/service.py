@@ -1,62 +1,65 @@
-"""L1 triyaj orkestrasyonu: sınıflandır -> yönlendir -> (RAG cevabı) -> kaydet.
-
-Sistem çalıştıkça her ticket DB'ye yazılır; bu birikim ileride 'geçmiş
-ticket'lardan öğrenme' (benzerlik tabanlı yönlendirme) için veri tabanı olur.
+"""L1 triyaj orkestrasyonu (yeni şema): sınıflandır -> yönlendir ->
+RAG çözüm denemesi -> tickets + routing_logs kaydı.
 """
 from __future__ import annotations
 
-import psycopg
-from pgvector.psycopg import register_vector
-
-from app.config import settings
-from app.rag import ollama_client, pipeline
+from app.rag import pipeline
 from app.triage import classifier, router
 
 REFUSAL_MARK = "elimde bilgi yok"
 
-
-def _save_ticket(
-    text: str, c: dict, r: dict, cozum: str | None, embedding: list[float]
-) -> int:
-    with psycopg.connect(settings.database_url) as conn:
-        register_vector(conn)  # vector tipini tanıt
-        with conn.cursor() as cur:
-            cur.execute(
-                """
-                INSERT INTO tickets
-                    (sorun_aciklamasi, modul, oncelik, ozet, guven, ekip,
-                     atanan_kisi, otomatik_atandi, onerilen_cozum, durum,
-                     embedding)
-                VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING ticket_id
-                """,
-                (
-                    text, c["modul"], c["oncelik"], c["ozet"], c["guven"],
-                    r["ekip"], r["atanan_uzman"], r["otomatik_atandi"],
-                    cozum, "acik", embedding,
-                ),
-            )
-            tid = cur.fetchone()[0]
-            conn.commit()
-    return tid
+# Sınıflandırıcının Türkçe öncelik etiketini şema CHECK değerine çevir.
+_ONCELIK_MAP = {"dusuk": "low", "orta": "medium", "yuksek": "high", "kritik": "urgent"}
 
 
-async def triage(ticket_text: str) -> dict:
+async def triage(
+    ticket_text: str,
+    customer_email: str = "demo@sirket.com",
+    recipient_email: str = "destek@sirket.com",
+    subject: str | None = None,
+    region: str | None = None,
+) -> dict:
+    from app.rag import store  # geç import: DB tabloları hazır olmadan yüklenmesin
+
     c = await classifier.classify(ticket_text)
     r = router.route(c)
 
-    # Bilinen bir sorun mu? RAG ile otomatik cevap denemesi.
+    # Bilinen sorun mu? RAG (çift katman) ile otomatik çözüm denemesi.
     rag = await pipeline.answer(ticket_text)
     cozuldu = REFUSAL_MARK not in rag["answer"].lower()
     onerilen_cozum = rag["answer"] if cozuldu else None
 
-    # Ticket metninin vektörü — geçmişten öğrenme (benzerlik) için saklanır.
-    emb = await ollama_client.embed(ticket_text)
-    tid = _save_ticket(ticket_text, c, r, onerilen_cozum, emb)
+    # Yönlendirme -> destek grubu UUID'si (otomatik atandıysa)
+    otomatik = r["otomatik_atandi"]
+    group_id = store.get_or_create_support_group(r["ekip"]) if otomatik else None
+    priority = _ONCELIK_MAP.get(c["oncelik"], "medium")
+    status = "assigned" if otomatik else "l1_routing"
+    subj = subject or ticket_text[:60]
+
+    tid, tno = store.create_ticket(
+        customer_email=customer_email,
+        recipient_email=recipient_email,
+        subject=subj,
+        raw_issue_description=ticket_text,
+        extracted_category=c["modul"],
+        region=region,
+        status=status,
+        priority=priority,
+        assigned_group_id=group_id,
+    )
+
+    store.create_routing_log(
+        ticket_id=tid,
+        decision_factors={"siniflandirma": c, "yonlendirme": r},
+        assigned_group_id=group_id,
+        confidence_score=c["guven"],
+    )
 
     return {
         "ticket_id": tid,
+        "ticket_number": tno,
         "siniflandirma": c,
         "yonlendirme": r,
-        "otomatik_cozum": onerilen_cozum,   # None ise uzmana gitmeli
+        "otomatik_cozum": onerilen_cozum,
         "kaynaklar": rag["sources"] if cozuldu else [],
     }
