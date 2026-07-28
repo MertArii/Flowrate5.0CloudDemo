@@ -67,7 +67,9 @@ def search_solutions(query_embedding: list[float], top_k: int) -> list[dict]:
             """
             SELECT problem_text, solution_text,
                    COALESCE(category, 'genel') AS category,
-                   1 - (embedding <=> %s::vector) AS score
+                   1 - (embedding <=> %s::vector) AS score,
+                   ticket_id,
+                   metadata->>'harici_no' AS harici_no
             FROM ticket_solutions
             WHERE embedding IS NOT NULL
             ORDER BY embedding <=> %s::vector
@@ -77,7 +79,9 @@ def search_solutions(query_embedding: list[float], top_k: int) -> list[dict]:
         )
         rows = cur.fetchall()
     return [{"content": f"Sorun: {r[0]}\nÇözüm: {r[1]}", "source": f"cozum:{r[2]}",
-             "score": float(r[3]), "tip": "cozum"} for r in rows]
+             "score": float(r[3]), "tip": "cozum",
+             "ticket_id": str(r[4]) if r[4] else None,
+             "harici_ticket_no": r[5]} for r in rows]
 
 
 # ---- Destek grubu / ticket / routing log ------------------------------------

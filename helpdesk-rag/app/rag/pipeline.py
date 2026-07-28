@@ -36,6 +36,8 @@ async def answer(question: str) -> dict:
     reply = await ollama_client.chat(messages)
     return {
         "answer": reply.get("content", ""),
-        "sources": [{"source": h["source"], "score": h["score"], "tip": h["tip"]}
+        "sources": [{"source": h["source"], "score": h["score"], "tip": h["tip"],
+                     "ticket_id": h.get("ticket_id"),
+                     "harici_ticket_no": h.get("harici_ticket_no")}
                     for h in hits],
     }
