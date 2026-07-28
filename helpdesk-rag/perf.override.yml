@@ -17,8 +17,8 @@
 services:
   api:
     environment:
-      LLM_MODEL: qwen3.5:0.8b
-      TRIAGE_MODEL: qwen3.5:0.8b
+      LLM_MODEL: qwen3.5:4b
+      TRIAGE_MODEL: qwen3.5:4b
       TOP_K: "2"
 
   # Open WebUI bizim RAG API'mizi KULLANMAZ (doğrudan Ollama'ya bağlanır).
