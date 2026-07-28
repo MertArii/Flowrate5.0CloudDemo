@@ -19,7 +19,7 @@ SYSTEM_PROMPT = (
 )
 
 
-async def answer(question: str) -> dict:
+async def answer(question: str, min_score: float | None = None) -> dict:
     q_emb = await ollama_client.embed(question)
 
     # İki katmanı birlikte getir; skora göre birleştir.
@@ -27,10 +27,13 @@ async def answer(question: str) -> dict:
     hits += store.search_knowledge(q_emb, settings.top_k)
     hits.sort(key=lambda h: h["score"], reverse=True)
 
+    # Eşik: istekte gelen min_score önceliklidir; yoksa sunucu varsayılanı.
+    esik = min_score if min_score is not None else settings.min_score
+
     # Opsiyonel eşik: altındaki parçaları ele. Hiçbiri geçemezse, modele hiç
     # sormadan reddet (hem hızlı hem uydurmayı garantili engeller).
-    if settings.min_score > 0:
-        hits = [h for h in hits if h["score"] >= settings.min_score]
+    if esik > 0:
+        hits = [h for h in hits if h["score"] >= esik]
         if not hits:
             return {
                 "answer": "Bu konuda elimde bilgi yok, lütfen bir yetkiliye "

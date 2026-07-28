@@ -19,6 +19,7 @@ async def _shutdown():
 
 class AskRequest(BaseModel):
     question: str
+    min_score: float | None = None   # opsiyonel benzerlik eşiği (0-1)
 
 
 class TriageRequest(BaseModel):
@@ -77,8 +78,9 @@ async def get_job(job_id: str):
 
 @app.post("/ask")
 async def ask(req: AskRequest):
-    """RAG ile soru sor -> kaynaklı cevap."""
-    return await pipeline.answer(req.question)
+    """RAG ile soru sor -> kaynaklı cevap. min_score gönderilirse o istek için
+    benzerlik eşiği uygulanır (yoksa sunucu varsayılanı)."""
+    return await pipeline.answer(req.question, min_score=req.min_score)
 
 
 @app.post("/triage")
