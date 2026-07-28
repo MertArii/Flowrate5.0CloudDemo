@@ -19,5 +19,10 @@ class Settings(BaseSettings):
     chunk_overlap: int = 120
     top_k: int = 5
 
+    # Opsiyonel benzerlik eşiği (cosine skoru). 0.0 = kapalı (varsayılan).
+    # Bu değerin altındaki parçalar bağlamdan elenir; hiçbiri geçemezse
+    # sistem "elimde bilgi yok" ile reddeder (modele hiç sormadan).
+    min_score: float = 0.0
+
 
 settings = Settings()

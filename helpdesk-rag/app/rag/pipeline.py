@@ -26,6 +26,17 @@ async def answer(question: str) -> dict:
     hits = store.search_solutions(q_emb, settings.top_k)
     hits += store.search_knowledge(q_emb, settings.top_k)
     hits.sort(key=lambda h: h["score"], reverse=True)
+
+    # Opsiyonel eşik: altındaki parçaları ele. Hiçbiri geçemezse, modele hiç
+    # sormadan reddet (hem hızlı hem uydurmayı garantili engeller).
+    if settings.min_score > 0:
+        hits = [h for h in hits if h["score"] >= settings.min_score]
+        if not hits:
+            return {
+                "answer": "Bu konuda elimde bilgi yok, lütfen bir yetkiliye "
+                          "yönlendireyim.",
+                "sources": [],
+            }
     hits = hits[: settings.top_k]
 
     context = "\n\n".join(f"[Kaynak: {h['source']}]\n{h['content']}" for h in hits)
