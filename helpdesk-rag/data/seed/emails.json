@@ -1,0 +1,1069 @@
+[
+  {
+    "ticket_id": "TCK-1031",
+    "kullanici_maili": "deniz.kor@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Teslimat Belgesi Kaydedilemiyor",
+    "sorun_aciklamasi": "VL01N üzerinden Yozgat deposundan çıkış yapacağım ama sistem 'Malzeme kalemi için miktar aşıldı' uyarısı verip teslimatı kaydettirmiyor.",
+    "cozum": "Sipariş (VA03) ve mevcut stok (MMBE) kontrol edildi. Kullanıcının sipariş miktarından fazla çıkış yapmaya çalıştığı tespit edildi. İlgili miktar düzeltilerek teslimat belgesi oluşturuldu.",
+    "atanan_kisi": "Gizem.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1032",
+    "kullanici_maili": "ahmet.yolcu@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Monitör Görüntü Vermiyor",
+    "sorun_aciklamasi": "Sabah geldiğimde çift monitörümden sağdaki çalışmıyordu. Kabloları kontrol ettim, tak çıkar yaptım ama 'No Signal' diyor.",
+    "cozum": "Kullanıcının masasına gidilerek HDMI kablosu test edildi. Kabloda kırılma olduğu tespit edildiği için depodan yeni bir kablo alınarak değiştirildi. Görüntü başarıyla sağlandı.",
+    "atanan_kisi": "yücel.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1033",
+    "kullanici_maili": "ayse.nur@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Outlook Sürekli Parola Soruyor",
+    "sorun_aciklamasi": "Dün şifremi değiştirdikten sonra Outlook sürekli şifre sormaya başladı. Doğru giriyorum, bağlanıyor ama 10 dakika sonra tekrar pencere çıkıyor.",
+    "cozum": "Windows Kimlik Bilgisi Yöneticisi (Credential Manager) üzerinden eski şifreye ait Office 365 kayıtları temizlendi. Outlook yeniden başlatılarak yeni şifreyle bir kez giriş yapılıp 'Parolayı hatırla' seçildi. Sorun düzeldi.",
+    "atanan_kisi": "faruk.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1034",
+    "kullanici_maili": "can.tekin@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Yazıcıdan Ses Geliyor",
+    "sorun_aciklamasi": "Muhasebe departmanındaki büyük fotokopi makinesinden kağıt çekerken tıkırtı şeklinde yüksek bir ses geliyor ve kağıdı yamuk çıkarıyor.",
+    "cozum": "Yazıcı fiziksel olarak incelendi. Kağıt kasetinin (Tepsi 2) tam oturmadığı ve dişlilerin zorlandığı fark edildi. Kaset çıkarılıp temizlendi ve düzgünce yerine takıldı. Test sayfasında ses kesildi.",
+    "atanan_kisi": "yusuf.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1035",
+    "kullanici_maili": "mehmet.can@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Switch Odasında İnternet Kesintisi",
+    "sorun_aciklamasi": "Halkalı 2. kattaki herkesin interneti aynı anda gitti. Ağ kablosu takılı değil uyarısı alıyoruz.",
+    "cozum": "2. kat kenar anahtarına (Edge Switch) uzak bağlantı kurulamadığı için sistem odasına gidildi. Cihazın güç adaptörünün yandığı görüldü. Yedek PoE switch takılarak konfigürasyonu yüklendi ve katın bağlantısı geri getirildi.",
+    "atanan_kisi": "yücel.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1001",
+    "kullanici_maili": "ayse.demir@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Fatura Giriş Ekranında Hata",
+    "sorun_aciklamasi": "Merhaba, FB60 ekranından satıcı faturası girmeye çalışırken 'Şirket kodu 1000 için dönem 07/2026 kapalı' hatası alıyorum. İşlemi acil tamamlamam gerekiyor, destek olabilir misiniz?",
+    "cozum": "OB52 işlem kodu üzerinden kontrol sağlandı. İlgili şirket kodu için 07/2026 dönemi fiili olarak kapalı kalmış. Finans yöneticisinin onayı ile mali dönem girişe açıldı ve kullanıcıya bilgi verildi.",
+    "atanan_kisi": "oğulcan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1002",
+    "kullanici_maili": "can.turan@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Laptop Ekranında Titreme Sorunu",
+    "sorun_aciklamasi": "Günaydın, sabah bilgisayarımı açtığımdan beri ana ekranda sürekli bir titreme var. Gözlerimi çok yoruyor, harici monitörde sorun yok ama laptop ekranı problemli. Kontrol edebilir misiniz?",
+    "cozum": "Kullanıcının masasına gidilerek donanım testi yapıldı. Ekran kartı sürücüleri güncellendi ancak sorun devam etti. Panel arızası tespit edildiği için kullanıcıya yedek bir laptop (Envanter: LPT-405) tahsis edildi ve arızalı cihaz garantiye gönderilmek üzere teslim alındı.",
+    "atanan_kisi": "yusuf.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1003",
+    "kullanici_maili": "merve.celik@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "El Terminali Bağlantı Kopması",
+    "sorun_aciklamasi": "Depo 2'de mal kabul işlemi yaparken RF el terminalleri sürekli sistemden düşüyor. Barkod okutuyoruz ama SAP'ye işlemiyor. Acil destek bekliyoruz, tır bekliyor.",
+    "cozum": "Depo 2'deki erişim noktaları (Access Point) kontrol edildi. Cihazlardan birinde IP çakışması olduğu görüldü. AP yeniden başlatıldı ve statik IP ataması düzeltildi. RF terminallerinin SAP EWM sunucusuna kesintisiz bağlandığı teyit edildi.",
+    "atanan_kisi": "Ömer.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1004",
+    "kullanici_maili": "burak.kaya@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Bağlantı Hatası",
+    "sorun_aciklamasi": "Evden çalışıyorum, VPN'e bağlanmaya çalıştığımda %10'da kalıyor ve 'Sunucu yanıt vermiyor' hatası alıyorum. Acil toplantım var.",
+    "cozum": "Kullanıcının internet servis sağlayıcısı kaynaklı bir DNS problemi yaşadığı anlaşıldı. Kullanıcıya telefonla ulaşılarak bağdaştırıcı ayarlarından DNS adresi 8.8.8.8 olarak güncelletildi. VPN bağlantısı başarılı şekilde sağlandı.",
+    "atanan_kisi": "yücel.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1005",
+    "kullanici_maili": "elif.sahin@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Şüpheli E-posta Bildirimi",
+    "sorun_aciklamasi": "Merhaba, az önce 'Fatura Gecikmesi' konulu bir mail aldım. Mailin geldiği adres bizim tedarikçilere benziyor ama domain farklı. İçinde bir zip dosyası var, açmadım. İnceleyebilir misiniz?",
+    "cozum": "İlgili e-posta güvenlik sistemleri üzerinden karantinaya alındı. Gelen e-postanın bir phishing (oltalama) saldırısı olduğu tespit edildi. Gönderici domain kara listeye eklendi. Kullanıcıya dikkatli davranıp dosyayı açmadığı için teşekkür edildi.",
+    "atanan_kisi": "turgut.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1006",
+    "kullanici_maili": "hasan.koc@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Sipariş Fiyatlandırma Hatası",
+    "sorun_aciklamasi": "VA01 ekranından yeni bir yurt dışı siparişi açıyorum fakat sistem navlun koşul türünü (ZNAV) otomatik getirmiyor. Manuel girmeye çalıştığımda da yetki hatası veriyor.",
+    "cozum": "Müşteri ana verilerinde (XD02) taşıma şartlarının eksik girildiği tespit edildi. Taşıma şartı 'CFR' olarak güncellendi ve koşul kayıtları (VK11) kontrol edildi. Kullanıcının siparişi tekrar oluşturması sağlandı, navlun otomatik olarak hesaplandı.",
+    "atanan_kisi": "Gizem.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1007",
+    "kullanici_maili": "zeynep.avci@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Klasör Erişim Yetkisi Talebi",
+    "sorun_aciklamasi": "Ortak alandaki 'Pazarlama_2026' klasörüne erişimim yok. Yeni projeler için buradaki dosyalara ulaşmam gerekiyor. Yetkimi tanımlayabilir misiniz?",
+    "cozum": "Kullanıcının yöneticisinden ticket üzerinden onay talep edildi. Onay geldikten sonra Active Directory üzerinden kullanıcının hesabı 'SG_Pazarlama_RW' güvenlik grubuna eklendi. Kullanıcıdan oturum kapatıp açması istendi, erişim doğrulandı.",
+    "atanan_kisi": "esra.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1008",
+    "kullanici_maili": "oguz.cetin@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Muayene Lotu Oluşmuyor",
+    "sorun_aciklamasi": "Üretimden depoya malzeme girişi (MIGO 101) yaptık ama kalite kontrol için muayene lotu otomatik oluşmadı. Malzeme QA03'te görünmüyor, stoka direk serbest kullanım olarak geçmiş.",
+    "cozum": "Malzeme ana verisi (MM02) Kalite Yönetimi görünümü incelendi. 04 (Üretimden giriş) muayene türünün aktif edilmediği görüldü. İlgili muayene türü aktif edildi. Mevcut stok QA08 ile kalite stokuna çekilip lot oluşturuldu.",
+    "atanan_kisi": "Ramazan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1009",
+    "kullanici_maili": "deniz.aksoy@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Yazıcıdan Çıktı Alamıyorum",
+    "sorun_aciklamasi": "Satın alma departmanındaki PRNT-03 yazıcısına gönderdiğim belgeler sıraya giriyor ama yazdırılmıyor. Ekranda 'Kağıt Sıkışması' hatası da yok, sadece bekliyor.",
+    "cozum": "Yazıcının Print Spooler (Yazdırma Biriktiricisi) servisinde birikme olduğu görüldü. Sunucu üzerinden kuyruk temizlendi ve servis yeniden başlatıldı. Test çıktısı alınarak yazıcının normal çalıştığı teyit edildi.",
+    "atanan_kisi": "emirhan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1010",
+    "kullanici_maili": "tarik.yildiz@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Şifre Sıfırlama ve Hesap Kilitlenmesi",
+    "sorun_aciklamasi": "Sabah şifremi 3 kere yanlış girdim sanırım, hesabım kilitlendi. Outlook ve Teams'e giremiyorum. Şifremi de unuttum, yardımcı olabilir misiniz?",
+    "cozum": "Active Directory üzerinden kullanıcının hesabı kilitten (Unlock) çıkarıldı. Geçici bir şifre tanımlanarak kullanıcıya SMS ile iletildi ve 'Bir sonraki oturum açılışında şifre değiştir' seçeneği işaretlendi. Kullanıcının sisteme girişi doğrulandı.",
+    "atanan_kisi": "mustafa.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1011",
+    "kullanici_maili": "selin.yurt@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Outlook Arama Sonuç Vermiyor",
+    "sorun_aciklamasi": "Merhaba, Outlook üzerinden geçmiş maillerimi arattığımda 'Arama sonuçları yükleniyor' diyor fakat hiçbir sonuç bulmuyor. Dünden beri bu şekilde.",
+    "cozum": "Kullanıcının bilgisayarına uzaktan bağlanıldı. Windows Dizin Oluşturma (Indexing) servisinin durduğu tespit edildi. Servis yeniden başlatıldı ve Outlook dizini yeniden oluşturulmak üzere tetiklendi. Arama fonksiyonu normale döndü.",
+    "atanan_kisi": "yusuf.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1012",
+    "kullanici_maili": "kemal.arslan@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Satınalma Siparişi Onaya Düşmüyor",
+    "sorun_aciklamasi": "ME21N üzerinden oluşturduğum hammadde siparişleri yöneticimin onay ekranına gitmiyor. Sistem siparişi kaydediyor ama onay stratejisi tetiklenmemiş görünüyor.",
+    "cozum": "Satınalma siparişinin tutarı kontrol edildi. İlgili onay stratejisinde 100.000 TL üzeri için yeni bir kural eklenmediği fark edildi. Uyarlama (SPRO) üzerinden ilgili onay sınıfına yeni değer aralığı eklendi. Sipariş yeniden oluşturuldu ve onaya düştü.",
+    "atanan_kisi": "sena.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1013",
+    "kullanici_maili": "buse.kara@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Toplantı Odası 3'te Wi-Fi Kopuyor",
+    "sorun_aciklamasi": "Şu an Toplantı Odası 3'te sunum yapıyoruz fakat kablosuz ağa bağlanan herkesin interneti 5 dakikada bir kopuyor. Misafir ağında da aynı sorun var.",
+    "cozum": "Controller üzerinden ilgili toplantı odasındaki Access Point'in (AP-012) logları incelendi. Cihazın aşırı ısınmadan dolayı kendini yeniden başlattığı görüldü. AP fiziksel olarak değiştirildi ve yapılandırması tamamlandı. Kesinti giderildi.",
+    "atanan_kisi": "yücel.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1014",
+    "kullanici_maili": "murat.gunes@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Üretim Siparişi Teyidi Alınamıyor",
+    "sorun_aciklamasi": "CO11N ekranında üretim teyidi verirken 'Teyit miktarı planlanan miktarı aşıyor' uyarısı alıp işlemi kaydedemiyorum. Tolerans sınırını aşmadığıma eminim.",
+    "cozum": "İşyeri (Work Center) ve rota verileri kontrol edildi. Önceki vardiyada başka bir operatörün yanlışlıkla fazla miktar teyidi (CO13 ile iptal edilmemiş) girdiği tespit edildi. Hatalı teyit iptal edildi, kullanıcının güncel teyidi sisteme işlendi.",
+    "atanan_kisi": "Ramazan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1015",
+    "kullanici_maili": "aylin.toprak@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Excel Formülleri Otomatik Hesaplanmıyor",
+    "sorun_aciklamasi": "Büyük bir finansal tablo üzerinde çalışıyorum. Hücredeki değeri değiştirdiğimde toplamlar güncellenmiyor. Sadece dosyayı kapatıp açarsam değerler değişiyor.",
+    "cozum": "Kullanıcının Excel ayarları kontrol edildi. 'Formüller' sekmesindeki Hesaplama Seçenekleri'nin yanlışlıkla 'El ile' (Manual) olarak değiştirildiği görüldü. Ayar 'Otomatik' olarak düzeltildi ve sorun giderildi.",
+    "atanan_kisi": "faruk.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1016",
+    "kullanici_maili": "sinan.kurt@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Antivirüs Sürekli Uyarı Veriyor",
+    "sorun_aciklamasi": "Bilgisayarımda sağ altta sürekli 'Zararlı yazılım engellendi' şeklinde Defender uyarısı çıkıyor. Tarama yapıyorum bitmiyor, bilgisayar da çok yavaşladı.",
+    "cozum": "Cihaz acil olarak ağdan izole edildi. Güvenli modda EDR aracı ile derin tarama başlatıldı. İndirilenler klasöründeki bir crackli yazılım kalıntısının sürekli dışarıya istek yaptığı tespit edildi. İlgili zararlı temizlendi, cihaz tekrar ağa dahil edildi.",
+    "atanan_kisi": "turgut.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1017",
+    "kullanici_maili": "gokhan.yildirim@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Maliyet Merkezi Bütçe Aşımı Hatası",
+    "sorun_aciklamasi": "Masraf faturası kaydı yaparken '1020 nolu maliyet merkezi bütçesi aşıldı' şeklinde sistem beni engelliyor. Bütçemiz bu ay için artırılmıştı.",
+    "cozum": "Bütçe kontrol (KO22) ekranından 1020 nolu maliyet merkezinin güncel bütçesi incelendi. Yeni bütçe rakamlarının henüz sisteme yüklenmediği anlaşıldı. Finans kontrolöründen alınan teyit sonrası ek bütçe sisteme tanımlandı. Fatura kaydı tamamlandı.",
+    "atanan_kisi": "oğulcan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1018",
+    "kullanici_maili": "ik@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Yeni Personel E-posta ve Domain Hesabı Açılışı",
+    "sorun_aciklamasi": "Pazartesi günü işe başlayacak olan yeni Satış Uzmanımız Cenk Yılmaz için AD hesabı ve sirket.com uzantılı mail adresi açılmasını rica ederiz.",
+    "cozum": "Active Directory üzerinde 'cenk.yilmaz' kullanıcı adı ile standart satış departmanı yetkilerine sahip hesap oluşturuldu. Exchange üzerinden e-posta kutusu tanımlandı. Geçici şifre İK departmanına güvenli kanaldan iletildi.",
+    "atanan_kisi": "esra.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1019",
+    "kullanici_maili": "canan.ozer@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Klavye Bazı Tuşları Basmıyor",
+    "sorun_aciklamasi": "Masaüstü bilgisayarımdaki klavyenin 'A', 'S' ve 'Boşluk' tuşları basmıyor. Temizledim ama düzelmedi, yedek klavye talep ediyorum.",
+    "cozum": "BT deposundan yeni bir standart USB klavye (Envanter: KLV-152) alınarak kullanıcının masasına götürüldü. Eski klavye hurdaya ayrılmak üzere teslim alındı, yeni klavye takılarak test edildi.",
+    "atanan_kisi": "salih.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1020",
+    "kullanici_maili": "tayfun.bilgin@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "İrsaliye Çıktısı Alınamıyor",
+    "sorun_aciklamasi": "VL02N ekranından teslimat kaydı yapıp irsaliye dökmek istediğimde çıktı gelmiyor. SP01'e baktığımda statü 'Hatalı' görünüyor.",
+    "cozum": "Çıktı kontrol (NACE) uyarlamaları ve yazıcı ayarları incelendi. İlgili çıktı türü için atanan yazıcının (LPT2) sistemde pasife alındığı tespit edildi. Yazıcı tanımı LPT3 olarak güncellendi ve bekleyen irsaliyeler yazdırıldı.",
+    "atanan_kisi": "Gizem.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1021",
+    "kullanici_maili": "hakan.tunc@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Bilgisayar Mavi Ekran Verip Kapanıyor",
+    "sorun_aciklamasi": "Sabah bilgisayarı açtım, tam masaüstü gelirken mavi bir ekran çıkıp (CRITICAL_PROCESS_DIED) yeniden başlıyor. Hiçbir dosyama ulaşamıyorum.",
+    "cozum": "Cihaz IT ofisine alındı. Sorunun son Windows güncellemesinden kaynaklı bir sürücü uyuşmazlığı (sys dosyası) olduğu anlaşıldı. Güvenli modda son güncelleme geri alındı. Sistem stabil hale getirildikten sonra kullanıcıya teslim edildi.",
+    "atanan_kisi": "yücel.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1022",
+    "kullanici_maili": "serkan.yavuz@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Depo Görevi Kilitli Kaldı",
+    "sorun_aciklamasi": "Malzemeyi rafa yerleştirmek için depo görevi (Warehouse Task) onaylamaya çalışıyorum ama 'Belge başka bir kullanıcı tarafından kilitlendi' hatası veriyor. Kimse işlem yapmıyor şu an.",
+    "cozum": "SM12 (Kilit girişleri) işlem kodu üzerinden kontrol edildi. Gece vardiyasındaki bir kullanıcının ekranı kapandığı için belgenin kilitli kaldığı görüldü. İlgili kilit tablosu (Lock entry) silindi ve görev onaya açıldı.",
+    "atanan_kisi": "Ömer.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1023",
+    "kullanici_maili": "fatma.guler@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Posta Kutusu Kotası Doldu Uyarısı",
+    "sorun_aciklamasi": "Dışarıya mail atamıyorum, 'Kotanız doldu, bazı öğeleri silin' uyarısı alıyorum ama silebileceğim mail yok, hepsi önemli sözleşmeler.",
+    "cozum": "Exchange Yönetim Merkezi üzerinden kullanıcının posta kutusu boyutu incelendi (Geçerli boyut: 4.9 GB). Kullanıcının departman yöneticisinden onay alınarak kotası 10 GB'a yükseltildi. Arşivleme (In-Place Archive) özelliği aktif edilerek eski maillerin arşive düşmesi sağlandı.",
+    "atanan_kisi": "emirhan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1024",
+    "kullanici_maili": "ismail.cetin@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Kalite Belgesi Basılamıyor",
+    "sorun_aciklamasi": "Müşteriye sevk edilecek ürün için QC02'den kalite sertifikası (COA) oluşturduk fakat PDF olarak alamıyoruz, formattan taşıyor ve hata veriyor.",
+    "cozum": "Sertifika profili ve atanan SmartForms/Adobe Forms şablonu kontrol edildi. Müşterinin spesifikasyonlarına girilen bir kimyasal değerin karakter sınırını aştığı için formun patladığı tespit edildi. Formül alanı genişletilerek ABAP tarafında düzeltme yapıldı. Çıktı başarılı.",
+    "atanan_kisi": "Ramazan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1025",
+    "kullanici_maili": "ali.dogan@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Masa IP Telefonu Çalışmıyor",
+    "sorun_aciklamasi": "Masamdaki Cisco IP telefonda ekranda 'Registering' yazısı yanıp sönüyor, hat düşmüyor. Kabloyu çıkarıp taktım düzelmedi.",
+    "cozum": "Switch üzerinden kullanıcının portu kontrol edildi, PoE beslemesinde sorun yoktu ancak VLAN atamasının yanlışlıkla data vlan'ında kaldığı görüldü. Port konfigürasyonu Voice VLAN (VLAN 30) olarak düzeltildi. Telefon santrale başarıyla register oldu.",
+    "atanan_kisi": "yücel.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1026",
+    "kullanici_maili": "nihal.sari@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Word Belgesi Bozuk Gözüküyor",
+    "sorun_aciklamasi": "Dün üzerinde çalıştığım ve kaydettiğim 50 sayfalık şartname dosyasını bugün açtığımda içindeki tüm tablolar birbirine girmiş, yazılar okunmuyor.",
+    "cozum": "Dosya kopyalanarak onarma aracı ile açıldı ancak kalıcı hasar almış olduğu tespit edildi. Dosya Sunucusu (File Server) üzerindeki Gölge Kopya (Shadow Copy / Previous Versions) özelliği kullanılarak dosyanın dün akşam saat 17:00'deki sağlam versiyonu geri getirildi.",
+    "atanan_kisi": "salih.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1027",
+    "kullanici_maili": "orhan.kaya@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Mouse Tekerleği Aşağı İnmiyor",
+    "sorun_aciklamasi": "Faremin scroll (orta tekerlek) tuşu bozuldu, aşağı kaydırıyorum ama ekran yukarı atlıyor. Yeni mouse alabilir miyim?",
+    "cozum": "BT envanterinden yeni bir kablosuz mouse (Envanter: MUS-210) çıkarılarak kullanıcıya teslim edildi. Arızalı donanım geri dönüşüme ayrıldı.",
+    "atanan_kisi": "faruk.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1028",
+    "kullanici_maili": "mert.aydin@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Uzak Masaüstü Erişim Talebi",
+    "sorun_aciklamasi": "Evden çalıştığım günlerde ofisteki masaüstü bilgisayarıma RDP (Uzak Masaüstü) ile bağlanmak istiyorum. Yetki tanımlaması yapabilir misiniz?",
+    "cozum": "Bilgi Güvenliği politikası gereği doğrudan RDP yetkisi verilmediği kullanıcıya bildirildi. Bunun yerine SSL VPN üzerinden bağlanıp, cihaz ismine (PC-MERT) RDP yapabilmesi için VPN profili yetkilendirildi. Ofisteki PC'sinde 'Uzak Masaüstü' özelliği aktif edildi.",
+    "atanan_kisi": "mustafa.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1029",
+    "kullanici_maili": "pelin.ozcan@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Malzeme Deposu Bulunamıyor Hatası",
+    "sorun_aciklamasi": "Malzeme transferi (MIGO 311) yaparken 2000 nolu üretim deposunu hedef depo olarak seçiyorum ama 'Depo yeri tanımlı değil' diyor. Halbuki dün yapıyorduk.",
+    "cozum": "MM02'den ilgili malzemenin (Mat No: 800912) depo yeri görünümleri kontrol edildi. Malzemenin 2000 nolu üretim deposuna genişletilmediği (extend edilmediği) görüldü. MMSC ekranından eksik depo yeri tanımı eklendi, transfer işlemi gerçekleşti.",
+    "atanan_kisi": "sena.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1030",
+    "kullanici_maili": "engin.tekin@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "USB Bellek Okuma İzni Talebi",
+    "sorun_aciklamasi": "Müşteriden gelen çizim dosyaları USB bellek içerisinde. Bilgisayarıma taktığımda erişim engellendi uyarısı alıyorum. Okuma izni verebilir misiniz?",
+    "cozum": "DLP (Veri Sızıntısı Önleme) politikaları gereği USB portları kapalıdır. Ancak yöneticisinden gelen onay maeline istinaden, kullanıcının cihazına DLP ajanı üzerinden sadece 'Okuma' (Read-Only) yetkisi 2 saatlik geçici bir süreyle tanımlandı.",
+    "atanan_kisi": "turgut.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1031",
+    "kullanici_maili": "fatma.teyze@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Bilgisayardan Garip Sesler Geliyor ve Açılmıyor",
+    "sorun_aciklamasi": "Merhaba, sabah işe geldim düğmeye bastım ama bilgisayar çığlık atar gibi dıııt dıııt ötüyor. Ekran da simsiyah kaldı hiçbir şey göremiyorum, bozuldu mu acaba bu?",
+    "cozum": "Kullanıcının masasına gidilerek cihaz incelendi. RAM belleklerin tozlanma nedeniyle temas sorunu yaşadığı ve anakartın bu yüzden donanım uyarı sesi (beeps) verdiği tespit edildi. RAM'ler temizlenip yuvalarına sıkıca oturtulduktan sonra bilgisayar sorunsuz açıldı.",
+    "atanan_kisi": "emirhan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1032",
+    "kullanici_maili": "selami.ustun@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Sarı Kutulu Program Beni İçeri Almıyor",
+    "sorun_aciklamasi": "Kolay gelsin, her gün girdiğim o sarı logolu SAP programına basıyorum ama bana kırmızı yazıyla ingilizce bir şeyler diyor, giriş yapamıyorum. Acil fatura girmem lazım işim yarım kaldı.",
+    "cozum": "Kullanıcıyla görüşüldü. SAP GUI giriş ekranında şifre deneme sınırını aştığı için hesabının kilitlendiği anlaşıldı. SU01 üzerinden kullanıcının şifre kilidi kaldırıldı ve yeni şifre oluşturularak sisteme girmesi sağlandı.",
+    "atanan_kisi": "oğulcan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1033",
+    "kullanici_maili": "ayten.guzel@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "İnternetim Tamamen Gitti Sanırım",
+    "sorun_aciklamasi": "Arkadaşımla konuşuyorum onun interneti var ama bende sağ altta dünya resmi çıktı, üstünde de çarpı var. Hiçbir yere giremiyorum, sabahtan beri böyle.",
+    "cozum": "Kullanıcının bilgisayarının arkasındaki ethernet kablosunun tam oturmadığı ve yerinden çıktığı görüldü. Kablo yerine oturtuldu, ağ bağlantısı saniyeler içinde geri geldi.",
+    "atanan_kisi": "yücel.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1034",
+    "kullanici_maili": "remzi.usta@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Malzeme Kabulünde Garip Hata",
+    "sorun_aciklamasi": "Merhaba, depoya gelen malları sisteme işliyordum ama yeşil ekran yerine önüme kocaman kırmızı bir yazı çıktı. 'QM bilmem nesi aktif değil' yazıyor. Ben ne yapacağım şimdi?",
+    "cozum": "Kullanıcının MIGO ekranında malzeme girişi yaparken karşılaştığı hata incelendi. İlgili malzeme kartında kalite kontrol görünümünün (QM) aktif olduğu ancak denetim türünün tanımlanmadığı tespit edildi. MM02'den gerekli kalite ayarları yapıldı ve kullanıcının kaydı tamamlaması sağlandı.",
+    "atanan_kisi": "Ramazan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1035",
+    "kullanici_maili": "nermin.aslan@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Excel Kafayı Yedi Sayılar Görünmüyor",
+    "sorun_aciklamasi": "Yöneticime sunum hazırlıyorum ama Excel tablosundaki tüm paralar gitmiş yerine '###' şeklinde kareler çıkmış. Dosya mı bozuldu, emeğim çöp mü oldu eyvah!",
+    "cozum": "Kullanıcıya panik yapmaması iletildi. Hücre genişliğinin içerideki sayısal değere göre dar kaldığı durumlarda Excel'in bu işareti çıkardığı açıklandı. Sütun çizgisine çift tıklanarak genişletildi ve sayılar tekrar görünür hale getirildi.",
+    "atanan_kisi": "yusuf.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1036",
+    "kullanici_maili": "cengiz.kaya@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Telefonum Sustu Kimse Beni Duymuyor",
+    "sorun_aciklamasi": "Masanın üstündeki şu telefon dünden beri hiç çalmıyor. Ben birini aramaya çalışınca da kulağıma garip dıt dıt sesleri geliyor. Bozuldu galiba bu alet.",
+    "cozum": "Masa üstü IP telefonun arkasındaki ağ kablosunun yanlışlıkla 'PC' portuna takıldığı fark edildi. Kablo sökülerek 'LAN' portuna takıldı. Cihaz IP alarak santrale bağlandı ve hat normale döndü.",
+    "atanan_kisi": "faruk.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1037",
+    "kullanici_maili": "sevgi.can@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Yazıcıdan Kağıt Çıkmıyor Ama Işığı Yanıyor",
+    "sorun_aciklamasi": "Bizim odadaki yazıcıya kaç kere çıktı gönderdim ama tık yok. Yanına gittim kırmızı bir ışık yanıp sönüyor ama kağıt falan sıkışmamış, boş boş duruyor.",
+    "cozum": "Yazıcı kontrol edildiğinde 'Toner Low' uyarısı verdiği ve toner tamamen bittiği için kendini korumaya aldığı görüldü. Yeni toner takılarak cihazın kırmızı hata ışığı söndürüldü ve biriken çıktılar yazdırıldı.",
+    "atanan_kisi": "salih.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1038",
+    "kullanici_maili": "ihsan.demir@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Barkod Okuyucu SAP'ye Yazmıyor",
+    "sorun_aciklamasi": "Depoda el terminaliyle kutuları okutuyorum, ışık yanıyor bip sesi geliyor ama SAP ekranındaki kutucuğa hiçbir şey yazmıyor. Elle yazmak zorunda kalıyorum, çok yavaşladık.",
+    "cozum": "El terminalindeki SAP EWM RF yazılımının oturumunun kapandığı veya arka planda donduğu anlaşıldı. RF cihazı üzerindeki SAP oturumu kapatılıp yeniden açıldı, cihazın girdileri tekrar sorunsuz algıladığı doğrulandı.",
+    "atanan_kisi": "Ömer.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1039",
+    "kullanici_maili": "hasan.tatar@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Ortak Klasörüm Tamamen Silinmiş!",
+    "sorun_aciklamasi": "Yandık biz! Her gün girdiğim o ortak dosya ağacındaki 'Üretim Planlama' klasörü yerinde yok. Birisi her şeyi silmiş herhalde acil yardım edin!",
+    "cozum": "Kullanıcının ortak disk klasörünü silmediği, fareyle sürüklerken yanlışlıkla yanındaki başka bir klasörün içine bıraktığı (drag-drop kazası) tespit edildi. Klasör eski yerine taşınarak kullanıcıya bilgi verildi.",
+    "atanan_kisi": "yücel.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1040",
+    "kullanici_maili": "mualla.kurt@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "E-postalarım Gelmiyor Sanırım",
+    "sorun_aciklamasi": "Sabahtan beri kimse bana mail atmadı, normalde bu saate kadar 20 tane gelirdi. Ben birine deneme gönderdim gitti ama bana gelen giden hiçbir şey yok, sistem mi çöktü?",
+    "cozum": "Outlook kontrol edildiğinde kullanıcının yanlışlıkla 'Çevrimdışı Çalış' (Work Offline) butonuna bastığı ve sistemin sunucuyla bağlantısını kestiği görüldü. Butona tekrar basılarak 'Çevrimiçi' duruma getirildi ve biriken mailler kutuya düştü.",
+    "atanan_kisi": "faruk.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1041",
+    "kullanici_maili": "turgay.yilmaz@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Bilgisayarımda Sürekli Reklamlar Çıkıyor",
+    "sorun_aciklamasi": "İnternette gezinirken ekranda sürekli 'Tebrikler kazandınız' diye saçma sapan şeyler çıkmaya başladı. Kapatıyorum yine geliyor, bilgisayara virüs mü girdi?",
+    "cozum": "Kullanıcının tarayıcısına (Chrome) bindiği reklam yazılımları (adware) ve tarayıcı bildirim izinleri incelendi. İzin verilen zararlı sitelerin bildirim yetkileri iptal edildi, tarayıcı önbelleği temizlendi ve sistem antivirüs ile taratıldı.",
+    "atanan_kisi": "turgut.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1042",
+    "kullanici_maili": "huseyin.oz@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Siparişe Fiyat Ekleyemiyorum Kilitli",
+    "sorun_aciklamasi": "Müşterinin siparişine indirim tanımlayacağım ama fiyata tıklatıp yazdırmıyor sistem bana. Kutucuklar gri renkte kalmış, dondum kaldım.",
+    "cozum": "Sipariş belgesi (VA02) incelendi. Kullanıcının indirim koşul türünü (ZDIS) manuel girmeye çalıştığı ancak bu alanın sadece sistem tarafından otomatik hesaplandığı, yetkisinin yetersiz olduğu belirlendi. Satış yöneticisinin onayıyla ilgili koşul türü için geçici manuel giriş izni tanımlandı.",
+    "atanan_kisi": "Gizem.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1043",
+    "kullanici_maili": "aylin.sen@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Şifremi Kabul Etmiyor Sinir Oldum",
+    "sorun_aciklamasi": "Her gün girdiğim şifreyi yazıyorum ama 'Hatalı şifre' deyip duruyor. Büyük küçük harfe de dikkat ediyorum ama delirtti beni sabahtan beri açamadım ekranı.",
+    "cozum": "Kullanıcının klavyesindeki 'Caps Lock' ışığının açık olduğu ve şifreyi bu yüzden ters karakterlerle girdiği tespit edildi. Caps Lock kapatılarak doğru şekilde giriş yapması sağlandı.",
+    "atanan_kisi": "yücel.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1044",
+    "kullanici_maili": "sabri.guler@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Malzemenin Fiyatı Yanlış Çıkıyor",
+    "sorun_aciklamasi": "Hammadde stoğuna bakıyorum ama bizim 10 dolara aldığımız malzeme sistemde 100 lira görünüyor. Bu hesaplarda büyük bir yanlışlık var, biri kurcaladı mı naptı?",
+    "cozum": "Malzeme ana verisi (MM03) Muhasebe görünümü kontrol edildi. Malzemenin fiyat denetiminin 'V' (Hareketli ortalama fiyat) olduğu ve para biriminin TL olarak seçildiği görüldü. İlgili muhasebe kaydı ve satınalma siparişlerindeki kur farkları incelenerek fiyatın sistemde neden bu şekilde oluştuğu kullanıcıya detaylıca açıklandı.",
+    "atanan_kisi": "sena.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1045",
+    "kullanici_maili": "pelin.kaya@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Beni Şu Klasöre Alın Lütfen",
+    "sorun_aciklamasi": "Merhaba, yeni gelen bütçe dosyalarını görmem lazımmış ama bana 'Yetkiniz yok' diye bir uyarı veriyor. Acil bakmam lazım şuna yetki verir misiniz?",
+    "cozum": "Kullanıcının talep ettiği 'Finans_Butce_2026' klasörüne erişim için departman müdüründen mail yoluyla onay alındı. Active Directory üzerinde ilgili klasöre okuma/yazma yetkisi veren güvenlik grubuna kullanıcının hesabı dahil edildi.",
+    "atanan_kisi": "esra.teknoloji"
+  },
+    {
+    "ticket_id": "TCK-1046",
+    "kullanici_maili": "huseyin.amca@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Fare Kendi Kendine Geziyor",
+    "sorun_aciklamasi": "Bilgisayarın faresi ben dokunmadan ekranda sağa sola titriyor. Bazen tıklayamıyorum bile, içine cin kaçmış gibi. Yenisini mi alacağız?",
+    "cozum": "Kullanıcının faresinin altındaki optik sensör kontrol edildi. Sensör deliğine küçük bir kağıt/toz parçası sıkıştığı için imlecin titrediği anlaşıldı. Sensör temizlendi ve mouse normal çalışmasına döndü.",
+    "atanan_kisi": "salih.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1047",
+    "kullanici_maili": "berna.koc@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Para Gönderecem Kırmızı Işık Yandı",
+    "sorun_aciklamasi": "Tedarikçiye ödeme çıkmam lazım, SAP'de her şeyi yazdım ama kaydet tuşuna basınca altta kırmızı bir ampul yandı 'Hesap bloke' falan diyor. Adamlar para bekliyor acil!",
+    "cozum": "İlgili satıcı ana verisi (FK03) incelendi. Satıcının kalite departmanı tarafından 'Kalite Problemi' nedeniyle geçici olarak ödeme blokajına alındığı görüldü. Kullanıcıya durum açıklandı ve ödeme blokajını kaldırmak için kalite departmanıyla görüşmesi gerektiği iletildi.",
+    "atanan_kisi": "oğulcan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1048",
+    "kullanici_maili": "yavuz.cetinkaya@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Ekranda Polis Amblemi Çıktı Para İstiyor",
+    "sorun_aciklamasi": "İnternette araştırma yaparken ekran birden kilitlendi. EGM logosu var, 'Bilgisayarınız kilitlendi ceza ödeyin' yazıyor. Hiçbir yere basamıyorum, fişi çektim korkudan.",
+    "cozum": "Bilgisayar hemen ağdan izole edildi. Tarayıcı üzerinden tam ekran yapılarak kullanıcıyı kandırmaya çalışan basit bir 'Scareware' (Korkutma amaçlı zararlı) olduğu anlaşıldı. Cihaz güvenli modda açılarak tarayıcı eklentileri ve önbelleği temizlendi. Kullanıcıya bu tür ekranlarda hiçbir işlem yapmaması gerektiği anlatıldı.",
+    "atanan_kisi": "turgut.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1049",
+    "kullanici_maili": "nuray.sahin@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Klavyeye Çay Döküldü Tuşlar Yapıştı",
+    "sorun_aciklamasi": "Sabah yanlışlıkla klavyenin üstüne yarım bardak şekerli çay döktüm. Peçeteyle sildim ama 'Enter' ve 'Boşluk' tuşları basınca geri gelmiyor, yapış yapış oldu.",
+    "cozum": "Klavye donanımının sıvı teması ve şekerlenme nedeniyle fiziksel olarak kurtarılamayacağı belirlendi. Ankara BT deposundan yeni bir klavye alınarak kullanıcının masasına kuruldu. Eski klavye hurdaya ayrıldı.",
+    "atanan_kisi": "faruk.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1050",
+    "kullanici_maili": "kemal.tanca@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Satın Alma Yapamıyorum Düğmeler Kayboldu",
+    "sorun_aciklamasi": "Siparişi gireceğim ama yukarıdaki kaydetme, silme düğmelerinin hiçbiri bende yok. Dün vardı bugün uçmuşlar. Düğmelerimi geri getirin lütfen.",
+    "cozum": "Kullanıcının yetki profilleri (SU53) kontrol edildi. Satınalma yöneticisi tarafından kullanıcının yetkisinin 'Sadece Görüntüleme' moduna çekildiği tespit edildi. Kullanıcıya sistemde bir arıza olmadığı, yetki değişikliği yapıldığı bilgisi verilerek yöneticisine yönlendirildi.",
+    "atanan_kisi": "sena.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1051",
+    "kullanici_maili": "asli.veli@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Şifremi Kağıda Yazmıştım Kaybettim",
+    "sorun_aciklamasi": "Bilgisayar şifremi unutmayayım diye sarı kağıda yazıp ekranın altına yapıştırmıştım, temizlikçi abla çöpe atmış galiba. Sabahtan beri giremiyorum, şifrem neydi benim?",
+    "cozum": "Kullanıcının kimliği yöneticisi üzerinden doğrulandı. Active Directory üzerinden eski şifre sıfırlanarak geçici bir şifre belirlendi ve kullanıcıya telefonda iletildi. Şifrelerin kağıtlara yazılmaması gerektiği konusunda güvenlik uyarısı yapıldı.",
+    "atanan_kisi": "mustafa.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1052",
+    "kullanici_maili": "tevfik.zengin@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Fatura Çıkmıyor Yazıcı İşareti Yok",
+    "sorun_aciklamasi": "Müşterinin malı tıra yüklendi faturasını basıcam ama SAP'de faturayı buluyorum, yukarıda yazıcı resmi çıkmıyor. Bu kamyon faturasız nasıl yola çıkacak?",
+    "cozum": "Fatura belgesinin çıktı koşulları (VF02 -> Çıktı) incelendi. İlgili fatura türü için otomatik çıktı kaydının koşul kayıtlarında (VV31) tanımlı olmadığı anlaşıldı. Manuel olarak ZFAT çıktı türü eklendi ve faturanın basılması sağlandı.",
+    "atanan_kisi": "Gizem.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1053",
+    "kullanici_maili": "ik@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Yeni Stajyer Geldi Ama Ekranı Açılmıyor",
+    "sorun_aciklamasi": "Pazarlama departmanına yeni bir stajyer kızımız geldi (Merve), masasına oturdu ama bilgisayar kullanıcı adı şifre istiyor, biz ne yazacağız oraya?",
+    "cozum": "İnsan Kaynakları tarafından işe giriş bildirgesi açılmadığı için IT tarafında hesap oluşturulmadığı tespit edildi. Acil olarak IK'dan form talep edildi. Form geldikten sonra 'merve.stajyer' kullanıcı adı ile kısıtlı AD hesabı açıldı ve bilgileri paylaşıldı.",
+    "atanan_kisi": "esra.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1054",
+    "kullanici_maili": "resul.kurt@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Makineden SAP'ye Sayı Gitmiyor",
+    "sorun_aciklamasi": "Üretim hattında iş emrini bitirdik, normalde makineden SAP'ye '100 tane bitti' diye kendi yazıyordu. Bugün yazmıyor, manuel girersem stoklar karışır mı?",
+    "cozum": "Üretim otomasyon sistemi (MES) ile SAP arasındaki RFC bağlantısı (SM59) kontrol edildi. Bağlantıda zaman aşımı kopukluğu olduğu görüldü. Bağlantı resetlendi ve kuyrukta (SMQ1) takılı kalan üretim teyit verileri SAP tarafına başarıyla aktarıldı.",
+    "atanan_kisi": "Ramazan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1055",
+    "kullanici_maili": "sibel.canan@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Projeksiyon Pembe Gösteriyor Rezil Olduk",
+    "sorun_aciklamasi": "Toplantı odasında müdürlere sunum yapacağım ama duvardaki görüntü kıpkırmızı/pembe. Renkler birbirine girdi, tablolar okunmuyor acil birini gönderin!",
+    "cozum": "Toplantı odasına gidilerek projeksiyon cihazının bağlantıları kontrol edildi. Masadaki VGA kablosunun pinlerinden birinin yamulduğu için renkleri hatalı ilettiği görüldü. Kullanıcının bilgisayarına HDMI kablosu takılarak sorun çözüldü ve VGA kablosu yenisiyle değiştirilmek üzere çöpe atıldı.",
+    "atanan_kisi": "yusuf.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1056",
+    "kullanici_maili": "cetin.yucel@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Kabloya Taktım Ayağımı İnternet Gitti",
+    "sorun_aciklamasi": "Masadan kalkarken ayağım kasaya giren beyaz kabloya takıldı. Tırnak kısmı kırılmış herhalde, geri takıyorum bol duruyor tık etmiyor. İnternetim de gitti haliyle.",
+    "cozum": "Yozgat ofisindeki IT personeli masaya yönlendirildi. Ağ kablosunun RJ45 ucu kırıldığı için switch ile iletişimi kestiği görüldü. Yeni bir RJ45 ucu çakılarak kablo sağlamlaştırıldı ve ağ erişimi geri geldi.",
+    "atanan_kisi": "yücel.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1057",
+    "kullanici_maili": "gulsah.aydin@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Depoda Mal Var Sistemde Sıfır Diyor Hayalet Mi Bu?",
+    "sorun_aciklamasi": "Gözümle görüyorum rafta 50 koli mal var, SAP programına girip bakıyorum sıfır yazıyor. Biri bizim malları sildi mi sistemden?",
+    "cozum": "Malzeme hareketleri (MB51) incelendi. Malların bir önceki vardiyada yanlışlıkla başka bir depoya (Hurda Deposu) transfer edildiği tespit edildi. 311 hareket türü ile malzemeler sistem üzerinde tekrar fiilen bulundukları ana depoya çekildi.",
+    "atanan_kisi": "sena.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1058",
+    "kullanici_maili": "tarik.boy@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Bilgisayar Kapanırken Güncelleme Dedi 2 Saattir Bekliyor",
+    "sorun_aciklamasi": "Çıkıcam bilgisayarı kapat dedim 'Bilgisayarınızı kapatmayın güncelleniyor' dedi. %100 olmadı hala, fişini çeksem bozulur mu? Servisi kaçırıcam.",
+    "cozum": "Kullanıcıya telefonla ulaşıldı ve fişi kesinlikle çekmemesi gerektiği, aksi takdirde işletim sisteminin çökebileceği söylendi. Sistemin arka planda büyük bir versiyon güncellemesi yaptığı anlaşıldı. Kullanıcıya mesai bitimi bilgisayarı o şekilde bırakıp çıkabileceği, cihazın işi bitince kendini kapatacağı söylendi.",
+    "atanan_kisi": "faruk.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1059",
+    "kullanici_maili": "leyla.yeni@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Evlendim Mailim Eski Soyadımda Kaldı",
+    "sorun_aciklamasi": "Geçen ay evlendim adım Leyla Yeni oldu ama maillerim hala leyla.eski@sirket.com olarak gidiyor. Herkes bana hala eski soyadımla hitap ediyor, bunu düzeltebilir miyiz?",
+    "cozum": "İnsan Kaynakları sisteminden resmi soyadı değişikliği teyit edildi. Active Directory üzerinde kullanıcının Display Name ve UPN bilgileri güncellendi. Exchange üzerinden leyla.yeni@sirket.com adresi ana (Primary) mail yapıldı, eski adresi ise (Alias) olarak bırakıldı ki eski mailler gelmeye devam etsin.",
+    "atanan_kisi": "mustafa.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1060",
+    "kullanici_maili": "omer.faruk@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Banka Şifresi Sordu Bir Mail Tıkladım",
+    "sorun_aciklamasi": "Muhasebeden geliyormuş gibi bir mail vardı, 'Maaş güncellemesi için banka bilgilerinizi girin' dedi. Tıkladım bir ekran açıldı şifremi yazdım ama hata verdi. Bir sorun olur mu?",
+    "cozum": "Çok yüksek öncelikli güvenlik alarmı. Kullanıcının bir oltalama (Phishing) kurbanı olduğu anlaşıldı. Cihaz anında ağdan koparıldı. Kullanıcının Windows ve tüm şirket şifreleri derhal sıfırlandı. Oltalama mailinin geldiği sunucu şirket genelinde engellendi. Kullanıcıya BT'den bilgi verilmeden bu tarz formlara asla bilgi girmemesi anlatıldı.",
+    "atanan_kisi": "turgut.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1061",
+    "kullanici_maili": "dursun.kaptan@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Bütçe Yok Diyor Ama Var Patron Onayladı",
+    "sorun_aciklamasi": "Seyahat masrafımı gireceğim 'Bütçe aşıldı' diye bağırıyor sistem. Halbuki patron dünden onayladı bütçe verdiler, sistem dondu herhalde yenileyin bir.",
+    "cozum": "Maliyet merkezi bütçe raporu (S_ALR_87013611) kontrol edildi. Patronun onayı alınmasına rağmen, finans departmanının sisteme bütçe aktarımı (CJ30 / KO22) henüz yapmadığı anlaşıldı. Bütçe sisteme tanımlandıktan sonra kullanıcının işlemi yapabileceği bildirildi.",
+    "atanan_kisi": "oğulcan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1062",
+    "kullanici_maili": "halil.usta@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Okutunca Dıt Diye Ötüyor Koli Gitmiyor",
+    "sorun_aciklamasi": "El terminaliyle sevk edilecek kutuyu okutuyorum ekranda HU bilmem ne hatası veriyor, dıt dıt bağırıyor makine. Kamyona yükleyemedim malı.",
+    "cozum": "Belirtilen Taşıma Birimi (Handling Unit - HU) sistemde kontrol edildi. İlgili kolinin ambalajlamasının (Pack) sistemde henüz tamamlanmadığı ve 'Açık' statüde olduğu görüldü. HU statüsü kapatılarak sevkiyata uygun hale getirildi ve terminal hatası giderildi.",
+    "atanan_kisi": "Ömer.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1063",
+    "kullanici_maili": "meryem.kisa@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Kulaklıktan Ses Gelmiyor Toplantıdayım Adamlar Sessiz Sinema Gibi",
+    "sorun_aciklamasi": "Teams'ten toplantıya girdim, kulaklığı taktım adamların dudakları oynuyor ama gram ses yok. Benim sesim onlara gidiyormuş ama ben sağır oldum sanki.",
+    "cozum": "Kullanıcının bilgisayarına uzaktan bağlanıldı. Windows ses ayarlarında 'Çıkış Cihazı' olarak kulaklık yerine monitörün dahili hoparlörünün seçili kaldığı fark edildi. Çıkış cihazı 'USB Headset' olarak değiştirildi ve toplantı sesi kulaklığa geldi.",
+    "atanan_kisi": "yücel.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1064",
+    "kullanici_maili": "vedat.sari@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Kalite Tik İşareti Soluk Basamıyorum",
+    "sorun_aciklamasi": "Testleri bitirdim, kalite ekranında malzemeye onay vereceğim yeşil tike basacam ama düğme soluk renkli, tıklanmıyor. Biri benim yetkimi mi sildi?",
+    "cozum": "Kalite lotu (QA03) incelendi. Lot için zorunlu olan 'Sonuç Kaydı' (QE01) adımlarının tam olarak girilmediği, bir test parametresinin eksik bırakıldığı tespit edildi. Eksik sonuçlar girilip kaydedildikten sonra onay butonu aktif hale geldi.",
+    "atanan_kisi": "Ramazan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1065",
+    "kullanici_maili": "serdar.ortac@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Ekrana Kedim Bastı Masaüstü Yan Döndü",
+    "sorun_aciklamasi": "Evden çalışıyorum, ben kahve alırken kedi klavyenin üstünden geçmiş. Ekran yan döndü, diklemesine bakıyorum şu an boynum tutuldu, nasıl düzeltirim bunu?",
+    "cozum": "Kullanıcıya ekran yönlendirmesinin grafik kartı kısayolları ile değiştiği açıklandı. 'CTRL + ALT + Yukarı Ok' tuş kombinasyonuna basması söylendi. Kullanıcı tuşlara bastıktan sonra ekran normal yatay konumuna geri döndü.",
+    "atanan_kisi": "faruk.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1066",
+    "kullanici_maili": "nejla.yazici@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Sipariş Numarası Atladı Arada Boşluk Var",
+    "sorun_aciklamasi": "En son 1005 numaralı siparişi açtık, şimdi yeni açtığımda 1010 numarasını verdi. Aradaki 4 tane sipariş silinmiş mi, maliye ceza kesmesin bize?",
+    "cozum": "Kullanıcıya SAP sisteminde numara alanı arabelleği (Number Range Buffer) mantığı açıklandı. Sistem performansını artırmak için SAP'nin numaraları paketler halinde aldığı, sunucu yeniden başladığında veya oturum koptuğunda aradaki kullanılmayan numaraların atlanabildiği, bunun yasal olarak bir sorun teşkil etmediği (Fatura numarası olmadığı için) detaylıca anlatıldı.",
+    "atanan_kisi": "Gizem.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1067",
+    "kullanici_maili": "cengizhan.kurt@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Flaş Bellek Taktım İçindeki Her Şey Kısayol Olmuş",
+    "sorun_aciklamasi": "Müşterinin verdiği siyah flaş belleği taktım içindeki resimlere bakacaktım ama bütün klasörlerin üstünde ok işareti var, tıklıyorum açılmıyor. Dosyalar silinmiş mi?",
+    "cozum": "Müşterinin USB belleğinde meşhur 'Shortcut Virus' (Kısayol Virüsü) olduğu tespit edildi. USB bellek şirket antivirüsü tarafından taratıldı. Virüs temizlendi ve komut satırından (attrib komutu) gizlenen orijinal dosyalar tekrar görünür hale getirilip temiz klasöre alındı.",
+    "atanan_kisi": "turgut.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1068",
+    "kullanici_maili": "ayca.goren@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Cep Telefonum Wifiden Koptu Bağlanmıyor",
+    "sorun_aciklamasi": "Şirketin wifi ağına telefonumdan bağlanamıyorum, 'Şifre yanlış' deyip duruyor ama ben değiştirmedim ki. Kendi internetim de bitmek üzere, yardım edin.",
+    "cozum": "Şirket kuralları gereği Active Directory şifresi değiştirildiğinde (kullanıcı dün şifresini değiştirmiş), RADIUS tabanlı 802.1x kablosuz ağında da cep telefonundan şifrenin güncellenmesi gerektiği hatırlatıldı. Kullanıcıya telefondaki wifi ağını 'Unut' yapıp yeni Windows şifresiyle girmesi sağlandı.",
+    "atanan_kisi": "yücel.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1069",
+    "kullanici_maili": "tufan.ates@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": " Şirket Dosyalarına Ulaşamıyorum",
+    "sorun_aciklamasi": "Şehir dışındayım, otelin internetinden sizin o kilit resimli programa basıyorum dönüp dönüp hata veriyor. Şirket dosyalarına ulaşamıyorum acil.",
+    "cozum": "Kullanıcının bağlandığı otel ağının (Guest Wi-Fi) güvenlik duvarında VPN portlarının (IPSec/SSL) engelli olduğu tespit edildi. Kullanıcıya geçici olarak kendi cep telefonu interneti (Hotspot) üzerinden bağlanması önerildi. Hotspot üzerinden VPN sorunsuz çalıştı.",
+    "atanan_kisi": "yücel.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1070",
+    "kullanici_maili": "deniz.derya@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Benim Yerime Bu Yeni Çocuğu Ayarlayın",
+    "sorun_aciklamasi": "Bizim departmana yeni başlayan Can diye bir çocuk var. Benim ne kadar klasörüm, programım, printerım varsa aynısını ona da kopyalayın, ben ne yapıyorsam o da onu yapacak.",
+    "cozum": "Bu tarz 'Kopyala-Yapıştır' yetki taleplerinin güvenlik politikalarına aykırı olduğu kullanıcıya nazikçe açıklandı. İlgili personel için spesifik olarak hangi klasörlere (Okuma/Yazma) ve programlara erişim gerektiğinin bir liste halinde İK ve Yöneticisi onayından geçerek iletilmesi gerektiği bildirildi.",
+    "atanan_kisi": "esra.teknoloji"
+  },
+   {
+    "ticket_id": "TCK-1071",
+    "kullanici_maili": "aylin.yilmaz@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Bilgisayar Şifremi Değiştir Diyor Ama Kabul Etmiyor",
+    "sorun_aciklamasi": "Sabah açtım 'Parolanızın süresi doldu' dedi. Yeni şifre yazıyorum, 'Kurallara uymuyor' diye kızıyor. İçinde harf var, sayı var, daha ne istiyor bu benden?",
+    "cozum": "Kullanıcıya telefonla ulaşıldı. Şirket güvenlik politikası gereği şifrenin en az 8 karakter olması, büyük/küçük harf, sayı ve özel karakter (nokta, ünlem vb.) içermesi gerektiği ve son 3 şifresiyle aynı olamayacağı anlatıldı. Birlikte kurallara uygun bir şifre belirlenip sisteme giriş yapıldı.",
+    "atanan_kisi": "mustafa.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1072",
+    "kullanici_maili": "fatih.korkmaz@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Patron Benden Apple Kartı İstiyor Acil!",
+    "sorun_aciklamasi": "Genel Müdürümüz Ahmet Bey bana mail atmış, toplantıdaymış gizlice 5 tane 1000 liralık Apple hediye kartı alıp kodlarını mail atmamı istiyor. Şirket kartımla alacağım acil onay verin.",
+    "cozum": "Durumun klasik bir 'CEO Dolandırıcılığı' (Whaling / BEC) oltalama saldırısı olduğu hemen fark edildi. Kullanıcı acilen aranarak hiçbir alım yapmaması söylendi. Gelen e-postanın sahte bir adresten (ahmet.bey@sirket-mail.com gibi) atıldığı gösterildi ve domain engellendi.",
+    "atanan_kisi": "turgut.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1073",
+    "kullanici_maili": "sezgin.demir@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Üretim Ekranı Gri Oldu Yazı Yazamıyorum",
+    "sorun_aciklamasi": "İş emrini açıyorum ama kutucukların hepsi gri renkte. Tıklıyorum imleç gelmiyor. Ben bu üretimi sisteme nasıl gireceğim, kağıda mı yazayım?",
+    "cozum": "Üretim siparişi (CO02) ekranı kontrol edildi. Siparişin sistem statüsünün 'TEKN' (Teknik olarak tamamlandı) veya 'KAPL' (Kapalı) olduğu, bu yüzden belge üzerinde değişiklik yapılamayacağı tespit edildi. Sistem statüsü geri alınarak kullanıcının veri girmesi sağlandı.",
+    "atanan_kisi": "Ramazan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1074",
+    "kullanici_maili": "nergis.soylu@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Yazı Yazarken Klavyem Arapça Oldu",
+    "sorun_aciklamasi": "Word'de dilekçe yazıyordum, bir şeyler oldu 'Ş' harfine basıyorum noktalı virgül çıkıyor, 'İ' ye basıyorum tek tırnak çıkıyor. Klavye dili değişti galiba düzeltemedim.",
+    "cozum": "Kullanıcının yanlışlıkla 'Alt + Shift' kısayoluna basarak Windows klavye dilini İngilizce (EN) yaptığı anlaşıldı. Aynı kısayola tekrar basılarak Türkçe (TR) düzene geri dönüldü ve Windows ayarlarından İngilizce klavye seçeneği tamamen kaldırılarak tekrarlanması önlendi.",
+    "atanan_kisi": "faruk.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1075",
+    "kullanici_maili": "hasan.boyaci@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Malzeme Yok Diyor Ama Depoda Dağ Gibi Duruyor",
+    "sorun_aciklamasi": "Satınalma siparişi açacağım, malzemenin kodunu giriyorum 'Bu malzeme mevcut değil' diye hata veriyor. Gidip depoya bakıyorum adamlar boy boy dizmiş, nasıl yok?",
+    "cozum": "Kullanıcının girmeye çalıştığı malzemenin (Mat No: 40012) MM01 üzerinden ilgili üretim yeri (Plant) için yaratılmadığı görüldü. Malzeme başka fabrikada tanımlı olsa da Halkalı fabrikası için 'extend' (genişletme) yapılmamış. İlgili üretim yeri için malzeme genişletildi ve sorun çözüldü.",
+    "atanan_kisi": "sena.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1076",
+    "kullanici_maili": "burcu.cicek@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Youtube Çok Kasıyor Müzik Dinleyemiyorum",
+    "sorun_aciklamasi": "Çalışırken arkada Youtube'dan müzik açıyorum ama sürekli donuyor. İnternetimiz çok mu yavaşladı, böyle çalışmak çok motivasyon bozucu.",
+    "cozum": "Kullanıcıya şirket güvenlik ve bant genişliği politikaları gereği, streaming (video/müzik) sitelerine trafik sınırlaması (QoS) uygulandığı, önceliğin ERP ve mail trafiğine verildiği açıklandı. Sistemde bir arıza olmadığı bildirildi.",
+    "atanan_kisi": "yücel.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1077",
+    "kullanici_maili": "koray.avci@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Kasadan Uçak Motoru Gibi Ses Geliyor",
+    "sorun_aciklamasi": "Sabah bilgisayarı açtım, kasadan öyle bir uğultu geliyor ki sanki havalanıp uçacak. Titriyor masanın üstünde, patlamasın bu?",
+    "cozum": "Kasaya yerinde müdahale edildi. İşlemci (CPU) fanına kablo sürttüğü ve fanın aşırı tozlandığı için yalpalayarak döndüğü görüldü. Kasa içi hava tutularak temizlendi, kablo cırt kelepçe ile toparlandı. Ses tamamen kesildi.",
+    "atanan_kisi": "emirhan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1078",
+    "kullanici_maili": "selin.akar@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Geçen Yılın Faturasını Giremiyorum",
+    "sorun_aciklamasi": "Geçen aydan çekmecede unutulmuş bir taksi fişi buldum, masrafa gireceğim ama 'Kayıt tarihi 2025 için mali yıl kapalı' uyarısı çıkıyor. Ne yapayım çöpe mi atayım fişi?",
+    "cozum": "Kullanıcıya eski mali yılın (2025) resmi olarak kapandığı ve geriye dönük muhasebe kaydı atılamayacağı (OB52) açıklandı. Çözüm olarak, belge tarihi fişin üzerindeki tarih, kayıt tarihi ise içinde bulunulan güncel tarih seçilerek masrafın güncel döneme işlenmesi sağlandı.",
+    "atanan_kisi": "oğulcan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1079",
+    "kullanici_maili": "murat.beyaz@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Spotify Kurcam Yönetici Şifresi İstiyor",
+    "sorun_aciklamasi": "Kendi kendime müzik dinlemek için Spotify indireyim dedim, kurarken bir ekran çıkıyor benden 'Admin şifresi' istiyor. Şifreyi bana yollar mısınız?",
+    "cozum": "Kullanıcıya bilgi güvenliği politikası gereği son kullanıcılara Local Admin yetkisi verilmediği açıklandı. Üçüncü parti yazılımların kurulumu izne tabi olduğundan, web sürümünü (open.spotify.com) kullanabileceği belirtildi ve talep reddedildi.",
+    "atanan_kisi": "esra.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1080",
+    "kullanici_maili": "ali.riza@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Müşterinin Adresi Yanlış Düzeltemiyorum",
+    "sorun_aciklamasi": "Siparişi açtım ama müşterinin sevk adresi eski adres kalmış. Üzerine tıklayıp değiştirmeye çalışıyorum ama kutu kilitli. Mal yanlış yere gidecek!",
+    "cozum": "Kullanıcının sipariş belgesi (VA02) içinden müşteri ana verisini değiştirmeye çalıştığı anlaşıldı. Kalıcı değişikliklerin Müşteri Ana Verisi (XD02) ekranından yapılması gerektiği anlatıldı. XD02 üzerinden adres güncellendi ve sipariş güncel adresi çekti.",
+    "atanan_kisi": "Gizem.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1081",
+    "kullanici_maili": "gamze.gullu@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Teams'ten Beni Attı Toplantım Var!",
+    "sorun_aciklamasi": "10 dakika sonra bölge müdürüyle toplantım var ama Teams 'Oturumunuz kapatıldı' dedi. Şifremi giriyorum kabul etmiyor, çok acil beni içeri alın!",
+    "cozum": "Kullanıcının hesabının Azure AD üzerinde şüpheli giriş denemesi (farklı bir lokasyondan üst üste hatalı deneme) nedeniyle otomatik riskli duruma düşüp kilitlendiği tespit edildi. Hesabın kilidi acilen kaldırıldı ve kullanıcı geçici şifreyle Teams'e alınarak toplantıya yetiştirildi.",
+    "atanan_kisi": "mustafa.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1082",
+    "kullanici_maili": "tevfik.can@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Kalite Onay Düğmesi Yok Ortadan Kaybolmuş",
+    "sorun_aciklamasi": "Malı test ettim her şey sağlam. SAP'de onay vereceğim ama yeşil bayrak resmi yok. Dün basıyordum bugün düğmenin yeri boş.",
+    "cozum": "Kullanıcının QA11 (Kullanım Kararı) yerine QA02 (Lot Değiştirme) ekranına girdiği tespit edildi. QA02 ekranında onay butonu bulunmadığı için kullanıcıya doğru işlem kodu (QA11) gösterildi ve işlem başarılı bir şekilde tamamlandı.",
+    "atanan_kisi": "Ramazan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1083",
+    "kullanici_maili": "zeynep.tok@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Bilgisayardan Garip Ses Geliyor (Müzik Gibi)",
+    "sorun_aciklamasi": "Ben hiçbir şey açmadım ama bilgisayardan İngilizce bir şeyler anlatan kadın sesi geliyor. Bütün sekmeleri kapattım ses hala var, hoparlörü kıstım mecbur.",
+    "cozum": "Cihaza uzaktan bağlanıldı. Arka planda çalışan gizli bir tarayıcı işleminin (Muhtemelen bir reklam veya Adware) ses oynattığı tespit edildi. Görev Yöneticisi'nden (Task Manager) ilgili işlem sonlandırıldı. Cihazda AdwCleaner ile tarama yapılıp reklam virüsü temizlendi.",
+    "atanan_kisi": "turgut.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1084",
+    "kullanici_maili": "suleyman.kara@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Excel Dondu 3 Saattir Kaydetmedim Lütfen Kurtarın",
+    "sorun_aciklamasi": "Bütün sabah maliyet tablosu hazırladım, tam bitecekken Excel 'Yanıt Vermiyor' deyip dondu kaldı. Ekranda öylece duruyor. Kapatırsam biterim, bunu kurtarmanın bir yolu yok mu?",
+    "cozum": "Kullanıcının masasına gidildi, Excel zorla kapatılmak zorunda kalındı. Ancak Office'in 'Otomatik Kurtarma' (AutoRecover) özelliği aktif olduğu için, Excel yeniden açıldığında sol tarafta beliren belge kurtarma panelinden dosyanın 10 dakika önceki hali sorunsuzca geri getirildi.",
+    "atanan_kisi": "yusuf.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1085",
+    "kullanici_maili": "recep.tay@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Yanlışlıkla İki Kere Ürettim Stok Çift Oldu",
+    "sorun_aciklamasi": "İnternet koptu sandım, üretim teyidini (CO11N) kaydet tuşuna iki kere bastım. Sistem iki kere almış, şimdi depoda 100 yerine 200 mal gözüküyor. Nasıl silicem bunu?",
+    "cozum": "Kullanıcı hatalı girdiği işlemi geri alamadığı için destek istedi. CO13 (Teyit İptali) işlem kodu kullanılarak mükerrer atılan ikinci üretim teyit belgesi iptal edildi. Stoklar ve maliyetler normal haline geri döndü.",
+    "atanan_kisi": "Ramazan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1086",
+    "kullanici_maili": "pinar.su@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Adım Neden 'Test User' Olarak Gidiyor?",
+    "sorun_aciklamasi": "Şirket dışına mail atıyorum, karşı taraf 'Sen kimsin' diyor. Gönderen kısmına baktım Pınar Su yerine 'Test User' yazıyor. Bu şaka mı?",
+    "cozum": "Exchange Yönetim paneli kontrol edildi. Hesabın ilk açılışı sırasında İK test amaçlı kopyalama yaparken görünen adın (Display Name) değiştirilmesinin unutulduğu fark edildi. AD üzerinden 'Pınar Su' olarak düzeltildi ve Global Address List (GAL) güncellendi.",
+    "atanan_kisi": "esra.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1087",
+    "kullanici_maili": "caner.telli@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Masa Telefonumda Network Down Yazıyor",
+    "sorun_aciklamasi": "Telefonun ekranında İngilizce 'Network Down' yazısı çıktı. Kulağıma dayıyorum çevirme sesi gelmiyor. Fişi çektim taktım düzelmedi.",
+    "cozum": "Ağ yönetim sistemi üzerinden kullanıcının bağlı olduğu switch portu kontrol edildi. Portun elektriksel bir dalgalanma sonucu 'Err-Disable' moduna (kendini korumaya) geçtiği görüldü. Port arayüzden 'shutdown' ve 'no shutdown' yapılarak yeniden aktif edildi, telefon çalıştı.",
+    "atanan_kisi": "yücel.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1088",
+    "kullanici_maili": "orhan.veli@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Sipariş Benden Masraf Yeri İstiyor O Ne Demek?",
+    "sorun_aciklamasi": "Kalem siparişi açacağım, her şeyi yazdım tam kaydedicem 'G/L hesabı için masraf yeri gereklidir' diye hata veriyor. Masraf yeri ne demek ben nereye ne yazıcam?",
+    "cozum": "Kullanıcıya, alınan malzemenin stoklu (depoya giren) bir malzeme olmadığı, doğrudan tüketime (masrafa) atılan bir sarf malzemesi olduğu açıklandı. Hesap tayin kategorisinin 'K' seçildiği için kendi departmanına ait masraf yeri kodunu (Örn: 20500 - İdari İşler) girmesi gerektiği gösterildi.",
+    "atanan_kisi": "sena.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1089",
+    "kullanici_maili": "selda.bagcan@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Laptopun Şarjı 5 Dakikada Bitiyor",
+    "sorun_aciklamasi": "Toplantıya gidiyorum fişten bir çekiyorum daha koridordayken pil zayıf diyor. Toplantı odasına gidene kadar kapanıyor alet. Sürekli kabloyla gezmekten usandım.",
+    "cozum": "Laptopun pil sağlığı (Battery Report) CMD üzerinden kontrol edildi. Pil ömrünün (Design Capacity) %15 seviyesine düştüğü, ömrünü tamamladığı tespit edildi. Ankara IT deposundan uygun model yeni bir batarya siparişi verilerek cihazın pili değiştirildi.",
+    "atanan_kisi": "faruk.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1090",
+    "kullanici_maili": "hakan.tasiyan@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Terminale Tıkladım Camı Kırıldı",
+    "sorun_aciklamasi": "Depoda mal okuturken el terminali paletin üstünden düştü. Camı boydan boya çatladı ama sorun şu ki SAP ekranı da dondu okumuyor artık.",
+    "cozum": "Donanım arızası olduğu için cihaz IT birimine teslim alınmak üzere yönlendirildi. Ancak SAP oturumunun donma sebebi, cihazın Wi-Fi anteninin darbeden zarar görmesi olarak açıklandı. SM04'ten kullanıcının kilitli kalan SAP oturumu düşürüldü ve yeni bir yedek el terminali verildi.",
+    "atanan_kisi": "Ömer.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1091",
+    "kullanici_maili": "ik.yonetici@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Yeni Çocuğu Size Haber Vermeyi Unuttuk Acil Mail Lazım",
+    "sorun_aciklamasi": "Ahmet Bey bugün işe başladı ama biz IT'ye form atmayı unutmuşuz. Çocuk şu an masada boş boş oturuyor, 10 dakika içinde mail hesabı açabilir misiniz rica etsek?",
+    "cozum": "Sürecin normal şartlarda 1 gün önceden haber verilmesi gerektiği İK'ya nazikçe hatırlatıldı. Aciliyetten dolayı istisna yapılarak Active Directory ve Exchange üzerinden hızlıca 'ahmet.yeni@sirket.com' oluşturuldu ve şifresi SMS ile paylaşıldı.",
+    "atanan_kisi": "mustafa.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1092",
+    "kullanici_maili": "aylin.gun@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Vergi %20 Ekliyor Ama %18 Olması Lazım",
+    "sorun_aciklamasi": "Satıcı faturasını (FB60) girerken vergiyi hesapla diyorum, sistem %20 atıyor. Bu eski bir fatura, KDV'si %18 olması lazım. Elle de değiştirtmiyor kafayı yicem.",
+    "cozum": "Kullanıcıya, vergi göstergesi (Tax Code) kutucuğunda %20 KDV'ye denk gelen 'V1' kodunu seçtiği için sistemin otomatik %20 hesapladığı gösterildi. Kutuya tıklayıp %18 olan 'V2' kodunu seçtiğinde sistemin vergiyi doğru hesapladığı teyit edildi.",
+    "atanan_kisi": "oğulcan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1093",
+    "kullanici_maili": "kemal.dogulu@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Kırmızı Ekran Çıktı Bağlantınız Gizli Değil Diyor",
+    "sorun_aciklamasi": "Devletin ihale sitesine gireceğim, Google Chrome kocaman kırmızı bir ekran çıkardı 'Bağlantınız Gizli Değil, şifreleriniz çalınabilir' diyor. Site mi hacklendi ben mi hacklendim?",
+    "cozum": "Kullanıcının girmeye çalıştığı devlet sitesinin SSL sertifikasının süresinin dolduğu tespit edildi. Güvenlik riski düşük olduğu (sadece ilan okuma amaçlı girildiği) anlaşıldığından, kullanıcıya 'Gelişmiş -> Siteye ilerle' butonuna basarak sayfayı nasıl açabileceği tarif edildi.",
+    "atanan_kisi": "turgut.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1094",
+    "kullanici_maili": "ferhat.gocer@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Hoparlörden Ses Gelmiyor Eğitime Girecem",
+    "sorun_aciklamasi": "İK'nın zorunlu kıldığı eğitim videosunu izleyeceğim ama monitörün hoparlöründen zerre ses çıkmıyor. Sağ alttan sesi %100 yaptım hala tık yok.",
+    "cozum": "Kullanıcının monitörünün arkasındaki yeşil ses kablosunun (3.5mm jack) bilgisayar kasasına takılı olmadığı fark edildi. Kablo kasadaki yeşil porta takıldıktan sonra ses düzgün şekilde alınmaya başlandı.",
+    "atanan_kisi": "salih.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1095",
+    "kullanici_maili": "yildiz.tilbe@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Tarih Geçmişte Kaldı Diyor Kaydetmiyor",
+    "sorun_aciklamasi": "Müşterinin malı yola çıkacak, teslimat belgesini kaydedicem 'Mal çıkış tarihi geçmişte olamaz' yazıyor. Ben tarihi değiştirmedim ki bugünü gösteriyor?",
+    "cozum": "Belgedeki rotalama ve nakliye planlaması süreleri incelendi. Sistemin otomatik olarak hazırlık için 2 gün süre hesapladığı, siparişin teslim tarihinin ise yarına girildiği görüldü. Sistemin mantıksal olarak zamanın gerisine düştüğü açıklandı. Teslimat tarihi ileri alınarak kayıt yapılabildi.",
+    "atanan_kisi": "Gizem.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1096",
+    "kullanici_maili": "ibrahim.tatli@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Ortak Ağ Klasörü Wi-Fi'de Gözükmüyor",
+    "sorun_aciklamasi": "Kablosuz ağa bağlıyken Z: sürücüsüne tıklıyorum bağlanamıyor. İlla kabloyu mu takmam lazım, toplantı odasında nasıl dosya açıcam?",
+    "cozum": "Kullanıcının şirket Wi-Fi'si yerine yanlışlıkla 'Guest' (Misafir) ağına bağlandığı görüldü. Misafir ağından şirket içi dosya sunucularına (File Server) erişim güvenlik duvarı üzerinden kapalıdır. Ağ Corporate-Wifi olarak değiştirildiğinde dosyalara erişim sağlandı.",
+    "atanan_kisi": "yücel.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1097",
+    "kullanici_maili": "sezen.aksu@sirket.com",
+    "kime": "sapdestek@gmail.com",
+    "bolge": "Sakarya",
+    "konu": "Parti Numarası Ne Demek Benden Onu İstiyor",
+    "sorun_aciklamasi": "Kalite ekranında sonucu giriyorum, tam yeşil ışık yakacağım 'Parti (Batch) numarası zorunludur' diyor. Parti ne demek, siyasete mi girdik, oraya ne yazacağım?",
+    "cozum": "Kullanıcıya 'Parti (Batch)' kavramının malzemenin üretim serisi/lot numarası olduğu basit dille anlatıldı. Malzemenin parti takipli (batch-managed) olduğu belirtilerek, malı üreten bölümden o ürüne ait numarayı öğrenip MSC1N'den yaratması ya da listeden seçmesi gerektiği gösterildi.",
+    "atanan_kisi": "Ramazan.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1098",
+    "kullanici_maili": "mumin.sarikaya@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Yozgat",
+    "konu": "Flash Bellek İstiyorum Ama Şifreli Olsun",
+    "sorun_aciklamasi": "Devlet dairesine gizli belgeler götüreceğim, benim USB'ye attığımda herkes açabiliyor. Kaybedersem yandık, bana şifre soran cinsten bir bellek verin.",
+    "cozum": "Bilgi Güvenliği prosedürleri gereği şirket verilerinin dışarı çıkarılması onaya tabidir. Yöneticisinden gelen onay sonrası, donanımsal şifrelemeye sahip (BitLocker destekli) özel bir şirket USB belleği Yozgat ofisine kargolandı ve şifreleme eğitimi verildi.",
+    "atanan_kisi": "turgut.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1099",
+    "kullanici_maili": "hakki.bulut@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Ankara",
+    "konu": "Müdürümün Takvimini Göremiyorum Boş Duruyor",
+    "sorun_aciklamasi": "Müdürüme toplantı atacağım ama Outlook'ta onun takvimine bakınca içi bembeyaz, 'Meşgul' veya 'Boş' yazmıyor. İzin vermemiş bana galiba, ayarlar mısınız?",
+    "cozum": "Müdürün takvim izinlerine bakıldı, genel okuma yetkisi standart olarak herkese açıktı ancak kullanıcının Outlook'unda 'Çevrimdışı Adres Defteri' (OAB) güncel değildi. Kullanıcının adres defteri manuel olarak güncellendi ve takvim bilgileri anında yüklendi.",
+    "atanan_kisi": "esra.teknoloji"
+  },
+  {
+    "ticket_id": "TCK-1100",
+    "kullanici_maili": "kibariye.orhan@sirket.com",
+    "kime": "btdestek@gmail.com",
+    "bolge": "Halkalı",
+    "konu": "Benim Ekranım Neden Siyah Beyaz Oldu?",
+    "sorun_aciklamasi": "Bilgisayarın ekranındaki bütün renkler gitti. Eski televizyonlar gibi siyah beyaz oldu her şey. Çok içim daraldı böyle çalışırken, gözlerim bozulacak.",
+    "cozum": "Kullanıcının yanlışlıkla Windows 10/11 Erişilebilirlik (Erişim Kolaylığı) ayarlarından 'Renk Filtreleri'ni (Color Filters) veya kısayolunu (Ctrl + Win + C) aktif ettiği anlaşıldı. Kısayola tekrar basılarak gri tonlamalı filtre kapatıldı, ekran eski renklerine kavuştu.",
+    "atanan_kisi": "yusuf.teknoloji"
+  }
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
