@@ -20,6 +20,10 @@ services:
       LLM_MODEL: qwen3.5:4b
       TRIAGE_MODEL: qwen3.5:4b
       TOP_K: "2"
+      # Canlı testte doğrulandı: 0.55-0.58 skorlu kaynaklar alakasız uydurma
+      # cevap üretti (3 örnek); 0.71-0.74 skorlu kaynaklar doğru/isabetli
+      # cevap verdi. 0.6, ikisi arasındaki net boşluğa oturuyor.
+      MIN_SCORE: "0.6"
 
   # Open WebUI bizim RAG API'mizi KULLANMAZ (doğrudan Ollama'ya bağlanır).
   # Postman/`/docs` üzerinden demo yapıldığı için kapatıldı; ~640 MB kazanç.
