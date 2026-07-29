@@ -121,6 +121,24 @@ def get_agents_info(emails: list[str]) -> dict[str, dict]:
     return {r[0]: {"id": str(r[1]), "region": r[2]} for r in rows}
 
 
+def get_agents_in_group(group_name: str) -> list[dict]:
+    """Bir destek grubundaki TÜM uzmanları DB'den çeker (email, id, region).
+    Elle tutulan routing_rules.json listesinden bağımsız — grup üyeliği
+    değiştiğinde (yeni uzman eklendiğinde) otomatik günceldir."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT u.email, u.id, u.region
+            FROM users u JOIN support_groups g ON g.id = u.support_group_id
+            WHERE g.name = %s AND u.role = 'agent'
+            ORDER BY u.email
+            """,
+            (group_name,),
+        )
+        rows = cur.fetchall()
+    return [{"email": r[0], "id": str(r[1]), "region": r[2]} for r in rows]
+
+
 def create_ticket(
     customer_email: str, recipient_email: str, subject: str,
     raw_issue_description: str, extracted_category: str | None,
