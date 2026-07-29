@@ -122,13 +122,17 @@ def get_agents_info(emails: list[str]) -> dict[str, dict]:
 
 
 def get_categories() -> dict[str, dict]:
-    """Sınıflandırma kategorilerini DB'den çeker: {category_key: {aciklama, ekip}}.
+    """Sınıflandırma kategorilerini DB'den çeker:
+    {category_key: {aciklama, ekip, ekip_gorunum_adi}}.
     ekip=None ise gruba bağlanmamış demektir (o kategori güvenle otomatik
-    atanamaz, çağıran taraf insan triyajına düşürmeli)."""
+    atanamaz, çağıran taraf insan triyajına düşürmeli). ekip_gorunum_adi,
+    gerçek support_group'tan bağımsız iş-türüne özel görünür isimdir
+    (ör. donanım için "Donanım Destek Ekibi") — atama mantığını etkilemez,
+    sadece API yanıtında gösterilir."""
     with _connect() as conn, conn.cursor() as cur:
         cur.execute(
             """
-            SELECT cc.category_key, cc.aciklama, sg.name
+            SELECT cc.category_key, cc.aciklama, sg.name, cc.ekip_gorunum_adi
             FROM classification_categories cc
             LEFT JOIN support_groups sg ON sg.id = cc.ekip_group_id
             WHERE cc.is_active = true
@@ -136,7 +140,8 @@ def get_categories() -> dict[str, dict]:
             """
         )
         rows = cur.fetchall()
-    return {r[0]: {"aciklama": r[1], "ekip": r[2]} for r in rows}
+    return {r[0]: {"aciklama": r[1], "ekip": r[2], "ekip_gorunum_adi": r[3] or r[2]}
+            for r in rows}
 
 
 def get_agents_in_group(group_name: str) -> list[dict]:

@@ -149,10 +149,14 @@ CREATE TABLE IF NOT EXISTS ai_feedbacks (
 -- kaynak burasıdır. 'Diger' (belirsiz) kategorisi bilerek burada yok — kod
 -- seviyesinde sabit bir "insan triyajına düş" sinyalidir.
 CREATE TABLE IF NOT EXISTS classification_categories (
-    id             UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    category_key   TEXT UNIQUE NOT NULL,
-    aciklama       TEXT NOT NULL,
-    ekip_group_id  UUID REFERENCES support_groups(id) ON DELETE SET NULL,
-    is_active      BOOLEAN DEFAULT TRUE,
-    created_at     TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+    id                UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    category_key      TEXT UNIQUE NOT NULL,
+    aciklama          TEXT NOT NULL,
+    ekip_group_id     UUID REFERENCES support_groups(id) ON DELETE SET NULL,
+    -- Gerçek support_group'tan bağımsız, iş-türüne özel GÖRÜNÜR ekip adı
+    -- (ör. "Donanım Destek Ekibi"). Atama mantığını etkilemez, sadece API
+    -- yanıtında gösterilir; ekip_group_id hâlâ gerçek organizasyon birimidir.
+    ekip_gorunum_adi  TEXT,
+    is_active         BOOLEAN DEFAULT TRUE,
+    created_at        TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
