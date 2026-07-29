@@ -1,50 +1,50 @@
 {
-  "_aciklama": "Kategori -> ekip -> uzman eşlemesi. Sınıflandırıcı bu kategori listesinden birini seçer. Ekipleri/uzmanları kendi organizasyonunuza göre düzenleyin.",
+  "_aciklama": "Kategori -> ekip -> uzman eşlemesi. uzmanlar listesi GERÇEK e-postalardır (users.email) — atama bunlarla veritabanında eşleştirilir. Eşlemeler emails.json'daki 105 gerçek ticket'ın kategori/uzman dağılımından çıkarılmıştır (bkz. seed_from_emails.py).",
   "guven_esigi": 0.6,
   "kategoriler": {
     "SAP-FI": {
       "aciklama": "Finans ve muhasebe (fatura, hesap belirleme, mizan, kapanış)",
-      "ekip": "SAP Finans",
-      "uzmanlar": ["ayse.k", "mehmet.d"]
+      "ekip": "SAP Danışman Ekibi",
+      "uzmanlar": ["ogulcan.teknoloji@sirket.com", "gizem.teknoloji@sirket.com"]
     },
     "SAP-MM": {
       "aciklama": "Malzeme yönetimi / satınalma (sipariş, mal girişi, stok)",
-      "ekip": "SAP Lojistik",
-      "uzmanlar": ["can.h"]
+      "ekip": "SAP Danışman Ekibi",
+      "uzmanlar": ["gizem.teknoloji@sirket.com", "ramazan.teknoloji@sirket.com"]
     },
     "SAP-SD": {
       "aciklama": "Satış ve dağıtım (müşteri siparişi, teslimat, faturalama)",
-      "ekip": "SAP Lojistik",
-      "uzmanlar": ["can.h", "elif.y"]
+      "ekip": "SAP Danışman Ekibi",
+      "uzmanlar": ["gizem.teknoloji@sirket.com", "sena.teknoloji@sirket.com"]
     },
     "SAP-Basis": {
       "aciklama": "Sistem yönetimi, yetkiler, performans, transport",
-      "ekip": "SAP Basis",
-      "uzmanlar": ["okan.t"]
+      "ekip": "SAP Danışman Ekibi",
+      "uzmanlar": ["ramazan.teknoloji@sirket.com", "omer.teknoloji@sirket.com"]
     },
     "SAP-Yetki": {
       "aciklama": "Kullanıcı yetkileri, rol atama, erişim engeli",
-      "ekip": "SAP Basis",
-      "uzmanlar": ["okan.t"]
+      "ekip": "SAP Danışman Ekibi",
+      "uzmanlar": ["omer.teknoloji@sirket.com"]
     },
     "IT-Ag": {
       "aciklama": "Ağ, VPN, internet erişimi bağlantı sorunları",
-      "ekip": "IT Altyapı",
-      "uzmanlar": ["burak.s"]
+      "ekip": "BT Destek Ekibi",
+      "uzmanlar": ["yucel.teknoloji@sirket.com", "turgut.teknoloji@sirket.com"]
     },
     "IT-Donanim": {
       "aciklama": "Bilgisayar, yazıcı, monitör, donanım arızası/talebi",
-      "ekip": "IT Destek",
-      "uzmanlar": ["deniz.a"]
+      "ekip": "BT Destek Ekibi",
+      "uzmanlar": ["yucel.teknoloji@sirket.com", "yusuf.teknoloji@sirket.com", "faruk.teknoloji@sirket.com"]
     },
     "IT-Hesap": {
       "aciklama": "Parola sıfırlama, hesap kilidi, e-posta erişimi",
-      "ekip": "IT Destek",
-      "uzmanlar": ["deniz.a"]
+      "ekip": "BT Destek Ekibi",
+      "uzmanlar": ["mustafa.teknoloji@sirket.com", "turgut.teknoloji@sirket.com"]
     },
     "Diger": {
       "aciklama": "Yukarıdakilere uymayan / belirsiz talepler",
-      "ekip": "Triyaj Kuyruğu",
+      "ekip": "Genel Triyaj",
       "uzmanlar": []
     }
   }
