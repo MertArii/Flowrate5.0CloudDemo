@@ -6,7 +6,7 @@ from pydantic import BaseModel
 
 from app.config import settings
 from app.queue import close_pool, enqueue_ingest, job_status
-from app.rag import ingest, pipeline
+from app.rag import ingest
 from app.triage import service as triage_service
 
 app = FastAPI(title="Helpdesk RAG API")
@@ -20,6 +20,11 @@ async def _shutdown():
 class AskRequest(BaseModel):
     question: str
     min_score: float | None = None   # opsiyonel benzerlik eşiği (0-1)
+    # L1 atama için opsiyonel bağlam (tickets kaydına yazılır):
+    customer_email: str = "demo@sirket.com"
+    recipient_email: str = "destek@sirket.com"
+    subject: str | None = None
+    region: str | None = None
 
 
 class TriageRequest(BaseModel):
@@ -78,9 +83,27 @@ async def get_job(job_id: str):
 
 @app.post("/ask")
 async def ask(req: AskRequest):
-    """RAG ile soru sor -> kaynaklı cevap. min_score gönderilirse o istek için
-    benzerlik eşiği uygulanır (yoksa sunucu varsayılanı)."""
-    return await pipeline.answer(req.question, min_score=req.min_score)
+    """RAG ile soru sor -> kaynaklı cevap + L1 ataması.
+
+    Cevabın yanında soruyu sınıflandırır, doğru ekibe/uzmana yönlendirir ve
+    tickets + routing_logs tablolarına kaydeder (bkz. /triage ile aynı motor).
+    min_score gönderilirse o istek için benzerlik eşiği uygulanır."""
+    r = await triage_service.triage(
+        req.question,
+        customer_email=req.customer_email,
+        recipient_email=req.recipient_email,
+        subject=req.subject,
+        region=req.region,
+        min_score=req.min_score,
+    )
+    return {
+        "answer": r["cevap_metni"],
+        "sources": r["tum_kaynaklar"],
+        "ticket_id": r["ticket_id"],
+        "ticket_number": r["ticket_number"],
+        "siniflandirma": r["siniflandirma"],
+        "yonlendirme": r["yonlendirme"],
+    }
 
 
 @app.post("/triage")
