@@ -33,6 +33,7 @@ class TriageRequest(BaseModel):
     recipient_email: str = "destek@sirket.com"
     subject: str | None = None
     region: str | None = None
+    min_score: float | None = None   # opsiyonel benzerlik eşiği (0-1)
 
 
 @app.get("/health")
@@ -116,4 +117,5 @@ async def triage(req: TriageRequest):
         recipient_email=req.recipient_email,
         subject=req.subject,
         region=req.region,
+        min_score=req.min_score,
     )
