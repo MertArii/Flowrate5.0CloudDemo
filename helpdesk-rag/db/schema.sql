@@ -143,3 +143,16 @@ CREATE TABLE IF NOT EXISTS ai_feedbacks (
     feedback_text TEXT,
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
+
+-- CLASSIFICATION CATEGORIES (sınıflandırıcının kategori->ekip eşlemesi).
+-- Eskiden app/triage/routing_rules.json'da elle tutuluyordu; artık tek
+-- kaynak burasıdır. 'Diger' (belirsiz) kategorisi bilerek burada yok — kod
+-- seviyesinde sabit bir "insan triyajına düş" sinyalidir.
+CREATE TABLE IF NOT EXISTS classification_categories (
+    id             UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    category_key   TEXT UNIQUE NOT NULL,
+    aciklama       TEXT NOT NULL,
+    ekip_group_id  UUID REFERENCES support_groups(id) ON DELETE SET NULL,
+    is_active      BOOLEAN DEFAULT TRUE,
+    created_at     TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);

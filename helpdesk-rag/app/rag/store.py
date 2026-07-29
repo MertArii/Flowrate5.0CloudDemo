@@ -121,9 +121,27 @@ def get_agents_info(emails: list[str]) -> dict[str, dict]:
     return {r[0]: {"id": str(r[1]), "region": r[2]} for r in rows}
 
 
+def get_categories() -> dict[str, dict]:
+    """Sınıflandırma kategorilerini DB'den çeker: {category_key: {aciklama, ekip}}.
+    ekip=None ise gruba bağlanmamış demektir (o kategori güvenle otomatik
+    atanamaz, çağıran taraf insan triyajına düşürmeli)."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT cc.category_key, cc.aciklama, sg.name
+            FROM classification_categories cc
+            LEFT JOIN support_groups sg ON sg.id = cc.ekip_group_id
+            WHERE cc.is_active = true
+            ORDER BY cc.category_key
+            """
+        )
+        rows = cur.fetchall()
+    return {r[0]: {"aciklama": r[1], "ekip": r[2]} for r in rows}
+
+
 def get_agents_in_group(group_name: str) -> list[dict]:
     """Bir destek grubundaki TÜM uzmanları DB'den çeker (email, id, region).
-    Elle tutulan routing_rules.json listesinden bağımsız — grup üyeliği
+    Elle tutulan bir liste dosyasından bağımsız — grup üyeliği
     değiştiğinde (yeni uzman eklendiğinde) otomatik günceldir."""
     with _connect() as conn, conn.cursor() as cur:
         cur.execute(

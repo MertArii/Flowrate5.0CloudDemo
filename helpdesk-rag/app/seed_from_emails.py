@@ -90,7 +90,8 @@ async def main():
     cur.execute("""
         TRUNCATE ai_feedbacks, attachment_vectors, message_attachments,
                  ticket_messages, ticket_solutions, routing_logs, tickets,
-                 routing_rules, users, support_groups RESTART IDENTITY CASCADE;
+                 routing_rules, classification_categories, users, support_groups
+                 RESTART IDENTITY CASCADE;
     """)
     conn.commit()
 
@@ -110,6 +111,26 @@ async def main():
     def group_for(recipient: str) -> str:
         return group_ids[GROUP_BY_RECIPIENT.get(recipient, (DEFAULT_GROUP[0],))[0]] \
             if recipient in GROUP_BY_RECIPIENT else group_ids[DEFAULT_GROUP[0]]
+
+    # --- classification_categories (sınıflandırıcının kategori->ekip eşlemesi) ---
+    sap_g = group_ids["SAP Danışman Ekibi"]
+    bt_g = group_ids["BT Destek Ekibi"]
+    categories = [
+        ("SAP-FI", "Finans ve muhasebe (fatura, hesap belirleme, mizan, kapanış)", sap_g),
+        ("SAP-MM", "Malzeme yönetimi / satınalma (sipariş, mal girişi, stok)", sap_g),
+        ("SAP-SD", "Satış ve dağıtım (müşteri siparişi, teslimat, faturalama)", sap_g),
+        ("SAP-Basis", "Sistem yönetimi, yetkiler, performans, transport", sap_g),
+        ("SAP-Yetki", "Kullanıcı yetkileri, rol atama, erişim engeli", sap_g),
+        ("IT-Ag", "Ağ, VPN, internet erişimi bağlantı sorunları", bt_g),
+        ("IT-Donanim", "Bilgisayar, yazıcı, monitör, donanım arızası/talebi", bt_g),
+        ("IT-Hesap", "Parola sıfırlama, hesap kilidi, e-posta erişimi", bt_g),
+    ]
+    for key, aciklama, ekip_id in categories:
+        cur.execute(
+            "INSERT INTO classification_categories (category_key, aciklama, ekip_group_id) VALUES (%s,%s,%s)",
+            (key, aciklama, ekip_id),
+        )
+    conn.commit()
 
     # --- users: uzmanlar ---
     agent_ids: dict[str, str] = {}

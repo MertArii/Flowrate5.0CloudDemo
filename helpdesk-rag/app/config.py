@@ -24,5 +24,10 @@ class Settings(BaseSettings):
     # sistem "elimde bilgi yok" ile reddeder (modele hiç sormadan).
     min_score: float = 0.0
 
+    # Triyaj sınıflandırma güven eşiği. Altındaysa otomatik atama yapılmaz,
+    # insan triyajına düşer. (Kategori/ekip verisi DB'de; bu eşik bir ayar
+    # olduğu için MIN_SCORE ile aynı mantıkla config'te tutuluyor.)
+    triage_guven_esigi: float = 0.6
+
 
 settings = Settings()
