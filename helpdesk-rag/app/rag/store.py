@@ -157,6 +157,45 @@ def get_agents_in_group(group_name: str) -> list[dict]:
     return [{"email": r[0], "id": str(r[1]), "region": r[2]} for r in rows]
 
 
+def get_agents_by_category(category_key: str, group_name: str) -> list[dict]:
+    """Geçmişte bu KATEGORİYİ gerçekten çözmüş VE bu ekipte olan uzmanlar
+    (email, id, region). Boş dönerse o kategoride hiç geçmiş yok demektir —
+    çağıran taraf tüm ekibe (get_agents_in_group) düşmelidir."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT DISTINCT u.email, u.id, u.region
+            FROM tickets t
+            JOIN users u ON u.id = t.assigned_agent_id
+            JOIN support_groups g ON g.id = u.support_group_id
+            WHERE t.extracted_category = %s AND g.name = %s AND u.role = 'agent'
+            ORDER BY u.email
+            """,
+            (category_key, group_name),
+        )
+        rows = cur.fetchall()
+    return [{"email": r[0], "id": str(r[1]), "region": r[2]} for r in rows]
+
+
+def get_open_ticket_counts(agent_ids: list[str]) -> dict[str, int]:
+    """Verilen uzman id'leri için AÇIK (kapanmamış) ticket sayısı.
+    'resolved'/'closed' sayılmaz — iş yükü sadece devam eden işlerden."""
+    if not agent_ids:
+        return {}
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT assigned_agent_id, count(*)
+            FROM tickets
+            WHERE assigned_agent_id = ANY(%s) AND status NOT IN ('resolved', 'closed')
+            GROUP BY assigned_agent_id
+            """,
+            (agent_ids,),
+        )
+        rows = cur.fetchall()
+    return {str(r[0]): r[1] for r in rows}
+
+
 def create_ticket(
     customer_email: str, recipient_email: str, subject: str,
     raw_issue_description: str, extracted_category: str | None,

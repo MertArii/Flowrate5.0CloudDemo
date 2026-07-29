@@ -1,5 +1,8 @@
 """L1 triyaj orkestrasyonu (yeni şema): sınıflandır -> yönlendir ->
 RAG çözüm denemesi -> tickets + routing_logs kaydı.
+
+Atama mantığının tamamı (uzmanlık uyuşması -> bölge -> iş yükü -> rastgele
+eşitlik) router.route() içinde, tümüyle DB'den. Bkz. app/triage/router.py.
 """
 from __future__ import annotations
 
@@ -10,22 +13,6 @@ REFUSAL_MARK = "elimde bilgi yok"
 
 # Sınıflandırıcının Türkçe öncelik etiketini şema CHECK değerine çevir.
 _ONCELIK_MAP = {"dusuk": "low", "orta": "medium", "yuksek": "high", "kritik": "urgent"}
-
-# Bölge eşleşmesi SADECE bu kategoride uygulanır (donanım = sahaya çıkan iş).
-# SAP kategorilerinde asla uygulanmaz — SAP desteği bölgeden bağımsızdır.
-BOLGE_ESLESMESI_UYGULANAN_MODUL = "IT-Donanim"
-
-
-def _bolge_eslesen_uzman(uzman_adaylari: list[dict], region: str | None) -> str | None:
-    """router.route()'un döndürdüğü aday listesi (gerçek support_group
-    üyeliğinden, DB'den) içinde region'ı isteğe uyan ilk uzmanı döner;
-    yoksa None. Ayrı bir DB sorgusu atmaz — route() zaten çekmişti."""
-    if not region:
-        return None
-    for agent in uzman_adaylari:
-        if agent.get("region") == region:
-            return agent["email"]
-    return None
 
 
 async def triage(
@@ -39,41 +26,22 @@ async def triage(
     from app.rag import store  # geç import: DB tabloları hazır olmadan yüklenmesin
 
     c = await classifier.classify(ticket_text)
-    r = router.route(c)
+    r = router.route(c, region=region)
 
     # Bilinen sorun mu? RAG (çift katman) ile otomatik çözüm denemesi.
     rag = await pipeline.answer(ticket_text, min_score=min_score)
     cozuldu = REFUSAL_MARK not in rag["answer"].lower()
     onerilen_cozum = rag["answer"] if cozuldu else None
 
-    # Yönlendirme -> destek grubu + uzman UUID'leri.
+    # atanan_uzman zaten DB'den (get_agents_in_group/get_agents_by_category)
+    # geldiği için normalde her zaman gerçek bir users kaydına çözülür. Yine
+    # de savunma amaçlı: çözülemezse otomatik atama İPTAL edilir.
     otomatik = r["otomatik_atandi"]
-
-    # Bölge eşleşmesi — SADECE donanım kategorisinde, SAP'de asla. Talep
-    # sahibinin bölgesiyle aynı bölgedeki uzman varsa o tercih edilir;
-    # yoksa router'ın varsayılan (ilk) adayında kalınır.
-    bolge_eslesti = False
-    if otomatik and c["modul"] == BOLGE_ESLESMESI_UYGULANAN_MODUL and region:
-        eslesen = _bolge_eslesen_uzman(r.get("uzman_adaylari", []), region)
-        if eslesen and eslesen != r["atanan_uzman"]:
-            r = {**r, "atanan_uzman": eslesen,
-                 "sebep": f"{r['sebep']} + bölge eşleşmesi ({region})"}
-            bolge_eslesti = True
-        elif eslesen:
-            bolge_eslesti = True  # varsayılan zaten doğru bölgedeydi
-
-    # atanan_uzman zaten DB'den (get_agents_in_group) geldiği için normalde
-    # her zaman gerçek bir users kaydına çözülür. Yine de savunma amaçlı:
-    # çözülemezse otomatik atama İPTAL edilir, ticket insan triyajına düşer.
     agent_id = store.get_user_id_by_email(r["atanan_uzman"]) if otomatik and r["atanan_uzman"] else None
     if otomatik and r["atanan_uzman"] and not agent_id:
         otomatik = False
         r = {**r, "otomatik_atandi": False,
              "sebep": f"{r['atanan_uzman']} gerçek bir kullanıcı değil — insan triyajı gerekiyor."}
-
-    # Sonuçta gösterilecek bölge bilgisi (talep edilen + eşleşme durumu).
-    r = {**r, "istenen_bolge": region,
-         "bolge_eslesti": bolge_eslesti if c["modul"] == BOLGE_ESLESMESI_UYGULANAN_MODUL else None}
 
     group_id = store.get_or_create_support_group(r["ekip"]) if otomatik else None
     priority = _ONCELIK_MAP.get(c["oncelik"], "medium")
