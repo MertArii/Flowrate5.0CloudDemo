@@ -125,20 +125,34 @@ async def main():
     # --- classification_categories (sınıflandırıcının kategori->ekip eşlemesi) ---
     sap_g = group_ids["SAP Danışman Ekibi"]
     bt_g = group_ids["BT Destek Ekibi"]
+    # (category_key, aciklama, ekip_group_id, ekip_gorunum_adi)
+    # ekip_gorunum_adi = gerçek support_group'tan bağımsız, iş-türüne özel
+    # görünür isim (donanım sorununa "BT Destek Ekibi" yerine "Donanım Destek
+    # Ekibi" gösterebilmek için). Atama mantığını etkilemez.
     categories = [
-        ("SAP-FI", "Finans ve muhasebe (fatura, hesap belirleme, mizan, kapanış)", sap_g),
-        ("SAP-MM", "Malzeme yönetimi / satınalma (sipariş, mal girişi, stok)", sap_g),
-        ("SAP-SD", "Satış ve dağıtım (müşteri siparişi, teslimat, faturalama)", sap_g),
-        ("SAP-Basis", "Sistem yönetimi, yetkiler, performans, transport", sap_g),
-        ("SAP-Yetki", "Kullanıcı yetkileri, rol atama, erişim engeli", sap_g),
-        ("IT-Ag", "Ağ, VPN, internet erişimi bağlantı sorunları", bt_g),
-        ("IT-Donanim", "Bilgisayar, yazıcı, monitör, donanım arızası/talebi", bt_g),
-        ("IT-Hesap", "Parola sıfırlama, hesap kilidi, e-posta erişimi", bt_g),
+        ("SAP-FI", "Finans ve muhasebe (fatura, hesap belirleme, mizan, kapanış)", sap_g,
+         "SAP Finans Danışmanlığı"),
+        ("SAP-MM", "Malzeme yönetimi / satınalma (sipariş, mal girişi, stok)", sap_g,
+         "SAP Malzeme Yönetimi Danışmanlığı"),
+        ("SAP-SD", "Satış ve dağıtım (müşteri siparişi, teslimat, faturalama)", sap_g,
+         "SAP Satış/Dağıtım Danışmanlığı"),
+        ("SAP-Basis", "Sistem yönetimi, yetkiler, performans, transport", sap_g,
+         "SAP Basis Danışmanlığı"),
+        ("SAP-Yetki", "Kullanıcı yetkileri, rol atama, erişim engeli", sap_g,
+         "SAP Yetkilendirme Danışmanlığı"),
+        ("IT-Ag", "Ağ, VPN, internet erişimi bağlantı sorunları", bt_g,
+         "Ağ Destek Ekibi"),
+        ("IT-Donanim", "Bilgisayar, yazıcı, monitör, donanım arızası/talebi", bt_g,
+         "Donanım Destek Ekibi"),
+        ("IT-Hesap", "Parola sıfırlama, hesap kilidi, e-posta erişimi", bt_g,
+         "Hesap/Erişim Destek Ekibi"),
     ]
-    for key, aciklama, ekip_id in categories:
+    for key, aciklama, ekip_id, gorunum_adi in categories:
         cur.execute(
-            "INSERT INTO classification_categories (category_key, aciklama, ekip_group_id) VALUES (%s,%s,%s)",
-            (key, aciklama, ekip_id),
+            """INSERT INTO classification_categories
+               (category_key, aciklama, ekip_group_id, ekip_gorunum_adi)
+               VALUES (%s,%s,%s,%s)""",
+            (key, aciklama, ekip_id, gorunum_adi),
         )
     conn.commit()
 

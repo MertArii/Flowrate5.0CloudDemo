@@ -54,6 +54,7 @@ def route(classification: dict, region: str | None = None) -> dict:
     if dusuk_guven or belirsiz:
         return {
             "ekip": "Triyaj Kuyruğu",
+            "ekip_gorunum_adi": "Triyaj Kuyruğu",
             "atanan_uzman": None,
             "uzman_adaylari": [],
             "otomatik_atandi": False,
@@ -68,9 +69,11 @@ def route(classification: dict, region: str | None = None) -> dict:
 
     kat = _get_kategoriler().get(modul)
     ekip = kat["ekip"] if kat else None
+    ekip_gorunum = kat["ekip_gorunum_adi"] if kat else None
     if not ekip:
         return {
             "ekip": "Triyaj Kuyruğu",
+            "ekip_gorunum_adi": "Triyaj Kuyruğu",
             "atanan_uzman": None,
             "uzman_adaylari": [],
             "otomatik_atandi": False,
@@ -90,6 +93,7 @@ def route(classification: dict, region: str | None = None) -> dict:
     if not pool:
         return {
             "ekip": ekip,
+            "ekip_gorunum_adi": ekip_gorunum,
             "atanan_uzman": None,
             "uzman_adaylari": [],
             "otomatik_atandi": False,
@@ -118,7 +122,8 @@ def route(classification: dict, region: str | None = None) -> dict:
         sebep += f" | bölge eşleşti: {'evet' if bolge_eslesti else 'hayır'}"
 
     return {
-        "ekip": ekip,
+        "ekip": ekip,                        # gerçek support_group (DB/FK için)
+        "ekip_gorunum_adi": ekip_gorunum,     # iş-türüne özel görünür isim
         "atanan_uzman": secilen["email"],
         "uzman_adaylari": uzman_havuzu,  # tam ekip listesi (transparanlık için)
         "otomatik_atandi": True,
