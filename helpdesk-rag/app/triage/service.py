@@ -18,6 +18,7 @@ async def triage(
     recipient_email: str = "destek@sirket.com",
     subject: str | None = None,
     region: str | None = None,
+    min_score: float | None = None,
 ) -> dict:
     from app.rag import store  # geç import: DB tabloları hazır olmadan yüklenmesin
 
@@ -25,7 +26,7 @@ async def triage(
     r = router.route(c)
 
     # Bilinen sorun mu? RAG (çift katman) ile otomatik çözüm denemesi.
-    rag = await pipeline.answer(ticket_text)
+    rag = await pipeline.answer(ticket_text, min_score=min_score)
     cozuldu = REFUSAL_MARK not in rag["answer"].lower()
     onerilen_cozum = rag["answer"] if cozuldu else None
 
@@ -60,6 +61,9 @@ async def triage(
         "ticket_number": tno,
         "siniflandirma": c,
         "yonlendirme": r,
-        "otomatik_cozum": onerilen_cozum,
+        "otomatik_cozum": onerilen_cozum,   # None ise uzmana gitmeli (triyaj anlamı)
         "kaynaklar": rag["sources"] if cozuldu else [],
+        # /ask gibi her zaman cevap gösteren yerler için (reddetse bile dolu):
+        "cevap_metni": rag["answer"],
+        "tum_kaynaklar": rag["sources"],
     }
