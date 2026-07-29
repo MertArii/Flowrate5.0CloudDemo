@@ -102,11 +102,20 @@ def get_or_create_support_group(name: str, description: str = "") -> str:
     return str(gid)
 
 
+def get_user_id_by_email(email: str) -> str | None:
+    """E-postadan users.id döner; yoksa None (uydurma/placeholder isim demektir)."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute("SELECT id FROM users WHERE email = %s", (email,))
+        row = cur.fetchone()
+    return str(row[0]) if row else None
+
+
 def create_ticket(
     customer_email: str, recipient_email: str, subject: str,
     raw_issue_description: str, extracted_category: str | None,
     region: str | None, status: str, priority: str,
     assigned_group_id: str | None,
+    assigned_agent_id: str | None = None,
 ) -> tuple[str, int]:
     """Ticket oluşturur, (id, ticket_number) döner."""
     with _connect() as conn, conn.cursor() as cur:
@@ -114,12 +123,14 @@ def create_ticket(
             """
             INSERT INTO tickets
                 (customer_email, recipient_email, subject, raw_issue_description,
-                 extracted_category, region, status, priority, assigned_group_id)
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                 extracted_category, region, status, priority, assigned_group_id,
+                 assigned_agent_id)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
             RETURNING id, ticket_number
             """,
             (customer_email, recipient_email, subject, raw_issue_description,
-             extracted_category, region, status, priority, assigned_group_id),
+             extracted_category, region, status, priority, assigned_group_id,
+             assigned_agent_id),
         )
         tid, tno = cur.fetchone()
         conn.commit()
@@ -129,15 +140,16 @@ def create_ticket(
 def create_routing_log(
     ticket_id: str, decision_factors: dict,
     assigned_group_id: str | None, confidence_score: float,
+    assigned_agent_id: str | None = None,
 ) -> None:
     with _connect() as conn, conn.cursor() as cur:
         cur.execute(
             """
             INSERT INTO routing_logs
-                (ticket_id, decision_factors, assigned_group_id, confidence_score)
-            VALUES (%s, %s, %s, %s)
+                (ticket_id, decision_factors, assigned_group_id, assigned_agent_id, confidence_score)
+            VALUES (%s, %s, %s, %s, %s)
             """,
             (ticket_id, json.dumps(decision_factors, ensure_ascii=False),
-             assigned_group_id, confidence_score),
+             assigned_group_id, assigned_agent_id, confidence_score),
         )
         conn.commit()

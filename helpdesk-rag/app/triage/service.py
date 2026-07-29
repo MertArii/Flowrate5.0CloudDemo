@@ -30,8 +30,18 @@ async def triage(
     cozuldu = REFUSAL_MARK not in rag["answer"].lower()
     onerilen_cozum = rag["answer"] if cozuldu else None
 
-    # Yönlendirme -> destek grubu UUID'si (otomatik atandıysa)
+    # Yönlendirme -> destek grubu + uzman UUID'leri.
+    # atanan_uzman bir e-posta olarak gelir (routing_rules.json); DB'de gerçek
+    # bir users kaydına çözülemiyorsa (uydurma/placeholder isim) otomatik
+    # atama İPTAL edilir ve ticket insan triyajına düşer — yanlış kişiye
+    # (veya var olmayan birine) atanmasını engeller.
     otomatik = r["otomatik_atandi"]
+    agent_id = store.get_user_id_by_email(r["atanan_uzman"]) if otomatik and r["atanan_uzman"] else None
+    if otomatik and r["atanan_uzman"] and not agent_id:
+        otomatik = False
+        r = {**r, "otomatik_atandi": False,
+             "sebep": f"{r['atanan_uzman']} gerçek bir kullanıcı değil — insan triyajı gerekiyor."}
+
     group_id = store.get_or_create_support_group(r["ekip"]) if otomatik else None
     priority = _ONCELIK_MAP.get(c["oncelik"], "medium")
     status = "assigned" if otomatik else "l1_routing"
@@ -47,12 +57,14 @@ async def triage(
         status=status,
         priority=priority,
         assigned_group_id=group_id,
+        assigned_agent_id=agent_id if otomatik else None,
     )
 
     store.create_routing_log(
         ticket_id=tid,
         decision_factors={"siniflandirma": c, "yonlendirme": r},
         assigned_group_id=group_id,
+        assigned_agent_id=agent_id if otomatik else None,
         confidence_score=c["guven"],
     )
 
