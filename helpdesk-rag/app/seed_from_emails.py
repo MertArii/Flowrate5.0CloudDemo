@@ -267,6 +267,35 @@ async def main():
             print(f"[seed] {i + 1}/{len(data)} ticket işlendi...")
 
     conn.commit()
+
+    # --- uzmanlara bölge ata (SADECE donanım kategorisi üzerinden) ---
+    # Bölge eşleşmesi triyajda yalnızca IT-Donanim kategorisinde kullanılır
+    # (SAP'de asla). Her uzmanın en çok çözdüğü bölge, o uzmanın "ana bölgesi"
+    # sayılır. Tek bir bölgede belirgin çoğunluğu olmayan (birden fazla
+    # bölgeye eşit dağılmış) uzmanlar bilerek bölgesiz bırakılır — bunlar
+    # bölge eşleşmesi bulunamadığında genel/esnek yedek görevi görür.
+    cur.execute("""
+        SELECT u.email, t.region, count(*) AS adet
+        FROM tickets t JOIN users u ON u.id = t.assigned_agent_id
+        WHERE t.extracted_category = 'Donanım'
+        GROUP BY u.email, t.region
+        ORDER BY u.email, adet DESC
+    """)
+    best_region: dict[str, tuple[str, int]] = {}
+    tie: set[str] = set()
+    for email, region, adet in cur.fetchall():
+        if email not in best_region:
+            best_region[email] = (region, adet)
+        elif best_region[email][1] == adet:
+            tie.add(email)  # aynı sayıda ilk sıradaki ile eşit -> belirsiz
+    for email, (region, _adet) in best_region.items():
+        if email in tie:
+            continue
+        cur.execute("UPDATE users SET region=%s WHERE email=%s", (region, email))
+    conn.commit()
+    print(f"[seed] {len(best_region) - len(tie)} uzmana ana bölge atandı "
+          f"({len(tie)} uzman birden fazla bölgeye eşit dağıldığı için bölgesiz/genel bırakıldı).")
+
     cur.close()
     conn.close()
     print(f"[seed] TAMAM. 105 ticket, {att_count} ek/vektör, 105 çözüm embedding'i yazıldı.")

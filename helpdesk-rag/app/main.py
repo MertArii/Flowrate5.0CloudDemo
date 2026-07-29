@@ -110,7 +110,11 @@ async def ask(req: AskRequest):
 @app.post("/triage")
 async def triage(req: TriageRequest):
     """L1 triyaj: ticket'ı sınıflandır, uzmana yönlendir, mümkünse otomatik çöz.
-    tickets + routing_logs tablolarına kaydeder."""
+    tickets + routing_logs tablolarına kaydeder.
+
+    region gönderilirse ve kategori IT-Donanim ise, aynı bölgedeki uzmana
+    öncelik verilir (yonlendirme.istenen_bolge / bolge_eslesti alanlarında
+    görünür). SAP kategorilerinde bölge eşleşmesi uygulanmaz."""
     return await triage_service.triage(
         req.text,
         customer_email=req.customer_email,
