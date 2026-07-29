@@ -16,15 +16,15 @@ _ONCELIK_MAP = {"dusuk": "low", "orta": "medium", "yuksek": "high", "kritik": "u
 BOLGE_ESLESMESI_UYGULANAN_MODUL = "IT-Donanim"
 
 
-def _bolge_eslesen_uzman(store, adaylar: list[str], region: str | None) -> str | None:
-    """adaylar arasında region'ı isteğe uyan ilk uzmanı döner; yoksa None
-    (çağıran taraf varsayılan/ilk adaya düşer)."""
-    if not region or not adaylar:
+def _bolge_eslesen_uzman(store, ekip: str, region: str | None) -> str | None:
+    """O grubun TÜM üyelerini DB'den çeker (routing_rules.json'daki elle
+    tutulan listeye değil, gerçek support_group üyeliğine dayanır) ve
+    region'ı isteğe uyan ilk uzmanı döner; yoksa None."""
+    if not region:
         return None
-    bilgi = store.get_agents_info(adaylar)
-    for email in adaylar:
-        if bilgi.get(email, {}).get("region") == region:
-            return email
+    for agent in store.get_agents_in_group(ekip):
+        if agent["region"] == region:
+            return agent["email"]
     return None
 
 
@@ -54,7 +54,7 @@ async def triage(
     # yoksa router'ın varsayılan (ilk) adayında kalınır.
     bolge_eslesti = False
     if otomatik and c["modul"] == BOLGE_ESLESMESI_UYGULANAN_MODUL and region:
-        eslesen = _bolge_eslesen_uzman(store, r.get("uzman_adaylari", []), region)
+        eslesen = _bolge_eslesen_uzman(store, r["ekip"], region)
         if eslesen and eslesen != r["atanan_uzman"]:
             r = {**r, "atanan_uzman": eslesen,
                  "sebep": f"{r['sebep']} + bölge eşleşmesi ({region})"}
