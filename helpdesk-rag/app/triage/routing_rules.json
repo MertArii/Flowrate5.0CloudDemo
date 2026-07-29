@@ -35,7 +35,12 @@
     "IT-Donanim": {
       "aciklama": "Bilgisayar, yazıcı, monitör, donanım arızası/talebi",
       "ekip": "BT Destek Ekibi",
-      "uzmanlar": ["yucel.teknoloji@sirket.com", "yusuf.teknoloji@sirket.com", "faruk.teknoloji@sirket.com"]
+      "uzmanlar": [
+        "yucel.teknoloji@sirket.com", "yusuf.teknoloji@sirket.com",
+        "faruk.teknoloji@sirket.com", "salih.teknoloji@sirket.com",
+        "turgut.teknoloji@sirket.com", "mustafa.teknoloji@sirket.com",
+        "emirhan.teknoloji@sirket.com", "esra.teknoloji@sirket.com"
+      ]
     },
     "IT-Hesap": {
       "aciklama": "Parola sıfırlama, hesap kilidi, e-posta erişimi",
