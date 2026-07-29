@@ -110,6 +110,17 @@ def get_user_id_by_email(email: str) -> str | None:
     return str(row[0]) if row else None
 
 
+def get_agents_info(emails: list[str]) -> dict[str, dict]:
+    """E-posta listesi -> {email: {id, region}}. Bölgesi olmayan uzmanlar
+    (region=None) genel/bölgesiz yedek sayılır."""
+    if not emails:
+        return {}
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute("SELECT email, id, region FROM users WHERE email = ANY(%s)", (emails,))
+        rows = cur.fetchall()
+    return {r[0]: {"id": str(r[1]), "region": r[2]} for r in rows}
+
+
 def create_ticket(
     customer_email: str, recipient_email: str, subject: str,
     raw_issue_description: str, extracted_category: str | None,

@@ -21,6 +21,7 @@ def route(classification: dict) -> dict:
         return {
             "ekip": "Triyaj Kuyruğu",
             "atanan_uzman": None,
+            "uzman_adaylari": [],
             "otomatik_atandi": False,
             "sebep": (
                 f"Güven düşük ({guven:.2f} < {GUVEN_ESIGI})"
@@ -29,11 +30,13 @@ def route(classification: dict) -> dict:
         }
 
     uzmanlar = kat.get("uzmanlar", [])
-    # Basit seçim: ilk uzman. (Sonraki adım: iş yükü/müsaitlik dengeleme.)
+    # Varsayılan seçim: ilk uzman. Bölge eşleşmesi (donanım için) service.py'de
+    # uzman_adaylari listesi üzerinden yapılır; SAP kategorilerinde uygulanmaz.
     atanan = uzmanlar[0] if uzmanlar else None
     return {
         "ekip": kat["ekip"],
         "atanan_uzman": atanan,
+        "uzman_adaylari": uzmanlar,
         "otomatik_atandi": atanan is not None,
         "sebep": f"{modul} -> {kat['ekip']} (güven {guven:.2f})",
     }

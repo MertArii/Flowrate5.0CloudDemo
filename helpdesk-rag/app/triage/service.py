@@ -11,6 +11,22 @@ REFUSAL_MARK = "elimde bilgi yok"
 # Sınıflandırıcının Türkçe öncelik etiketini şema CHECK değerine çevir.
 _ONCELIK_MAP = {"dusuk": "low", "orta": "medium", "yuksek": "high", "kritik": "urgent"}
 
+# Bölge eşleşmesi SADECE bu kategoride uygulanır (donanım = sahaya çıkan iş).
+# SAP kategorilerinde asla uygulanmaz — SAP desteği bölgeden bağımsızdır.
+BOLGE_ESLESMESI_UYGULANAN_MODUL = "IT-Donanim"
+
+
+def _bolge_eslesen_uzman(store, adaylar: list[str], region: str | None) -> str | None:
+    """adaylar arasında region'ı isteğe uyan ilk uzmanı döner; yoksa None
+    (çağıran taraf varsayılan/ilk adaya düşer)."""
+    if not region or not adaylar:
+        return None
+    bilgi = store.get_agents_info(adaylar)
+    for email in adaylar:
+        if bilgi.get(email, {}).get("region") == region:
+            return email
+    return None
+
 
 async def triage(
     ticket_text: str,
@@ -31,16 +47,34 @@ async def triage(
     onerilen_cozum = rag["answer"] if cozuldu else None
 
     # Yönlendirme -> destek grubu + uzman UUID'leri.
+    otomatik = r["otomatik_atandi"]
+
+    # Bölge eşleşmesi — SADECE donanım kategorisinde, SAP'de asla. Talep
+    # sahibinin bölgesiyle aynı bölgedeki uzman varsa o tercih edilir;
+    # yoksa router'ın varsayılan (ilk) adayında kalınır.
+    bolge_eslesti = False
+    if otomatik and c["modul"] == BOLGE_ESLESMESI_UYGULANAN_MODUL and region:
+        eslesen = _bolge_eslesen_uzman(store, r.get("uzman_adaylari", []), region)
+        if eslesen and eslesen != r["atanan_uzman"]:
+            r = {**r, "atanan_uzman": eslesen,
+                 "sebep": f"{r['sebep']} + bölge eşleşmesi ({region})"}
+            bolge_eslesti = True
+        elif eslesen:
+            bolge_eslesti = True  # varsayılan zaten doğru bölgedeydi
+
     # atanan_uzman bir e-posta olarak gelir (routing_rules.json); DB'de gerçek
     # bir users kaydına çözülemiyorsa (uydurma/placeholder isim) otomatik
     # atama İPTAL edilir ve ticket insan triyajına düşer — yanlış kişiye
     # (veya var olmayan birine) atanmasını engeller.
-    otomatik = r["otomatik_atandi"]
     agent_id = store.get_user_id_by_email(r["atanan_uzman"]) if otomatik and r["atanan_uzman"] else None
     if otomatik and r["atanan_uzman"] and not agent_id:
         otomatik = False
         r = {**r, "otomatik_atandi": False,
              "sebep": f"{r['atanan_uzman']} gerçek bir kullanıcı değil — insan triyajı gerekiyor."}
+
+    # Sonuçta gösterilecek bölge bilgisi (talep edilen + eşleşme durumu).
+    r = {**r, "istenen_bolge": region,
+         "bolge_eslesti": bolge_eslesti if c["modul"] == BOLGE_ESLESMESI_UYGULANAN_MODUL else None}
 
     group_id = store.get_or_create_support_group(r["ekip"]) if otomatik else None
     priority = _ONCELIK_MAP.get(c["oncelik"], "medium")
