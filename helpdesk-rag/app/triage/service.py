@@ -16,14 +16,14 @@ _ONCELIK_MAP = {"dusuk": "low", "orta": "medium", "yuksek": "high", "kritik": "u
 BOLGE_ESLESMESI_UYGULANAN_MODUL = "IT-Donanim"
 
 
-def _bolge_eslesen_uzman(store, ekip: str, region: str | None) -> str | None:
-    """O grubun TÜM üyelerini DB'den çeker (routing_rules.json'daki elle
-    tutulan listeye değil, gerçek support_group üyeliğine dayanır) ve
-    region'ı isteğe uyan ilk uzmanı döner; yoksa None."""
+def _bolge_eslesen_uzman(uzman_adaylari: list[dict], region: str | None) -> str | None:
+    """router.route()'un döndürdüğü aday listesi (gerçek support_group
+    üyeliğinden, DB'den) içinde region'ı isteğe uyan ilk uzmanı döner;
+    yoksa None. Ayrı bir DB sorgusu atmaz — route() zaten çekmişti."""
     if not region:
         return None
-    for agent in store.get_agents_in_group(ekip):
-        if agent["region"] == region:
+    for agent in uzman_adaylari:
+        if agent.get("region") == region:
             return agent["email"]
     return None
 
@@ -54,7 +54,7 @@ async def triage(
     # yoksa router'ın varsayılan (ilk) adayında kalınır.
     bolge_eslesti = False
     if otomatik and c["modul"] == BOLGE_ESLESMESI_UYGULANAN_MODUL and region:
-        eslesen = _bolge_eslesen_uzman(store, r["ekip"], region)
+        eslesen = _bolge_eslesen_uzman(r.get("uzman_adaylari", []), region)
         if eslesen and eslesen != r["atanan_uzman"]:
             r = {**r, "atanan_uzman": eslesen,
                  "sebep": f"{r['sebep']} + bölge eşleşmesi ({region})"}
@@ -62,10 +62,9 @@ async def triage(
         elif eslesen:
             bolge_eslesti = True  # varsayılan zaten doğru bölgedeydi
 
-    # atanan_uzman bir e-posta olarak gelir (routing_rules.json); DB'de gerçek
-    # bir users kaydına çözülemiyorsa (uydurma/placeholder isim) otomatik
-    # atama İPTAL edilir ve ticket insan triyajına düşer — yanlış kişiye
-    # (veya var olmayan birine) atanmasını engeller.
+    # atanan_uzman zaten DB'den (get_agents_in_group) geldiği için normalde
+    # her zaman gerçek bir users kaydına çözülür. Yine de savunma amaçlı:
+    # çözülemezse otomatik atama İPTAL edilir, ticket insan triyajına düşer.
     agent_id = store.get_user_id_by_email(r["atanan_uzman"]) if otomatik and r["atanan_uzman"] else None
     if otomatik and r["atanan_uzman"] and not agent_id:
         otomatik = False
