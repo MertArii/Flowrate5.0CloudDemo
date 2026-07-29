@@ -42,22 +42,32 @@ DEFAULT_GROUP = ("Genel Triyaj", "Sınıflandırılamayan talepler için insan t
 HIGH_KW = ["acil", "çalışmıyor", "giremiyorum", "durdu", "erişemiyorum", "kritik", "mavi ekran"]
 URGENT_KW = ["üretim durdu", "hiç kimse", "tüm", "acilen"]
 
-# Kategori tahmini
+# Kategori tahmini — classifier.py/DB'deki YAŞAYAN taksonomiyle BİREBİR aynı
+# anahtarları döner (SAP-FI, SAP-MM, SAP-SD, SAP-Basis, SAP-Yetki, IT-Ag,
+# IT-Donanim, IT-Hesap). Eskiden farklı bir taksonomi (SAP-SD/MM, Donanım,
+# Hesap/E-posta...) kullanıyordu; bu, "geçmişte bu kategoriyi kim çözmüş"
+# sorgusunu imkansız kılıyordu (bkz. app/remap_categories.py).
 def guess_category(recipient: str, konu: str, sorun: str) -> str:
     t = (konu + " " + sorun).lower()
     if "sapdestek" in recipient:
-        if any(k in t for k in ["vl01n", "teslimat", "sipariş", "mmbe", "va03", "stok"]):
-            return "SAP-SD/MM"
+        if any(k in t for k in ["vl01n", "teslimat", "sipariş", "va01", "va03"]):
+            return "SAP-SD"
+        if any(k in t for k in ["mmbe", "stok", "mal girişi", "mal kabul"]):
+            return "SAP-MM"
         if any(k in t for k in ["fb60", "fatura", "muhasebe", "mizan"]):
             return "SAP-FI"
-        return "SAP-Genel"
+        if any(k in t for k in ["yetki", "rol atama", "erişim engeli", "su01", "su3"]):
+            return "SAP-Yetki"
+        if any(k in t for k in ["performans", "transport", "sistem", "su01"]):
+            return "SAP-Basis"
+        return "SAP-FI"  # SAP içinde belirsizse en yaygın bucket'a düş
     if any(k in t for k in ["monitör", "ekran", "görüntü", "kablo", "yazıcı", "klavye", "fare"]):
-        return "Donanım"
+        return "IT-Donanim"
     if any(k in t for k in ["outlook", "mail", "e-posta", "parola", "şifre", "hesap", "kilit"]):
-        return "Hesap/E-posta"
+        return "IT-Hesap"
     if any(k in t for k in ["vpn", "ağ", "internet", "bağlant"]):
-        return "Ağ"
-    return "Genel-BT"
+        return "IT-Ag"
+    return "IT-Donanim"  # BT içinde belirsizse en büyük/en çok uzmanı olan bucket
 
 
 def guess_priority(konu: str, sorun: str) -> str:
@@ -298,7 +308,7 @@ async def main():
     cur.execute("""
         SELECT u.email, t.region, count(*) AS adet
         FROM tickets t JOIN users u ON u.id = t.assigned_agent_id
-        WHERE t.extracted_category = 'Donanım'
+        WHERE t.extracted_category = 'IT-Donanim'
         GROUP BY u.email, t.region
         ORDER BY u.email, adet DESC
     """)
