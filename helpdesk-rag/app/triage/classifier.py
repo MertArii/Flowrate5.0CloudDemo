@@ -25,6 +25,14 @@ def _get_kategoriler() -> dict[str, dict]:
     return _kategoriler_cache
 
 
+def invalidate_cache() -> None:
+    """Yeni bir kategori eklendiğinde çağrılır (bkz. /admin/categories) —
+    container'ı yeniden başlatmadan güncel listeyi bir sonraki çağrıda
+    tazeler."""
+    global _kategoriler_cache
+    _kategoriler_cache = None
+
+
 def _build_system(kategoriler: dict[str, dict]) -> str:
     kategori_listesi = "\n".join(f"- {k}: {v['aciklama']}" for k, v in kategoriler.items())
     return (

@@ -30,6 +30,12 @@ def _get_kategoriler() -> dict[str, dict]:
     return _kategoriler_cache
 
 
+def invalidate_cache() -> None:
+    """Yeni bir kategori eklendiğinde çağrılır (bkz. /admin/categories)."""
+    global _kategoriler_cache
+    _kategoriler_cache = None
+
+
 def _en_az_yuklu(store, adaylar: list[dict]) -> dict:
     """adaylar içinden en az açık ticket'ı olanı seçer; eşitlikte rastgele."""
     sayilar = store.get_open_ticket_counts([a["id"] for a in adaylar])
