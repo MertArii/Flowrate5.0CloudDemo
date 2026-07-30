@@ -163,10 +163,34 @@ def get_agents_in_group(group_name: str) -> list[dict]:
 
 
 def get_agents_by_category(category_key: str, group_name: str) -> list[dict]:
-    """Geçmişte bu KATEGORİYİ gerçekten çözmüş VE bu ekipte olan uzmanlar
-    (email, id, region). Boş dönerse o kategoride hiç geçmiş yok demektir —
-    çağıran taraf tüm ekibe (get_agents_in_group) düşmelidir."""
+    """Bu kategoride uzman olan, bu ekipteki uzmanlar (email, id, region).
+
+    Öncelik sırası:
+      1) ELLE beyan edilmiş uzmanlık (users.uzman_kategorileri) — gerçek
+         title'lardan türetilmiş, en güvenilir sinyal.
+      2) Elle beyan yoksa: geçmişte bu kategoriyi gerçekten çözmüş uzmanlar
+         (ticket geçmişi) — daha zayıf bir sezgi, az veri varsa yanıltıcı
+         olabilir (ör. tek seferlik çapraz görevlendirme "uzmanlık" sanılabilir).
+
+    Boş dönerse hiçbir sinyal yok demektir — çağıran taraf tüm ekibe
+    (get_agents_in_group) düşmelidir."""
     with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT u.email, u.id, u.region
+            FROM users u
+            JOIN support_groups g ON g.id = u.support_group_id
+            WHERE g.name = %s AND u.role = 'agent'
+              AND u.uzman_kategorileri IS NOT NULL
+              AND %s = ANY(u.uzman_kategorileri)
+            ORDER BY u.email
+            """,
+            (group_name, category_key),
+        )
+        rows = cur.fetchall()
+        if rows:
+            return [{"email": r[0], "id": str(r[1]), "region": r[2]} for r in rows]
+
         cur.execute(
             """
             SELECT DISTINCT u.email, u.id, u.region
