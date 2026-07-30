@@ -7,7 +7,6 @@ from pydantic import BaseModel
 from app.config import settings
 from app.queue import close_pool, enqueue_ingest, job_status
 from app.rag import ingest, store, vision
-from app.triage import classifier, router
 from app.triage import service as triage_service
 
 app = FastAPI(title="Helpdesk RAG API")
@@ -220,9 +219,8 @@ async def create_agent(req: AgentCreateRequest):
 @app.post("/admin/categories")
 async def create_category(req: CategoryCreateRequest):
     """Yeni bir sınıflandırma kategorisi ekler. Grup ADI ile çalışır (id
-    değil). Ekledikten sonra classifier/router önbelleğini HEMEN tazeler —
-    api container'ını yeniden başlatmaya gerek kalmaz (eskiden bu adım
-    unutulunca yeni kategori sessizce hiç seçilemiyordu)."""
+    değil). Kategori listesi önbelleksiz, her classify() çağrısında DB'den
+    taze çekildiği için eklendiği an kullanılabilir — restart gerekmez."""
     group_id = store.get_support_group_id_by_name(req.support_group)
     if not group_id:
         raise HTTPException(
@@ -235,10 +233,7 @@ async def create_category(req: CategoryCreateRequest):
         category_key=req.category_key, aciklama=req.aciklama,
         ekip_group_id=group_id, ekip_gorunum_adi=req.ekip_gorunum_adi,
     )
-    classifier.invalidate_cache()
-    router.invalidate_cache()
     return {
         "id": category_id, "category_key": req.category_key,
         "support_group": req.support_group,
-        "not": "Önbellek tazelendi, restart gerekmez — hemen kullanılabilir.",
     }
