@@ -135,6 +135,42 @@
         },
         "description": "Ticket'ı sınıflandırır (modül + öncelik + güven), doğru ekibe/uzmana yönlendirir ve mümkünse RAG ile otomatik çözüm önerir. Sonuç tickets tablosuna kaydedilir. İki model çağrısı yaptığı için /ask'tan yavaştır."
       }
+    },
+    {
+      "name": "Admin - Yeni uzman ekle",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"yeni.uzman@sirket.com\",\n  \"full_name\": \"Yeni Uzman\",\n  \"title\": \"SAP FI Destek Uzmanı\",\n  \"department\": \"Bilgi Teknolojileri\",\n  \"region\": \"Ankara\",\n  \"support_group\": \"SAP Danışman Ekibi\",\n  \"uzman_kategorileri\": [\"SAP-FI\"]\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/admin/agents",
+          "host": ["{{baseUrl}}"],
+          "path": ["admin", "agents"]
+        },
+        "description": "Yeni uzman ekler. support_group ADI ile çalışır (id değil) — yanlış grup ID'si kopyalama hatasını önler. Grup veya kategori adı yanlışsa 400 döner ve geçerli listeyi gösterir."
+      }
+    },
+    {
+      "name": "Admin - Yeni kategori ekle",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"category_key\": \"SAP-CO\",\n  \"aciklama\": \"Maliyet muhasebesi ve maliyet kontrol\",\n  \"support_group\": \"SAP Danışman Ekibi\",\n  \"ekip_gorunum_adi\": \"SAP CO Danışmanlığı\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/admin/categories",
+          "host": ["{{baseUrl}}"],
+          "path": ["admin", "categories"]
+        },
+        "description": "Yeni sınıflandırma kategorisi ekler ve classifier/router önbelleğini HEMEN tazeler — api restart gerekmez, eklendiği an kullanılabilir olur."
+      }
     }
   ]
 }

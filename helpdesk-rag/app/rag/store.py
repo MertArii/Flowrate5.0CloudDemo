@@ -144,6 +144,68 @@ def get_categories() -> dict[str, dict]:
             for r in rows}
 
 
+# ---- Admin: uzman/kategori yönetimi -----------------------------------------
+
+def get_support_group_id_by_name(name: str) -> str | None:
+    """Grup adından id döner; yoksa None. Elle ID kopyalama hatasını
+    (yanlış grubun ID'sini girmek) önlemek için isimle çalışılır."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute("SELECT id FROM support_groups WHERE name = %s", (name,))
+        row = cur.fetchone()
+    return str(row[0]) if row else None
+
+
+def get_all_group_names() -> list[str]:
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute("SELECT name FROM support_groups ORDER BY name")
+        return [r[0] for r in cur.fetchall()]
+
+
+def get_all_category_keys() -> list[str]:
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute("SELECT category_key FROM classification_categories WHERE is_active = true ORDER BY category_key")
+        return [r[0] for r in cur.fetchall()]
+
+
+def create_agent(
+    email: str, full_name: str, title: str | None, department: str | None,
+    region: str | None, support_group_id: str, uzman_kategorileri: list[str] | None,
+) -> str:
+    """Yeni bir uzman (agent) ekler, users.id döner."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO users (email, full_name, title, department, region, role,
+                                support_group_id, uzman_kategorileri)
+            VALUES (%s,%s,%s,%s,%s,'agent',%s,%s)
+            RETURNING id
+            """,
+            (email, full_name, title, department, region, support_group_id,
+             uzman_kategorileri or None),
+        )
+        uid = cur.fetchone()[0]
+        conn.commit()
+    return str(uid)
+
+
+def create_category(
+    category_key: str, aciklama: str, ekip_group_id: str, ekip_gorunum_adi: str | None,
+) -> str:
+    """Yeni bir sınıflandırma kategorisi ekler, id döner."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO classification_categories (category_key, aciklama, ekip_group_id, ekip_gorunum_adi)
+            VALUES (%s,%s,%s,%s)
+            RETURNING id
+            """,
+            (category_key, aciklama, ekip_group_id, ekip_gorunum_adi),
+        )
+        cid = cur.fetchone()[0]
+        conn.commit()
+    return str(cid)
+
+
 def get_agents_in_group(group_name: str) -> list[dict]:
     """Bir destek grubundaki TÜM uzmanları DB'den çeker (email, id, region).
     Elle tutulan bir liste dosyasından bağımsız — grup üyeliği
