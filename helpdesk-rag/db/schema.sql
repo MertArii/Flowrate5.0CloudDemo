@@ -27,6 +27,10 @@ CREATE TABLE IF NOT EXISTS users (
     phone VARCHAR(50),
     role VARCHAR(20) DEFAULT 'customer' CHECK (role IN ('customer', 'agent', 'admin')),
     support_group_id UUID REFERENCES support_groups(id) ON DELETE SET NULL,
+    -- Elle beyan edilmiş uzmanlık kategorileri (ör. {'SAP-MM','SAP-SD'}).
+    -- Doluysa atama algoritması ÖNCELİKLE bunu kullanır; geçmiş-ticket
+    -- sezgisi sadece bu boşsa devreye girer (bkz. store.get_agents_by_category).
+    uzman_kategorileri TEXT[],
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
