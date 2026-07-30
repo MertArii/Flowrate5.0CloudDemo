@@ -1,9 +1,11 @@
 """Ticket metnini yapılandırılmış sınıflandırmaya çevirir (Qwen3.5, JSON).
 
 Kategori listesi DB'den (classification_categories) gelir — elle tutulan
-dosya yok. İlk classify() çağrısında çekilip önbelleğe alınır (uygulama
-başlarken DB henüz hazır olmayabileceği için import anında değil, ilk
-kullanımda yüklenir)."""
+dosya yok, ÖNBELLEK de yok: her classify() çağrısında taze çekilir. Bu VM'de
+bile DB sorgusu milisaniyeler sürer, model çağrısının (saniyeler) yanında
+ihmal edilebilir — buna karşılık yeni eklenen bir kategori restart
+beklemeden anında devreye girer (eskiden önbellek yüzünden saatlerce fark
+edilmeyen bir yanlış-sınıflandırma hatasına yol açmıştı)."""
 from __future__ import annotations
 
 import json
@@ -14,23 +16,10 @@ from app.rag import ollama_client
 # "belirsiz/eşleşmiyor -> insan triyajı" için sabit bir sinyal.
 _DIGER = {"aciklama": "Yukarıdakilere uymayan / belirsiz talepler"}
 
-_kategoriler_cache: dict[str, dict] | None = None
-
 
 def _get_kategoriler() -> dict[str, dict]:
-    global _kategoriler_cache
-    if _kategoriler_cache is None:
-        from app.rag import store  # geç import: DB tabloları hazır olmadan yüklenmesin
-        _kategoriler_cache = {**store.get_categories(), "Diger": _DIGER}
-    return _kategoriler_cache
-
-
-def invalidate_cache() -> None:
-    """Yeni bir kategori eklendiğinde çağrılır (bkz. /admin/categories) —
-    container'ı yeniden başlatmadan güncel listeyi bir sonraki çağrıda
-    tazeler."""
-    global _kategoriler_cache
-    _kategoriler_cache = None
+    from app.rag import store  # geç import: DB tabloları hazır olmadan yüklenmesin
+    return {**store.get_categories(), "Diger": _DIGER}
 
 
 def _build_system(kategoriler: dict[str, dict]) -> str:
