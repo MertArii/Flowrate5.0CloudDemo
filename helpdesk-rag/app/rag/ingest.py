@@ -27,16 +27,23 @@ def read_file(path: str) -> str:
 
     if head.startswith(b"%PDF"):
         reader = PdfReader(path)
-        return "\n".join((page.extract_text() or "") for page in reader.pages)
+        text = "\n".join((page.extract_text() or "") for page in reader.pages)
+        return _sanitize(text)
 
     with open(path, "rb") as f:
         raw = f.read()
     for enc in ("utf-8", "cp1254", "iso-8859-9"):
         try:
-            return raw.decode(enc)
+            return _sanitize(raw.decode(enc))
         except UnicodeDecodeError:
             continue
-    return raw.decode("latin-1")
+    return _sanitize(raw.decode("latin-1"))
+
+
+def _sanitize(text: str) -> str:
+    """Postgres'in TEXT sütunlarının kabul etmediği NUL (0x00) baytlarını
+    temizler. Bazı karmaşık/gömülü fontlu PDF'lerde pypdf bunları üretebiliyor."""
+    return text.replace("\x00", "")
 
 
 async def ingest_file(path: str, source: str, title: str) -> int:
