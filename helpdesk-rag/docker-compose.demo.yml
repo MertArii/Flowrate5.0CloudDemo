@@ -52,11 +52,24 @@ services:
       retries: 10
     restart: unless-stopped
 
+  redis:
+    image: redis:7.4-alpine
+    command: redis-server --save 60 1 --loglevel warning --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
   api:
     build: ./app
-    environment:
+    environment: &api-env
       OLLAMA_BASE_URL: http://ollama:11434
       DATABASE_URL: postgresql://helpdesk:demopw@postgres:5432/helpdesk
+      REDIS_URL: redis://redis:6379/0
       LLM_MODEL: qwen3.5:4b
       TRIAGE_MODEL: qwen3.5:4b
       EMBED_MODEL: bge-m3
@@ -74,6 +87,25 @@ services:
         condition: service_healthy
       ollama:
         condition: service_started
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Asenkron ingest: büyük dosyaları kuyruğa alır, /ingest'i bekletmez.
+  # Redis çalıştığı için artık gerçekten devrede (öncesinde /ingest hep
+  # senkron moda düşüyordu çünkü Redis hiç ayakta değildi).
+  worker:
+    build: ./app
+    command: arq app.worker.WorkerSettings
+    environment: *api-env
+    volumes:
+      - ./app:/code/app
+      - ./data:/code/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     restart: unless-stopped
 
   open-webui:
@@ -93,3 +125,4 @@ volumes:
   ollama:
   pgdata:
   webui:
+  redisdata:
