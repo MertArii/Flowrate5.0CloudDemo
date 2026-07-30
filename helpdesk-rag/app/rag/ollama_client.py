@@ -19,10 +19,13 @@ async def chat(
     messages: list[dict],
     tools: list[dict] | None = None,
     fmt: str | None = None,
+    images_b64: list[str] | None = None,
 ) -> dict:
     """Qwen3.5 native tool-calling destekler. tools verilirse model
     tool_calls döndürebilir; döndürmezse düz 'content' gelir.
-    fmt='json' verilirse model geçerli JSON döndürmeye zorlanır."""
+    fmt='json' verilirse model geçerli JSON döndürmeye zorlanır.
+    images_b64 verilirse (base64 string listesi) Qwen3.5'in multimodal
+    desteğiyle görseli doğrudan okur — ayrı bir OCR adımı gerekmez."""
     payload: dict = {
         "model": settings.llm_model,
         "messages": messages,
@@ -35,6 +38,12 @@ async def chat(
         payload["tools"] = tools
     if fmt:
         payload["format"] = fmt
+    if images_b64:
+        # Ollama'da görsel, son user mesajının 'images' alanına eklenir.
+        for m in reversed(payload["messages"]):
+            if m["role"] == "user":
+                m["images"] = images_b64
+                break
     async with httpx.AsyncClient(timeout=300) as client:
         r = await client.post(f"{settings.ollama_base_url}/api/chat", json=payload)
         r.raise_for_status()

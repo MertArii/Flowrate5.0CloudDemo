@@ -22,14 +22,25 @@ async def triage(
     subject: str | None = None,
     region: str | None = None,
     min_score: float | None = None,
+    extra_context: str | None = None,
+    images_b64: list[str] | None = None,
+    attachment: dict | None = None,
 ) -> dict:
+    """attachment verilirse (file_name, file_path, file_type, extracted_text)
+    ticket'a bağlı bir müşteri mesajına eklenip attachment_vectors'e
+    (RAG Katman 2) kalıcı olarak yazılır — ileride başka sorularda da
+    bulunabilir hale gelir."""
     from app.rag import store  # geç import: DB tabloları hazır olmadan yüklenmesin
 
     c = await classifier.classify(ticket_text)
     r = router.route(c, region=region)
 
     # Bilinen sorun mu? RAG (çift katman) ile otomatik çözüm denemesi.
-    rag = await pipeline.answer(ticket_text, min_score=min_score)
+    # extra_context/images_b64 -> eklenen dosya varsa bu cevaba da katılır.
+    rag = await pipeline.answer(
+        ticket_text, min_score=min_score,
+        extra_context=extra_context, images_b64=images_b64,
+    )
     cozuldu = REFUSAL_MARK not in rag["answer"].lower()
     onerilen_cozum = rag["answer"] if cozuldu else None
 
@@ -67,6 +78,33 @@ async def triage(
         assigned_group_id=group_id,
         assigned_agent_id=agent_id if otomatik else None,
         confidence_score=c["guven"],
+    )
+
+    # Mesaj zinciri: müşteri sorusu + (varsa) ek + AI'ın taslak cevabı.
+    musteri_mid = store.create_ticket_message(
+        ticket_id=tid, sender_email=customer_email, sender_type="customer",
+        message_body=ticket_text,
+    )
+    if attachment:
+        att_id = store.create_attachment(
+            message_id=musteri_mid,
+            file_name=attachment["file_name"],
+            file_path=attachment["file_path"],
+            file_type=attachment.get("file_type"),
+            ocr_extracted_text=attachment.get("extracted_text"),
+        )
+        if attachment.get("extracted_text"):
+            from app.rag import ollama_client
+            emb = await ollama_client.embed(attachment["extracted_text"])
+            store.add_attachment_vector(
+                attachment_id=att_id, ticket_id=tid,
+                source=attachment["file_name"],
+                content=attachment["extracted_text"], embedding=emb,
+            )
+    store.create_ticket_message(
+        ticket_id=tid, sender_email="ai_bot@sirket.local", sender_type="ai_bot",
+        message_body="AI tarafından çözüm taslağı hazırlandı.",
+        ai_generated_draft=rag["answer"], rag_sources_used=rag["sources"],
     )
 
     return {

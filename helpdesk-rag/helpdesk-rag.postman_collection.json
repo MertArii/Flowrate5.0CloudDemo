@@ -72,27 +72,41 @@
       "name": "Ask (soru sor)",
       "request": {
         "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json"
-          }
-        ],
+        "header": [],
         "body": {
-          "mode": "raw",
-          "raw": "{\n  \"question\": \"Yıllık izin talebini nasıl oluştururum?\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "question",
+              "value": "Yıllık izin talebini nasıl oluştururum?",
+              "type": "text"
+            },
+            {
+              "key": "region",
+              "value": "",
+              "type": "text",
+              "description": "Opsiyonel — sadece IT-Donanim kategorisinde bölge önceliği uygular"
+            },
+            {
+              "key": "min_score",
+              "value": "",
+              "type": "text",
+              "description": "Opsiyonel benzerlik eşiği (0-1); boşsa sunucu varsayılanı (0.6) kullanılır"
+            },
+            {
+              "key": "file",
+              "type": "file",
+              "src": [],
+              "description": "Opsiyonel: görsel (png/jpg/webp) Qwen3.5 ile doğrudan okunur; PDF/.txt metni çıkarılır. İkisi de kalıcı olarak kaydedilir."
             }
-          }
+          ]
         },
         "url": {
           "raw": "{{baseUrl}}/ask",
           "host": ["{{baseUrl}}"],
           "path": ["ask"]
         },
-        "description": "RAG ile soru sorar; kaynaklı cevap döner."
+        "description": "RAG ile soru sorar + L1 ataması yapar; kaynaklı cevap döner. Artık form-data (JSON değil) — opsiyonel dosya ekleyebilirsin."
       }
     },
     {
