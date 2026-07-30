@@ -25,7 +25,6 @@ from app.config import settings
 from app.rag import ollama_client, pipeline
 
 REFUSAL_MARK = "elimde bilgi yok"
-DATA = Path(__file__).parent / "dataset.json"
 
 
 def check_retrieval(item: dict, sources: list[dict]) -> bool | None:
@@ -66,8 +65,9 @@ async def llm_judge(question: str, reference: str, answer: str) -> int:
     return 0
 
 
-async def main(use_judge: bool):
-    data = json.loads(DATA.read_text())
+async def main(use_judge: bool, data_file: str):
+    data_path = Path(__file__).parent / data_file
+    data = json.loads(data_path.read_text())
     items = data["items"]
     ret_ok = ret_total = ans_ok = 0
     judge_scores: list[int] = []
@@ -111,5 +111,6 @@ async def main(use_judge: bool):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--judge", action="store_true", help="LLM-hakem puanı ekle (yavaş)")
+    ap.add_argument("--file", default="dataset.json", help="eval/ altındaki veri dosyası")
     args = ap.parse_args()
-    asyncio.run(main(args.judge))
+    asyncio.run(main(args.judge, args.file))

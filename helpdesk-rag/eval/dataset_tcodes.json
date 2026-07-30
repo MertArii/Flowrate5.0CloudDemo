@@ -1,0 +1,69 @@
+{
+  "description": "MM T-Codes.pdf üzerinde chunking karşılaştırması (karakter-bazlı vs giriş-bazlı) için gerçek sorular.",
+  "items": [
+    {
+      "id": "tcode-1",
+      "question": "ME28 ne işe yarar?",
+      "type": "answerable",
+      "expected_source": "MM T-Codes.pdf",
+      "must_include": ["onay"],
+      "reference": "ME28: Yöneticilerin siparişleri toplu olarak onaylaması."
+    },
+    {
+      "id": "tcode-2",
+      "question": "MM60 hangi işlem için kullanılır?",
+      "type": "answerable",
+      "expected_source": "MM T-Codes.pdf",
+      "must_include": ["malzeme"],
+      "reference": "MM60: Malzeme türü, üretim yeri veya grubu bazında toplu malzeme listesi."
+    },
+    {
+      "id": "tcode-3",
+      "question": "Transit stok hangi kodla görüntülenir?",
+      "type": "answerable",
+      "expected_source": "MM T-Codes.pdf",
+      "must_include": ["MB5T"],
+      "reference": "MB5T: Depolar arası veya üretim yerleri arası yolda olan stokları gösterir."
+    },
+    {
+      "id": "tcode-4",
+      "question": "ME52N nedir?",
+      "type": "answerable",
+      "expected_source": "MM T-Codes.pdf",
+      "must_include": ["satınalma"],
+      "reference": "ME52N: Onay öncesi veya revize aşamasında satınalma talebi değiştirme."
+    },
+    {
+      "id": "tcode-5",
+      "question": "MI07 hangi kayıt için kullanılır?",
+      "type": "answerable",
+      "expected_source": "MM T-Codes.pdf",
+      "must_include": ["fark"],
+      "reference": "MI07: Sistem stoku ile fiili stok arasındaki fark kaydını işler."
+    },
+    {
+      "id": "tcode-6",
+      "question": "Business Partner ekranı ne için kullanılır?",
+      "type": "answerable",
+      "expected_source": "MM T-Codes.pdf",
+      "must_include": ["müşteri"],
+      "reference": "S/4HANA ile gelen, müşteri ve satıcıların merkezi olarak yönetildiği ekran."
+    },
+    {
+      "id": "tcode-7",
+      "question": "RFQ (teklif formu) nasıl oluşturulur?",
+      "type": "answerable",
+      "expected_source": "MM T-Codes.pdf",
+      "must_include": ["teklif"],
+      "reference": "Satıcılara gönderilecek teklif formunu (RFQ) oluşturma/değiştirme/görüntüleme."
+    },
+    {
+      "id": "tcode-8",
+      "question": "Malzeme Ana Verisi (Material Master) neyi kapsar?",
+      "type": "answerable",
+      "expected_source": "MM T-Codes.pdf",
+      "must_include": ["malzeme"],
+      "reference": "Sistemdeki tüm fiziksel ve sanal malzemelerin merkezi ana verisi."
+    }
+  ]
+}

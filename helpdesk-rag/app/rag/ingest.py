@@ -1,12 +1,23 @@
 """Doküman -> parçalama (chunking) -> embedding -> pgvector."""
+from __future__ import annotations
+
+import re
+
 from pypdf import PdfReader
 from app.config import settings
 from app.rag import ollama_client, store
 
+# T-code / kod-listesi tarzı girişleri tespit eder: 2 harfle başlayıp içinde
+# en az bir rakam geçen kısa kodlar (ME28, MM60, MB5T, ME52N...). Bu, sözlük/
+# referans tarzı dokümanlarda (SAP T-code listesi gibi) her girişi kendi
+# başına bir chunk yapmayı sağlar — karakter-bazlı bölme bir girişi ortadan
+# kesebilir veya birden fazla ilgisiz girişi tek chunk'ta birleştirebilir.
+_ENTRY_PATTERN = re.compile(r"\b[A-Z]{2}[A-Z0-9]*\d[A-Z0-9]*\b")
+_MIN_ENTRIES = 3  # bundan az eşleşme varsa karakter-bazlı yönteme düş
+
 
 def chunk_text(text: str, size: int, overlap: int) -> list[str]:
-    """Basit karakter-tabanlı, örtüşmeli parçalama. İleride cümle/başlık
-    farkındalıklı bir splitter ile değiştirilebilir."""
+    """Basit karakter-tabanlı, örtüşmeli parçalama."""
     text = " ".join(text.split())
     chunks, start = [], 0
     while start < len(text):
@@ -14,6 +25,28 @@ def chunk_text(text: str, size: int, overlap: int) -> list[str]:
         chunks.append(text[start:end])
         start = end - overlap
     return [c for c in chunks if c.strip()]
+
+
+def chunk_by_entries(text: str) -> list[str] | None:
+    """Kod-listesi tarzı içerikte her girişi (kod + açıklaması) ayrı bir
+    chunk yapar. Yeterli sayıda giriş bulunamazsa None döner — çağıran taraf
+    karakter-bazlı yönteme düşmeli."""
+    text = " ".join(text.split())
+    matches = list(_ENTRY_PATTERN.finditer(text))
+    if len(matches) < _MIN_ENTRIES:
+        return None
+
+    chunks = []
+    if matches[0].start() > 0:
+        onsoz = text[: matches[0].start()].strip()
+        if onsoz:
+            chunks.append(onsoz)
+    for i, m in enumerate(matches):
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
+        parca = text[m.start():end].strip()
+        if parca:
+            chunks.append(parca)
+    return chunks
 
 
 def read_file(path: str) -> str:
@@ -73,8 +106,13 @@ def _sanitize(text: str) -> str:
 
 async def ingest_file(path: str, source: str, title: str) -> int:
     """Dokümanı parçalayıp attachment_vectors'e (RAG Katman 2) yazar.
-    Eklenen parça sayısını döner."""
+    Eklenen parça sayısını döner.
+
+    Önce giriş-bazlı bölmeyi dener (kod-listesi tarzı içerik için); yeterli
+    giriş bulunamazsa karakter-bazlı yönteme düşer (prose/anlatı metinler)."""
     raw = read_file(path)
-    pieces = chunk_text(raw, settings.chunk_size, settings.chunk_overlap)
+    pieces = chunk_by_entries(raw)
+    if pieces is None:
+        pieces = chunk_text(raw, settings.chunk_size, settings.chunk_overlap)
     embedded = [(p, await ollama_client.embed(p)) for p in pieces]
     return store.add_knowledge_chunks(source or title, embedded)
