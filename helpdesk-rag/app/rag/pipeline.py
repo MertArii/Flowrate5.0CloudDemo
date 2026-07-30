@@ -19,7 +19,16 @@ SYSTEM_PROMPT = (
 )
 
 
-async def answer(question: str, min_score: float | None = None) -> dict:
+async def answer(
+    question: str,
+    min_score: float | None = None,
+    extra_context: str | None = None,
+    images_b64: list[str] | None = None,
+) -> dict:
+    """extra_context: eklenen dosyadan çıkarılan metin (görsel açıklaması/
+    doküman içeriği), bu tek cevap için bağlama eklenir.
+    images_b64: verilirse Qwen3.5 görseli bu cevapta doğrudan da okur
+    (multimodal) — extra_context'teki açıklamaya ek bir doğrulama katmanı."""
     q_emb = await ollama_client.embed(question)
 
     # İki katmanı birlikte getir; skora göre birleştir.
@@ -43,11 +52,14 @@ async def answer(question: str, min_score: float | None = None) -> dict:
     hits = hits[: settings.top_k]
 
     context = "\n\n".join(f"[Kaynak: {h['source']}]\n{h['content']}" for h in hits)
+    if extra_context:
+        context += f"\n\n[Kaynak: eklenen dosya]\n{extra_context}"
+
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": f"Bağlam:\n{context}\n\nSoru: {question}"},
     ]
-    reply = await ollama_client.chat(messages)
+    reply = await ollama_client.chat(messages, images_b64=images_b64)
     return {
         "answer": reply.get("content", ""),
         "sources": [{"source": h["source"], "score": h["score"], "tip": h["tip"],

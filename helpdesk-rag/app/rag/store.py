@@ -244,3 +244,67 @@ def create_routing_log(
              assigned_group_id, assigned_agent_id, confidence_score),
         )
         conn.commit()
+
+
+# ---- Mesajlar / ekler --------------------------------------------------
+
+def create_ticket_message(
+    ticket_id: str, sender_email: str, sender_type: str, message_body: str,
+    ai_generated_draft: str | None = None, rag_sources_used: list | None = None,
+) -> str:
+    """ticket_messages'a bir satır ekler, message_id döner."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO ticket_messages
+                (ticket_id, sender_email, sender_type, message_body,
+                 ai_generated_draft, rag_sources_used)
+            VALUES (%s,%s,%s,%s,%s,%s) RETURNING id
+            """,
+            (ticket_id, sender_email, sender_type, message_body,
+             ai_generated_draft,
+             json.dumps(rag_sources_used, ensure_ascii=False) if rag_sources_used else None),
+        )
+        mid = cur.fetchone()[0]
+        conn.commit()
+    return str(mid)
+
+
+def create_attachment(
+    message_id: str, file_name: str, file_path: str, file_type: str | None,
+    ocr_extracted_text: str | None,
+) -> str:
+    """message_attachments'a bir satır ekler, attachment_id döner."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO message_attachments
+                (message_id, file_name, file_path, file_type, ocr_extracted_text)
+            VALUES (%s,%s,%s,%s,%s) RETURNING id
+            """,
+            (message_id, file_name, file_path, file_type, ocr_extracted_text),
+        )
+        aid = cur.fetchone()[0]
+        conn.commit()
+    return str(aid)
+
+
+def add_attachment_vector(
+    attachment_id: str, ticket_id: str, source: str, content: str,
+    embedding: list[float],
+) -> None:
+    """Ekin metnini (görsel açıklaması / doküman metni) attachment_vectors'e
+    yazar — RAG Katman 2'ye kalıcı olarak eklenmiş olur, ileride başka
+    sorularda da bulunabilir."""
+    with _connect() as conn:
+        register_vector(conn)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO attachment_vectors
+                    (attachment_id, ticket_id, source, chunk_index, chunk_content, embedding)
+                VALUES (%s,%s,%s,0,%s,%s)
+                """,
+                (attachment_id, ticket_id, source, content, embedding),
+            )
+            conn.commit()
