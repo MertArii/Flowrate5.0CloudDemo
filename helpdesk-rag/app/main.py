@@ -77,7 +77,7 @@ async def get_job(job_id: str):
 @app.post("/ask")
 async def ask(
     question: str = Form(...),
-    min_score: float | None = Form(None),
+    min_score: str | None = Form(None),
     customer_email: str = Form("demo@sirket.com"),
     recipient_email: str = Form("destek@sirket.com"),
     subject: str | None = Form(None),
@@ -96,6 +96,12 @@ async def ask(
     Cevabın yanında soruyu sınıflandırır, doğru ekibe/uzmana yönlendirir ve
     tickets + routing_logs tablolarına kaydeder (bkz. /triage ile aynı motor).
     min_score gönderilirse o istek için benzerlik eşiği uygulanır."""
+    # Postman/form-data boş bırakılan alanları None yerine "" gönderir;
+    # float alanda bu parse hatası verir, string alanlarda da temizleyelim.
+    parsed_min_score = float(min_score) if min_score else None
+    region = region or None
+    subject = subject or None
+
     extra_context = None
     attachment_info = None
 
@@ -126,7 +132,7 @@ async def ask(
         recipient_email=recipient_email,
         subject=subject,
         region=region,
-        min_score=min_score,
+        min_score=parsed_min_score,
         extra_context=extra_context,
         attachment=attachment_info,
     )
