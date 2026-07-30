@@ -97,7 +97,7 @@
               "key": "file",
               "type": "file",
               "src": [],
-              "description": "Opsiyonel: görsel (png/jpg/webp) Qwen3.5 ile doğrudan okunur; PDF/.txt metni çıkarılır. İkisi de kalıcı olarak kaydedilir."
+              "description": "Opsiyonel: görsel (png/jpg/webp) Tesseract ile GERÇEK OCR yapılır (Qwen3.5 görseli görmez, sadece çıkan metni yorumlar); PDF/.txt metni çıkarılır. İkisi de kalıcı olarak kaydedilir."
             }
           ]
         },
