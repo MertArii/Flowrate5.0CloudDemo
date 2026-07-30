@@ -8,3 +8,5 @@ pydantic-settings==2.7.1
 pypdf==5.1.0
 python-multipart==0.0.20
 arq==0.26.3
+pytesseract==0.3.13
+Pillow==11.1.0

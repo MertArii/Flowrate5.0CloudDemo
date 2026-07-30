@@ -1,19 +1,22 @@
-"""Qwen3.5'in multimodal desteğiyle görselden metin/açıklama çıkarır.
-Ayrı bir OCR aracı gerekmez — model görseli doğrudan okur."""
+"""Görselden gerçek OCR (Tesseract) ile metin çıkarır.
+
+Not: Qwen3.5 kendisi de multimodal (görseli doğrudan okuyabilir), ama karakter
+seviyesinde kesinlik gerektiren durumlarda (hata kodları, stack trace'ler)
+genel bir "görseli açıkla" isteği parafraz/yuvarlama riski taşır. Bu yüzden
+gerçek bir OCR motoru kullanılıyor; Qwen3.5 sadece çıkan METNİ yorumlayıp
+cevap üretiyor, görselin kendisini görmüyor.
+"""
 from __future__ import annotations
 
-from app.rag import ollama_client
+import io
 
-_PROMPT = (
-    "Bu görseldeki tüm metni (hata mesajları, kod, ekran içeriği vb.) ve "
-    "önemli görsel detayları eksiksiz, Türkçe olarak açıkla. Sadece "
-    "gördüklerini yaz, yorum katma."
-)
+import pytesseract
+from PIL import Image
 
 
-async def describe_image(image_b64: str) -> str:
-    msg = await ollama_client.chat(
-        [{"role": "user", "content": _PROMPT}],
-        images_b64=[image_b64],
-    )
-    return msg.get("content", "")
+def ocr_image(image_bytes: bytes) -> str:
+    """Görsel bytes -> OCR ile çıkarılan metin. Türkçe + İngilizce birlikte
+    denenir (ekran görüntülerinde ikisi de sık karışık geçebiliyor)."""
+    img = Image.open(io.BytesIO(image_bytes))
+    text = pytesseract.image_to_string(img, lang="tur+eng")
+    return text.strip()

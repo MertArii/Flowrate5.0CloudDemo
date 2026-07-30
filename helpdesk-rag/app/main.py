@@ -1,4 +1,3 @@
-import base64
 import os
 import uuid
 
@@ -87,17 +86,17 @@ async def ask(
 ):
     """RAG ile soru sor -> kaynaklı cevap + L1 ataması.
 
-    Opsiyonel dosya eklenebilir: görsel ise (png/jpg/webp) Qwen3.5 multimodal
-    ile doğrudan okunur (OCR gerekmez); PDF/metin ise mevcut ingest mantığıyla
-    metni çıkarılır. Her iki durumda da içerik kalıcı olarak
-    message_attachments + attachment_vectors'e yazılır — ileride başka
-    sorularda da bulunabilir hale gelir.
+    Opsiyonel dosya eklenebilir: görsel ise (png/jpg/webp) Tesseract ile
+    gerçek OCR yapılır (Qwen3.5 görseli GÖRMEZ, sadece çıkan metni yorumlar
+    — hata kodu/stack trace gibi kesinlik gereken içerikte parafraz riskini
+    önler); PDF/metin ise mevcut ingest mantığıyla metni çıkarılır. Her iki
+    durumda da içerik kalıcı olarak message_attachments + attachment_vectors'e
+    yazılır — ileride başka sorularda da bulunabilir hale gelir.
 
     Cevabın yanında soruyu sınıflandırır, doğru ekibe/uzmana yönlendirir ve
     tickets + routing_logs tablolarına kaydeder (bkz. /triage ile aynı motor).
     min_score gönderilirse o istek için benzerlik eşiği uygulanır."""
     extra_context = None
-    images_b64 = None
     attachment_info = None
 
     if file is not None:
@@ -110,9 +109,7 @@ async def ask(
 
         content_type = file.content_type or ""
         if content_type in IMAGE_TYPES:
-            b64 = base64.b64encode(raw).decode("ascii")
-            extra_context = await vision.describe_image(b64)
-            images_b64 = [b64]
+            extra_context = vision.ocr_image(raw)
         else:
             extra_context = ingest.read_file(path)
 
@@ -131,7 +128,6 @@ async def ask(
         region=region,
         min_score=min_score,
         extra_context=extra_context,
-        images_b64=images_b64,
         attachment=attachment_info,
     )
     return {
