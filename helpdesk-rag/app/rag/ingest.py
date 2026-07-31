@@ -30,20 +30,34 @@ def chunk_text(text: str, size: int, overlap: int) -> list[str]:
 def chunk_by_entries(text: str) -> list[str] | None:
     """Kod-listesi tarzı içerikte her girişi (kod + açıklaması) ayrı bir
     chunk yapar. Yeterli sayıda giriş bulunamazsa None döner — çağıran taraf
-    karakter-bazlı yönteme düşmeli."""
+    karakter-bazlı yönteme düşmeli.
+
+    'ME31K / ME32K / ME33K Sözleşme Oluşturma...' gibi BİRDEN FAZLA kodun
+    aynı girişte '/' ile gruplandığı satırlarda, her kod ayrı bir "yeni
+    giriş" sayılırsa aradaki kodlar (ME31K, ME32K) boş kalır, açıklama
+    sadece sona yapışır. Bunu önlemek için: iki kod eşleşmesi arasında
+    SADECE boşluk/'/' varsa (gerçek kelime yoksa) aynı grup sayılır, yeni
+    giriş başlatılmaz."""
     text = " ".join(text.split())
     matches = list(_ENTRY_PATTERN.finditer(text))
     if len(matches) < _MIN_ENTRIES:
         return None
 
+    starts = [matches[0].start()]
+    for prev, cur in zip(matches, matches[1:]):
+        between = text[prev.end():cur.start()]
+        if between.strip(" /"):  # boşluk/'/' dışında gerçek metin varsa
+            starts.append(cur.start())
+        # yoksa (ör. sadece " / "): aynı grup, yeni başlangıç sayılmaz
+
     chunks = []
-    if matches[0].start() > 0:
-        onsoz = text[: matches[0].start()].strip()
+    if starts[0] > 0:
+        onsoz = text[: starts[0]].strip()
         if onsoz:
             chunks.append(onsoz)
-    for i, m in enumerate(matches):
-        end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
-        parca = text[m.start():end].strip()
+    for i, s in enumerate(starts):
+        end = starts[i + 1] if i + 1 < len(starts) else len(text)
+        parca = text[s:end].strip()
         if parca:
             chunks.append(parca)
     return chunks
