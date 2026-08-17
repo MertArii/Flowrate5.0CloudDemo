@@ -81,6 +81,20 @@ ALTER TABLE public.classification_categories OWNER TO helpdesk;
 GRANT ALL ON TABLE public.classification_categories TO helpdesk;
 
 
+-- public.sla_policies definition
+
+-- Drop table
+
+-- DROP TABLE public.sla_policies;
+
+CREATE TABLE public.sla_policies ( id uuid DEFAULT uuid_generate_v4() NOT NULL, level_int int4 NOT NULL, level_name varchar(100) NOT NULL, priority_key varchar(20) NOT NULL, response_target interval NULL, workaround_target interval NULL, resolution_target interval NOT NULL, is_business_days bool DEFAULT false NULL, description text NULL, created_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, CONSTRAINT sla_policies_pkey PRIMARY KEY (id));
+
+-- Permissions
+
+ALTER TABLE public.sla_policies OWNER TO helpdesk;
+GRANT ALL ON TABLE public.sla_policies TO helpdesk;
+
+
 -- public.support_groups definition
 
 -- Drop table
@@ -129,7 +143,7 @@ GRANT ALL ON TABLE public.routing_rules TO helpdesk;
 
 -- DROP TABLE public.tickets;
 
-CREATE TABLE public.tickets ( id uuid DEFAULT uuid_generate_v4() NOT NULL, ticket_number serial4 NOT NULL, customer_email varchar(150) NOT NULL, customer_id uuid NULL, recipient_email varchar(150) NOT NULL, subject varchar(255) NOT NULL, raw_issue_description text NOT NULL, extracted_category varchar(100) NULL, region varchar(100) NULL, status varchar(30) DEFAULT 'new'::character varying NULL, priority varchar(20) DEFAULT 'medium'::character varying NULL, assigned_group_id uuid NULL, assigned_agent_id uuid NULL, created_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, updated_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, resolved_at timestamptz NULL, CONSTRAINT tickets_pkey PRIMARY KEY (id), CONSTRAINT tickets_priority_check CHECK (((priority)::text = ANY ((ARRAY['low'::character varying, 'medium'::character varying, 'high'::character varying, 'urgent'::character varying])::text[]))), CONSTRAINT tickets_status_check CHECK (((status)::text = ANY ((ARRAY['new'::character varying, 'l1_routing'::character varying, 'assigned'::character varying, 'in_progress'::character varying, 'resolved'::character varying, 'closed'::character varying])::text[]))), CONSTRAINT tickets_ticket_number_key UNIQUE (ticket_number), CONSTRAINT tickets_assigned_agent_id_fkey FOREIGN KEY (assigned_agent_id) REFERENCES public.users(id) ON DELETE SET NULL, CONSTRAINT tickets_assigned_group_id_fkey FOREIGN KEY (assigned_group_id) REFERENCES public.support_groups(id) ON DELETE SET NULL, CONSTRAINT tickets_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.users(id) ON DELETE SET NULL);
+CREATE TABLE public.tickets ( id uuid DEFAULT uuid_generate_v4() NOT NULL, ticket_number serial4 NOT NULL, customer_email varchar(150) NOT NULL, customer_id uuid NULL, recipient_email varchar(150) NOT NULL, subject varchar(255) NOT NULL, raw_issue_description text NOT NULL, extracted_category varchar(100) NULL, region varchar(100) NULL, status varchar(30) DEFAULT 'new'::character varying NULL, priority varchar(20) DEFAULT 'medium'::character varying NULL, assigned_group_id uuid NULL, assigned_agent_id uuid NULL, created_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, updated_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, resolved_at timestamptz NULL, sla_policy_id uuid NULL, response_deadline timestamptz NULL, workaround_deadline timestamptz NULL, resolution_deadline timestamptz NULL, first_response_at timestamptz NULL, sla_status varchar(20) DEFAULT 'within_sla'::character varying NULL, last_paused_at timestamptz NULL, total_paused_duration interval DEFAULT '00:00:00'::interval NULL, CONSTRAINT tickets_pkey PRIMARY KEY (id), CONSTRAINT tickets_priority_check CHECK (((priority)::text = ANY (ARRAY['low'::text, 'medium'::text, 'high'::text, 'urgent'::text, 'planned'::text]))), CONSTRAINT tickets_status_check CHECK (((status)::text = ANY (ARRAY['new'::text, 'l1_routing'::text, 'assigned'::text, 'in_progress'::text, 'waiting'::text, 'resolved'::text, 'closed'::text]))), CONSTRAINT tickets_ticket_number_key UNIQUE (ticket_number), CONSTRAINT tickets_assigned_agent_id_fkey FOREIGN KEY (assigned_agent_id) REFERENCES public.users(id) ON DELETE SET NULL, CONSTRAINT tickets_assigned_group_id_fkey FOREIGN KEY (assigned_group_id) REFERENCES public.support_groups(id) ON DELETE SET NULL, CONSTRAINT tickets_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.users(id) ON DELETE SET NULL, CONSTRAINT tickets_sla_policy_id_fkey FOREIGN KEY (sla_policy_id) REFERENCES public.sla_policies(id));
 
 -- Permissions
 
