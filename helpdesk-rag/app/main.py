@@ -216,6 +216,14 @@ async def create_agent(req: AgentCreateRequest):
     }
 
 
+@app.get("/admin/sla-ihlaller")
+async def sla_ihlaller():
+    """Süresi geçmiş (ilk müdahale veya çözüm deadline'ı aşılmış) ve hâlâ
+    açık olan ticket'ları listeler. Anlık sorgu — periyodik bir arka plan
+    işi değil, her çağrıda taze hesaplanır."""
+    return {"ihlaller": store.get_sla_violations()}
+
+
 @app.post("/admin/categories")
 async def create_category(req: CategoryCreateRequest):
     """Yeni bir sınıflandırma kategorisi ekler. Grup ADI ile çalışır (id
