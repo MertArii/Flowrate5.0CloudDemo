@@ -293,6 +293,8 @@ def create_ticket(
     region: str | None, status: str, priority: str,
     assigned_group_id: str | None,
     assigned_agent_id: str | None = None,
+    sla_policy_id: str | None = None,
+    response_deadline=None, workaround_deadline=None, resolution_deadline=None,
 ) -> tuple[str, int]:
     """Ticket oluşturur, (id, ticket_number) döner."""
     with _connect() as conn, conn.cursor() as cur:
@@ -301,17 +303,78 @@ def create_ticket(
             INSERT INTO tickets
                 (customer_email, recipient_email, subject, raw_issue_description,
                  extracted_category, region, status, priority, assigned_group_id,
-                 assigned_agent_id)
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                 assigned_agent_id, sla_policy_id, response_deadline,
+                 workaround_deadline, resolution_deadline)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
             RETURNING id, ticket_number
             """,
             (customer_email, recipient_email, subject, raw_issue_description,
              extracted_category, region, status, priority, assigned_group_id,
-             assigned_agent_id),
+             assigned_agent_id, sla_policy_id, response_deadline,
+             workaround_deadline, resolution_deadline),
         )
         tid, tno = cur.fetchone()
         conn.commit()
     return str(tid), tno
+
+
+# ---- SLA ----------------------------------------------------------------
+
+def get_sla_policy(priority_key: str) -> dict | None:
+    """priority_key ('urgent'|'high'|'medium'|'low'|'planned') -> sla_policies
+    satırı. Hedefler timedelta olarak döner (psycopg interval->timedelta)."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT id, response_target, workaround_target, resolution_target,
+                   is_business_days
+            FROM sla_policies WHERE priority_key = %s
+            """,
+            (priority_key,),
+        )
+        row = cur.fetchone()
+    if not row:
+        return None
+    return {
+        "id": str(row[0]),
+        "response_target": row[1],
+        "workaround_target": row[2],
+        "resolution_target": row[3],
+        "is_business_days": row[4],
+    }
+
+
+def get_sla_violations() -> list[dict]:
+    """Süresi geçmiş ama hâlâ açık olan ticket'lar (response veya resolution
+    deadline'ı geçmiş, resolved_at boş)."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT t.id, t.ticket_number, t.subject, t.priority, t.status,
+                   t.response_deadline, t.resolution_deadline, t.first_response_at,
+                   t.assigned_agent_id, u.email
+            FROM tickets t
+            LEFT JOIN users u ON u.id = t.assigned_agent_id
+            WHERE t.resolved_at IS NULL
+              AND t.status NOT IN ('resolved', 'closed')
+              AND (
+                    (t.response_deadline IS NOT NULL AND t.first_response_at IS NULL
+                     AND now() > t.response_deadline)
+                 OR (t.resolution_deadline IS NOT NULL AND now() > t.resolution_deadline)
+              )
+            ORDER BY t.resolution_deadline NULLS LAST
+            """
+        )
+        rows = cur.fetchall()
+    return [
+        {
+            "ticket_id": str(r[0]), "ticket_number": r[1], "subject": r[2],
+            "priority": r[3], "status": r[4],
+            "response_deadline": r[5], "resolution_deadline": r[6],
+            "first_response_at": r[7], "assigned_agent_email": r[9],
+        }
+        for r in rows
+    ]
 
 
 def create_routing_log(

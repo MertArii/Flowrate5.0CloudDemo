@@ -28,9 +28,34 @@ def _build_system(kategoriler: dict[str, dict]) -> str:
         "Sen bir help desk ticket sınıflandırıcısısın. Verilen ticket metnini "
         "analiz et ve SADECE geçerli JSON döndür. Alanlar:\n"
         '  "modul": aşağıdaki kategorilerden TAM BİRİNİN anahtarı,\n'
-        '  "oncelik": "dusuk" | "orta" | "yuksek" | "kritik",\n'
+        '  "oncelik": "dusuk" | "orta" | "yuksek" | "kritik" (aşağıdaki kapsam '
+        'kriterlerine göre),\n'
+        '  "istek_turu": "olay" | "planli_talep",\n'
         '  "ozet": sorunun tek cümlelik Türkçe özeti,\n'
         '  "guven": 0.0-1.0 arası, sınıflandırmaya ne kadar emin olduğun.\n\n'
+        "Öncelik (oncelik) — Uyar Holding BT Olay ve Talep Yönetimi Prosedürü'ndeki "
+        "SLA önceliklendirme tablosuna göre KAPSAMA (kaç kişiyi etkilediğine) bak, "
+        "sadece kategoriye değil:\n"
+        "  kritik: Holding/şirket genelini veya kritik iş sürecini tamamen durduran "
+        "(ör. SAP tamamen erişilemez, tüm e-posta çalışmıyor, siber saldırı).\n"
+        "  yuksek: Bir departmanı veya çok sayıda kullanıcıyı etkiliyor, tüm "
+        "organizasyonu durdurmuyor (ör. bir departman SAP'e giremiyor, dosya "
+        "sunucusuna bölgesel erişilemiyor).\n"
+        "  orta: Tek bir kullanıcının üretim/iş yapmasını engelleyen sorun (ör. "
+        "bilgisayar açılmıyor, yazıcı bağlantısı kopmuş).\n"
+        "  dusuk: İşi doğrudan durdurmayan, alternatifle devam edilebilen sorun "
+        "(ör. bilgisayar yavaş, toner uyarısı, makro hatası).\n\n"
+        "İstek türü (istek_turu) — SADECE şunu ayırt eder: yeni bir şey mi "
+        "TALEP ediliyor, yoksa var olan bir şey mi BOZUK/ARIZALI? Metindeki "
+        "aciliyet ifadesiyle (acelesi yok / acil vb.) KARIŞTIRMA — 'acelesi "
+        "yok' demek düşük öncelik demektir, planlı talep demek DEĞİLDİR.\n"
+        "  planli_talep: kullanıcı yeni bir şey istiyor — kurulum, yeni "
+        "yazılım/donanım temini, yetki/erişim verilmesi, geliştirme talebi "
+        "(ör. 'yeni çalışan için bilgisayar kurulumu', 'X yazılımı kurulsun', "
+        "'bu klasöre erişim yetkisi istiyorum').\n"
+        "  olay: var olan bir sistem/donanım/yazılım bozuk, yavaş, çalışmıyor "
+        "veya hata veriyor — aciliyeti düşük olsa bile (ör. 'bilgisayarım "
+        "yavaş, acelesi yok' → olay + dusuk, planli_talep DEĞİL).\n\n"
         f"Kategoriler:\n{kategori_listesi}\n\n"
         "Emin değilsen modul='Diger' ve düşük guven ver. Uydurma kategori kullanma."
     )
@@ -60,6 +85,9 @@ async def classify(ticket_text: str) -> dict:
     oncelik = data.get("oncelik", "orta")
     if oncelik not in ("dusuk", "orta", "yuksek", "kritik"):
         oncelik = "orta"
+    istek_turu = data.get("istek_turu", "olay")
+    if istek_turu not in ("olay", "planli_talep"):
+        istek_turu = "olay"
     try:
         guven = float(data.get("guven", 0.0))
     except (TypeError, ValueError):
@@ -69,6 +97,7 @@ async def classify(ticket_text: str) -> dict:
     return {
         "modul": modul,
         "oncelik": oncelik,
+        "istek_turu": istek_turu,
         "ozet": data.get("ozet", ""),
         "guven": guven,
     }
