@@ -111,8 +111,6 @@ IT_VARLIK_KOKLERI = [
     "lokasyon", "şube", "fabrika", "depo",
 ]
 _KOK_REGEX = "(?:" + "|".join(IT_VARLIK_KOKLERI) + ")"
-# olası hâl eki (belirtme/yönelme/bulunma/ayrılma) iyelik ekinin ardına gelebilir:
-# "sunucumuzu", "ağımıza", "hesabımızda" gibi.
 _HAL_EKI = r"(?:i|ı|u|ü|e|a|de|da|den|dan|te|ta)?"
 
 COGUL_IYELIK_REGEX = re.compile(
@@ -281,11 +279,6 @@ def model_guncel_mi():
     if not os.path.exists(DOSYA_ADI):
         return True
     veri_guncel_mi = os.path.getmtime(MODEL_DOSYASI) > os.path.getmtime(DOSYA_ADI)
-    # YENİ: pipeline.py'nin kendisi (özellik mühendisliği kodu) değiştiyse
-    # de model bayat sayılmalı. Aksi halde 'departman_geneli_flag' gibi yeni
-    # bir eğitim özelliği eklediğinizde, veri dosyasına dokunmadığınız için
-    # sistem sessizce ESKİ model.pkl'i yükleyip yeni özelliği hiç öğrenmemiş
-    # olur - fark etmeniz zor olur.
     kod_guncel_mi = os.path.getmtime(MODEL_DOSYASI) > os.path.getmtime(__file__)
     return veri_guncel_mi and kod_guncel_mi
 
@@ -393,10 +386,6 @@ def gelen_maili_veya_gorseli_isle(girdi_verisi, tip='metin'):
     tespit_edilen_modul = sap_modul_analizi(ham_mail_metni)
     departman_geneli_mi = departman_geneli_etkisi_var_mi(ham_mail_metni)
 
-    # NOT: 'departman_geneli_flag' artık eğitimdeki ile BİREBİR AYNI şekilde,
-    # aynı fonksiyon (departman_geneli_etkisi_var_mi) çağrılarak üretiliyor.
-    # Böylece eğitim/çıkarım arasında özellik tutarsızlığı (train/inference
-    # skew) oluşmuyor - iki taraf da aynı mantığı kullanıyor.
     test_df = pd.DataFrame([{
         'maskelenmis_metin': maskelenmis,
         'sap_modulu': tespit_edilen_modul,
