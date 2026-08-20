@@ -1,0 +1,7 @@
+{
+    "secilen_model": "LogisticRegression",
+    "en_iyi_cv_f1_macro": 0.4283982683982684,
+    "egitim_tarihi": "2026-08-19",
+    "veri_seti": "emails_sla_seviyeli.json",
+    "toplam_kayit": 105
+}

@@ -1,0 +1,2558 @@
+[
+  {
+    "modul": "CO",
+    "bolum": "1. Genel Ana Veri ve Kontrol Alanı (CO-OM Master Data)",
+    "t_code": "KA01",
+    "aciklama": "Birincil Maliyet Unsuru Oluşturma / Değiştirme / Görüntüleme: FI tarafındaki gider hesaplarının CO karşılığını tanımlar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "1. Genel Ana Veri ve Kontrol Alanı (CO-OM Master Data)",
+    "t_code": "KA02",
+    "aciklama": "Birincil Maliyet Unsuru Oluşturma / Değiştirme / Görüntüleme: FI tarafındaki gider hesaplarının CO karşılığını tanımlar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "1. Genel Ana Veri ve Kontrol Alanı (CO-OM Master Data)",
+    "t_code": "KA03",
+    "aciklama": "Birincil Maliyet Unsuru Oluşturma / Değiştirme / Görüntüleme: FI tarafındaki gider hesaplarının CO karşılığını tanımlar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "1. Genel Ana Veri ve Kontrol Alanı (CO-OM Master Data)",
+    "t_code": "KA06",
+    "aciklama": "İkincil Maliyet Unsuru Oluşturma: Yalnızca CO içinde (dağıtım, virman, yükleme amacıyla) kullanılacak maliyet türlerini tanımlar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "1. Genel Ana Veri ve Kontrol Alanı (CO-OM Master Data)",
+    "t_code": "KAH1",
+    "aciklama": "Maliyet unsuru hiyerarşisi / grupları oluşturma ve düzenleme."
+  },
+  {
+    "modul": "CO",
+    "bolum": "1. Genel Ana Veri ve Kontrol Alanı (CO-OM Master Data)",
+    "t_code": "KAH2",
+    "aciklama": "Maliyet unsuru hiyerarşisi / grupları oluşturma ve düzenleme."
+  },
+  {
+    "modul": "CO",
+    "bolum": "1. Genel Ana Veri ve Kontrol Alanı (CO-OM Master Data)",
+    "t_code": "KAH3",
+    "aciklama": "Maliyet unsuru hiyerarşisi / grupları oluşturma ve düzenleme."
+  },
+  {
+    "modul": "CO",
+    "bolum": "2. Masraf Yeri Muhasebesi (CO-OM-CCA - Cost Center Accounting)",
+    "t_code": "KS01",
+    "aciklama": "Masraf Yeri (Cost Center) Oluşturma / Değiştirme / Görüntüleme: Üretim, iktisadi veya idari birimleri (ör. Bilgi Teknolojileri, İK, Montaj Hattı) tanımlar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "2. Masraf Yeri Muhasebesi (CO-OM-CCA - Cost Center Accounting)",
+    "t_code": "KS02",
+    "aciklama": "Masraf Yeri (Cost Center) Oluşturma / Değiştirme / Görüntüleme: Üretim, iktisadi veya idari birimleri (ör. Bilgi Teknolojileri, İK, Montaj Hattı) tanımlar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "2. Masraf Yeri Muhasebesi (CO-OM-CCA - Cost Center Accounting)",
+    "t_code": "KS03",
+    "aciklama": "Masraf Yeri (Cost Center) Oluşturma / Değiştirme / Görüntüleme: Üretim, iktisadi veya idari birimleri (ör. Bilgi Teknolojileri, İK, Montaj Hattı) tanımlar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "2. Masraf Yeri Muhasebesi (CO-OM-CCA - Cost Center Accounting)",
+    "t_code": "KSH1",
+    "aciklama": "Masraf Yeri Grubu / Hiyerarşisi: Masraf yerlerini departman bazında ağaç yapısında toplar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "2. Masraf Yeri Muhasebesi (CO-OM-CCA - Cost Center Accounting)",
+    "t_code": "KSH2",
+    "aciklama": "Masraf Yeri Grubu / Hiyerarşisi: Masraf yerlerini departman bazında ağaç yapısında toplar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "2. Masraf Yeri Muhasebesi (CO-OM-CCA - Cost Center Accounting)",
+    "t_code": "KSH3",
+    "aciklama": "Masraf Yeri Grubu / Hiyerarşisi: Masraf yerlerini departman bazında ağaç yapısında toplar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "2. Masraf Yeri Muhasebesi (CO-OM-CCA - Cost Center Accounting)",
+    "t_code": "KB11N",
+    "aciklama": "Manuel Maliyet Virmanı: Yanlış masraf yerine atılan giderleri başka bir masraf yerine aktarır."
+  },
+  {
+    "modul": "CO",
+    "bolum": "2. Masraf Yeri Muhasebesi (CO-OM-CCA - Cost Center Accounting)",
+    "t_code": "KB21N",
+    "aciklama": "Aktivite Kaydı (Direct Activity Allocation): Bir masraf yerinin sunduğu hizmeti/aktiviteyi (ör. işçilik saati, makine saati) hedef nesneye yükler."
+  },
+  {
+    "modul": "CO",
+    "bolum": "2. Masraf Yeri Muhasebesi (CO-OM-CCA - Cost Center Accounting)",
+    "t_code": "KSB1",
+    "aciklama": "Masraf Yeri Fiili Kalem Listesi: Masraf yerlerinde gerçekleşen tüm giderleri detaylıca raporlar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "2. Masraf Yeri Muhasebesi (CO-OM-CCA - Cost Center Accounting)",
+    "t_code": "KSB2",
+    "aciklama": "Masraf yeri taahhüt (Commitment) listesi."
+  },
+  {
+    "modul": "CO",
+    "bolum": "2. Masraf Yeri Muhasebesi (CO-OM-CCA - Cost Center Accounting)",
+    "t_code": "KS13",
+    "aciklama": "Masraf yerleri genel listesi."
+  },
+  {
+    "modul": "CO",
+    "bolum": "3. Aktivite Türleri ve Tarifeler (Activity Types & Rates)",
+    "t_code": "KL01",
+    "aciklama": "Aktivite Türü Oluşturma / Değiştirme / Görüntüleme: İnsan saati, makine saati gibi ölçülebilir hizmet birimlerini tanımlar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "3. Aktivite Türleri ve Tarifeler (Activity Types & Rates)",
+    "t_code": "KL02",
+    "aciklama": "Aktivite Türü Oluşturma / Değiştirme / Görüntüleme: İnsan saati, makine saati gibi ölçülebilir hizmet birimlerini tanımlar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "3. Aktivite Türleri ve Tarifeler (Activity Types & Rates)",
+    "t_code": "KL03",
+    "aciklama": "Aktivite Türü Oluşturma / Değiştirme / Görüntüleme: İnsan saati, makine saati gibi ölçülebilir hizmet birimlerini tanımlar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "3. Aktivite Türleri ve Tarifeler (Activity Types & Rates)",
+    "t_code": "KP26",
+    "aciklama": "Aktivite/Tarife Planlaması: Masraf yeri ve aktivite türü bazında planlanan miktarları ve birim fiyatları (tarifeleri) girer."
+  },
+  {
+    "modul": "CO",
+    "bolum": "3. Aktivite Türleri ve Tarifeler (Activity Types & Rates)",
+    "t_code": "KSII",
+    "aciklama": "Fiili Tarife Hesaplama: Dönem sonunda masraf yerinde oluşan toplam fiili gideri, gerçekleşen toplam aktivite miktarına bölerek fiili birim tarifeyi hesaplar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "4. İç Siparişler (CO-OM-OPA - Internal Orders)",
+    "t_code": "KO01",
+    "aciklama": "İç Sipariş (Internal Order) Oluşturma / Değiştirme / Görüntüleme: Maliyet toplayıcı sipariş kartını açar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "4. İç Siparişler (CO-OM-OPA - Internal Orders)",
+    "t_code": "KO02",
+    "aciklama": "İç Sipariş (Internal Order) Oluşturma / Değiştirme / Görüntüleme: Maliyet toplayıcı sipariş kartını açar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "4. İç Siparişler (CO-OM-OPA - Internal Orders)",
+    "t_code": "KO03",
+    "aciklama": "İç Sipariş (Internal Order) Oluşturma / Değiştirme / Görüntüleme: Maliyet toplayıcı sipariş kartını açar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "4. İç Siparişler (CO-OM-OPA - Internal Orders)",
+    "t_code": "KOH1",
+    "aciklama": "İç sipariş grupları ve hiyerarşisi oluşturma."
+  },
+  {
+    "modul": "CO",
+    "bolum": "4. İç Siparişler (CO-OM-OPA - Internal Orders)",
+    "t_code": "KOH2",
+    "aciklama": "İç sipariş grupları ve hiyerarşisi oluşturma."
+  },
+  {
+    "modul": "CO",
+    "bolum": "4. İç Siparişler (CO-OM-OPA - Internal Orders)",
+    "t_code": "KOH3",
+    "aciklama": "İç sipariş grupları ve hiyerarşisi oluşturma."
+  },
+  {
+    "modul": "CO",
+    "bolum": "4. İç Siparişler (CO-OM-OPA - Internal Orders)",
+    "t_code": "KOB1",
+    "aciklama": "İç Sipariş Fiili Kalem Listesi: İç siparişe yüklenmiş olan tüm giderleri raporlar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "4. İç Siparişler (CO-OM-OPA - Internal Orders)",
+    "t_code": "KO88",
+    "aciklama": "Tekil İç Sipariş Yüklemesi (Settlement): İç siparişte biriken maliyetleri dönem sonunda ana masraf yerine veya duran varlığa devreder."
+  },
+  {
+    "modul": "CO",
+    "bolum": "5. Ürün Maliyet Planlaması ve Standart Maliyet (CO-PC-PCP - Product Cost Planning)",
+    "t_code": "CK11N",
+    "aciklama": "Ürün Maliyet Hesabı (Cost Estimate): Belli bir malzeme için hammadde, yarı mamul ve aktivite giderlerini toplayarak maliyet hesaplar."
+  },
+  {
+    "modul": "CO",
+    "bolum": "5. Ürün Maliyet Planlaması ve Standart Maliyet (CO-PC-PCP - Product Cost Planning)",
+    "t_code": "CK24",
+    "aciklama": "Maliyet Fiyatını Onaylama ve Yayımlama (Marking & Release): Hesaplanan standart maliyeti malzeme kartındaki (MM01) \"Gelecekteki Fiyat\" veya \"Standart Fiyat\" alanına işler."
+  },
+  {
+    "modul": "CO",
+    "bolum": "5. Ürün Maliyet Planlaması ve Standart Maliyet (CO-PC-PCP - Product Cost Planning)",
+    "t_code": "CK40N",
+    "aciklama": "Toplu Maliyet Hesabı Çalıştırma (Costing Run): Fabrikadaki tüm mamul ve yarı mamuller için toplu maliyet hesaplar ve fiyatlarını günceller."
+  },
+  {
+    "modul": "CO",
+    "bolum": "5. Ürün Maliyet Planlaması ve Standart Maliyet (CO-PC-PCP - Product Cost Planning)",
+    "t_code": "CK13N",
+    "aciklama": "Malzeme maliyet hesabı detaylarını görüntüleme."
+  },
+  {
+    "modul": "CO",
+    "bolum": "6. Nesneye Göre Ürün Maliyetlendirmesi / Fiili Maliyet (CO-PC-OBJ / CO-PC-ACT)",
+    "t_code": "KKS1",
+    "aciklama": "Sapma Hesaplama (Variance Calculation): Üretim siparişindeki standart maliyet ile fiili gerçekleşen maliyet arasındaki farkı (sapmayı) analiz eder."
+  },
+  {
+    "modul": "CO",
+    "bolum": "6. Nesneye Göre Ürün Maliyetlendirmesi / Fiili Maliyet (CO-PC-OBJ / CO-PC-ACT)",
+    "t_code": "KKS2",
+    "aciklama": "Sapma Hesaplama (Variance Calculation): Üretim siparişindeki standart maliyet ile fiili gerçekleşen maliyet arasındaki farkı (sapmayı) analiz eder."
+  },
+  {
+    "modul": "CO",
+    "bolum": "6. Nesneye Göre Ürün Maliyetlendirmesi / Fiili Maliyet (CO-PC-OBJ / CO-PC-ACT)",
+    "t_code": "CO88",
+    "aciklama": "Toplu Sipariş Yüklemesi: Üretim siparişlerinin sapmalarını ve WIP değerlerini FI/CO hesaplarına devreder."
+  },
+  {
+    "modul": "CO",
+    "bolum": "6. Nesneye Göre Ürün Maliyetlendirmesi / Fiili Maliyet (CO-PC-OBJ / CO-PC-ACT)",
+    "t_code": "CKMLCP",
+    "aciklama": "Maliyet Nesnesi / Malzeme Defteri (Material Ledger): S/4HANA ile zorunlu hale gelen, fiili maliyetlendirme (Actual Costing) ve çoklu para birimi değerleme çalıştırma ekranı."
+  },
+  {
+    "modul": "CO",
+    "bolum": "7. Kârlılık Analizi (CO-PA - Profitability Analysis)",
+    "t_code": "KE24",
+    "aciklama": "CO-PA Fiili Belge Listesi: Kârlılık segmentlerine akan tüm satış ve maliyet kalemlerini listeler."
+  },
+  {
+    "modul": "CO",
+    "bolum": "7. Kârlılık Analizi (CO-PA - Profitability Analysis)",
+    "t_code": "KE30",
+    "aciklama": "CO-PA Raporlama: Esnek kârlılık raporları çalıştırma (Ör. Müşteri bazlı marj analizi)."
+  },
+  {
+    "modul": "CO",
+    "bolum": "7. Kârlılık Analizi (CO-PA - Profitability Analysis)",
+    "t_code": "KEU5",
+    "aciklama": "Masraf yerlerindeki genel giderleri dönemsel olarak CO-PA kârlılık segmentlerine dağıtma (Assessment)."
+  },
+  {
+    "modul": "CO",
+    "bolum": "8. Dönem Sonu Kapanış ve Dağıtım İşlemleri (CO Period-End Closing)",
+    "t_code": "KSV1",
+    "aciklama": "Dağıtım (Distribution) Döngüsü Oluşturma: Birincil giderleri doğrudan hedef masraf yerlerine aktarır."
+  },
+  {
+    "modul": "CO",
+    "bolum": "8. Dönem Sonu Kapanış ve Dağıtım İşlemleri (CO Period-End Closing)",
+    "t_code": "KSV2",
+    "aciklama": "Dağıtım (Distribution) Döngüsü Oluşturma: Birincil giderleri doğrudan hedef masraf yerlerine aktarır."
+  },
+  {
+    "modul": "CO",
+    "bolum": "8. Dönem Sonu Kapanış ve Dağıtım İşlemleri (CO Period-End Closing)",
+    "t_code": "KSV3",
+    "aciklama": "Dağıtım (Distribution) Döngüsü Oluşturma: Birincil giderleri doğrudan hedef masraf yerlerine aktarır."
+  },
+  {
+    "modul": "CO",
+    "bolum": "8. Dönem Sonu Kapanış ve Dağıtım İşlemleri (CO Period-End Closing)",
+    "t_code": "KSV5",
+    "aciklama": "Dağıtım döngüsünü dönem sonunda çalıştırma."
+  },
+  {
+    "modul": "CO",
+    "bolum": "8. Dönem Sonu Kapanış ve Dağıtım İşlemleri (CO Period-End Closing)",
+    "t_code": "KSU1",
+    "aciklama": "Yükleme (Assessment) Döngüsü Oluşturma: İkincil maliyet unsurları kullanarak giderleri topluca hedef birimlere dağıtır."
+  },
+  {
+    "modul": "CO",
+    "bolum": "8. Dönem Sonu Kapanış ve Dağıtım İşlemleri (CO Period-End Closing)",
+    "t_code": "KSU2",
+    "aciklama": "Yükleme (Assessment) Döngüsü Oluşturma: İkincil maliyet unsurları kullanarak giderleri topluca hedef birimlere dağıtır."
+  },
+  {
+    "modul": "CO",
+    "bolum": "8. Dönem Sonu Kapanış ve Dağıtım İşlemleri (CO Period-End Closing)",
+    "t_code": "KSU3",
+    "aciklama": "Yükleme (Assessment) Döngüsü Oluşturma: İkincil maliyet unsurları kullanarak giderleri topluca hedef birimlere dağıtır."
+  },
+  {
+    "modul": "CO",
+    "bolum": "8. Dönem Sonu Kapanış ve Dağıtım İşlemleri (CO Period-End Closing)",
+    "t_code": "KSU5",
+    "aciklama": "Yükleme döngüsünü dönem sonunda çalıştırma."
+  },
+  {
+    "modul": "CO",
+    "bolum": "8. Dönem Sonu Kapanış ve Dağıtım İşlemleri (CO Period-End Closing)",
+    "t_code": "FS00",
+    "aciklama": "Defter-i kebir ve birincil maliyet hesaplarının kartlarını tanımlama, değiştirme ve görüntüleme ekranıdır."
+  },
+  {
+    "modul": "CO",
+    "bolum": "8. Dönem Sonu Kapanış ve Dağıtım İşlemleri (CO Period-End Closing)",
+    "t_code": "KSS2",
+    "aciklama": "Masraf yerlerindeki toplam fiili giderleri, tanımlı kurallara göre aktivite türlerine ayrıştıran dönem sonu ekranıdır."
+  },
+  {
+    "modul": "CO",
+    "bolum": "8. Dönem Sonu Kapanış ve Dağıtım İşlemleri (CO Period-End Closing)",
+    "t_code": "KO8G",
+    "aciklama": "Birden fazla iç siparişte biriken maliyetleri hedef masraf yeri veya duran varlıklara toplu olarak devreden yükleme ekranıdır."
+  },
+  {
+    "modul": "CO",
+    "bolum": "8. Dönem Sonu Kapanış ve Dağıtım İşlemleri (CO Period-End Closing)",
+    "t_code": "KE24N",
+    "aciklama": "Kârlılık segmentlerine akan fiili satış, maliyet ve marj kayıtlarını listeleyen ve analiz eden raporlama ekranıdır."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "1. Ana Veri Yönetimi (EWM Master Data)",
+    "t_code": "/SCWM/BINMAT",
+    "aciklama": "Depo Adresi Malzeme Ataması: Belirli bir malzeme ile depo adresi (Bin) arasındaki ilişkiyi ve stok parametrelerini tanımlar."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "1. Ana Veri Yönetimi (EWM Master Data)",
+    "t_code": "/SCWM/LS01",
+    "aciklama": "Depo Adresi (Bin) Oluşturma / Değiştirme / Görüntüleme: Tekil olarak raf, kitle depolama veya toplama adresi oluşturur."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "1. Ana Veri Yönetimi (EWM Master Data)",
+    "t_code": "/SCWM/LS02",
+    "aciklama": "Depo Adresi (Bin) Oluşturma / Değiştirme / Görüntüleme: Tekil olarak raf, kitle depolama veya toplama adresi oluşturur."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "1. Ana Veri Yönetimi (EWM Master Data)",
+    "t_code": "/SCWM/LS03",
+    "aciklama": "Depo Adresi (Bin) Oluşturma / Değiştirme / Görüntüleme: Tekil olarak raf, kitle depolama veya toplama adresi oluşturur."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "1. Ana Veri Yönetimi (EWM Master Data)",
+    "t_code": "/SCWM/LS05",
+    "aciklama": "Toplu Depo Adresi Oluşturma: Tanımlanan şablona göre (ör. A-01-01'den A-10-10'a kadar) yüzlerce raf adresini otomatik üretir."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "1. Ana Veri Yönetimi (EWM Master Data)",
+    "t_code": "/SCWM/MAT1",
+    "aciklama": "EWM Malzeme Ana Verisi: Malzemenin EWM'e özel hacim, ağırlık, depolama türü (Storage Type) ve paketleme grubunu tanımlar."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "1. Ana Veri Yönetimi (EWM Master Data)",
+    "t_code": "/SCWM/FIXBIN",
+    "aciklama": "Sabit Depo Adresi Atama: Hızlı toplanan malzemeler için sabit toplama adresleri belirler ve alt/üst stok limitlerini girer."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "1. Ana Veri Yönetimi (EWM Master Data)",
+    "t_code": "/SCWM/PACKGR",
+    "aciklama": "Paketleme Grubu Bakımı: Ürünlerin hangi ambalaj malzemeleriyle paketlenebileceğinin kurallarını belirler."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "2. Depo İzleme ve Yönetim Merkezi (Warehouse Monitor)",
+    "t_code": "/SCWM/MON",
+    "aciklama": "Depo İzleme Monitörü (Warehouse Monitor): EWM'in kalbidir. Stok durumu, açık/tamamlanan depo görevleri (WT), dalgalar, araçlar, kapılar ve çalışanların durumunu ağaç yapısında raporlar ve müdahale imkanı sunar."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "2. Depo İzleme ve Yönetim Merkezi (Warehouse Monitor)",
+    "t_code": "/SCWM/AQUA",
+    "aciklama": "Stok Detay Sorgulama: Malzeme, parti veya stok tipine göre depo adreslerindeki anlık miktarları listeler."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "2. Depo İzleme ve Yönetim Merkezi (Warehouse Monitor)",
+    "t_code": "/SCWM/PHYSSTOCK",
+    "aciklama": "Fiziksel Stok Listesi: Depo tipi ve bölge bazında kullanılabilir, bloke veya kalitedeki stoğu raporlar."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "2. Depo İzleme ve Yönetim Merkezi (Warehouse Monitor)",
+    "t_code": "/SCWM/POST",
+    "aciklama": "Stok Türü Değiştirme (Posting Change): Stok durumunu (ör. Kalite kontrolden serbest stoğa veya blokeli stoğa) EWM içinde dönüştürür."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "3. Giriş Lojistiği ve Mal Girişi (Inbound Processing)",
+    "t_code": "/SCWM/PRDI",
+    "aciklama": "Giriş Teslimat Belgesi İşleme (Inbound Delivery): Gelen teslimatları görüntüler, mal girişini onaylar ve yerleştirme görevlerini başlatır."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "3. Giriş Lojistiği ve Mal Girişi (Inbound Processing)",
+    "t_code": "/SCWM/TAS_INB",
+    "aciklama": "Giriş Depo Görevi Oluşturma (Create Putaway WT): Gelen ürünlerin depodaki hangi hedef adreslere koyulacağını sistem stratejilerine (Staging/Putaway) göre hesaplar ve görev oluşturur."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "3. Giriş Lojistiği ve Mal Girişi (Inbound Processing)",
+    "t_code": "/SCWM/GR",
+    "aciklama": "Hızlı Mal Girişi: Gelen arayüz belgelerine istinaden doğrudan mal girişi (Goods Receipt) kaydı atar."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "3. Giriş Lojistiği ve Mal Girişi (Inbound Processing)",
+    "t_code": "/SCWM/UNLOAD",
+    "aciklama": "Araç Boşaltma: Kamyon kapıya yanaştıktan sonra taşıma birimlerini (HU) veya paletleri mal kabul alanına indirme kaydı atar."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "3. Giriş Lojistiği ve Mal Girişi (Inbound Processing)",
+    "t_code": "/SCWM/VAS_INB",
+    "aciklama": "Katma Değerli Hizmetler (Inbound VAS): Ürün depoya yerleştirilmeden önce yapılacak etiketleme, paletleme veya kalite kontrol talimatlarını yönetir."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "4. Çıkış Lojistiği ve Mal Çıkışı (Outbound Processing)",
+    "t_code": "/SCWM/PRDO",
+    "aciklama": "Çıkış Teslimat Belgesi İşleme (Outbound Delivery Order): Satış sevkiyat belgesini yönetir, toplama ve yükleme adımlarını tetikler."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "4. Çıkış Lojistiği ve Mal Çıkışı (Outbound Processing)",
+    "t_code": "/SCWM/TAS_OUT",
+    "aciklama": "Çıkış Depo Görevi Oluşturma (Create Picking WT): Ürünün hangi raf adresinden toplanacağını sistem stratejilerine göre belirler ve görev açar."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "4. Çıkış Lojistiği ve Mal Çıkışı (Outbound Processing)",
+    "t_code": "/SCWM/WAVE",
+    "aciklama": "Dalga Yönetimi (Wave Management): Benzer teslimatları gruplayarak mantıksal toplama dalgaları oluşturur, kilitler ve serbest bırakır (Release)."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "4. Çıkış Lojistiği ve Mal Çıkışı (Outbound Processing)",
+    "t_code": "/SCWM/PACK",
+    "aciklama": "Paketleme İstasyonu Ekranı (Packing Station): Toplama alanından gelen ürünleri koli/palet bazında ambalajlama, tartma, etiket çıkarma ve nakliye HU'su oluşturma ekranı."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "4. Çıkış Lojistiği ve Mal Çıkışı (Outbound Processing)",
+    "t_code": "/SCWM/LOAD",
+    "aciklama": "Yükleme İşlemi (Loading): Paketlenen taşıma birimlerini (HU) sevkiyat alanından kamyona yükleme kaydı atar."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "5. Depo Görevleri ve Depo Siparişleri (WT & WO)",
+    "t_code": "/SCWM/TO_CREATE",
+    "aciklama": "Manuel Depo Görevi Oluşturma: Sistem stratejilerinden bağımsız, adresi kullanıcı tarafından seçilen depo görevi açar."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "5. Depo Görevleri ve Depo Siparişleri (WT & WO)",
+    "t_code": "/SCWM/TO_CONF",
+    "aciklama": "Depo Görevi Onaylama (WT Confirmation): Operatörün fiziksel taşıma veya toplama işlemini bitirdiğini sisteme onaylaması."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "5. Depo Görevleri ve Depo Siparişleri (WT & WO)",
+    "t_code": "/SCWM/CANCTO",
+    "aciklama": "Depo Görevi İptali: Henüz onaylanmamış/başlanmamış bir depo görevini iptal eder."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "5. Depo Görevleri ve Depo Siparişleri (WT & WO)",
+    "t_code": "/SCWM/ADPROD",
+    "aciklama": "Ürün Bazlı Anlık Transfer (Ad-hoc Movement): Depo içinde plansız, tekil ürün taşıma görevi oluşturur."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "5. Depo Görevleri ve Depo Siparişleri (WT & WO)",
+    "t_code": "/SCWM/ADHU",
+    "aciklama": "HU Bazlı Anlık Transfer: Bütün bir paleti/koliyi (HU) depoda başka bir adrese taşıma görevi oluşturur."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "6. Depo İçi İkmal ve Sayım İşlemleri (Replenishment & Physical Inventory)",
+    "t_code": "/SCWM/REPL",
+    "aciklama": "Stok İkmali (Replenishment): Hızlı toplanan adreslerde stok kritik seviyenin altına düştüğünde, rezerv alandan toplama alanına otomatik transfer emri oluşturur."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "6. Depo İçi İkmal ve Sayım İşlemleri (Replenishment & Physical Inventory)",
+    "t_code": "/SCWM/PI_CREATE",
+    "aciklama": "Fiziksel Sayım Belgesi Oluşturma: Adres (Bin) veya malzeme bazlı envanter sayım belgesi açar."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "6. Depo İçi İkmal ve Sayım İşlemleri (Replenishment & Physical Inventory)",
+    "t_code": "/SCWM/PI_COUNT",
+    "aciklama": "Sayım Sonucu Girme: Sayım personelinin fiziki olarak saydığı miktarları sisteme işler."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "6. Depo İçi İkmal ve Sayım İşlemleri (Replenishment & Physical Inventory)",
+    "t_code": "/SCWM/PI_COMP",
+    "aciklama": "Sayım Farkı Onaylama (Difference Analyzer): Sayım sonuçları ile sistem stoku arasındaki farkları onaylar ve ERP (MM) tarafına fark kaydı atar."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "7. Taşıma Birimi Yönetimi (Handling Unit - HU Management)",
+    "t_code": "/SCWM/HUMO",
+    "aciklama": "Taşıma Birimi Monitörü (HU Monitor): Depodaki tüm palet ve kolilerin konumunu, durumunu ve içerdiği malzemeleri raporlar."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "7. Taşıma Birimi Yönetimi (Handling Unit - HU Management)",
+    "t_code": "/SCWM/PACK",
+    "aciklama": "Manuel HU Oluşturma / Düzenleme: Ambalaj malzemesi seçerek yeni bir palet kimliği oluşturur veya mevcut HU içeriğini değiştirir."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "7. Taşıma Birimi Yönetimi (Handling Unit - HU Management)",
+    "t_code": "/SCWM/UNPACK",
+    "aciklama": "HU Bozma (Unpacking): Palet üzerindeki ambalaj yapısını bozar, malzemeleri dökme stoğa dönüştürür."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "8. Sahil, Park ve Kapı Yönetimi (Yard Management)",
+    "t_code": "/SCWM/YM_MON",
+    "aciklama": "Yard Monitörü: Tesis bahçesindeki tüm kamyon ve konteynerlerin anlık yerini izler."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "8. Sahil, Park ve Kapı Yönetimi (Yard Management)",
+    "t_code": "/SCWM/CICO",
+    "aciklama": "Check-In / Check-Out: Tırların tesise giriş ve çıkış saatlerini kaydeder."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "8. Sahil, Park ve Kapı Yönetimi (Yard Management)",
+    "t_code": "/SCWM/DOOR",
+    "aciklama": "Kapı Yönetimi: Yükleme veya boşaltma yapılacak tırları ilgili depo kapılarına (Door) atar ve durumu günceller."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "9. El Terminali ve Radyo Frekans (RF - Radio Frequency)",
+    "t_code": "/SCWM/RFUI",
+    "aciklama": "RF Menüsü (El Terminali Ekranı): El terminali arayüzünün bilgisayar/simülatör üzerinden çalıştırılan ana ekranıdır. Operatörler toplamayı, yerleştirmeyi ve sayımı bu ekranın menülerinden yapar."
+  },
+  {
+    "modul": "EWM",
+    "bolum": "9. El Terminali ve Radyo Frekans (RF - Radio Frequency)",
+    "t_code": "/SCWM/RSRC",
+    "aciklama": "Kaynak Bakımı (Resource Management): Depo çalışanlarını veya forkliftleri \"Kaynak (Resource)\" olarak tanımlar ve RF oturumlarını yönetir."
+  },
+  {
+    "modul": "FI",
+    "bolum": "1. Genel Muhasebe / Defter-i Kebir (FI-GL - General Ledger)",
+    "t_code": "FS00",
+    "aciklama": "Ana Hesap Yönetimi (G/L Account Master): Merkezi olarak ana hesap (G/L) kartı oluşturur, değiştirir ve görüntüler."
+  },
+  {
+    "modul": "FI",
+    "bolum": "1. Genel Muhasebe / Defter-i Kebir (FI-GL - General Ledger)",
+    "t_code": "F-02",
+    "aciklama": "Genel Muhasebe Belgesi Kaydı: Standart mahsup/fiş kaydı oluşturur."
+  },
+  {
+    "modul": "FI",
+    "bolum": "1. Genel Muhasebe / Defter-i Kebir (FI-GL - General Ledger)",
+    "t_code": "FB01",
+    "aciklama": "Genel Muhasebe Belgesi Kaydı: Standart mahsup/fiş kaydı oluşturur."
+  },
+  {
+    "modul": "FI",
+    "bolum": "1. Genel Muhasebe / Defter-i Kebir (FI-GL - General Ledger)",
+    "t_code": "FB50",
+    "aciklama": "Ekran Odaklı Mahsup Kaydı: Borç/Alacak kalemlerini tek bir kullanıcı dostu ekranda girme imkanı sağlar."
+  },
+  {
+    "modul": "FI",
+    "bolum": "1. Genel Muhasebe / Defter-i Kebir (FI-GL - General Ledger)",
+    "t_code": "FB02",
+    "aciklama": "Muhasebe Belgesi Değiştirme / Görüntüleme: Girilmiş muhasebe belgesinin başlık/kalem metinlerini düzenler veya belgeyi inceler."
+  },
+  {
+    "modul": "FI",
+    "bolum": "1. Genel Muhasebe / Defter-i Kebir (FI-GL - General Ledger)",
+    "t_code": "FB03",
+    "aciklama": "Muhasebe Belgesi Değiştirme / Görüntüleme: Girilmiş muhasebe belgesinin başlık/kalem metinlerini düzenler veya belgeyi inceler."
+  },
+  {
+    "modul": "FI",
+    "bolum": "1. Genel Muhasebe / Defter-i Kebir (FI-GL - General Ledger)",
+    "t_code": "FB08",
+    "aciklama": "Ters Kayıt (Storno / Reversal): Hatalı girilen muhasebe belgesini ters kayıt atarak iptal eder."
+  },
+  {
+    "modul": "FI",
+    "bolum": "1. Genel Muhasebe / Defter-i Kebir (FI-GL - General Ledger)",
+    "t_code": "FBL3N",
+    "aciklama": "Ana Hesap Kalem Listesi: Belirli ana hesapların açık/kapanmış tüm hareketlerini ve bakiyelerini listeler."
+  },
+  {
+    "modul": "FI",
+    "bolum": "1. Genel Muhasebe / Defter-i Kebir (FI-GL - General Ledger)",
+    "t_code": "FS10N",
+    "aciklama": "Ana Hesap Bakiye Görüntüleme: Dönemsel borç, alacak ve bakiye toplamlarını gösterir."
+  },
+  {
+    "modul": "FI",
+    "bolum": "1. Genel Muhasebe / Defter-i Kebir (FI-GL - General Ledger)",
+    "t_code": "F-03",
+    "aciklama": "Ana Hesap Açık Kalem Temizleme: Ana hesapta duran karşılıklı açık kayıtları birbiriyle eşleştirerek kapatır."
+  },
+  {
+    "modul": "FI",
+    "bolum": "2. Satıcılar / Borçlar Muhasebesi (FI-AP - Accounts Payable)",
+    "t_code": "FK01",
+    "aciklama": "Satıcı ana verisi oluşturma / değiştirme / görüntüleme (Mali veri odaklı)."
+  },
+  {
+    "modul": "FI",
+    "bolum": "2. Satıcılar / Borçlar Muhasebesi (FI-AP - Accounts Payable)",
+    "t_code": "FK02",
+    "aciklama": "Satıcı ana verisi oluşturma / değiştirme / görüntüleme (Mali veri odaklı)."
+  },
+  {
+    "modul": "FI",
+    "bolum": "2. Satıcılar / Borçlar Muhasebesi (FI-AP - Accounts Payable)",
+    "t_code": "FK03",
+    "aciklama": "Satıcı ana verisi oluşturma / değiştirme / görüntüleme (Mali veri odaklı)."
+  },
+  {
+    "modul": "FI",
+    "bolum": "2. Satıcılar / Borçlar Muhasebesi (FI-AP - Accounts Payable)",
+    "t_code": "FB60",
+    "aciklama": "Satıcı Faturası Girme: Satınalma siparişsiz (doğrudan masraf) gelen satıcı faturalarını sisteme işler."
+  },
+  {
+    "modul": "FI",
+    "bolum": "2. Satıcılar / Borçlar Muhasebesi (FI-AP - Accounts Payable)",
+    "t_code": "FB65",
+    "aciklama": "Satıcı Alacak Dekontu (Credit Memo): Satıcıya kesilen iade veya fiyat farkı tutarlarını kaydeder."
+  },
+  {
+    "modul": "FI",
+    "bolum": "2. Satıcılar / Borçlar Muhasebesi (FI-AP - Accounts Payable)",
+    "t_code": "F-53",
+    "aciklama": "Manuel Satıcı Ödemesi: Satıcıya yapılan münferit ödemeleri sistemdeki borç ile eşleştirerek kaydeder."
+  },
+  {
+    "modul": "FI",
+    "bolum": "2. Satıcılar / Borçlar Muhasebesi (FI-AP - Accounts Payable)",
+    "t_code": "F110",
+    "aciklama": "Otomatik Ödeme Programı (Automatic Payment Run): Vadesi gelen tüm satıcı borçlarını toplu olarak öder, banka talimatı/EFT dosyası üretir."
+  },
+  {
+    "modul": "FI",
+    "bolum": "2. Satıcılar / Borçlar Muhasebesi (FI-AP - Accounts Payable)",
+    "t_code": "FBL1N",
+    "aciklama": "Satıcı Hesap Hareketleri: Satıcının açık, kapanmış veya tüm kalemlerini ve mutabakat durumunu gösterir."
+  },
+  {
+    "modul": "FI",
+    "bolum": "2. Satıcılar / Borçlar Muhasebesi (FI-AP - Accounts Payable)",
+    "t_code": "FK10N",
+    "aciklama": "Satıcı Bakiye Görüntüleme: Satıcının dönem bazlı borç/alacak ve bakiye özetini sunar."
+  },
+  {
+    "modul": "FI",
+    "bolum": "2. Satıcılar / Borçlar Muhasebesi (FI-AP - Accounts Payable)",
+    "t_code": "F-44",
+    "aciklama": "Satıcı Açık Kalem Temizleme: Satıcının açık fatura ve avans/alacak kayıtlarını manuel olarak netleştirir."
+  },
+  {
+    "modul": "FI",
+    "bolum": "3. Müşteriler / Alacaklar Muhasebesi (FI-AR - Accounts Receivable)",
+    "t_code": "FD01",
+    "aciklama": "Müşteri ana verisi oluşturma / değiştirme / görüntüleme (Mali veri odaklı)."
+  },
+  {
+    "modul": "FI",
+    "bolum": "3. Müşteriler / Alacaklar Muhasebesi (FI-AR - Accounts Receivable)",
+    "t_code": "FD02",
+    "aciklama": "Müşteri ana verisi oluşturma / değiştirme / görüntüleme (Mali veri odaklı)."
+  },
+  {
+    "modul": "FI",
+    "bolum": "3. Müşteriler / Alacaklar Muhasebesi (FI-AR - Accounts Receivable)",
+    "t_code": "FD03",
+    "aciklama": "Müşteri ana verisi oluşturma / değiştirme / görüntüleme (Mali veri odaklı)."
+  },
+  {
+    "modul": "FI",
+    "bolum": "3. Müşteriler / Alacaklar Muhasebesi (FI-AR - Accounts Receivable)",
+    "t_code": "FB70",
+    "aciklama": "Müşteri Faturası Girme: SD modülünden bağımsız, doğrudan mali müşteri faturası keser."
+  },
+  {
+    "modul": "FI",
+    "bolum": "3. Müşteriler / Alacaklar Muhasebesi (FI-AR - Accounts Receivable)",
+    "t_code": "FB75",
+    "aciklama": "Müşteri Alacak Dekontu: Müşteriye verilecek iade veya indirim kayıtlarını işler."
+  },
+  {
+    "modul": "FI",
+    "bolum": "3. Müşteriler / Alacaklar Muhasebesi (FI-AR - Accounts Receivable)",
+    "t_code": "F-28",
+    "aciklama": "Manuel Tahsilat Kaydı: Müşteriden gelen ödemeyi girer ve ilgili faturayı kapatır."
+  },
+  {
+    "modul": "FI",
+    "bolum": "3. Müşteriler / Alacaklar Muhasebesi (FI-AR - Accounts Receivable)",
+    "t_code": "FBL5N",
+    "aciklama": "Müşteri Hesap Hareketleri: Müşterinin açık ve kapanmış faturalarını listeler."
+  },
+  {
+    "modul": "FI",
+    "bolum": "3. Müşteriler / Alacaklar Muhasebesi (FI-AR - Accounts Receivable)",
+    "t_code": "FD10N",
+    "aciklama": "Müşteri Bakiye Görüntüleme: Müşterinin dönem bazlı borç/alacak ve toplam bakiyesini gösterir."
+  },
+  {
+    "modul": "FI",
+    "bolum": "3. Müşteriler / Alacaklar Muhasebesi (FI-AR - Accounts Receivable)",
+    "t_code": "F-32",
+    "aciklama": "Müşteri Açık Kalem Temizleme: Müşterideki açık alacak ve tahsilat/avans kalemlerini eşleştirerek kapatır."
+  },
+  {
+    "modul": "FI",
+    "bolum": "3. Müşteriler / Alacaklar Muhasebesi (FI-AR - Accounts Receivable)",
+    "t_code": "F150",
+    "aciklama": "Hatırlatma Programı (Dunning): Vadesi geçmiş alacaklar için müşterilere otomatik ihbarname/hatırlatma mektubu oluşturur."
+  },
+  {
+    "modul": "FI",
+    "bolum": "4. Duran Varlık Muhasebesi (FI-AA - Asset Accounting)",
+    "t_code": "AS01",
+    "aciklama": "Duran Varlık Kartı Oluşturma / Değiştirme / Görüntüleme: Sabit kıymet kartını tanımlar."
+  },
+  {
+    "modul": "FI",
+    "bolum": "4. Duran Varlık Muhasebesi (FI-AA - Asset Accounting)",
+    "t_code": "AS02",
+    "aciklama": "Duran Varlık Kartı Oluşturma / Değiştirme / Görüntüleme: Sabit kıymet kartını tanımlar."
+  },
+  {
+    "modul": "FI",
+    "bolum": "4. Duran Varlık Muhasebesi (FI-AA - Asset Accounting)",
+    "t_code": "AS03",
+    "aciklama": "Duran Varlık Kartı Oluşturma / Değiştirme / Görüntüleme: Sabit kıymet kartını tanımlar."
+  },
+  {
+    "modul": "FI",
+    "bolum": "4. Duran Varlık Muhasebesi (FI-AA - Asset Accounting)",
+    "t_code": "AS11",
+    "aciklama": "Alt Duran Varlık Oluşturma: Mevcut bir demirbaşın alt parçasını (ek donanım vb.) tanımlar."
+  },
+  {
+    "modul": "FI",
+    "bolum": "4. Duran Varlık Muhasebesi (FI-AA - Asset Accounting)",
+    "t_code": "ABZN",
+    "aciklama": "Entegrasyon Dışı Duran Varlık Alımı: Doğrudan duran varlık aktifleştirme kaydı yapar."
+  },
+  {
+    "modul": "FI",
+    "bolum": "4. Duran Varlık Muhasebesi (FI-AA - Asset Accounting)",
+    "t_code": "ABAVN",
+    "aciklama": "Duran Varlık Hurdaya Ayırma / Çıkış: Demirbaşın satılmadan veya hurdaya ayrılarak aktiften çıkarılması."
+  },
+  {
+    "modul": "FI",
+    "bolum": "4. Duran Varlık Muhasebesi (FI-AA - Asset Accounting)",
+    "t_code": "ABT1N",
+    "aciklama": "Duran Varlık Transferi: Şirket içi veya şirketler arası demirbaş transferi gerçekleştirir."
+  },
+  {
+    "modul": "FI",
+    "bolum": "4. Duran Varlık Muhasebesi (FI-AA - Asset Accounting)",
+    "t_code": "AFAB",
+    "aciklama": "Amortisman Çalıştırma (Depreciation Run): Dönemsel veya aylık amortisman giderlerini toplu olarak muhasebeleştirir."
+  },
+  {
+    "modul": "FI",
+    "bolum": "4. Duran Varlık Muhasebesi (FI-AA - Asset Accounting)",
+    "t_code": "AW01N",
+    "aciklama": "Duran Varlık Değer Gezgini (Asset Explorer): Bir demirbaşın alış değerini, birikmiş amortismanını ve kalan net defter değerini simüle eder."
+  },
+  {
+    "modul": "FI",
+    "bolum": "5. Banka Muhasebesi (FI-BL - Bank Ledger)",
+    "t_code": "FI01",
+    "aciklama": "Banka ana verisi (Banka kodu, SWIFT vb.) oluşturma ve düzenleme."
+  },
+  {
+    "modul": "FI",
+    "bolum": "5. Banka Muhasebesi (FI-BL - Bank Ledger)",
+    "t_code": "FI02",
+    "aciklama": "Banka ana verisi (Banka kodu, SWIFT vb.) oluşturma ve düzenleme."
+  },
+  {
+    "modul": "FI",
+    "bolum": "5. Banka Muhasebesi (FI-BL - Bank Ledger)",
+    "t_code": "FI03",
+    "aciklama": "Banka ana verisi (Banka kodu, SWIFT vb.) oluşturma ve düzenleme."
+  },
+  {
+    "modul": "FI",
+    "bolum": "5. Banka Muhasebesi (FI-BL - Bank Ledger)",
+    "t_code": "FF_5",
+    "aciklama": "Elektronik Hesap Özeti (MT940 / CAMT) Yükleme: Bankadan gelen ekstre dosyasını sisteme aktarır ve otomatik muhasebeleştirir."
+  },
+  {
+    "modul": "FI",
+    "bolum": "5. Banka Muhasebesi (FI-BL - Bank Ledger)",
+    "t_code": "FEBAN",
+    "aciklama": "Hesap Özeti Son İşleme (Post-Processing): Otomatize edilemeyen banka hareketlerini manuel olarak hesaplara dağıtır."
+  },
+  {
+    "modul": "FI",
+    "bolum": "5. Banka Muhasebesi (FI-BL - Bank Ledger)",
+    "t_code": "FEBP",
+    "aciklama": "Hesap Özeti Son İşleme (Post-Processing): Otomatize edilemeyen banka hareketlerini manuel olarak hesaplara dağıtır."
+  },
+  {
+    "modul": "FI",
+    "bolum": "5. Banka Muhasebesi (FI-BL - Bank Ledger)",
+    "t_code": "FBCJ",
+    "aciklama": "Kasa Defteri (Cash Journal): Nakit giriş ve çıkışlarının tutulduğu günlük kasa ekranı."
+  },
+  {
+    "modul": "FI",
+    "bolum": "6. Dönem Sonu Kapanış ve Raporlama (Period End & Reporting)",
+    "t_code": "OB52",
+    "aciklama": "Dönem Açma / Kapama: Muhasebe dönemlerinin kayıt yapılmasına açılması veya kapatılması."
+  },
+  {
+    "modul": "FI",
+    "bolum": "6. Dönem Sonu Kapanış ve Raporlama (Period End & Reporting)",
+    "t_code": "F.01",
+    "aciklama": "Bilanço ve Gelir Tablosu: Tanımlı finansal tablolara göre resmi bilanço/gelir tablosu üretir."
+  },
+  {
+    "modul": "FI",
+    "bolum": "6. Dönem Sonu Kapanış ve Raporlama (Period End & Reporting)",
+    "t_code": "S_ALR_87012277",
+    "aciklama": "Mizan Raporu: Ana hesapların açılış, borç, alacak ve kapanış bakiyelerini listeler."
+  },
+  {
+    "modul": "FI",
+    "bolum": "6. Dönem Sonu Kapanış ve Raporlama (Period End & Reporting)",
+    "t_code": "FAGLGVTR",
+    "aciklama": "Bakiye Devri (Balance Carry Forward): Yıl sonunda hesap bakiyelerini yeni mali yıla devreder."
+  },
+  {
+    "modul": "FI",
+    "bolum": "6. Dönem Sonu Kapanış ve Raporlama (Period End & Reporting)",
+    "t_code": "FAGL_FC_VAL",
+    "aciklama": "Yabancı Para Değerlemesi (Foreign Currency Valuation): Dövizli açık kalemlerin ve banka hesaplarının dönem sonu kurlarından değerlemesini yapar."
+  },
+  {
+    "modul": "FI",
+    "bolum": "7. Şablonlar, Park Etme ve Yetkilendirme",
+    "t_code": "FV50",
+    "aciklama": "Belge Park Etme (Park Document): Mahsup, satıcı veya müşteri faturasını taslak olarak kaydeder (Henüz defter-i kebire işlemez, onay bekler)."
+  },
+  {
+    "modul": "FI",
+    "bolum": "7. Şablonlar, Park Etme ve Yetkilendirme",
+    "t_code": "FV60",
+    "aciklama": "Belge Park Etme (Park Document): Mahsup, satıcı veya müşteri faturasını taslak olarak kaydeder (Henüz defter-i kebire işlemez, onay bekler)."
+  },
+  {
+    "modul": "FI",
+    "bolum": "7. Şablonlar, Park Etme ve Yetkilendirme",
+    "t_code": "FV70",
+    "aciklama": "Belge Park Etme (Park Document): Mahsup, satıcı veya müşteri faturasını taslak olarak kaydeder (Henüz defter-i kebire işlemez, onay bekler)."
+  },
+  {
+    "modul": "FI",
+    "bolum": "7. Şablonlar, Park Etme ve Yetkilendirme",
+    "t_code": "FBV0",
+    "aciklama": "Park Edilen Belgeyi Kaydetme (Post): Ön kayda alınmış/park edilmiş belgeyi onaylayıp muhasebeleştirir."
+  },
+  {
+    "modul": "FI",
+    "bolum": "7. Şablonlar, Park Etme ve Yetkilendirme",
+    "t_code": "F-01",
+    "aciklama": "Duran kalıp (Sample) belgeler oluşturma."
+  },
+  {
+    "modul": "MM",
+    "bolum": "1. Malzeme Ana Verisi (Material Master Data)",
+    "t_code": "MM01",
+    "aciklama": "Malzeme Oluşturma: Yeni malzeme kartı tanımlar (Sektör, malzeme tipi, görünüm seçimi yapılır)."
+  },
+  {
+    "modul": "MM",
+    "bolum": "1. Malzeme Ana Verisi (Material Master Data)",
+    "t_code": "MM02",
+    "aciklama": "Malzeme Değiştirme: Var olan malzemenin verilerini (tanım, birim, depo verileri vb.) günceller."
+  },
+  {
+    "modul": "MM",
+    "bolum": "1. Malzeme Ana Verisi (Material Master Data)",
+    "t_code": "MM03",
+    "aciklama": "Malzeme Görüntüleme: Malzeme kartı verilerini salt okunur şekilde inceler."
+  },
+  {
+    "modul": "MM",
+    "bolum": "1. Malzeme Ana Verisi (Material Master Data)",
+    "t_code": "MM04",
+    "aciklama": "Malzeme Değişiklik Belgeleri: Malzeme kartında geçmişte kimin, ne zaman, neyi değiştirdiğini gösterir."
+  },
+  {
+    "modul": "MM",
+    "bolum": "1. Malzeme Ana Verisi (Material Master Data)",
+    "t_code": "MM06",
+    "aciklama": "Malzemeye Silme İşareti Koyma: Malzemenin sistemden tamamen kaldırılması için silme bayrağı atar."
+  },
+  {
+    "modul": "MM",
+    "bolum": "1. Malzeme Ana Verisi (Material Master Data)",
+    "t_code": "MM60",
+    "aciklama": "Malzeme Listesi (Material List): Malzeme türü, üretim yeri veya grubu bazında toplu liste alır."
+  },
+  {
+    "modul": "MM",
+    "bolum": "1. Malzeme Ana Verisi (Material Master Data)",
+    "t_code": "MMBE",
+    "aciklama": "Stok Genel Bakışı (Stock Overview): Bir malzemenin tüm şirket, üretim yeri ve depolardaki anlık stok miktarını gösterir."
+  },
+  {
+    "modul": "MM",
+    "bolum": "2. Satıcı / Satınalma Ana Verisi (Vendor & Purchasing Master Data)",
+    "t_code": "XK01",
+    "aciklama": "Satıcı oluşturma / değiştirme / görüntüleme (Genel, Merkezi ve Mali veri dahil)."
+  },
+  {
+    "modul": "MM",
+    "bolum": "2. Satıcı / Satınalma Ana Verisi (Vendor & Purchasing Master Data)",
+    "t_code": "XK02",
+    "aciklama": "Satıcı oluşturma / değiştirme / görüntüleme (Genel, Merkezi ve Mali veri dahil)."
+  },
+  {
+    "modul": "MM",
+    "bolum": "2. Satıcı / Satınalma Ana Verisi (Vendor & Purchasing Master Data)",
+    "t_code": "XK03",
+    "aciklama": "Satıcı oluşturma / değiştirme / görüntüleme (Genel, Merkezi ve Mali veri dahil)."
+  },
+  {
+    "modul": "MM",
+    "bolum": "2. Satıcı / Satınalma Ana Verisi (Vendor & Purchasing Master Data)",
+    "t_code": "MK01",
+    "aciklama": "Satıcı oluşturma / değiştirme / görüntüleme (Sadece Satın Alma Organizasyonu bazlı)."
+  },
+  {
+    "modul": "MM",
+    "bolum": "2. Satıcı / Satınalma Ana Verisi (Vendor & Purchasing Master Data)",
+    "t_code": "MK02",
+    "aciklama": "Satıcı oluşturma / değiştirme / görüntüleme (Sadece Satın Alma Organizasyonu bazlı)."
+  },
+  {
+    "modul": "MM",
+    "bolum": "2. Satıcı / Satınalma Ana Verisi (Vendor & Purchasing Master Data)",
+    "t_code": "MK03",
+    "aciklama": "Satıcı oluşturma / değiştirme / görüntüleme (Sadece Satın Alma Organizasyonu bazlı)."
+  },
+  {
+    "modul": "MM",
+    "bolum": "2. Satıcı / Satınalma Ana Verisi (Vendor & Purchasing Master Data)",
+    "t_code": "BP",
+    "aciklama": "Business Partner: S/4HANA ile gelen, müşteri ve satıcıların merkezi olarak yönetildiği ekran."
+  },
+  {
+    "modul": "MM",
+    "bolum": "2. Satıcı / Satınalma Ana Verisi (Vendor & Purchasing Master Data)",
+    "t_code": "ME11",
+    "aciklama": "Satınalma Bilgi Kaydı (Info Record): Belli bir satıcının belli bir malzemeyi hangi fiyata ve teslim süresinde satacağını tanımlar."
+  },
+  {
+    "modul": "MM",
+    "bolum": "2. Satıcı / Satınalma Ana Verisi (Vendor & Purchasing Master Data)",
+    "t_code": "ME12",
+    "aciklama": "Satınalma Bilgi Kaydı (Info Record): Belli bir satıcının belli bir malzemeyi hangi fiyata ve teslim süresinde satacağını tanımlar."
+  },
+  {
+    "modul": "MM",
+    "bolum": "2. Satıcı / Satınalma Ana Verisi (Vendor & Purchasing Master Data)",
+    "t_code": "ME13",
+    "aciklama": "Satınalma Bilgi Kaydı (Info Record): Belli bir satıcının belli bir malzemeyi hangi fiyata ve teslim süresinde satacağını tanımlar."
+  },
+  {
+    "modul": "MM",
+    "bolum": "2. Satıcı / Satınalma Ana Verisi (Vendor & Purchasing Master Data)",
+    "t_code": "ME1M",
+    "aciklama": "Malzeme bazında tanımlı tüm Bilgi Kayıtlarını listeler."
+  },
+  {
+    "modul": "MM",
+    "bolum": "2. Satıcı / Satınalma Ana Verisi (Vendor & Purchasing Master Data)",
+    "t_code": "ME1L",
+    "aciklama": "Satıcı bazında tanımlı tüm Bilgi Kayıtlarını listeler."
+  },
+  {
+    "modul": "MM",
+    "bolum": "2. Satıcı / Satınalma Ana Verisi (Vendor & Purchasing Master Data)",
+    "t_code": "MKH1",
+    "aciklama": "Satıcı hiyerarşisi oluşturma ve düzenleme."
+  },
+  {
+    "modul": "MM",
+    "bolum": "3. Satınalma Talebi - SAS (Purchase Requisition - PR)",
+    "t_code": "ME51N",
+    "aciklama": "Satınalma Talebi Oluşturma: Yeni talep girme (Miktar, malzeme, teslim tarihi, masraf yeri vb.)."
+  },
+  {
+    "modul": "MM",
+    "bolum": "3. Satınalma Talebi - SAS (Purchase Requisition - PR)",
+    "t_code": "ME52N",
+    "aciklama": "Satınalma Talebi Değiştirme: Onay öncesi veya revize aşamasında talebi güncelleme."
+  },
+  {
+    "modul": "MM",
+    "bolum": "3. Satınalma Talebi - SAS (Purchase Requisition - PR)",
+    "t_code": "ME53N",
+    "aciklama": "Satınalma Talebi Görüntüleme: Talebin detaylarını inceleme."
+  },
+  {
+    "modul": "MM",
+    "bolum": "3. Satınalma Talebi - SAS (Purchase Requisition - PR)",
+    "t_code": "ME54N",
+    "aciklama": "Satınalma Talebi Onaylama (Release): Yetkili yöneticinin talebe onay vermesi."
+  },
+  {
+    "modul": "MM",
+    "bolum": "3. Satınalma Talebi - SAS (Purchase Requisition - PR)",
+    "t_code": "ME55",
+    "aciklama": "Toplu Talep Onaylama: Birden fazla SAS onayını tek ekrandan gerçekleştirme."
+  },
+  {
+    "modul": "MM",
+    "bolum": "3. Satınalma Talebi - SAS (Purchase Requisition - PR)",
+    "t_code": "ME5A",
+    "aciklama": "Satınalma Talepleri Listesi: Filtrelere göre açık veya kapanmış tüm talepleri raporlama."
+  },
+  {
+    "modul": "MM",
+    "bolum": "3. Satınalma Talebi - SAS (Purchase Requisition - PR)",
+    "t_code": "ME5J",
+    "aciklama": "Proje veya şantiye bazlı talepleri (WBS/PSK) sorgulama."
+  },
+  {
+    "modul": "MM",
+    "bolum": "4. Teklif Talebi ve Teklif Yönetimi (RFQ & Quotation)",
+    "t_code": "ME41",
+    "aciklama": "Teklif Talebi (RFQ) Oluşturma / Değiştirme / Görüntüleme: Satıcılara gönderilecek teklif formunu hazırlar."
+  },
+  {
+    "modul": "MM",
+    "bolum": "4. Teklif Talebi ve Teklif Yönetimi (RFQ & Quotation)",
+    "t_code": "ME42",
+    "aciklama": "Teklif Talebi (RFQ) Oluşturma / Değiştirme / Görüntüleme: Satıcılara gönderilecek teklif formunu hazırlar."
+  },
+  {
+    "modul": "MM",
+    "bolum": "4. Teklif Talebi ve Teklif Yönetimi (RFQ & Quotation)",
+    "t_code": "ME43",
+    "aciklama": "Teklif Talebi (RFQ) Oluşturma / Değiştirme / Görüntüleme: Satıcılara gönderilecek teklif formunu hazırlar."
+  },
+  {
+    "modul": "MM",
+    "bolum": "4. Teklif Talebi ve Teklif Yönetimi (RFQ & Quotation)",
+    "t_code": "ME47",
+    "aciklama": "Teklif Girme: Tedarikçiden gelen fiyat, indirim ve teslim sürelerini sisteme işler."
+  },
+  {
+    "modul": "MM",
+    "bolum": "4. Teklif Talebi ve Teklif Yönetimi (RFQ & Quotation)",
+    "t_code": "ME49",
+    "aciklama": "Teklif Karşılaştırma Listesi: Gelen tüm teklifleri fiyat ve koşul bazında yan yana karşılaştırır."
+  },
+  {
+    "modul": "MM",
+    "bolum": "5. Satınalma Siparişi - SAS (Purchase Order - PO)",
+    "t_code": "ME21N",
+    "aciklama": "Satınalma Siparişi Oluşturma: Satıcıya verilecek resmi sipariş belgesini açar."
+  },
+  {
+    "modul": "MM",
+    "bolum": "5. Satınalma Siparişi - SAS (Purchase Order - PO)",
+    "t_code": "ME22N",
+    "aciklama": "Satınalma Siparişi Değiştirme: Sipariş miktarı, fiyatı veya tarihlerini günceller."
+  },
+  {
+    "modul": "MM",
+    "bolum": "5. Satınalma Siparişi - SAS (Purchase Order - PO)",
+    "t_code": "ME23N",
+    "aciklama": "Satınalma Siparişi Görüntüleme: Siparişin durumu, girilen teslimat ve fatura geçmişini inceleme."
+  },
+  {
+    "modul": "MM",
+    "bolum": "5. Satınalma Siparişi - SAS (Purchase Order - PO)",
+    "t_code": "ME28",
+    "aciklama": "Toplu Sipariş Onaylama: Yöneticilerin siparişleri toplu olarak onaylaması."
+  },
+  {
+    "modul": "MM",
+    "bolum": "5. Satınalma Siparişi - SAS (Purchase Order - PO)",
+    "t_code": "ME29N",
+    "aciklama": "Tekil Sipariş Onaylama: Tek bir siparişin onay stratejisini yürütme."
+  },
+  {
+    "modul": "MM",
+    "bolum": "5. Satınalma Siparişi - SAS (Purchase Order - PO)",
+    "t_code": "ME2L",
+    "aciklama": "Satıcıya göre sipariş listesi alma."
+  },
+  {
+    "modul": "MM",
+    "bolum": "5. Satınalma Siparişi - SAS (Purchase Order - PO)",
+    "t_code": "ME2M",
+    "aciklama": "Malzemeye göre sipariş listesi alma."
+  },
+  {
+    "modul": "MM",
+    "bolum": "5. Satınalma Siparişi - SAS (Purchase Order - PO)",
+    "t_code": "ME2N",
+    "aciklama": "Sipariş numarasına göre detaylı sipariş listesi."
+  },
+  {
+    "modul": "MM",
+    "bolum": "5. Satınalma Siparişi - SAS (Purchase Order - PO)",
+    "t_code": "ME2C",
+    "aciklama": "Mal grubuna (Material Group) göre sipariş sorgulama."
+  },
+  {
+    "modul": "MM",
+    "bolum": "6. Sözleşmeler ve Çerçeve Anlaşmalar (Outline Agreements)",
+    "t_code": "ME31K",
+    "aciklama": "Sözleşme (Contract) Oluşturma / Değiştirme / Görüntüleme: Tutar veya miktar bazlı ana sözleşme."
+  },
+  {
+    "modul": "MM",
+    "bolum": "6. Sözleşmeler ve Çerçeve Anlaşmalar (Outline Agreements)",
+    "t_code": "ME32K",
+    "aciklama": "Sözleşme (Contract) Oluşturma / Değiştirme / Görüntüleme: Tutar veya miktar bazlı ana sözleşme."
+  },
+  {
+    "modul": "MM",
+    "bolum": "6. Sözleşmeler ve Çerçeve Anlaşmalar (Outline Agreements)",
+    "t_code": "ME33K",
+    "aciklama": "Sözleşme (Contract) Oluşturma / Değiştirme / Görüntüleme: Tutar veya miktar bazlı ana sözleşme."
+  },
+  {
+    "modul": "MM",
+    "bolum": "6. Sözleşmeler ve Çerçeve Anlaşmalar (Outline Agreements)",
+    "t_code": "ME31L",
+    "aciklama": "Teslimat Planı (Scheduling Agreement) Oluşturma / Değiştirme / Görüntüleme: Zamana yayılmış periyodik teslimatlar için."
+  },
+  {
+    "modul": "MM",
+    "bolum": "6. Sözleşmeler ve Çerçeve Anlaşmalar (Outline Agreements)",
+    "t_code": "ME32L",
+    "aciklama": "Teslimat Planı (Scheduling Agreement) Oluşturma / Değiştirme / Görüntüleme: Zamana yayılmış periyodik teslimatlar için."
+  },
+  {
+    "modul": "MM",
+    "bolum": "6. Sözleşmeler ve Çerçeve Anlaşmalar (Outline Agreements)",
+    "t_code": "ME33L",
+    "aciklama": "Teslimat Planı (Scheduling Agreement) Oluşturma / Değiştirme / Görüntüleme: Zamana yayılmış periyodik teslimatlar için."
+  },
+  {
+    "modul": "MM",
+    "bolum": "6. Sözleşmeler ve Çerçeve Anlaşmalar (Outline Agreements)",
+    "t_code": "ME38",
+    "aciklama": "Teslimat planı terminlerini düzenleme."
+  },
+  {
+    "modul": "MM",
+    "bolum": "6. Sözleşmeler ve Çerçeve Anlaşmalar (Outline Agreements)",
+    "t_code": "ME35",
+    "aciklama": "Sözleşmeleri onaylama."
+  },
+  {
+    "modul": "MM",
+    "bolum": "7. Stok Yönetimi ve Mal Hareketleri (Goods Movement - Inventory)",
+    "t_code": "MIGO",
+    "aciklama": "Merkezi Mal Hareketi Ekranı: Mal girişi (101), Mal çıkışı (201/261), Transfer (311/301) gibi tüm hareketlerin yapıldığı ana ekran."
+  },
+  {
+    "modul": "MM",
+    "bolum": "7. Stok Yönetimi ve Mal Hareketleri (Goods Movement - Inventory)",
+    "t_code": "MB51",
+    "aciklama": "Malzeme Belgeleri Listesi: Yapılan tüm stok hareketlerinin (MIGO kayıtlarının) tarihsel dökümü."
+  },
+  {
+    "modul": "MM",
+    "bolum": "7. Stok Yönetimi ve Mal Hareketleri (Goods Movement - Inventory)",
+    "t_code": "MB52",
+    "aciklama": "Depo Stok Listesi: Hangi depoda, ne kadar kullanılabilir/bloke/kalite stok olduğunu gösterir."
+  },
+  {
+    "modul": "MM",
+    "bolum": "7. Stok Yönetimi ve Mal Hareketleri (Goods Movement - Inventory)",
+    "t_code": "MB5T",
+    "aciklama": "Transit Stok: Depolar arası veya üretim yerleri arası yolda olan stokları gösterir."
+  },
+  {
+    "modul": "MM",
+    "bolum": "7. Stok Yönetimi ve Mal Hareketleri (Goods Movement - Inventory)",
+    "t_code": "MB5B",
+    "aciklama": "Tarihsel Stok: Belirli bir geçmiş tarihteki stok miktarını ve değerini hesaplar."
+  },
+  {
+    "modul": "MM",
+    "bolum": "7. Stok Yönetimi ve Mal Hareketleri (Goods Movement - Inventory)",
+    "t_code": "MB21",
+    "aciklama": "Rezervasyon Oluşturma / Değiştirme / Görüntüleme: Gelecekte kullanılacak stok için depoya ön sipariş/rezervasyon koyma."
+  },
+  {
+    "modul": "MM",
+    "bolum": "7. Stok Yönetimi ve Mal Hareketleri (Goods Movement - Inventory)",
+    "t_code": "MB22",
+    "aciklama": "Rezervasyon Oluşturma / Değiştirme / Görüntüleme: Gelecekte kullanılacak stok için depoya ön sipariş/rezervasyon koyma."
+  },
+  {
+    "modul": "MM",
+    "bolum": "7. Stok Yönetimi ve Mal Hareketleri (Goods Movement - Inventory)",
+    "t_code": "MB23",
+    "aciklama": "Rezervasyon Oluşturma / Değiştirme / Görüntüleme: Gelecekte kullanılacak stok için depoya ön sipariş/rezervasyon koyma."
+  },
+  {
+    "modul": "MM",
+    "bolum": "7. Stok Yönetimi ve Mal Hareketleri (Goods Movement - Inventory)",
+    "t_code": "MB25",
+    "aciklama": "Rezervasyon listesi sorgulama."
+  },
+  {
+    "modul": "MM",
+    "bolum": "7. Stok Yönetimi ve Mal Hareketleri (Goods Movement - Inventory)",
+    "t_code": "MI01",
+    "aciklama": "Sayım Belgesi Oluşturma / Değiştirme / Görüntüleme: Sayım yapılacak malzemeler için liste hazırlar."
+  },
+  {
+    "modul": "MM",
+    "bolum": "7. Stok Yönetimi ve Mal Hareketleri (Goods Movement - Inventory)",
+    "t_code": "MI02",
+    "aciklama": "Sayım Belgesi Oluşturma / Değiştirme / Görüntüleme: Sayım yapılacak malzemeler için liste hazırlar."
+  },
+  {
+    "modul": "MM",
+    "bolum": "7. Stok Yönetimi ve Mal Hareketleri (Goods Movement - Inventory)",
+    "t_code": "MI03",
+    "aciklama": "Sayım Belgesi Oluşturma / Değiştirme / Görüntüleme: Sayım yapılacak malzemeler için liste hazırlar."
+  },
+  {
+    "modul": "MM",
+    "bolum": "7. Stok Yönetimi ve Mal Hareketleri (Goods Movement - Inventory)",
+    "t_code": "MI04",
+    "aciklama": "Sayım Sonuçlarını Girme: Depoda fiilen sayılan miktarları sisteme işler."
+  },
+  {
+    "modul": "MM",
+    "bolum": "7. Stok Yönetimi ve Mal Hareketleri (Goods Movement - Inventory)",
+    "t_code": "MI07",
+    "aciklama": "Fark Kaydı (Difference Post): Sistem stoku ile fiili sayım arasındaki eksik/fazla stok farkını muhasebeleştirir."
+  },
+  {
+    "modul": "MM",
+    "bolum": "7. Stok Yönetimi ve Mal Hareketleri (Goods Movement - Inventory)",
+    "t_code": "MI08",
+    "aciklama": "Sayım sonucu girme ve farkı aynı anda kaydetme."
+  },
+  {
+    "modul": "MM",
+    "bolum": "7. Stok Yönetimi ve Mal Hareketleri (Goods Movement - Inventory)",
+    "t_code": "MI20",
+    "aciklama": "Envanter fark listesini detaylı görüntüleme."
+  },
+  {
+    "modul": "MM",
+    "bolum": "10. MM Hizmet Satınalma (Service Procurement)",
+    "t_code": "AC01",
+    "aciklama": "Hizmet ana verisi (Service Master) oluşturma ve görüntüleme."
+  },
+  {
+    "modul": "MM",
+    "bolum": "10. MM Hizmet Satınalma (Service Procurement)",
+    "t_code": "AC03",
+    "aciklama": "Hizmet ana verisi (Service Master) oluşturma ve görüntüleme."
+  },
+  {
+    "modul": "MM",
+    "bolum": "10. MM Hizmet Satınalma (Service Procurement)",
+    "t_code": "ML81N",
+    "aciklama": "Hizmet Kabul Yaprağı (Service Entry Sheet - SES): Alınan hizmetin tamamlandığını ve kalitesini onaylama (MIGO yerine geçer)."
+  },
+  {
+    "modul": "MM",
+    "bolum": "10. MM Hizmet Satınalma (Service Procurement)",
+    "t_code": "ML82",
+    "aciklama": "Hizmet kabul yaprağını görüntüleme."
+  },
+  {
+    "modul": "PP",
+    "bolum": "1. Üretim Ana Verileri (Production Master Data)",
+    "t_code": "CS01",
+    "aciklama": "Ürün Reçetesi (BOM - Bill of Materials) Oluşturma / Değiştirme / Görüntüleme: Bir mamulün üretilmesi için gerekli hammadde ve yarı mamul bileşen listesini tanımlar."
+  },
+  {
+    "modul": "PP",
+    "bolum": "1. Üretim Ana Verileri (Production Master Data)",
+    "t_code": "CS02",
+    "aciklama": "Ürün Reçetesi (BOM - Bill of Materials) Oluşturma / Değiştirme / Görüntüleme: Bir mamulün üretilmesi için gerekli hammadde ve yarı mamul bileşen listesini tanımlar."
+  },
+  {
+    "modul": "PP",
+    "bolum": "1. Üretim Ana Verileri (Production Master Data)",
+    "t_code": "CS03",
+    "aciklama": "Ürün Reçetesi (BOM - Bill of Materials) Oluşturma / Değiştirme / Görüntüleme: Bir mamulün üretilmesi için gerekli hammadde ve yarı mamul bileşen listesini tanımlar."
+  },
+  {
+    "modul": "PP",
+    "bolum": "1. Üretim Ana Verileri (Production Master Data)",
+    "t_code": "CS11",
+    "aciklama": "Reçeteyi kademeli (Explosion) olarak görüntüleme."
+  },
+  {
+    "modul": "PP",
+    "bolum": "1. Üretim Ana Verileri (Production Master Data)",
+    "t_code": "CS12",
+    "aciklama": "Reçeteyi çok seviyeli (Multi-level BOM) ağaç yapısında görüntüleme."
+  },
+  {
+    "modul": "PP",
+    "bolum": "1. Üretim Ana Verileri (Production Master Data)",
+    "t_code": "CS15",
+    "aciklama": "BOM Nerede Kullanılıyor (Where-Used List): Bir hammaddenin hangi mamul/yarı mamul reçetelerinde yer aldığını sorgular."
+  },
+  {
+    "modul": "PP",
+    "bolum": "1. Üretim Ana Verileri (Production Master Data)",
+    "t_code": "CR01",
+    "aciklama": "İş Merkezi (Work Center) Oluşturma / Değiştirme / Görüntüleme: Üretimin yapıldığı tezgah, makine, montaj hattı veya personel grubunu tanımlar (Kapasite ve maliyet hesaplama verilerini içerir)."
+  },
+  {
+    "modul": "PP",
+    "bolum": "1. Üretim Ana Verileri (Production Master Data)",
+    "t_code": "CR02",
+    "aciklama": "İş Merkezi (Work Center) Oluşturma / Değiştirme / Görüntüleme: Üretimin yapıldığı tezgah, makine, montaj hattı veya personel grubunu tanımlar (Kapasite ve maliyet hesaplama verilerini içerir)."
+  },
+  {
+    "modul": "PP",
+    "bolum": "1. Üretim Ana Verileri (Production Master Data)",
+    "t_code": "CR03",
+    "aciklama": "İş Merkezi (Work Center) Oluşturma / Değiştirme / Görüntüleme: Üretimin yapıldığı tezgah, makine, montaj hattı veya personel grubunu tanımlar (Kapasite ve maliyet hesaplama verilerini içerir)."
+  },
+  {
+    "modul": "PP",
+    "bolum": "1. Üretim Ana Verileri (Production Master Data)",
+    "t_code": "CA01",
+    "aciklama": "Rota (Routing) Oluşturma / Değiştirme / Görüntüleme: Üretimin hangi iş merkezlerinde, hangi operasyon sırasıyla ve ne kadar sürede yapılacağını adımlayarak tanımlar."
+  },
+  {
+    "modul": "PP",
+    "bolum": "1. Üretim Ana Verileri (Production Master Data)",
+    "t_code": "CA02",
+    "aciklama": "Rota (Routing) Oluşturma / Değiştirme / Görüntüleme: Üretimin hangi iş merkezlerinde, hangi operasyon sırasıyla ve ne kadar sürede yapılacağını adımlayarak tanımlar."
+  },
+  {
+    "modul": "PP",
+    "bolum": "1. Üretim Ana Verileri (Production Master Data)",
+    "t_code": "CA03",
+    "aciklama": "Rota (Routing) Oluşturma / Değiştirme / Görüntüleme: Üretimin hangi iş merkezlerinde, hangi operasyon sırasıyla ve ne kadar sürede yapılacağını adımlayarak tanımlar."
+  },
+  {
+    "modul": "PP",
+    "bolum": "1. Üretim Ana Verileri (Production Master Data)",
+    "t_code": "CA11",
+    "aciklama": "Standart Rota Grubu (Reference Operation Set) yönetimi."
+  },
+  {
+    "modul": "PP",
+    "bolum": "1. Üretim Ana Verileri (Production Master Data)",
+    "t_code": "CA12",
+    "aciklama": "Standart Rota Grubu (Reference Operation Set) yönetimi."
+  },
+  {
+    "modul": "PP",
+    "bolum": "1. Üretim Ana Verileri (Production Master Data)",
+    "t_code": "CA13",
+    "aciklama": "Standart Rota Grubu (Reference Operation Set) yönetimi."
+  },
+  {
+    "modul": "PP",
+    "bolum": "2. Satış ve Operasyonel Planlama / Ana Planlama (SOP & Demand Management)",
+    "t_code": "MC88",
+    "aciklama": "SOP (Sales and Operations Planning): Satış ve üretim miktar tahminlerini makro seviyede planlama ve konsolide etme."
+  },
+  {
+    "modul": "PP",
+    "bolum": "2. Satış ve Operasyonel Planlama / Ana Planlama (SOP & Demand Management)",
+    "t_code": "MC87",
+    "aciklama": "SOP (Sales and Operations Planning): Satış ve üretim miktar tahminlerini makro seviyede planlama ve konsolide etme."
+  },
+  {
+    "modul": "PP",
+    "bolum": "2. Satış ve Operasyonel Planlama / Ana Planlama (SOP & Demand Management)",
+    "t_code": "MD61",
+    "aciklama": "Planlanan Bağımsız İhtiyaçlar (PIR - Independent Requirements) Oluşturma / Değiştirme / Görüntüleme: Belli bir dönemde satılması veya üretilmesi hedeflenen tahmin verilerini (Forecast) sisteme girer."
+  },
+  {
+    "modul": "PP",
+    "bolum": "2. Satış ve Operasyonel Planlama / Ana Planlama (SOP & Demand Management)",
+    "t_code": "MD62",
+    "aciklama": "Planlanan Bağımsız İhtiyaçlar (PIR - Independent Requirements) Oluşturma / Değiştirme / Görüntüleme: Belli bir dönemde satılması veya üretilmesi hedeflenen tahmin verilerini (Forecast) sisteme girer."
+  },
+  {
+    "modul": "PP",
+    "bolum": "2. Satış ve Operasyonel Planlama / Ana Planlama (SOP & Demand Management)",
+    "t_code": "MD63",
+    "aciklama": "Planlanan Bağımsız İhtiyaçlar (PIR - Independent Requirements) Oluşturma / Değiştirme / Görüntüleme: Belli bir dönemde satılması veya üretilmesi hedeflenen tahmin verilerini (Forecast) sisteme girer."
+  },
+  {
+    "modul": "PP",
+    "bolum": "2. Satış ve Operasyonel Planlama / Ana Planlama (SOP & Demand Management)",
+    "t_code": "MD65",
+    "aciklama": "Bağımsız ihtiyaçların toplu listesini alma."
+  },
+  {
+    "modul": "PP",
+    "bolum": "3. Malzeme İhtiyaç Planlaması (MRP - Material Requirements Planning)",
+    "t_code": "MD01",
+    "aciklama": "MRP Çalıştırma (MRP Run): Üretim yeri (Plant) veya şirket bazında toplu MRP çalıştırır (S/4HANA'da MRP Live / MD01N kullanılır)."
+  },
+  {
+    "modul": "PP",
+    "bolum": "3. Malzeme İhtiyaç Planlaması (MRP - Material Requirements Planning)",
+    "t_code": "MD01N",
+    "aciklama": "MRP Çalıştırma (MRP Run): Üretim yeri (Plant) veya şirket bazında toplu MRP çalıştırır (S/4HANA'da MRP Live / MD01N kullanılır)."
+  },
+  {
+    "modul": "PP",
+    "bolum": "3. Malzeme İhtiyaç Planlaması (MRP - Material Requirements Planning)",
+    "t_code": "MD02",
+    "aciklama": "Tek bir malzemenin tüm alt seviye reçete bileşenleri için MRP çalıştırır (Single-Item, Multi-Level)."
+  },
+  {
+    "modul": "PP",
+    "bolum": "3. Malzeme İhtiyaç Planlaması (MRP - Material Requirements Planning)",
+    "t_code": "MD03",
+    "aciklama": "Tek bir malzeme için tek seviyeli MRP çalıştırır (Single-Item, Single-Level)."
+  },
+  {
+    "modul": "PP",
+    "bolum": "3. Malzeme İhtiyaç Planlaması (MRP - Material Requirements Planning)",
+    "t_code": "MD04",
+    "aciklama": "Stok / İhtiyaç Durum Listesi (Stock/Requirements List): Bir malzemenin anlık stokunu, beklenen girişlerini (SAS, Üretim Siparişi) ve çıkış ihtiyaçlarını (Satış Siparişi, Reçete Kullanımı) gösteren en kritik dinamik takip ekranıdır."
+  },
+  {
+    "modul": "PP",
+    "bolum": "3. Malzeme İhtiyaç Planlaması (MRP - Material Requirements Planning)",
+    "t_code": "MD05",
+    "aciklama": "MRP çalıştırma anındaki statik MRP listesini inceleme."
+  },
+  {
+    "modul": "PP",
+    "bolum": "3. Malzeme İhtiyaç Planlaması (MRP - Material Requirements Planning)",
+    "t_code": "MD06",
+    "aciklama": "MRP sonuçlarını ve kural ihlallerini (Istisna mesajları / Exception Messages) toplu inceleme."
+  },
+  {
+    "modul": "PP",
+    "bolum": "3. Malzeme İhtiyaç Planlaması (MRP - Material Requirements Planning)",
+    "t_code": "MD07",
+    "aciklama": "MRP sonuçlarını ve kural ihlallerini (Istisna mesajları / Exception Messages) toplu inceleme."
+  },
+  {
+    "modul": "PP",
+    "bolum": "4. Planlanan Sipariş Yönetimi (Planned Orders)",
+    "t_code": "MD11",
+    "aciklama": "Planlanan Sipariş Oluşturma / Değiştirme / Görüntüleme: Manuel planlanan sipariş kartı açar veya inceler."
+  },
+  {
+    "modul": "PP",
+    "bolum": "4. Planlanan Sipariş Yönetimi (Planned Orders)",
+    "t_code": "MD12",
+    "aciklama": "Planlanan Sipariş Oluşturma / Değiştirme / Görüntüleme: Manuel planlanan sipariş kartı açar veya inceler."
+  },
+  {
+    "modul": "PP",
+    "bolum": "4. Planlanan Sipariş Yönetimi (Planned Orders)",
+    "t_code": "MD13",
+    "aciklama": "Planlanan Sipariş Oluşturma / Değiştirme / Görüntüleme: Manuel planlanan sipariş kartı açar veya inceler."
+  },
+  {
+    "modul": "PP",
+    "bolum": "4. Planlanan Sipariş Yönetimi (Planned Orders)",
+    "t_code": "MD14",
+    "aciklama": "Planlanan siparişi Satınalma Talebine (PR/SAS) dönüştürme."
+  },
+  {
+    "modul": "PP",
+    "bolum": "4. Planlanan Sipariş Yönetimi (Planned Orders)",
+    "t_code": "MD15",
+    "aciklama": "Planlanan siparişleri toplu olarak Satınalma Talebine dönüştürme."
+  },
+  {
+    "modul": "PP",
+    "bolum": "4. Planlanan Sipariş Yönetimi (Planned Orders)",
+    "t_code": "CO40",
+    "aciklama": "Planlanan siparişi Üretim Siparişine (Production Order) tekil veya toplu dönüştürme."
+  },
+  {
+    "modul": "PP",
+    "bolum": "4. Planlanan Sipariş Yönetimi (Planned Orders)",
+    "t_code": "CO41",
+    "aciklama": "Planlanan siparişi Üretim Siparişine (Production Order) tekil veya toplu dönüştürme."
+  },
+  {
+    "modul": "PP",
+    "bolum": "5. Üretim Sipariş Yönetimi (Production Orders - Shop Floor Control)",
+    "t_code": "CO01",
+    "aciklama": "Üretim Siparişi Oluşturma: Malzeme, miktar ve teslim tarihi girilerek kesin imalat siparişi açılır."
+  },
+  {
+    "modul": "PP",
+    "bolum": "5. Üretim Sipariş Yönetimi (Production Orders - Shop Floor Control)",
+    "t_code": "CO02",
+    "aciklama": "Üretim Siparişi Değiştirme: Siparişi serbest bırakma (Release), miktar güncelleme veya bileşen değiştirme."
+  },
+  {
+    "modul": "PP",
+    "bolum": "5. Üretim Sipariş Yönetimi (Production Orders - Shop Floor Control)",
+    "t_code": "CO03",
+    "aciklama": "Üretim Siparişi Görüntüleme: Sipariş durumunu, reçete bileşenlerini ve operasyon adımlarını inceleme."
+  },
+  {
+    "modul": "PP",
+    "bolum": "5. Üretim Sipariş Yönetimi (Production Orders - Shop Floor Control)",
+    "t_code": "COOIS",
+    "aciklama": "Üretim Siparişleri Bilgi Sistemi (Production Order Information System): Siparişleri, operasyonları, kullanılan malzemeleri ve durumları detaylı raporlayan ana kontrol paneli."
+  },
+  {
+    "modul": "PP",
+    "bolum": "5. Üretim Sipariş Yönetimi (Production Orders - Shop Floor Control)",
+    "t_code": "CO05N",
+    "aciklama": "Üretim siparişlerini toplu serbest bırakma (Release)."
+  },
+  {
+    "modul": "PP",
+    "bolum": "5. Üretim Sipariş Yönetimi (Production Orders - Shop Floor Control)",
+    "t_code": "CO09",
+    "aciklama": "Malzeme kullanılabilirlik kontrolü (ATP - Available to Promise) detaylarını inceleme."
+  },
+  {
+    "modul": "PP",
+    "bolum": "6. Üretim Yürütme ve Teyit Verme (Production Execution & Confirmation)",
+    "t_code": "CO11N",
+    "aciklama": "Operasyon Bazlı Teyit Girişi (Single-Operation Confirmation): Üretim siparişinin her bir operasyon adımı için gerçekleşen miktar ve süre (işçilik/makine) kaydı atar."
+  },
+  {
+    "modul": "PP",
+    "bolum": "6. Üretim Yürütme ve Teyit Verme (Production Execution & Confirmation)",
+    "t_code": "CO15",
+    "aciklama": "Sipariş Bazında Teyit Girişi: Tüm siparişi tek seferde ve son operasyon üzerinden teyit eder."
+  },
+  {
+    "modul": "PP",
+    "bolum": "6. Üretim Yürütme ve Teyit Verme (Production Execution & Confirmation)",
+    "t_code": "CO13",
+    "aciklama": "Teyit İptali (Cancel Confirmation): Hatalı girilen üretim teyidini ve bağlı stok hareketlerini iptal eder."
+  },
+  {
+    "modul": "PP",
+    "bolum": "6. Üretim Yürütme ve Teyit Verme (Production Execution & Confirmation)",
+    "t_code": "CO12",
+    "aciklama": "Toplu teyit girişi yapma."
+  },
+  {
+    "modul": "PP",
+    "bolum": "6. Üretim Yürütme ve Teyit Verme (Production Execution & Confirmation)",
+    "t_code": "COGI",
+    "aciklama": "Hatalı Mal Hareketleri (Failed Goods Movements): Teyit sırasında stok yetersizliği nedeniyle otomatik düşülemeyen (Backflush) hammaddeleri listeler ve stok girildikten sonra tekrar işler."
+  },
+  {
+    "modul": "PP",
+    "bolum": "7. Üretim İçin Stok Hareketleri (Goods Movements for Production)",
+    "t_code": "MIGO (TÜR: 261)",
+    "aciklama": "Üretime Mal Çıkışı: Üretim siparişi için gerekli hammaddeleri depodan düşer."
+  },
+  {
+    "modul": "PP",
+    "bolum": "7. Üretim İçin Stok Hareketleri (Goods Movements for Production)",
+    "t_code": "MIGO (TÜR: 101)",
+    "aciklama": "Üretimden Mal Girişi: Tamamlanan mamulü depoya teslim alır ve stok miktarını artırır."
+  },
+  {
+    "modul": "PP",
+    "bolum": "7. Üretim İçin Stok Hareketleri (Goods Movements for Production)",
+    "t_code": "MB31",
+    "aciklama": "Üretim siparişine istinaden eski tip mal girişi ekranı (S/4HANA öncesi)."
+  },
+  {
+    "modul": "PP",
+    "bolum": "7. Üretim İçin Stok Hareketleri (Goods Movements for Production)",
+    "t_code": "MB26",
+    "aciklama": "Üretim siparişlerinin malzeme ihtiyaçlarına göre depodan toplu mal çıkışı (Picking list)."
+  },
+  {
+    "modul": "PP",
+    "bolum": "8. Kapasite Planlama (Capacity Planning)",
+    "t_code": "CM01",
+    "aciklama": "İş Merkezi Kapasite Yükü: Bir iş merkezinin mevcut kapasitesini ve üzerine gelen sipariş yükünü dönemsel gösterir."
+  },
+  {
+    "modul": "PP",
+    "bolum": "8. Kapasite Planlama (Capacity Planning)",
+    "t_code": "CM21",
+    "aciklama": "Kapasite Leveling (Kapasite Dengeleme Tablosu): Aşırı yüklenmiş tezgahlar üzerindeki siparişleri sürükle-bırak veya otomatik algoritma ile diğer tezglahlara veya saatlere kaydırır."
+  },
+  {
+    "modul": "PP",
+    "bolum": "8. Kapasite Planlama (Capacity Planning)",
+    "t_code": "CM25",
+    "aciklama": "Kapasite Leveling (Kapasite Dengeleme Tablosu): Aşırı yüklenmiş tezgahlar üzerindeki siparişleri sürükle-bırak veya otomatik algoritma ile diğer tezglahlara veya saatlere kaydırır."
+  },
+  {
+    "modul": "PP",
+    "bolum": "8. Kapasite Planlama (Capacity Planning)",
+    "t_code": "CM07",
+    "aciklama": "Üretim yeri bazında genel kapasite raporu."
+  },
+  {
+    "modul": "PP",
+    "bolum": "9. Serili Üretim / Düzenli Akış Üretimi (REMPP - Repetitive Manufacturing)",
+    "t_code": "MF50",
+    "aciklama": "Serili Üretim Planlama Tablosu (Planning Table): Hatlar bazında günlük/haftalık üretim miktarlarını planlama."
+  },
+  {
+    "modul": "PP",
+    "bolum": "9. Serili Üretim / Düzenli Akış Üretimi (REMPP - Repetitive Manufacturing)",
+    "t_code": "MFBF",
+    "aciklama": "Serili Üretim Teyit Kaydı (Backflushing): Üretilen nihai ürün miktarını girer; sistem otomatik olarak bağlı reçetedeki hammaddeleri stoktan düşer, makine süresini işler ve mal girişini yapar."
+  },
+  {
+    "modul": "PP",
+    "bolum": "9. Serili Üretim / Düzenli Akış Üretimi (REMPP - Repetitive Manufacturing)",
+    "t_code": "MF12",
+    "aciklama": "Serili üretim teyit belgeleri listesi."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ01",
+    "aciklama": "Projelerin ana yapısını oluşturan Proje Tanımı (Project Definition) kartlarını oluşturma, değiştirme ve görüntüleme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ02",
+    "aciklama": "Projelerin ana yapısını oluşturan Proje Tanımı (Project Definition) kartlarını oluşturma, değiştirme ve görüntüleme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ03",
+    "aciklama": "Projelerin ana yapısını oluşturan Proje Tanımı (Project Definition) kartlarını oluşturma, değiştirme ve görüntüleme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ20N",
+    "aciklama": "Proje Yöneticisi Ekranı (Project Builder); WBS elemanları, ağ planları, aktivite ve malzeme atamalarının tek yerden yönetildiği ana kontrol merkezidir."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ06",
+    "aciklama": "Proje adımlarını hierarchical olarak bölen Çalışma Kırılım Yapısı (WBS / SAS) elemanlarını tekil olarak tanımlama ve düzenleme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ07",
+    "aciklama": "Proje adımlarını hierarchical olarak bölen Çalışma Kırılım Yapısı (WBS / SAS) elemanlarını tekil olarak tanımlama ve düzenleme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ08",
+    "aciklama": "Proje adımlarını hierarchical olarak bölen Çalışma Kırılım Yapısı (WBS / SAS) elemanlarını tekil olarak tanımlama ve düzenleme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CN21",
+    "aciklama": "Projedeki iş adımlarının zaman, kaynak ve bağımlılık ilişkilerini belirleyen Ağ Planlarını (Network) oluşturma ve düzenleme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CN22",
+    "aciklama": "Projedeki iş adımlarının zaman, kaynak ve bağımlılık ilişkilerini belirleyen Ağ Planlarını (Network) oluşturma ve düzenleme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CN23",
+    "aciklama": "Projedeki iş adımlarının zaman, kaynak ve bağımlılık ilişkilerini belirleyen Ağ Planlarını (Network) oluşturma ve düzenleme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ30",
+    "aciklama": "Proje ve WBS bazında orijinal bütçe girişlerinin ve bütçe hiyerarşisinin tanımlandığı yapılandırma ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ31",
+    "aciklama": "Proje ve WBS bazında orijinal bütçe girişlerinin ve bütçe hiyerarşisinin tanımlandığı yapılandırma ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ32",
+    "aciklama": "Devam eden projelere ek bütçe (Supplement) tanımlama veya fazla bütçeyi geri alma (Return) güncelleme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ37",
+    "aciklama": "Devam eden projelere ek bütçe (Supplement) tanımlama veya fazla bütçeyi geri alma (Return) güncelleme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ35",
+    "aciklama": "Geçtiğimiz yıldan kalan kullanılmayan bütçeleri yeni mali yıla aktaran bütçe devir (Carryforward) ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ38",
+    "aciklama": "Geçtiğimiz yıldan kalan kullanılmayan bütçeleri yeni mali yıla aktaran bütçe devir (Carryforward) ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ40",
+    "aciklama": "Proje henüz başlamadan önce maliyetlerin ve gelirlerin hiyerarşik olarak planlandığı ön maliyetleme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ42",
+    "aciklama": "Proje henüz başlamadan önce maliyetlerin ve gelirlerin hiyerarşik olarak planlandığı ön maliyetleme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJBF",
+    "aciklama": "Proje harcamalarının belirlenen bütçeyi aşıp aşmadığını denetleyen Otomatik Bütçe Kontrolünü (Availability Control) aktifleştirme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJBV",
+    "aciklama": "Proje harcamalarının belirlenen bütçeyi aşıp aşmadığını denetleyen Otomatik Bütçe Kontrolünü (Availability Control) aktifleştirme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "C201",
+    "aciklama": "Standardize edilmiş tekrarlayan projeler için şablon olarak kullanılacak Standart Ağ Planlarını oluşturma ve düzenleme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "C202",
+    "aciklama": "Standardize edilmiş tekrarlayan projeler için şablon olarak kullanılacak Standart Ağ Planlarını oluşturma ve düzenleme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "C203",
+    "aciklama": "Standardize edilmiş tekrarlayan projeler için şablon olarak kullanılacak Standart Ağ Planlarını oluşturma ve düzenleme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ01S",
+    "aciklama": "Yeni projeleri hızlıca açmak için hazır altyapı sunan Standart WBS hiyerarşilerini tanımlama ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ02S",
+    "aciklama": "Yeni projeleri hızlıca açmak için hazır altyapı sunan Standart WBS hiyerarşilerini tanımlama ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CNS0",
+    "aciklama": "Proje aktivitelerine bağlanmış malzeme ihtiyaçlarını (Assembly/Reservation) görüntüleme ve tedarik süreçlerine aktarma ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ41",
+    "aciklama": "Projeye atanan malzemelerin tedarik, stok ve teslimat durumlarını takip eden malzeme genel bakış ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CN25",
+    "aciklama": "Proje ağ planı aktivitelerinde gerçekleşen işçilik, makine süresi ve ilerleme durumlarını sisteme onaylama (Confirmation) ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CN27",
+    "aciklama": "Proje ağ planı aktivitelerinde gerçekleşen işçilik, makine süresi ve ilerleme durumlarını sisteme onaylama (Confirmation) ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ88",
+    "aciklama": "Tek bir projenin veya WBS elemanının üzerinde biriken maliyetleri (Geçici Kabul / Hak Ediş) ana varlıklara veya masraf yerlerine devreden mahsup ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJ8G",
+    "aciklama": "Birden fazla projenin dönem sonıu maliyet mahsuplaştırmasını ve devir işlemlerini toplu olarak çalıştıran yükleme ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "KACF",
+    "aciklama": "Dönem sonunda projeler üzerindeki fiili maliyetler ile gerçekleşen gelirleri karşılaştırarak Dönem Sonu Değerleme (WIP / Result Analysis) hesaplayan ekranlardır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "KAJ2",
+    "aciklama": "Dönem sonunda projeler üzerindeki fiili maliyetler ile gerçekleşen gelirleri karşılaştırarak Dönem Sonu Değerleme (WIP / Result Analysis) hesaplayan ekranlardır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "S_ALR_87013557",
+    "aciklama": "Proje bazlı Bütçe / Fiili / Taahhüt (Commitment) ve Kalan Bütçe durumlarını karşılaştırmalı sunan ana raporlama ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CN41N",
+    "aciklama": "Proje tanımı, WBS, ağ planları ve malzeme ihtiyaçlarını tek bir ağaç yapısında listeleyen Proje Yapı Raporu ekranıdır."
+  },
+  {
+    "modul": "PS",
+    "bolum": "",
+    "t_code": "CJP2",
+    "aciklama": "Proje zaman planlarını ve iş adımlarının kritik yollarını görsel olarak izlemeyi sağlayan Gantt Şeması (Gantt Chart) ekranıdır."
+  },
+  {
+    "modul": "QM",
+    "bolum": "1. Kalite Ana Verileri (Quality Master Data)",
+    "t_code": "QS21",
+    "aciklama": "Ana Kontrol Özelliği (Master Inspection Characteristic - MIC) Oluşturma / Değiştirme / Görüntüleme: Kontrol edilecek parametreleri (ör. Kalınlık, Sertlik, Ph Değeri, Renk) tanımlar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "1. Kalite Ana Verileri (Quality Master Data)",
+    "t_code": "QS22",
+    "aciklama": "Ana Kontrol Özelliği (Master Inspection Characteristic - MIC) Oluşturma / Değiştirme / Görüntüleme: Kontrol edilecek parametreleri (ör. Kalınlık, Sertlik, Ph Değeri, Renk) tanımlar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "1. Kalite Ana Verileri (Quality Master Data)",
+    "t_code": "QS23",
+    "aciklama": "Ana Kontrol Özelliği (Master Inspection Characteristic - MIC) Oluşturma / Değiştirme / Görüntüleme: Kontrol edilecek parametreleri (ör. Kalınlık, Sertlik, Ph Değeri, Renk) tanımlar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "1. Kalite Ana Verileri (Quality Master Data)",
+    "t_code": "QS41",
+    "aciklama": "Katalog Bakımı: Hata kodları, hata nedenleri, sayım sonuçları veya görsel kontrol durumları için kod grupları tanımlar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "1. Kalite Ana Verileri (Quality Master Data)",
+    "t_code": "QS42",
+    "aciklama": "Katalog Bakımı: Hata kodları, hata nedenleri, sayım sonuçları veya görsel kontrol durumları için kod grupları tanımlar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "1. Kalite Ana Verileri (Quality Master Data)",
+    "t_code": "QS51",
+    "aciklama": "Seçim Kümeleri (Selected Sets): Kataloglardaki değerlendirme kodlarını (ör. Kabul, Red, Şartlı Kabul) işlem seviyesine bağlar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "1. Kalite Ana Verileri (Quality Master Data)",
+    "t_code": "QS52",
+    "aciklama": "Seçim Kümeleri (Selected Sets): Kataloglardaki değerlendirme kodlarını (ör. Kabul, Red, Şartlı Kabul) işlem seviyesine bağlar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "1. Kalite Ana Verileri (Quality Master Data)",
+    "t_code": "QP01",
+    "aciklama": "Kontrol Planı (Inspection Plan) Oluşturma / Değiştirme / Görüntüleme: Malzeme bazında hangi testlerin, hangi sırada ve hangi numune miktarlarıyla yapılacağını adımlayarak planlar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "1. Kalite Ana Verileri (Quality Master Data)",
+    "t_code": "QP02",
+    "aciklama": "Kontrol Planı (Inspection Plan) Oluşturma / Değiştirme / Görüntüleme: Malzeme bazında hangi testlerin, hangi sırada ve hangi numune miktarlarıyla yapılacağını adımlayarak planlar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "1. Kalite Ana Verileri (Quality Master Data)",
+    "t_code": "QP03",
+    "aciklama": "Kontrol Planı (Inspection Plan) Oluşturma / Değiştirme / Görüntüleme: Malzeme bazında hangi testlerin, hangi sırada ve hangi numune miktarlarıyla yapılacağını adımlayarak planlar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "1. Kalite Ana Verileri (Quality Master Data)",
+    "t_code": "QDV1",
+    "aciklama": "Numune Alma Prosedürü (Sampling Procedure): Kontrol edilecek numune miktarının statik mi yoksa dinamik kurallara (ISO 2859 vb.) göre mi hesaplanacağını belirler."
+  },
+  {
+    "modul": "QM",
+    "bolum": "1. Kalite Ana Verileri (Quality Master Data)",
+    "t_code": "QDV2",
+    "aciklama": "Numune Alma Prosedürü (Sampling Procedure): Kontrol edilecek numune miktarının statik mi yoksa dinamik kurallara (ISO 2859 vb.) göre mi hesaplanacağını belirler."
+  },
+  {
+    "modul": "QM",
+    "bolum": "1. Kalite Ana Verileri (Quality Master Data)",
+    "t_code": "QDV3",
+    "aciklama": "Numune Alma Prosedürü (Sampling Procedure): Kontrol edilecek numune miktarının statik mi yoksa dinamik kurallara (ISO 2859 vb.) göre mi hesaplanacağını belirler."
+  },
+  {
+    "modul": "QM",
+    "bolum": "1. Kalite Ana Verileri (Quality Master Data)",
+    "t_code": "QDB1",
+    "aciklama": "Dinamikleştirme Kuralı (Dynamic Modification Rule): Geçmiş kontrol sonuçlarına göre kontrol sıklığını artırma veya azaltma (Skip/Atlama kuralları) tanımlar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "1. Kalite Ana Verileri (Quality Master Data)",
+    "t_code": "QDB2",
+    "aciklama": "Dinamikleştirme Kuralı (Dynamic Modification Rule): Geçmiş kontrol sonuçlarına göre kontrol sıklığını artırma veya azaltma (Skip/Atlama kuralları) tanımlar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "1. Kalite Ana Verileri (Quality Master Data)",
+    "t_code": "QDB3",
+    "aciklama": "Dinamikleştirme Kuralı (Dynamic Modification Rule): Geçmiş kontrol sonuçlarına göre kontrol sıklığını artırma veya azaltma (Skip/Atlama kuralları) tanımlar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "2. Kalite Kontrol Lotu Yönetimi (Inspection Lot Management)",
+    "t_code": "QA01",
+    "aciklama": "Kalite Lotu Oluşturma / Değiştirme / Görüntüleme: Manuel olarak kalite kontrol lotu açar veya var olan lotun verilerini inceler."
+  },
+  {
+    "modul": "QM",
+    "bolum": "2. Kalite Kontrol Lotu Yönetimi (Inspection Lot Management)",
+    "t_code": "QA02",
+    "aciklama": "Kalite Lotu Oluşturma / Değiştirme / Görüntüleme: Manuel olarak kalite kontrol lotu açar veya var olan lotun verilerini inceler."
+  },
+  {
+    "modul": "QM",
+    "bolum": "2. Kalite Kontrol Lotu Yönetimi (Inspection Lot Management)",
+    "t_code": "QA03",
+    "aciklama": "Kalite Lotu Oluşturma / Değiştirme / Görüntüleme: Manuel olarak kalite kontrol lotu açar veya var olan lotun verilerini inceler."
+  },
+  {
+    "modul": "QM",
+    "bolum": "2. Kalite Kontrol Lotu Yönetimi (Inspection Lot Management)",
+    "t_code": "QA32",
+    "aciklama": "Kalite Lotu Çalışma Listesi (Inspection Lot Worklist): Açık, ölçümü bekleyen veya kararı verilmiş tüm kalite lotlarının yönetildiği ve filtreler ile sorgulandığı ana kontrol merkezidir."
+  },
+  {
+    "modul": "QM",
+    "bolum": "2. Kalite Kontrol Lotu Yönetimi (Inspection Lot Management)",
+    "t_code": "QA33",
+    "aciklama": "Kalite Lotu Çalışma Listesi (Inspection Lot Worklist): Açık, ölçümü bekleyen veya kararı verilmiş tüm kalite lotlarının yönetildiği ve filtreler ile sorgulandığı ana kontrol merkezidir."
+  },
+  {
+    "modul": "QM",
+    "bolum": "2. Kalite Kontrol Lotu Yönetimi (Inspection Lot Management)",
+    "t_code": "QA08",
+    "aciklama": "Malzemelere toplu olarak kalite kontrol türü (Inspection Type - 01 Mal Giriş, 04 Üretim vb.) atama veya aktifleştirme."
+  },
+  {
+    "modul": "QM",
+    "bolum": "2. Kalite Kontrol Lotu Yönetimi (Inspection Lot Management)",
+    "t_code": "QA05",
+    "aciklama": "Son kullanma tarihi (SKT / Expiration Date) yaklaşan stoklar için otomatik kalite lotu oluşturma."
+  },
+  {
+    "modul": "QM",
+    "bolum": "3. Kontrol Sonuçlarının Girilmesi ve Teyit (Result Recording)",
+    "t_code": "QE11",
+    "aciklama": "Kontrol Sonucu Girme / Değiştirme / Görüntüleme: Tek bir kalite lotu için ölçüm değerlerini (ör. 12.5 mm, 80 kg) sisteme kaydeder."
+  },
+  {
+    "modul": "QM",
+    "bolum": "3. Kontrol Sonuçlarının Girilmesi ve Teyit (Result Recording)",
+    "t_code": "QE12",
+    "aciklama": "Kontrol Sonucu Girme / Değiştirme / Görüntüleme: Tek bir kalite lotu için ölçüm değerlerini (ör. 12.5 mm, 80 kg) sisteme kaydeder."
+  },
+  {
+    "modul": "QM",
+    "bolum": "3. Kontrol Sonuçlarının Girilmesi ve Teyit (Result Recording)",
+    "t_code": "QE13",
+    "aciklama": "Kontrol Sonucu Girme / Değiştirme / Görüntüleme: Tek bir kalite lotu için ölçüm değerlerini (ör. 12.5 mm, 80 kg) sisteme kaydeder."
+  },
+  {
+    "modul": "QM",
+    "bolum": "3. Kontrol Sonuçlarının Girilmesi ve Teyit (Result Recording)",
+    "t_code": "QE17",
+    "aciklama": "Yüksek hacimli ölçümler için hızlı/toplu sonuç girişi yapma."
+  },
+  {
+    "modul": "QM",
+    "bolum": "3. Kontrol Sonuçlarının Girilmesi ve Teyit (Result Recording)",
+    "t_code": "QE51N",
+    "aciklama": "Gözden Geçirme ve Sonuç Girişi Monitörü (Worklist Result Recording): İş merkezine, laboratuvara veya malzemeye göre bekleyen testleri listeleyip sonuç girme ekranı."
+  },
+  {
+    "modul": "QM",
+    "bolum": "3. Kontrol Sonuçlarının Girilmesi ve Teyit (Result Recording)",
+    "t_code": "QER1",
+    "aciklama": "Kontrol sonuçları kayıt geçmişi ve değişiklik belgelerini görüntüleme."
+  },
+  {
+    "modul": "QM",
+    "bolum": "4. Kullanım Kararı ve Stok Serbest Bırakma (Usage Decision - UD)",
+    "t_code": "QA11",
+    "aciklama": "Kullanım Kararı Verme (Usage Decision): Kalite lotu için nihai kararı (Kabul / Red / Şartlı Kabul) verir ve stok transferini (105 / 321 / 350 hareketi) otomatik gerçekleştirir."
+  },
+  {
+    "modul": "QM",
+    "bolum": "4. Kullanım Kararı ve Stok Serbest Bırakma (Usage Decision - UD)",
+    "t_code": "QA12",
+    "aciklama": "Kullanım kararını değiştirme / görüntüleme."
+  },
+  {
+    "modul": "QM",
+    "bolum": "4. Kullanım Kararı ve Stok Serbest Bırakma (Usage Decision - UD)",
+    "t_code": "QA13",
+    "aciklama": "Kullanım kararını değiştirme / görüntüleme."
+  },
+  {
+    "modul": "QM",
+    "bolum": "4. Kullanım Kararı ve Stok Serbest Bırakma (Usage Decision - UD)",
+    "t_code": "QA14",
+    "aciklama": "Verilmiş bir kullanım kararını ve arka plandaki stok hareketlerini iptal etme / yeniden değerlendirme."
+  },
+  {
+    "modul": "QM",
+    "bolum": "4. Kullanım Kararı ve Stok Serbest Bırakma (Usage Decision - UD)",
+    "t_code": "QA10",
+    "aciklama": "Otomatik kullanım kararı çalıştırma (Testleri tamamlanmış uygun lotlar için toplu onay)."
+  },
+  {
+    "modul": "QM",
+    "bolum": "5. Kalite Bildirimleri / Hata Yönetimi (Quality Notifications - CAPA / DÖF)",
+    "t_code": "QN01",
+    "aciklama": "Kalite Bildirimi Oluşturma / Değiştirme / Görüntüleme: Müşteri şikayeti (Q1), Satıcı hatası (Q2) veya İç üretim hatası (Q3) için uygunsuzluk kaydı açar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "5. Kalite Bildirimleri / Hata Yönetimi (Quality Notifications - CAPA / DÖF)",
+    "t_code": "QN02",
+    "aciklama": "Kalite Bildirimi Oluşturma / Değiştirme / Görüntüleme: Müşteri şikayeti (Q1), Satıcı hatası (Q2) veya İç üretim hatası (Q3) için uygunsuzluk kaydı açar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "5. Kalite Bildirimleri / Hata Yönetimi (Quality Notifications - CAPA / DÖF)",
+    "t_code": "QN03",
+    "aciklama": "Kalite Bildirimi Oluşturma / Değiştirme / Görüntüleme: Müşteri şikayeti (Q1), Satıcı hatası (Q2) veya İç üretim hatası (Q3) için uygunsuzluk kaydı açar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "5. Kalite Bildirimleri / Hata Yönetimi (Quality Notifications - CAPA / DÖF)",
+    "t_code": "QM10",
+    "aciklama": "Kalite bildirimleri listesini sorgulama ve raporlama."
+  },
+  {
+    "modul": "QM",
+    "bolum": "5. Kalite Bildirimleri / Hata Yönetimi (Quality Notifications - CAPA / DÖF)",
+    "t_code": "QM11",
+    "aciklama": "Kalite bildirimleri listesini sorgulama ve raporlama."
+  },
+  {
+    "modul": "QM",
+    "bolum": "5. Kalite Bildirimleri / Hata Yönetimi (Quality Notifications - CAPA / DÖF)",
+    "t_code": "QM12",
+    "aciklama": "Kalite bildirimlerine bağlı aksiyonları/görevleri (Tasks) listeleme ve tamamlama takibi."
+  },
+  {
+    "modul": "QM",
+    "bolum": "5. Kalite Bildirimleri / Hata Yönetimi (Quality Notifications - CAPA / DÖF)",
+    "t_code": "QM13",
+    "aciklama": "Kalite bildirimlerine bağlı aksiyonları/görevleri (Tasks) listeleme ve tamamlama takibi."
+  },
+  {
+    "modul": "QM",
+    "bolum": "5. Kalite Bildirimleri / Hata Yönetimi (Quality Notifications - CAPA / DÖF)",
+    "t_code": "QM15",
+    "aciklama": "Kalite bildirimlerindeki hata kalemlerini (Items) detaylı raporlama."
+  },
+  {
+    "modul": "QM",
+    "bolum": "6. Kalite Sertifikası Yönetimi (Quality Certificates)",
+    "t_code": "QC01",
+    "aciklama": "Sertifika Profili Oluşturma / Değiştirme / Görüntüleme: Müşteriye verilecek sertifikada hangi test sonuçlarının yer alacağını kurgular."
+  },
+  {
+    "modul": "QM",
+    "bolum": "6. Kalite Sertifikası Yönetimi (Quality Certificates)",
+    "t_code": "QC02",
+    "aciklama": "Sertifika Profili Oluşturma / Değiştirme / Görüntüleme: Müşteriye verilecek sertifikada hangi test sonuçlarının yer alacağını kurgular."
+  },
+  {
+    "modul": "QM",
+    "bolum": "6. Kalite Sertifikası Yönetimi (Quality Certificates)",
+    "t_code": "QC03",
+    "aciklama": "Sertifika Profili Oluşturma / Değiştirme / Görüntüleme: Müşteriye verilecek sertifikada hangi test sonuçlarının yer alacağını kurgular."
+  },
+  {
+    "modul": "QM",
+    "bolum": "6. Kalite Sertifikası Yönetimi (Quality Certificates)",
+    "t_code": "QC20",
+    "aciklama": "Sevkiyat (Outbound Delivery) referansıyla müşteri analiz sertifikası basma / PDF üretme."
+  },
+  {
+    "modul": "QM",
+    "bolum": "6. Kalite Sertifikası Yönetimi (Quality Certificates)",
+    "t_code": "QC51",
+    "aciklama": "Satıcıdan gelen kalite sertifikalarını sisteme kaydetme ve onaylama."
+  },
+  {
+    "modul": "QM",
+    "bolum": "6. Kalite Sertifikası Yönetimi (Quality Certificates)",
+    "t_code": "QC52",
+    "aciklama": "Satıcıdan gelen kalite sertifikalarını sisteme kaydetme ve onaylama."
+  },
+  {
+    "modul": "QM",
+    "bolum": "6. Kalite Sertifikası Yönetimi (Quality Certificates)",
+    "t_code": "QC53",
+    "aciklama": "Satıcıdan gelen kalite sertifikalarını sisteme kaydetme ve onaylama."
+  },
+  {
+    "modul": "QM",
+    "bolum": "7. Tedarikçi Kalite Değerlendirmesi ve Kontrol Tipi (Vendor Quality / Control Loops)",
+    "t_code": "QI01",
+    "aciklama": "Kalite Bilgi Kaydı (Quality Info Record) Oluşturma / Değiştirme / Görüntüleme: Belli bir satıcının belli bir malzemeyi teslim etmeden önce sahip olması gereken kalite onaylarını tanımlar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "7. Tedarikçi Kalite Değerlendirmesi ve Kontrol Tipi (Vendor Quality / Control Loops)",
+    "t_code": "QI02",
+    "aciklama": "Kalite Bilgi Kaydı (Quality Info Record) Oluşturma / Değiştirme / Görüntüleme: Belli bir satıcının belli bir malzemeyi teslim etmeden önce sahip olması gereken kalite onaylarını tanımlar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "7. Tedarikçi Kalite Değerlendirmesi ve Kontrol Tipi (Vendor Quality / Control Loops)",
+    "t_code": "QI03",
+    "aciklama": "Kalite Bilgi Kaydı (Quality Info Record) Oluşturma / Değiştirme / Görüntüleme: Belli bir satıcının belli bir malzemeyi teslim etmeden önce sahip olması gereken kalite onaylarını tanımlar."
+  },
+  {
+    "modul": "QM",
+    "bolum": "7. Tedarikçi Kalite Değerlendirmesi ve Kontrol Tipi (Vendor Quality / Control Loops)",
+    "t_code": "QG21",
+    "aciklama": "Tedarikçilerin kalite performans indeksini ve hata istatistiklerini raporlama."
+  },
+  {
+    "modul": "SD",
+    "bolum": "1. Müşteri ve Satış Ana Verileri (Master Data)",
+    "t_code": "VD01",
+    "aciklama": "Müşteri Oluşturma / Değiştirme / Görüntüleme: Satış Alanı (Satış Org, Dağıtım Kanalı, Bölüm) bazlı müşteri verisi."
+  },
+  {
+    "modul": "SD",
+    "bolum": "1. Müşteri ve Satış Ana Verileri (Master Data)",
+    "t_code": "VD02",
+    "aciklama": "Müşteri Oluşturma / Değiştirme / Görüntüleme: Satış Alanı (Satış Org, Dağıtım Kanalı, Bölüm) bazlı müşteri verisi."
+  },
+  {
+    "modul": "SD",
+    "bolum": "1. Müşteri ve Satış Ana Verileri (Master Data)",
+    "t_code": "VD03",
+    "aciklama": "Müşteri Oluşturma / Değiştirme / Görüntüleme: Satış Alanı (Satış Org, Dağıtım Kanalı, Bölüm) bazlı müşteri verisi."
+  },
+  {
+    "modul": "SD",
+    "bolum": "1. Müşteri ve Satış Ana Verileri (Master Data)",
+    "t_code": "XD01",
+    "aciklama": "Merkezi Müşteri Oluşturma: Genel, Mali (FI) ve Satış (SD) verilerini tek seferde tanımlar."
+  },
+  {
+    "modul": "SD",
+    "bolum": "1. Müşteri ve Satış Ana Verileri (Master Data)",
+    "t_code": "XD02",
+    "aciklama": "Merkezi Müşteri Oluşturma: Genel, Mali (FI) ve Satış (SD) verilerini tek seferde tanımlar."
+  },
+  {
+    "modul": "SD",
+    "bolum": "1. Müşteri ve Satış Ana Verileri (Master Data)",
+    "t_code": "XD03",
+    "aciklama": "Merkezi Müşteri Oluşturma: Genel, Mali (FI) ve Satış (SD) verilerini tek seferde tanımlar."
+  },
+  {
+    "modul": "SD",
+    "bolum": "1. Müşteri ve Satış Ana Verileri (Master Data)",
+    "t_code": "BP",
+    "aciklama": "Business Partner: S/4HANA yapısında müşteri ve tedarikçilerin yönetildiği merkezi ekran."
+  },
+  {
+    "modul": "SD",
+    "bolum": "1. Müşteri ve Satış Ana Verileri (Master Data)",
+    "t_code": "VD51",
+    "aciklama": "Müşteri-Malzeme Bilgi Kaydı (Customer-Material Info Record): Müşterinin malzemeye verdiği özel kod ve tanımları eşleştirmek için kullanılır."
+  },
+  {
+    "modul": "SD",
+    "bolum": "1. Müşteri ve Satış Ana Verileri (Master Data)",
+    "t_code": "VD52",
+    "aciklama": "Müşteri-Malzeme Bilgi Kaydı (Customer-Material Info Record): Müşterinin malzemeye verdiği özel kod ve tanımları eşleştirmek için kullanılır."
+  },
+  {
+    "modul": "SD",
+    "bolum": "1. Müşteri ve Satış Ana Verileri (Master Data)",
+    "t_code": "VD53",
+    "aciklama": "Müşteri-Malzeme Bilgi Kaydı (Customer-Material Info Record): Müşterinin malzemeye verdiği özel kod ve tanımları eşleştirmek için kullanılır."
+  },
+  {
+    "modul": "SD",
+    "bolum": "1. Müşteri ve Satış Ana Verileri (Master Data)",
+    "t_code": "VD55",
+    "aciklama": "Müşteri-malzeme bilgi kayıtları listesi."
+  },
+  {
+    "modul": "SD",
+    "bolum": "2. Fiyatlandırma ve Koşul Ana Verileri (Pricing & Condition Records)",
+    "t_code": "VK11",
+    "aciklama": "Fiyat Koşul Kaydı Oluşturma: Malzeme, müşteri veya ürün grubuna özel baz fiyat/iskonto tanımlar."
+  },
+  {
+    "modul": "SD",
+    "bolum": "2. Fiyatlandırma ve Koşul Ana Verileri (Pricing & Condition Records)",
+    "t_code": "VK12",
+    "aciklama": "Fiyat Koşul Kaydı Değiştirme: Fiyat listelerini veya geçerlilik tarihlerini günceller."
+  },
+  {
+    "modul": "SD",
+    "bolum": "2. Fiyatlandırma ve Koşul Ana Verileri (Pricing & Condition Records)",
+    "t_code": "VK13",
+    "aciklama": "Fiyat Koşul Kaydı Görüntüleme: Tanımlı fiyatlandırma koşullarını inceleme."
+  },
+  {
+    "modul": "SD",
+    "bolum": "2. Fiyatlandırma ve Koşul Ana Verileri (Pricing & Condition Records)",
+    "t_code": "VK14",
+    "aciklama": "Referans ile hızlı fiyat koşulu oluşturma."
+  },
+  {
+    "modul": "SD",
+    "bolum": "2. Fiyatlandırma ve Koşul Ana Verileri (Pricing & Condition Records)",
+    "t_code": "V/06",
+    "aciklama": "Koşul türlerini (Condition Types - PR00, K007, MWST vb.) uyarlama/inceleme."
+  },
+  {
+    "modul": "SD",
+    "bolum": "2. Fiyatlandırma ve Koşul Ana Verileri (Pricing & Condition Records)",
+    "t_code": "V/08",
+    "aciklama": "Fiyatlandırma prosedürü (Pricing Procedure) yapısını inceleme."
+  },
+  {
+    "modul": "SD",
+    "bolum": "3. Satış Öncesi Süreçler (Pre-Sales: Inquiry & Quotation)",
+    "t_code": "VA11",
+    "aciklama": "Müşteri Talebi (Inquiry) Oluşturma / Değiştirme / Görüntüleme: Müşterinin fiyat/stok sorduğu bağlayıcı olmayan ön talep."
+  },
+  {
+    "modul": "SD",
+    "bolum": "3. Satış Öncesi Süreçler (Pre-Sales: Inquiry & Quotation)",
+    "t_code": "VA12",
+    "aciklama": "Müşteri Talebi (Inquiry) Oluşturma / Değiştirme / Görüntüleme: Müşterinin fiyat/stok sorduğu bağlayıcı olmayan ön talep."
+  },
+  {
+    "modul": "SD",
+    "bolum": "3. Satış Öncesi Süreçler (Pre-Sales: Inquiry & Quotation)",
+    "t_code": "VA13",
+    "aciklama": "Müşteri Talebi (Inquiry) Oluşturma / Değiştirme / Görüntüleme: Müşterinin fiyat/stok sorduğu bağlayıcı olmayan ön talep."
+  },
+  {
+    "modul": "SD",
+    "bolum": "3. Satış Öncesi Süreçler (Pre-Sales: Inquiry & Quotation)",
+    "t_code": "VA21",
+    "aciklama": "Teklif (Quotation) Oluşturma / Değiştirme / Görüntüleme: Belirli bir geçerlilik süresi olan resmi fiyat teklifi."
+  },
+  {
+    "modul": "SD",
+    "bolum": "3. Satış Öncesi Süreçler (Pre-Sales: Inquiry & Quotation)",
+    "t_code": "VA22",
+    "aciklama": "Teklif (Quotation) Oluşturma / Değiştirme / Görüntüleme: Belirli bir geçerlilik süresi olan resmi fiyat teklifi."
+  },
+  {
+    "modul": "SD",
+    "bolum": "3. Satış Öncesi Süreçler (Pre-Sales: Inquiry & Quotation)",
+    "t_code": "VA23",
+    "aciklama": "Teklif (Quotation) Oluşturma / Değiştirme / Görüntüleme: Belirli bir geçerlilik süresi olan resmi fiyat teklifi."
+  },
+  {
+    "modul": "SD",
+    "bolum": "3. Satış Öncesi Süreçler (Pre-Sales: Inquiry & Quotation)",
+    "t_code": "VA15",
+    "aciklama": "Müşteri talepleri listesi."
+  },
+  {
+    "modul": "SD",
+    "bolum": "3. Satış Öncesi Süreçler (Pre-Sales: Inquiry & Quotation)",
+    "t_code": "VA25",
+    "aciklama": "Müşteri teklifleri listesi."
+  },
+  {
+    "modul": "SD",
+    "bolum": "4. Satış Sipariş Yönetimi (Sales Order Management)",
+    "t_code": "VA01",
+    "aciklama": "Satış Siparişi Oluşturma: Satış türü (OR, BV, RE vb.) seçilerek sipariş açılır. Tekliften referansla da oluşturulabilir."
+  },
+  {
+    "modul": "SD",
+    "bolum": "4. Satış Sipariş Yönetimi (Sales Order Management)",
+    "t_code": "VA02",
+    "aciklama": "Satış Siparişi Değiştirme: Sipariş miktarı, fiyat, teslimat adresi veya kalem durumunu güncelleme."
+  },
+  {
+    "modul": "SD",
+    "bolum": "4. Satış Sipariş Yönetimi (Sales Order Management)",
+    "t_code": "VA03",
+    "aciklama": "Satış Siparişi Görüntüleme: Siparişin genel durumu, akışı ve bağlı belgeleri inceleme."
+  },
+  {
+    "modul": "SD",
+    "bolum": "4. Satış Sipariş Yönetimi (Sales Order Management)",
+    "t_code": "VA05",
+    "aciklama": "Satış Siparişleri Listesi: Müşteri, malzeme veya satış alanına göre sipariş sorgulama ve raporlama."
+  },
+  {
+    "modul": "SD",
+    "bolum": "4. Satış Sipariş Yönetimi (Sales Order Management)",
+    "t_code": "VA05N",
+    "aciklama": "Satış Siparişleri Listesi: Müşteri, malzeme veya satış alanına göre sipariş sorgulama ve raporlama."
+  },
+  {
+    "modul": "SD",
+    "bolum": "4. Satış Sipariş Yönetimi (Sales Order Management)",
+    "t_code": "VA14L",
+    "aciklama": "Teslimat engeli (Delivery Block) veya fatura engeli bulunan siparişlerin listesi."
+  },
+  {
+    "modul": "SD",
+    "bolum": "4. Satış Sipariş Yönetimi (Sales Order Management)",
+    "t_code": "V.23",
+    "aciklama": "Faturaya kilitlenmiş siparişlerin toplu kilidini kaldırma."
+  },
+  {
+    "modul": "SD",
+    "bolum": "5. Çerçeve Anlaşmalar ve Sözleşmeler (Contracts & Scheduling Agreements)",
+    "t_code": "VA31",
+    "aciklama": "Teslimat Planı (Scheduling Agreement) Oluşturma / Değiştirme / Görüntüleme: Otomotiv/uzun vadeli periyodik sevkiyatlar için."
+  },
+  {
+    "modul": "SD",
+    "bolum": "5. Çerçeve Anlaşmalar ve Sözleşmeler (Contracts & Scheduling Agreements)",
+    "t_code": "VA32",
+    "aciklama": "Teslimat Planı (Scheduling Agreement) Oluşturma / Değiştirme / Görüntüleme: Otomotiv/uzun vadeli periyodik sevkiyatlar için."
+  },
+  {
+    "modul": "SD",
+    "bolum": "5. Çerçeve Anlaşmalar ve Sözleşmeler (Contracts & Scheduling Agreements)",
+    "t_code": "VA33",
+    "aciklama": "Teslimat Planı (Scheduling Agreement) Oluşturma / Değiştirme / Görüntüleme: Otomotiv/uzun vadeli periyodik sevkiyatlar için."
+  },
+  {
+    "modul": "SD",
+    "bolum": "5. Çerçeve Anlaşmalar ve Sözleşmeler (Contracts & Scheduling Agreements)",
+    "t_code": "VA41",
+    "aciklama": "Satış Sözleşmesi (Contract) Oluşturma / Değiştirme / Görüntüleme: Tutar veya miktar taahhütlü ana satış sözleşmeleri."
+  },
+  {
+    "modul": "SD",
+    "bolum": "5. Çerçeve Anlaşmalar ve Sözleşmeler (Contracts & Scheduling Agreements)",
+    "t_code": "VA42",
+    "aciklama": "Satış Sözleşmesi (Contract) Oluşturma / Değiştirme / Görüntüleme: Tutar veya miktar taahhütlü ana satış sözleşmeleri."
+  },
+  {
+    "modul": "SD",
+    "bolum": "5. Çerçeve Anlaşmalar ve Sözleşmeler (Contracts & Scheduling Agreements)",
+    "t_code": "VA43",
+    "aciklama": "Satış Sözleşmesi (Contract) Oluşturma / Değiştirme / Görüntüleme: Tutar veya miktar taahhütlü ana satış sözleşmeleri."
+  },
+  {
+    "modul": "SD",
+    "bolum": "5. Çerçeve Anlaşmalar ve Sözleşmeler (Contracts & Scheduling Agreements)",
+    "t_code": "VA45",
+    "aciklama": "Müşteri sözleşmeleri listesi."
+  },
+  {
+    "modul": "SD",
+    "bolum": "6. Sevkiyat ve Teslimat İşlemleri (Shipping & Outbound Delivery)",
+    "t_code": "VL01N",
+    "aciklama": "Tekil Teslimat Oluşturma (Outbound Delivery): Belirli bir satış siparişi için sevkiyat belgesi açar."
+  },
+  {
+    "modul": "SD",
+    "bolum": "6. Sevkiyat ve Teslimat İşlemleri (Shipping & Outbound Delivery)",
+    "t_code": "VL02N",
+    "aciklama": "Teslimat Değiştirme: Toplama miktarını girme, ambalajlama yapma ve Mal Çıkışını Kaydetme (Post Goods Issue - PGI)."
+  },
+  {
+    "modul": "SD",
+    "bolum": "6. Sevkiyat ve Teslimat İşlemleri (Shipping & Outbound Delivery)",
+    "t_code": "VL03N",
+    "aciklama": "Teslimat Görüntüleme: Sevkiyat belgesini inceleme."
+  },
+  {
+    "modul": "SD",
+    "bolum": "6. Sevkiyat ve Teslimat İşlemleri (Shipping & Outbound Delivery)",
+    "t_code": "VL10A",
+    "aciklama": "Toplu Teslimat Oluşturma (Delivery Due List): Sevkiyat zamanı gelmiş siparişler için topluca teslimat belgesi üretir."
+  },
+  {
+    "modul": "SD",
+    "bolum": "6. Sevkiyat ve Teslimat İşlemleri (Shipping & Outbound Delivery)",
+    "t_code": "VL10C",
+    "aciklama": "Toplu Teslimat Oluşturma (Delivery Due List): Sevkiyat zamanı gelmiş siparişler için topluca teslimat belgesi üretir."
+  },
+  {
+    "modul": "SD",
+    "bolum": "6. Sevkiyat ve Teslimat İşlemleri (Shipping & Outbound Delivery)",
+    "t_code": "VL06O",
+    "aciklama": "Outbound Delivery Monitor: Sevkiyat izleme monitörü (toplanacak, mal çıkışı yapılacak tüm teslimatların tek ekrandan takibi)."
+  },
+  {
+    "modul": "SD",
+    "bolum": "6. Sevkiyat ve Teslimat İşlemleri (Shipping & Outbound Delivery)",
+    "t_code": "VL09",
+    "aciklama": "Mal Çıkışını İptal Etme (Reverse PGI): Yanlışlıkla yapılan mal çıkış kaydını ters kayıt ile geri alma."
+  },
+  {
+    "modul": "SD",
+    "bolum": "7. Fatura Oluşturma ve Faturalama Listeleri (Billing)",
+    "t_code": "VF01",
+    "aciklama": "Fatura Oluşturma (Billing Document): Teslimat veya sipariş referansıyla müşteri faturası keser."
+  },
+  {
+    "modul": "SD",
+    "bolum": "7. Fatura Oluşturma ve Faturalama Listeleri (Billing)",
+    "t_code": "VF02",
+    "aciklama": "Fatura Değiştirme / Muhasebeye Aktarma: Fatura metinlerini düzenler veya muhasebe kaydı oluşmamışsa tekrar serbest bırakır (Release to Accounting)."
+  },
+  {
+    "modul": "SD",
+    "bolum": "7. Fatura Oluşturma ve Faturalama Listeleri (Billing)",
+    "t_code": "VF03",
+    "aciklama": "Fatura Görüntüleme: Kesilen faturanın detaylarını ve oluşan FI muhasebe belgesini inceler."
+  },
+  {
+    "modul": "SD",
+    "bolum": "7. Fatura Oluşturma ve Faturalama Listeleri (Billing)",
+    "t_code": "VF04",
+    "aciklama": "Faturalama Havuzu (Billing Due List): Faturası kesilmeye hazır teslimat ve siparişlerin toplu listesi."
+  },
+  {
+    "modul": "SD",
+    "bolum": "7. Fatura Oluşturma ve Faturalama Listeleri (Billing)",
+    "t_code": "VF11",
+    "aciklama": "Fatura İptali: Hatalı kesilen SD faturasını ters kayıtla iptal eder."
+  },
+  {
+    "modul": "SD",
+    "bolum": "7. Fatura Oluşturma ve Faturalama Listeleri (Billing)",
+    "t_code": "VF05",
+    "aciklama": "Fatura belgeleri listesi."
+  },
+  {
+    "modul": "SD",
+    "bolum": "7. Fatura Oluşturma ve Faturalama Listeleri (Billing)",
+    "t_code": "VF05N",
+    "aciklama": "Fatura belgeleri listesi."
+  },
+  {
+    "modul": "SD",
+    "bolum": "8. Kredi ve Risk Yönetimi (Credit Management)",
+    "t_code": "FD32",
+    "aciklama": "Müşteri Kredi Limiti Bakımı: Müşterinin risk sınıfı ve kredi limitini tanımlar (Klasik SD)."
+  },
+  {
+    "modul": "SD",
+    "bolum": "8. Kredi ve Risk Yönetimi (Credit Management)",
+    "t_code": "UKM_BP",
+    "aciklama": "FSCM Credit Management: S/4HANA tarafında müşteri kredi limiti ve skorunun yönetildiği ekran."
+  },
+  {
+    "modul": "SD",
+    "bolum": "8. Kredi ve Risk Yönetimi (Credit Management)",
+    "t_code": "VKM1",
+    "aciklama": "Kredi Engelindeki Siparişler: Kredi limitini aştığı için bloke olan siparişleri listeler ve yetkili tarafından blokajı kaldırır."
+  },
+  {
+    "modul": "SD",
+    "bolum": "8. Kredi ve Risk Yönetimi (Credit Management)",
+    "t_code": "VKM3",
+    "aciklama": "Kredi Engelindeki Siparişler: Kredi limitini aştığı için bloke olan siparişleri listeler ve yetkili tarafından blokajı kaldırır."
+  },
+  {
+    "modul": "SD",
+    "bolum": "8. Kredi ve Risk Yönetimi (Credit Management)",
+    "t_code": "VKM4",
+    "aciklama": "Kredi engelindeki tüm belgelerin (sipariş, teslimat) merkezi listesi."
+  },
+  {
+    "modul": "SD",
+    "bolum": "9. İade ve Şikayet Yönetimi (Returns & Claims)",
+    "t_code": "VA01 (TÜR: RE)",
+    "aciklama": "İade Siparişi Oluşturma: Müşterinin geri göndereceği ürünler için sipariş açar."
+  },
+  {
+    "modul": "SD",
+    "bolum": "9. İade ve Şikayet Yönetimi (Returns & Claims)",
+    "t_code": "VL01N (TÜR: LR)",
+    "aciklama": "İade Teslimatı: İade ürünün depoya mal girişini (161/651 hareketi) yapar."
+  },
+  {
+    "modul": "SD",
+    "bolum": "9. İade ve Şikayet Yönetimi (Returns & Claims)",
+    "t_code": "VA01 (TÜR: CR / DR)",
+    "aciklama": "Alacak / Borç Dekont Talebi (Credit/Debit Memo Request): Fiyat farkı düzeltmeleri için onay talebi oluşturur."
+  }
+]
