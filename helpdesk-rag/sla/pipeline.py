@@ -102,17 +102,6 @@ BIREYSEL_ISARETLER = [
     "kendi işlemlerimi"
 ]
 
-# ---------------------------------------------------------------------------
-# YENİ: İyelik eki (morfoloji) tabanlı tespit
-# ---------------------------------------------------------------------------
-# Sabit ifade listeleri ("departmanı", "sadece ben" vb.) yalnızca metinde
-# BİREBİR o kelime geçerse çalışır; "sunucumuz çöktü", "ağımız kesildi",
-# "VPN'imiz düşüyor" gibi köke "biz" iyelik eki (-mız/-miz/-muz/-müz)
-# almış onlarca farklı BT terimini YAKALAYAMAZ. Aynı şekilde "bilgisayarım",
-# "şifrem", "yazıcım" gibi "ben" iyelik eki (-ım/-im/-um/-üm/-m) alan
-# tekil ifadeler de listede yoksa kaçırılır. Bu yüzden ek bazlı bir regex
-# ile genel bir çözüm ekliyoruz; sabit listeler onun üzerine ek güvence
-# olarak kalıyor.
 IT_VARLIK_KOKLERI = [
     "bilgisayar", "sunucu", "sistem", "ağ", "ekran", "yazıcı", "hesap", "hesab",
     "şifre", "vpn", "sap", "server", "network", "mail", "e-posta", "eposta",
@@ -196,12 +185,6 @@ def veri_hazirla_ve_temizle(df):
     df['metin'] = (df['konu'].astype(str) + " " + df['sorun_aciklamasi'].astype(str)).str.strip()
     df['maskelenmis_metin'] = df['metin'].apply(veriyi_maskele)
     df['sap_modulu'] = df['metin'].apply(sap_modul_analizi)
-    # YENİ EĞİTİM ÖZELLİĞİ: "departman/şirket geneli mi yoksa bireysel mi"
-    # sinyali artık kural-sonrası bir ceza değil, modele verilen gerçek bir
-    # sütun. RandomForest bu sütunun sınıflarla ilişkisini eğitim verisinden
-    # kendi öğrenir (kelime kökü ne olursa olsun -mız/-miz/-muz/-müz iyelik
-    # eki mi, yoksa -ım/-im/-um/-üm mü almış, veya "departmanı/ekibi/herkes"
-    # gibi sabit bir ifade mi geçiyor -> hepsi tek bir int(0/1) özelliğe iner).
     df['departman_geneli_flag'] = df['metin'].apply(lambda m: int(departman_geneli_etkisi_var_mi(m)))
     return df
 
@@ -456,15 +439,6 @@ def gelen_maili_veya_gorseli_isle(girdi_verisi, tip='metin'):
             en_yuksek_olasilik -= 0.40  # Güven skorunu %40 düşür
             ceza_uygulandi_mi = True
 
-    # ARTIK BURADA MANUEL BİR CEZA UYGULAMIYORUZ.
-    # Önceki sürümde "departman geneli sinyali yoksa güveni -%35 düşür"
-    # şeklinde ayrı bir kural vardı. Bu sinyal artık modelin kendi eğitim
-    # özelliği (departman_geneli_flag) olduğu için, RandomForest bunun
-    # SLA sınıflarıyla ilişkisini ZATEN kendi olasılık tahminine gömüyor.
-    # Üstüne bir de elle ceza uygulamak aynı sinyali iki kez saymak
-    # (double counting) olur ve güven skorunu yapay şekilde çarpıtır.
-    # Sadece şeffaflık için, tahmin 1/2 çıktığında ama sinyal yoksa
-    # bilgilendirici bir not düşüyoruz (skoru DEĞİŞTİRMEDEN):
     departman_sinyali_bilgi_notu = (tahmin in [1, 2]) and (not departman_geneli_mi)
 
     if en_yuksek_olasilik < 0.01:
