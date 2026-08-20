@@ -1,0 +1,38 @@
+{
+"support_groups": [
+	{
+		"id" : "9b826ff5-d32b-42c2-9e55-1a44b99b3554",
+		"name" : "Genel Triyaj",
+		"email_alias" : null,
+		"description" : "Sınıflandırılamayan talepler için insan triyaj kuyruğu",
+		"created_at" : "2026-07-28T11:03:33.925Z"
+	},
+	{
+		"id" : "e7d5dc65-8d42-4763-a249-4103927ff431",
+		"name" : "SAP Danışman Ekibi",
+		"email_alias" : "sapdestek@gmail.com",
+		"description" : "SAP modülleri (FI, MM, SD) ve iş süreçleri desteği",
+		"created_at" : "2026-07-28T11:03:33.925Z"
+	},
+	{
+		"id" : "8cd82ed0-91f8-4b33-9e6d-f55af97f43f2",
+		"name" : "BT Destek Ekibi",
+		"email_alias" : "btdestek@gmail.com",
+		"description" : "Donanım, ağ, e-posta, hesap ve genel BT desteği",
+		"created_at" : "2026-07-28T11:03:33.925Z"
+	},
+	{
+		"id" : "b114c09b-1e9a-4823-8182-6cb281f00b54",
+		"name" : "SAP Basis",
+		"email_alias" : null,
+		"description" : "",
+		"created_at" : "2026-07-28T11:27:47.361Z"
+	},
+	{
+		"id" : "e6915835-5a9d-4415-adc5-ea931cb773a0",
+		"name" : "IT Destek",
+		"email_alias" : null,
+		"description" : "",
+		"created_at" : "2026-07-29T07:15:54.995Z"
+	}
+]}

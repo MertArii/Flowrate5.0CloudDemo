@@ -1,0 +1,51 @@
+{
+"routing_rules": [
+	{
+		"id" : "162dae1c-7ae8-4455-bd63-b97dfc1bff96",
+		"rule_name" : "SAP Mail Doğrudan Atama",
+		"recipient_email_pattern" : "sapdestek@%",
+		"keyword_triggers" : "{VL01N,VA03,FB60,MMBE}",
+		"sender_domain" : null,
+		"target_group_id" : "e7d5dc65-8d42-4763-a249-4103927ff431",
+		"default_assigned_agent_id" : null,
+		"priority_score" : 20,
+		"is_active" : true,
+		"created_at" : "2026-07-28T11:03:33.965Z"
+	},
+	{
+		"id" : "8d8979db-a7f6-4444-a531-209a9f11f520",
+		"rule_name" : "BT Mail Doğrudan Atama",
+		"recipient_email_pattern" : "btdestek@%",
+		"keyword_triggers" : "{monitör,outlook,parola,yazıcı}",
+		"sender_domain" : null,
+		"target_group_id" : "8cd82ed0-91f8-4b33-9e6d-f55af97f43f2",
+		"default_assigned_agent_id" : null,
+		"priority_score" : 20,
+		"is_active" : true,
+		"created_at" : "2026-07-28T11:03:33.965Z"
+	},
+	{
+		"id" : "46939e89-802d-4620-9087-dccc13823f1f",
+		"rule_name" : "SAP Anahtar Kelime",
+		"recipient_email_pattern" : null,
+		"keyword_triggers" : "{SAP,\"teslimat belgesi\",sipariş}",
+		"sender_domain" : null,
+		"target_group_id" : "e7d5dc65-8d42-4763-a249-4103927ff431",
+		"default_assigned_agent_id" : null,
+		"priority_score" : 10,
+		"is_active" : true,
+		"created_at" : "2026-07-28T11:03:33.965Z"
+	},
+	{
+		"id" : "32633301-79e6-4b5a-999a-be27277480de",
+		"rule_name" : "Donanım Anahtar Kelime",
+		"recipient_email_pattern" : null,
+		"keyword_triggers" : "{ekran,kablo,klavye}",
+		"sender_domain" : null,
+		"target_group_id" : "8cd82ed0-91f8-4b33-9e6d-f55af97f43f2",
+		"default_assigned_agent_id" : null,
+		"priority_score" : 10,
+		"is_active" : true,
+		"created_at" : "2026-07-28T11:03:33.965Z"
+	}
+]}

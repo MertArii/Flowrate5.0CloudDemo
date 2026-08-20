@@ -1,0 +1,843 @@
+{
+"ai_feedbacks": [
+	{
+		"id" : "2a3ed471-00f9-4b35-8a20-478301b48938",
+		"message_id" : "004ba0a2-7d7d-4ece-876a-0b6b807fc2bf",
+		"user_id" : "2a1a849e-9db9-4cf7-a0f9-a6b652f5fefb",
+		"rating" : 5,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "aca2e30d-f6de-4b87-b09f-30eb7f3da952",
+		"message_id" : "e0b58c54-9218-4908-adbd-d99b7592fae1",
+		"user_id" : "fe167612-09a1-4d39-9b5d-b66f3110d815",
+		"rating" : 5,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "434f404d-cec2-42b7-ae7b-a11fe16e8650",
+		"message_id" : "fed6c2f8-4036-4f92-99f9-76f5297ccaf0",
+		"user_id" : "8cfa7028-25a9-49ba-9532-b85f4c8be422",
+		"rating" : 5,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "28c36ed4-4b2e-46ac-9c01-12aa2994331e",
+		"message_id" : "36a79385-f11e-428c-8f9a-b80481207a44",
+		"user_id" : "fd71f8a2-7884-47be-b7e0-0624ec2aeb19",
+		"rating" : 5,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "6286cf84-5905-4ecc-b4c3-453a9d950966",
+		"message_id" : "6b0f460f-5c2e-4678-9bac-013580422b5c",
+		"user_id" : "fe167612-09a1-4d39-9b5d-b66f3110d815",
+		"rating" : 4,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "de6d8ec7-b772-4359-83f2-442a03929245",
+		"message_id" : "009dcc3f-2239-43ea-9471-8ccd0c42f611",
+		"user_id" : "9e25d672-0cf8-451d-981a-d10530a30c5b",
+		"rating" : 4,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "2254049e-8b57-4d32-84f9-c8aa062175c5",
+		"message_id" : "8ef71eb6-14b3-4356-80a8-39d892a0c091",
+		"user_id" : "fd71f8a2-7884-47be-b7e0-0624ec2aeb19",
+		"rating" : 5,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "a7f6f90f-0bb2-46c1-ae11-4e45268ec3d4",
+		"message_id" : "1c2eb2bf-f7e2-432a-9636-c4a6dcea98cf",
+		"user_id" : "d452be79-656c-4651-817d-1a200da15727",
+		"rating" : 3,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "cb4c3764-0ad1-469f-b28a-357d248fa803",
+		"message_id" : "80af26d1-0597-4ffd-856b-f898b2b32c4f",
+		"user_id" : "fe167612-09a1-4d39-9b5d-b66f3110d815",
+		"rating" : 5,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "6afa46ca-885f-46bf-a926-786fe2548cfd",
+		"message_id" : "5f8d80e9-691c-4741-9f4d-be36047ff26a",
+		"user_id" : "d3bdaa4e-c353-4fd5-b358-09ac5476b912",
+		"rating" : 5,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "a9ae15c5-fc9d-4c29-8c70-f91084ea5887",
+		"message_id" : "277c44ea-29e4-4689-84bc-c8e5aab31b4b",
+		"user_id" : "2a1a849e-9db9-4cf7-a0f9-a6b652f5fefb",
+		"rating" : 5,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "a9716340-5ac6-499b-b310-6f0713805bb2",
+		"message_id" : "d0007be2-8716-497a-a3c2-4fe8c1b816b4",
+		"user_id" : "78cc4401-f73a-4447-9943-5a3bddec63dc",
+		"rating" : 5,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "02233360-2b82-4c41-a471-0f7f4ec0191b",
+		"message_id" : "61b4692c-2249-4912-a6bb-f552e9c789b2",
+		"user_id" : "f3144acb-ba7a-44b0-b1fc-ff5ed9185315",
+		"rating" : 5,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "a0f44fdd-5435-4c1c-9d2d-2afa1537d0f8",
+		"message_id" : "ea316c71-9b69-4157-9a13-41f244f06061",
+		"user_id" : "8905071e-51f8-4c75-9e65-bd6e09ec63b1",
+		"rating" : 3,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "4c008e19-968e-4078-874c-69364053a676",
+		"message_id" : "e40caea4-239c-4e48-a892-746508e675e8",
+		"user_id" : "64ac6896-d57d-43a1-b0b8-8e098acc470e",
+		"rating" : 5,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "8147b106-f2cc-4f48-9630-2e4ee7404e36",
+		"message_id" : "7f3e67fd-ccf9-432f-b0f8-71c44bbb2d47",
+		"user_id" : "fd71f8a2-7884-47be-b7e0-0624ec2aeb19",
+		"rating" : 5,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "7496b1b9-1258-4be8-a580-1db12f553000",
+		"message_id" : "2d17d019-d11a-4a29-99dc-6bb69c26b94a",
+		"user_id" : "68f7cf53-5de5-41d5-a6f5-cfa527a96871",
+		"rating" : 3,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "c124eb14-8da4-47d2-9a06-33e688222c1f",
+		"message_id" : "a89db95e-fc90-4397-a003-4837078a2e38",
+		"user_id" : "fe167612-09a1-4d39-9b5d-b66f3110d815",
+		"rating" : 4,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "1ee002b8-2e8b-4a0b-b6d2-e950ec1c3a6a",
+		"message_id" : "6c4ba366-72ef-4758-a64e-71242f36f168",
+		"user_id" : "f3144acb-ba7a-44b0-b1fc-ff5ed9185315",
+		"rating" : 3,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "ac14af22-2e31-4f74-8c1f-648027b54efa",
+		"message_id" : "11a078fe-b29d-421f-8482-30b97bb80d04",
+		"user_id" : "8cfa7028-25a9-49ba-9532-b85f4c8be422",
+		"rating" : 4,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:03:33.970Z"
+	},
+	{
+		"id" : "ea31fcf6-3f2d-45a5-ab96-ad6414ee190d",
+		"message_id" : "aa05b5ef-4af4-4f75-9fa2-c0884fc1b387",
+		"user_id" : "d3bdaa4e-c353-4fd5-b358-09ac5476b912",
+		"rating" : 5,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "30f255e8-713a-4b3b-a60e-f70a1eb3e879",
+		"message_id" : "9b6b05ba-e274-474f-a43c-18bd2a6d5137",
+		"user_id" : "9e25d672-0cf8-451d-981a-d10530a30c5b",
+		"rating" : 5,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "1e09a131-6b86-4d42-a5d4-36ca1658ba09",
+		"message_id" : "de3d6335-e96f-4f36-980a-ea368b6760c4",
+		"user_id" : "78cc4401-f73a-4447-9943-5a3bddec63dc",
+		"rating" : 5,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "885ebd98-b90c-46a1-8a90-6f1b01c02ac7",
+		"message_id" : "e8672beb-ee15-43cb-a77e-c4100914b791",
+		"user_id" : "992aa8db-0eec-455c-acb0-1f75c2119bb7",
+		"rating" : 4,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "bc4ae748-34e0-410d-bf16-94644276dd91",
+		"message_id" : "1f430379-799c-4716-9c19-09b43229213b",
+		"user_id" : "2a1a849e-9db9-4cf7-a0f9-a6b652f5fefb",
+		"rating" : 4,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "943f81ea-50f2-4ec2-aff5-edc833c4369b",
+		"message_id" : "f5881414-e6cf-431a-9973-95d1f8ff8f1f",
+		"user_id" : "fe167612-09a1-4d39-9b5d-b66f3110d815",
+		"rating" : 5,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "5d9f8b2e-abb3-4d44-a726-8eb9fa5dfadb",
+		"message_id" : "abf6b70d-1e2e-4e34-b0e9-676b7676c6bb",
+		"user_id" : "d452be79-656c-4651-817d-1a200da15727",
+		"rating" : 4,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "390a7548-9bba-484d-abc4-930b2a299526",
+		"message_id" : "02777511-0e69-4973-817a-fe364e3ac4d6",
+		"user_id" : "8905071e-51f8-4c75-9e65-bd6e09ec63b1",
+		"rating" : 4,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "23bf80d6-5fd8-443f-a652-dde9f034c433",
+		"message_id" : "3be7c63f-5032-4861-a847-d3be074ed31f",
+		"user_id" : "f3144acb-ba7a-44b0-b1fc-ff5ed9185315",
+		"rating" : 4,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "7c36cabb-4e4d-46ef-8bb2-b1275a186600",
+		"message_id" : "67d8d430-a25c-4802-a0c3-b7e65060d392",
+		"user_id" : "fe167612-09a1-4d39-9b5d-b66f3110d815",
+		"rating" : 5,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "fd057eeb-268d-4926-919f-30b56ef30219",
+		"message_id" : "1fd1af19-9d25-47a6-9c87-b5e8267441b5",
+		"user_id" : "992aa8db-0eec-455c-acb0-1f75c2119bb7",
+		"rating" : 5,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "fe46e2a3-2c31-4f77-bc75-77b8392b4c69",
+		"message_id" : "7c7da4f6-0977-4459-8a83-978cd7cca331",
+		"user_id" : "8cfa7028-25a9-49ba-9532-b85f4c8be422",
+		"rating" : 4,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "9587a5cb-da3c-4d23-9642-469028190c6a",
+		"message_id" : "77067bff-910a-46b1-8dd3-7da163c568e5",
+		"user_id" : "64ac6896-d57d-43a1-b0b8-8e098acc470e",
+		"rating" : 4,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "2e6a55c0-1101-4fa0-8917-d22f9a9061c0",
+		"message_id" : "d5dfc4c5-8892-4753-86d9-f0c18519682e",
+		"user_id" : "68f7cf53-5de5-41d5-a6f5-cfa527a96871",
+		"rating" : 3,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "fbcb6408-f5c5-4a35-b6de-07742ed91d87",
+		"message_id" : "9ff45fe8-601e-4a47-9516-3825647a82be",
+		"user_id" : "d3bdaa4e-c353-4fd5-b358-09ac5476b912",
+		"rating" : 4,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "01c2eb1d-bcf5-4d3d-865d-9c10ed0bb134",
+		"message_id" : "afc1b047-2238-4029-9e44-d1423616986e",
+		"user_id" : "8905071e-51f8-4c75-9e65-bd6e09ec63b1",
+		"rating" : 3,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "c5f410ee-36ee-45bc-933d-2c1d4c3cbdac",
+		"message_id" : "36daba41-fc95-4103-a233-8e4c0f5c1b5d",
+		"user_id" : "9e25d672-0cf8-451d-981a-d10530a30c5b",
+		"rating" : 4,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "3eb7b8dc-534f-42e9-a9fa-b5007aa30b48",
+		"message_id" : "b2cf6592-52e4-4a27-a41d-2305eb4c6200",
+		"user_id" : "fe167612-09a1-4d39-9b5d-b66f3110d815",
+		"rating" : 3,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "06b2cfc4-99de-4bc0-9d85-67fdad4718bb",
+		"message_id" : "dd64a94b-1cae-4a68-a68e-0150e071af22",
+		"user_id" : "f3144acb-ba7a-44b0-b1fc-ff5ed9185315",
+		"rating" : 5,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "638a7bd4-8ed7-4702-b8c3-b536cc982905",
+		"message_id" : "ee94370d-bd03-4866-8f9f-c3e49a415b2c",
+		"user_id" : "fd71f8a2-7884-47be-b7e0-0624ec2aeb19",
+		"rating" : 5,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:04:22.868Z"
+	},
+	{
+		"id" : "4b9e11ab-1563-493d-8473-befea4cb3bf3",
+		"message_id" : "d168e3c3-b6b5-4b43-8850-599464af7941",
+		"user_id" : "8cfa7028-25a9-49ba-9532-b85f4c8be422",
+		"rating" : 5,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "2a9cb117-72ed-4a02-93f8-cc092f1bf7b4",
+		"message_id" : "2c869a3e-65a3-49d0-8261-c9067e518ef6",
+		"user_id" : "992aa8db-0eec-455c-acb0-1f75c2119bb7",
+		"rating" : 4,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "3699c419-bd41-429a-a288-adbd240229ba",
+		"message_id" : "616d0222-c8d7-4796-ba8b-efb953a1da50",
+		"user_id" : "d452be79-656c-4651-817d-1a200da15727",
+		"rating" : 4,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "78fcdec8-371a-40b9-b5fa-9dc0e447e5aa",
+		"message_id" : "8e83188a-3e2f-40d5-9938-1274b2d9824e",
+		"user_id" : "fe167612-09a1-4d39-9b5d-b66f3110d815",
+		"rating" : 5,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "42b87892-4fa8-454b-bdad-c6d8cc06e8c4",
+		"message_id" : "89f69cdf-9a0d-45c6-b77d-4f0c34d720b7",
+		"user_id" : "8cfa7028-25a9-49ba-9532-b85f4c8be422",
+		"rating" : 5,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "c5ce2a1e-00f0-473f-9c6a-c486570f4f13",
+		"message_id" : "9b60b811-ecd3-4d75-98e8-f81195ebb841",
+		"user_id" : "d3bdaa4e-c353-4fd5-b358-09ac5476b912",
+		"rating" : 3,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "a7e467f3-d9d4-4762-8ff2-0672f4cf19a5",
+		"message_id" : "9a1dedd8-6249-43ef-8db6-63a677dbf45e",
+		"user_id" : "2a1a849e-9db9-4cf7-a0f9-a6b652f5fefb",
+		"rating" : 3,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "e66bebd8-bfff-453c-ad56-0beeb89ded41",
+		"message_id" : "88672d63-58a4-422e-a719-2c9b910fd300",
+		"user_id" : "fe167612-09a1-4d39-9b5d-b66f3110d815",
+		"rating" : 5,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "be5f4440-bbc6-41d5-bdc4-12922573699a",
+		"message_id" : "97a8b0f2-63b7-4e42-8331-0d8fdcc9b6ff",
+		"user_id" : "68f7cf53-5de5-41d5-a6f5-cfa527a96871",
+		"rating" : 4,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "7e825753-4a08-4ba9-bec1-3f32826a1972",
+		"message_id" : "f9e0bf29-b057-4760-a26e-3c9b21da58c8",
+		"user_id" : "78cc4401-f73a-4447-9943-5a3bddec63dc",
+		"rating" : 5,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "288f30f6-983d-4a19-80d9-9010d9d96ff9",
+		"message_id" : "2bf0718f-3cc3-4d0b-bf35-275030bd6052",
+		"user_id" : "992aa8db-0eec-455c-acb0-1f75c2119bb7",
+		"rating" : 3,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "35ed22d5-35fd-44a5-bc06-3119ad219a84",
+		"message_id" : "9026b03b-31c5-4827-b659-3d259c7ab0da",
+		"user_id" : "9e25d672-0cf8-451d-981a-d10530a30c5b",
+		"rating" : 5,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "1ebbf7e3-8f57-47d5-b917-97779706793f",
+		"message_id" : "d7aeed99-8991-4f7b-83b5-234ab3c27cd2",
+		"user_id" : "d3bdaa4e-c353-4fd5-b358-09ac5476b912",
+		"rating" : 5,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "b8279d3c-1c32-474e-9e7c-bbd2001a6eb5",
+		"message_id" : "2d10a7ee-b23b-42c5-a235-cc05f67c9807",
+		"user_id" : "8cfa7028-25a9-49ba-9532-b85f4c8be422",
+		"rating" : 5,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "e89be22c-17aa-4a1b-a6e0-b9ace94ee97a",
+		"message_id" : "4923271b-ccd4-4088-8f50-3676b05f0aa7",
+		"user_id" : "68f7cf53-5de5-41d5-a6f5-cfa527a96871",
+		"rating" : 5,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "61435f10-8436-4e75-9af6-aa9ca638737d",
+		"message_id" : "943fd88b-1466-4cbc-8a7a-593636df70dd",
+		"user_id" : "64ac6896-d57d-43a1-b0b8-8e098acc470e",
+		"rating" : 5,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "4cc43f8a-3bc8-4ef2-a7b9-0e1ca7e18caf",
+		"message_id" : "24c56028-d36a-4e73-8e40-c7aa2f8d7750",
+		"user_id" : "2a1a849e-9db9-4cf7-a0f9-a6b652f5fefb",
+		"rating" : 4,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "44bdb2ee-2e6f-4699-b7fb-7b90e207b33e",
+		"message_id" : "abc96a5c-b55e-494b-9fe0-5accdd535979",
+		"user_id" : "78cc4401-f73a-4447-9943-5a3bddec63dc",
+		"rating" : 3,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "0afb3fa6-cd7f-4ba2-b7b7-92a37fa52907",
+		"message_id" : "b298f7cc-32c2-4dc5-9f50-9194a911c114",
+		"user_id" : "f3144acb-ba7a-44b0-b1fc-ff5ed9185315",
+		"rating" : 3,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "215a295a-6ca9-451e-8ee2-6478097d5e1f",
+		"message_id" : "50fe93ad-bbee-411c-bc6a-99aa9b8d4d82",
+		"user_id" : "fd71f8a2-7884-47be-b7e0-0624ec2aeb19",
+		"rating" : 4,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:05:04.653Z"
+	},
+	{
+		"id" : "e71b6fe9-8e6f-4192-951f-4f3d91798069",
+		"message_id" : "f2c1610b-7105-43bf-9384-f81a52b586e8",
+		"user_id" : "fe167612-09a1-4d39-9b5d-b66f3110d815",
+		"rating" : 4,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "2308bbc6-21a5-43c2-93f4-71ec24ad55f1",
+		"message_id" : "39d1318e-c376-455c-99a5-01d2289eddda",
+		"user_id" : "68f7cf53-5de5-41d5-a6f5-cfa527a96871",
+		"rating" : 4,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "e428559f-518e-4dc9-9493-5076be5fa132",
+		"message_id" : "6de9c232-f34f-4120-b0b6-09711e25df13",
+		"user_id" : "8cfa7028-25a9-49ba-9532-b85f4c8be422",
+		"rating" : 4,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "fdbb7886-9fa4-487f-a5b2-63c445e4b71b",
+		"message_id" : "96245ff6-85e8-4ae2-98c0-8c22f9cb2797",
+		"user_id" : "64ac6896-d57d-43a1-b0b8-8e098acc470e",
+		"rating" : 5,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "11aa3360-6fb6-42a6-bbae-fa63b0858f0e",
+		"message_id" : "96652f70-df2c-4645-81c8-c4759dc13b3e",
+		"user_id" : "d3bdaa4e-c353-4fd5-b358-09ac5476b912",
+		"rating" : 4,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "26e4541a-5f57-4f81-8fa5-21636d82902f",
+		"message_id" : "f9a8d889-b228-49d1-986c-b7c94c2fc7c4",
+		"user_id" : "9e25d672-0cf8-451d-981a-d10530a30c5b",
+		"rating" : 5,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "b8ca9489-753a-4644-90e7-9b8e83cda633",
+		"message_id" : "5d961374-2497-4a8a-aedd-fbf3a627b8f6",
+		"user_id" : "d452be79-656c-4651-817d-1a200da15727",
+		"rating" : 5,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "f2ab29c1-e5f7-4ff4-ad84-79f445a3899b",
+		"message_id" : "0a1d23e9-fa1c-4927-b21e-9ca67545b757",
+		"user_id" : "fe167612-09a1-4d39-9b5d-b66f3110d815",
+		"rating" : 3,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "8f18c56a-a1d8-4e4d-a9d9-41866f88c0ec",
+		"message_id" : "3651e0e5-a23c-46e6-b8ef-592c8c23bb0e",
+		"user_id" : "f3144acb-ba7a-44b0-b1fc-ff5ed9185315",
+		"rating" : 4,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "a91d2722-d38b-477f-8931-79ea3e38f21b",
+		"message_id" : "942dc2e2-c62b-4748-b712-2a2771b0fd6c",
+		"user_id" : "8cfa7028-25a9-49ba-9532-b85f4c8be422",
+		"rating" : 4,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "1408a52f-a66a-4405-8146-b5f762b31dea",
+		"message_id" : "a33eb4e5-5f35-4b2c-a16f-feae20808b12",
+		"user_id" : "2a1a849e-9db9-4cf7-a0f9-a6b652f5fefb",
+		"rating" : 3,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "f8a994d1-b352-4615-a5e8-f845eefe2f36",
+		"message_id" : "01c8021f-b3e3-4d93-8fe9-a7bb133ace6c",
+		"user_id" : "d3bdaa4e-c353-4fd5-b358-09ac5476b912",
+		"rating" : 5,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "663999a9-3f21-476d-a1a2-a36b05970a00",
+		"message_id" : "ebcbacff-38ae-4f8d-9c5e-dbd89c43da62",
+		"user_id" : "fe167612-09a1-4d39-9b5d-b66f3110d815",
+		"rating" : 4,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "8ee4d61d-6547-473c-9f35-a6f6694196c3",
+		"message_id" : "7ee4d17e-a7d7-4176-8c1c-f212edb2648d",
+		"user_id" : "fe167612-09a1-4d39-9b5d-b66f3110d815",
+		"rating" : 5,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "ade6c501-bc00-4b2a-92ec-81b04b067cde",
+		"message_id" : "1180c51e-f758-4f61-a9bb-9def7c8491a7",
+		"user_id" : "78cc4401-f73a-4447-9943-5a3bddec63dc",
+		"rating" : 4,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "b8b316e4-d36e-4a83-bf59-a246821e279f",
+		"message_id" : "eb2e179c-5efd-41a5-af2b-9bd55f4c140c",
+		"user_id" : "64ac6896-d57d-43a1-b0b8-8e098acc470e",
+		"rating" : 5,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "c32ee6e4-1ff0-45b3-b6ef-c1a9e3cda04b",
+		"message_id" : "06b39b0b-33fc-4fab-9f4d-83ae2ea2dbec",
+		"user_id" : "d3bdaa4e-c353-4fd5-b358-09ac5476b912",
+		"rating" : 3,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "0ccf3332-898a-46f7-a33a-6ca695c597c2",
+		"message_id" : "3716a57d-a607-49d6-bb0c-e0a8ed4f8475",
+		"user_id" : "f3144acb-ba7a-44b0-b1fc-ff5ed9185315",
+		"rating" : 4,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "28f9e35a-af26-4227-a3f5-e89cde307f16",
+		"message_id" : "bb830d69-753a-4eba-8c4a-08ccb3088210",
+		"user_id" : "8cfa7028-25a9-49ba-9532-b85f4c8be422",
+		"rating" : 5,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "082567d7-f340-46b6-9b8d-ab4264d2d827",
+		"message_id" : "ddf51f7b-ba0e-4a45-be1b-a95b1fe856b0",
+		"user_id" : "68f7cf53-5de5-41d5-a6f5-cfa527a96871",
+		"rating" : 4,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:05:46.655Z"
+	},
+	{
+		"id" : "86230d0b-46ec-4dcd-a220-0fab61b9ee1b",
+		"message_id" : "b743be41-1dd7-4f9c-9426-da97f1677edd",
+		"user_id" : "fe167612-09a1-4d39-9b5d-b66f3110d815",
+		"rating" : 5,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "1c5a8ae9-34ba-47a2-8d31-36a543aacf08",
+		"message_id" : "0f30d55e-07f3-4aca-af49-4a7eb97617bc",
+		"user_id" : "8905071e-51f8-4c75-9e65-bd6e09ec63b1",
+		"rating" : 3,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "c07a6971-3d30-404b-813b-9969fa8357a8",
+		"message_id" : "4a0347b3-7b60-460f-9ac8-6576bd84d156",
+		"user_id" : "9e25d672-0cf8-451d-981a-d10530a30c5b",
+		"rating" : 5,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "96cbe7f4-d19c-4f0e-832c-e02ff1f451c3",
+		"message_id" : "e1866e25-3bc8-4c6a-9d1f-fd4ef4ae05da",
+		"user_id" : "78cc4401-f73a-4447-9943-5a3bddec63dc",
+		"rating" : 3,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "0523d9b9-4ffc-44a2-a378-3f99d53de898",
+		"message_id" : "c43df6ac-7860-40c2-ba01-4a5c8dc55e70",
+		"user_id" : "2a1a849e-9db9-4cf7-a0f9-a6b652f5fefb",
+		"rating" : 5,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "b6503a6d-f3bd-4c0c-b121-59e8cb22f14f",
+		"message_id" : "395a1e8e-afbc-4545-af22-604a3d38fdbf",
+		"user_id" : "64ac6896-d57d-43a1-b0b8-8e098acc470e",
+		"rating" : 4,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "cb1f4beb-4d23-408b-8d9b-5ebe1253a505",
+		"message_id" : "40c5f875-308b-4393-b2e2-806a772faa40",
+		"user_id" : "f3144acb-ba7a-44b0-b1fc-ff5ed9185315",
+		"rating" : 4,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "d6f253f6-7bca-411f-997c-02b0405a2ac1",
+		"message_id" : "fd1bb71d-2aca-4fa3-9d5d-9389a1b20ffa",
+		"user_id" : "d3bdaa4e-c353-4fd5-b358-09ac5476b912",
+		"rating" : 5,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "3b1e3a53-8766-427e-b60d-d3e39f783274",
+		"message_id" : "19e8bb8c-7240-4bb4-8119-7f5a0065b897",
+		"user_id" : "fd71f8a2-7884-47be-b7e0-0624ec2aeb19",
+		"rating" : 4,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "a004dc4e-4d22-48c0-9891-6e3b50df0a3b",
+		"message_id" : "b909fa32-9032-48a4-a4d9-6034c70035c7",
+		"user_id" : "f3144acb-ba7a-44b0-b1fc-ff5ed9185315",
+		"rating" : 5,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "fcec9d6d-da50-454b-a41c-d68a2838090e",
+		"message_id" : "7db05a5c-2ebc-4ad5-bde4-455591dd0edd",
+		"user_id" : "78cc4401-f73a-4447-9943-5a3bddec63dc",
+		"rating" : 4,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "c867b02f-76ab-45d4-95eb-37803d82c79c",
+		"message_id" : "0bad9df8-e5ac-480d-a09f-9131dc3b9803",
+		"user_id" : "fe167612-09a1-4d39-9b5d-b66f3110d815",
+		"rating" : 4,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "8b0dc9df-7f43-4e3c-8ac3-addf807fff7e",
+		"message_id" : "c32b51d8-4ab5-4e09-b9da-e54f59ffa9f9",
+		"user_id" : "68f7cf53-5de5-41d5-a6f5-cfa527a96871",
+		"rating" : 5,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "4f7099ad-cc18-470b-be6d-a77e203ec68a",
+		"message_id" : "7ff62ebe-f01b-45df-a0a8-ae22150ec556",
+		"user_id" : "8cfa7028-25a9-49ba-9532-b85f4c8be422",
+		"rating" : 4,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "e3372ee6-bb0e-48e7-94ae-ddb7f6740534",
+		"message_id" : "626c122d-aaa9-4f3d-9f5d-e1b71a99e46f",
+		"user_id" : "d452be79-656c-4651-817d-1a200da15727",
+		"rating" : 5,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "af4fcf41-266a-47cc-937c-9bdf6dbe7ee9",
+		"message_id" : "e5c1019c-86e0-4a3d-9ec8-cb6e5ca82b20",
+		"user_id" : "64ac6896-d57d-43a1-b0b8-8e098acc470e",
+		"rating" : 5,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "b7965aaf-d1f5-4490-8b4c-ffcab0ae2d55",
+		"message_id" : "dbfd5840-be04-4a91-a15f-52d5a5e92937",
+		"user_id" : "9e25d672-0cf8-451d-981a-d10530a30c5b",
+		"rating" : 4,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "7afcf718-ceb8-4699-bc86-5e12113587b0",
+		"message_id" : "7ead09e4-a876-426c-8f7a-3d566d0f2b9a",
+		"user_id" : "d3bdaa4e-c353-4fd5-b358-09ac5476b912",
+		"rating" : 4,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "8aeab241-0444-4df9-a2af-5f6857b9fa89",
+		"message_id" : "78cefb80-079d-4eee-a056-6f1a01b13918",
+		"user_id" : "992aa8db-0eec-455c-acb0-1f75c2119bb7",
+		"rating" : 4,
+		"feedback_text" : "Taslak isabetliydi.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "a333834d-5d02-4a48-be5c-09461aa2d080",
+		"message_id" : "48d1bf5c-a765-4d65-b49a-4b43b5dbbc5c",
+		"user_id" : "2a1a849e-9db9-4cf7-a0f9-a6b652f5fefb",
+		"rating" : 4,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:06:24.303Z"
+	},
+	{
+		"id" : "89571a11-7758-487e-96f0-5613a3de4d2e",
+		"message_id" : "10fb0b65-9c65-4faa-b5f7-9b229a93ee3d",
+		"user_id" : "fe167612-09a1-4d39-9b5d-b66f3110d815",
+		"rating" : 5,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:07:10.315Z"
+	},
+	{
+		"id" : "2467e8e5-c9f3-4a68-9dcd-f14496dd70eb",
+		"message_id" : "60ed417f-e9ee-4683-9039-6c84bfc2c4c3",
+		"user_id" : "f3144acb-ba7a-44b0-b1fc-ff5ed9185315",
+		"rating" : 5,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:07:10.315Z"
+	},
+	{
+		"id" : "64b4cc9f-bc94-4aa7-819e-bc6740528eb7",
+		"message_id" : "8097a63c-1f29-4f22-a40b-3b9f418d1692",
+		"user_id" : "d3bdaa4e-c353-4fd5-b358-09ac5476b912",
+		"rating" : 3,
+		"feedback_text" : "Doğru yöne işaret etti.",
+		"created_at" : "2026-07-28T11:07:10.315Z"
+	},
+	{
+		"id" : "1d12f970-9568-44ff-9e1c-fb829913f114",
+		"message_id" : "7c0d1fd3-2eda-4174-a33b-2713304b83d7",
+		"user_id" : "78cc4401-f73a-4447-9943-5a3bddec63dc",
+		"rating" : 4,
+		"feedback_text" : "Çözümün çoğu doğruydu.",
+		"created_at" : "2026-07-28T11:07:10.315Z"
+	},
+	{
+		"id" : "fd591185-ef7a-4710-867e-21d013da3347",
+		"message_id" : "e4d1ec93-3c20-4845-8e7f-aeec90d44339",
+		"user_id" : "fd71f8a2-7884-47be-b7e0-0624ec2aeb19",
+		"rating" : 4,
+		"feedback_text" : "Küçük düzeltme ile kullanıldı.",
+		"created_at" : "2026-07-28T11:07:10.315Z"
+	}
+]}
