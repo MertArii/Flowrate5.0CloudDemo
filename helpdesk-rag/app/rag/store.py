@@ -5,19 +5,50 @@ RAG iki katman:
   Katman 2: attachment_vectors    (doküman parçaları; bağımsız KB dahil)
 """
 from __future__ import annotations
-
+##pip install "psycopg[pool]" 
 import json
 
 import psycopg
 from pgvector.psycopg import register_vector
+from psycopg_pool import ConnectionPool
 
 from app.config import settings
 
 
-def _connect() -> psycopg.Connection:
-    conn = psycopg.connect(settings.database_url)
+def _configure_connection(conn: psycopg.Connection) -> None:
+    """Havuzdaki her YENİ bağlantı açıldığında BİR KEZ çalışır
+    (pgvector tipini kaydeder). Eskiden her sorguda tekrar tekrar
+    çağrılan register_vector(conn) artık burada, sadece bağlantı
+    ilk kurulduğunda yapılıyor."""
     register_vector(conn)
-    return conn
+
+
+_pool = ConnectionPool(
+    settings.database_url,
+    min_size=getattr(settings, "db_pool_min_size", 2),
+    max_size=getattr(settings, "db_pool_max_size", 10),
+    configure=_configure_connection,
+    open=False,  # uygulama başlarken open_pool() ile açık şekilde başlatılır
+)
+
+
+def open_pool() -> None:
+    """Uygulama başlarken (main.py startup / worker startup) bir kez çağrılır."""
+    _pool.open(wait=True)
+
+
+def close_pool() -> None:
+    """Uygulama kapanırken bir kez çağrılır."""
+    _pool.close()
+
+
+def _connect():
+    """Geriye dönük uyumlu: her fonksiyon hâlâ
+    'with _connect() as conn, conn.cursor() as cur:' şeklinde çalışır.
+    Artık YENİ bağlantı AÇMIYOR — havuzdan ödünç alıyor; blok bitince
+    bağlantı KAPANMIYOR, havuza geri dönüyor."""
+    return _pool.connection()
+
 
 
 # ---- İndeksleme (KB doküman parçaları) --------------------------------------
