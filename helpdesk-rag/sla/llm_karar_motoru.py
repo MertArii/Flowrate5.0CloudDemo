@@ -106,28 +106,81 @@ def benzer_gecmis_kayitlari_getir(conn, maskelenmis_metin, top_k=3):
         return cur.fetchall()
 
 
-def personel_uzmanlik_getir(conn, sap_modulu, limit=3):
-    if sap_modulu == "modul_yok":
-        return []
-    sorgu = """
-        SELECT u.full_name AS ad_soyad,
-               u.uzman_kategorileri AS uzmanlik_alani,
-               COUNT(t.id) FILTER (
-                   WHERE t.status NOT IN ('closed', 'resolved')
-               ) AS aktif_ticket_sayisi
-        FROM users u
-        LEFT JOIN tickets t ON t.assigned_agent_id = u.id
-        WHERE EXISTS (
-            SELECT 1 FROM unnest(u.uzman_kategorileri) AS kategori
-            WHERE kategori ILIKE %s
-        )
-        GROUP BY u.id, u.full_name, u.uzman_kategorileri
-        ORDER BY aktif_ticket_sayisi ASC
-        LIMIT %s;
+def personel_uzmanlik_getir(conn, sap_modulu, bolge=None, donanim_mi=False, limit=3):
+    """
+    users tablosundan uygun personeli bulur.
+    Aktif ticket sayısı, tickets tablosundan canlı hesaplanır
+    (status 'kapali'/'closed'/'resolved' olmayan kayıtlar 'aktif' sayılır).
     """
     with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-        cur.execute(sorgu, (f"%{sap_modulu}%", limit))
-        return cur.fetchall()
+
+        # NOT: 'status' kolonundaki gerçek değerleri (ör. 'open', 'in_progress',
+        # 'closed', 'resolved' ya da Türkçe karşılıkları) kontrol edip
+        # aşağıdaki AKTIF_OLMAYAN_DURUMLAR listesini buna göre güncelle.
+        AKTIF_OLMAYAN_DURUMLAR = ('closed', 'resolved', 'kapali', 'çözüldü')
+
+        if donanim_mi and bolge:
+            sorgu = """
+                SELECT
+                    u.full_name AS ad_soyad,
+                    u.title AS uzmanlik_alani,
+                    COUNT(t.id) FILTER (
+                        WHERE t.status IS NOT NULL
+                          AND LOWER(t.status) NOT IN %s
+                    ) AS aktif_ticket_sayisi
+                FROM users u
+                LEFT JOIN tickets t ON t.assigned_agent_id = u.id
+                WHERE u.title ILIKE '%%Donanım%%'
+                  AND u.region = %s
+                GROUP BY u.id, u.full_name, u.title
+                ORDER BY aktif_ticket_sayisi ASC
+                LIMIT %s;
+            """
+            cur.execute(sorgu, (AKTIF_OLMAYAN_DURUMLAR, bolge, limit))
+            return cur.fetchall()
+
+        elif sap_modulu and sap_modulu != "modul_yok":
+            sorgu = """
+                SELECT
+                    u.full_name AS ad_soyad,
+                    u.title AS uzmanlik_alani,
+                    COUNT(t.id) FILTER (
+                        WHERE t.status IS NOT NULL
+                          AND LOWER(t.status) NOT IN %s
+                    ) AS aktif_ticket_sayisi
+                FROM users u
+                LEFT JOIN tickets t ON t.assigned_agent_id = u.id
+                WHERE u.title ILIKE %s
+                   OR %s = ANY(u.uzman_kategorileri)
+                GROUP BY u.id, u.full_name, u.title
+                ORDER BY aktif_ticket_sayisi ASC
+                LIMIT %s;
+            """
+            cur.execute(
+                sorgu,
+                (AKTIF_OLMAYAN_DURUMLAR, f"%{sap_modulu}%", sap_modulu, limit)
+            )
+            return cur.fetchall()
+
+        else:
+            # Ne SAP modülü ne donanım tespit edildiyse genel BT desteğine düş
+            sorgu = """
+                SELECT
+                    u.full_name AS ad_soyad,
+                    u.title AS uzmanlik_alani,
+                    COUNT(t.id) FILTER (
+                        WHERE t.status IS NOT NULL
+                          AND LOWER(t.status) NOT IN %s
+                    ) AS aktif_ticket_sayisi
+                FROM users u
+                LEFT JOIN tickets t ON t.assigned_agent_id = u.id
+                WHERE u.title ILIKE '%%Sistem Destek%%'
+                GROUP BY u.id, u.full_name, u.title
+                ORDER BY aktif_ticket_sayisi ASC
+                LIMIT %s;
+            """
+            cur.execute(sorgu, (AKTIF_OLMAYAN_DURUMLAR, limit))
+            return cur.fetchall()
 
 
 JSON_SEMASI = {
@@ -175,7 +228,12 @@ Aşağıdaki bağlamı değerlendirerek karar ver.
 
 {baglam}
 
-SLA seviyeleri: 1-2 kritik/acil arıza, 3 standart arıza, 4 orta öncelik talep, 5 planlı iş/kurulum.
+Lütfen kararlarını aşağıdaki kurumsal SLA (Hizmet Seviyesi) rehberine göre ver:
+- SLA 1 (Kritik): Şirket genelini veya kritik iş süreçlerini tamamen durduran acil durumlar (Örn: Tüm ağın çökmesi, siber saldırı).
+- SLA 2 (Yüksek): Belirli bir departmanın işini aksatan ama tüm organizasyonu durdurmayan olaylar.
+- SLA 3 (Orta): Bireysel kullanıcılara ait, çalışmayı durduran arızalar (Örn: Bir kişinin bilgisayarının açılmaması).
+- SLA 4 (Düşük): İşi doğrudan durdurmayan, alternatifle devam edilebilen talepler (Örn: Şifre sıfırlama, yetki talebi, yavaşlık).
+- SLA 5 (Planlı): Önceden talep edilen kurulum, donanım sağlama veya geliştirme işleri (Örn: Yeni çalışan kurulumu).
 Aktif blokaj sinyali varsa bunu planlı iş olarak değerlendirme; kullanıcı şu an bloke olmuş demektir.
 
 SADECE aşağıdaki alanları içeren geçerli bir JSON nesnesi döndür.
@@ -184,8 +242,6 @@ Markdown, ```json işareti, açıklama cümlesi, kod bloğu KULLANMA. Sadece ham
 Şema:
 {json.dumps(JSON_SEMASI, ensure_ascii=False, indent=2)}
 """
-
-
 def _json_ayikla(ham_yanit):
     temiz = ham_yanit.strip()
     temiz = re.sub(r"^```(json)?", "", temiz).strip()
@@ -262,13 +318,58 @@ def karari_uygula(ham_metin, db_baglantisi_kullan=True):
 
     sinyaller = on_sinyalleri_olustur(ham_metin)
 
+# ... (kural_tabanli_yedek_karar fonksiyonu bitimi)
+
+# 1. YARDIMCI FONKSİYONLAR (karari_uygula'nın ÜSTÜNDE olmalı)
+def gonderen_eposta_bul(metin):
+    # 'Kimden' veya 'From' satırını önceliklendir, yoksa metindeki ilk e-postayı al
+    match = re.search(r'(?i)(?:kimden|from):\s*([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)', metin)
+    if match: return match.group(1)
+    genel_match = re.search(r'([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)', metin)
+    return genel_match.group(1) if genel_match else None
+
+def donanim_kategorisi_mi(metin):
+    donanim_kelimeleri = ["bilgisayar", "yazıcı", "klavye", "ekran", "mouse", "donanım", "kasa", "monitör", "laptop"]
+    return any(kelime in metin.lower() for kelime in donanim_kelimeleri)
+
+def kullanici_bolgesi_getir(conn, eposta):
+    if not eposta: return None
+    # users tablosundan bölge bilgisini çeker
+    with conn.cursor() as cur:
+        cur.execute("SELECT region FROM users WHERE email = %s LIMIT 1;", (eposta,))
+        sonuc = cur.fetchone()
+        return sonuc[0] if sonuc else None
+
+# 2. ANA ORKESTRASYON FONKSİYONU
+def karari_uygula(ham_metin, db_baglantisi_kullan=True):
+    gecerli_mi, sebep = metin_saglamlik_kontrolu(ham_metin)
+    if not gecerli_mi:
+        return {
+            "sla_seviyesi": None,
+            "guven_skoru": None,
+            "onerilen_departman": None,
+            "onerilen_personel": None,
+            "gerekce": sebep,
+            "manuel_onaya_gonder": True,
+            "kaynak": "on_filtre_red",
+            "rag_baglami_kullanildi": False,
+        }
+
+    sinyaller = on_sinyalleri_olustur(ham_metin)
+    
+    # Yeni eklediğimiz donanım ve bölge tespit mantıkları
+    eposta = gonderen_eposta_bul(ham_metin)
+    donanim_mi = donanim_kategorisi_mi(ham_metin)
+    bolge = None
+
     benzer_kayitlar, personel_onerileri = [], []
     if db_baglantisi_kullan:
         conn = None
         try:
             conn = db_baglanti.baglanti_al()
+            bolge = kullanici_bolgesi_getir(conn, eposta)
             benzer_kayitlar = benzer_gecmis_kayitlari_getir(conn, sinyaller["maskelenmis_metin"])
-            personel_onerileri = personel_uzmanlik_getir(conn, sinyaller["sap_modulu"])
+            personel_onerileri = personel_uzmanlik_getir(conn, sinyaller["sap_modulu"], bolge, donanim_mi)
         except Exception as e:
             print(f"Uyarı: RAG/personel sorgusu alınamadı, LLM bağlamsız devam edecek: {e}")
         finally:
@@ -281,6 +382,11 @@ def karari_uygula(ham_metin, db_baglantisi_kullan=True):
     llm_karari = llm_ile_karar_al(prompt)
 
     if llm_karari is not None:
+        # LLM personeli boş bırakırsa ve konu manuel onaya gitmiyorsa sistemi otonom işlet
+        if not llm_karari.get("onerilen_personel") and not llm_karari.get("manuel_onaya_gonder"):
+            if personel_onerileri:
+                llm_karari["onerilen_personel"] = personel_onerileri[0]["ad_soyad"]
+                
         llm_karari["rag_baglami_kullanildi"] = rag_baglami_var
         return llm_karari
 
@@ -296,7 +402,6 @@ if __name__ == "__main__":
     print("Çıkmak için 'q' yazın.\n")
 
     while True:
-        # Sürükle-bırak yapıldığında oluşan tırnakları temizlemek için strip(" '\"")
         kullanici_girisi = input("Simüle edilecek metin VEYA resim adı: ").strip(" '\"")
 
         if kullanici_girisi.lower() == "q":
@@ -306,12 +411,10 @@ if __name__ == "__main__":
         if not kullanici_girisi:
             continue
 
-        # Girilen değerin bir görsel dosyası olup olmadığını kontrol et
         if kullanici_girisi.lower().endswith(('.png', '.jpg', '.jpeg')):
             print("Görsel algılandı. Tesseract OCR ile metin okunuyor...")
             islenmis_metin = gorselden_metin_oku(kullanici_girisi)
 
-            # Eğer OCR sırasında dosya bulunamazsa veya hata olursa
             if islenmis_metin.startswith("[HATA]"):
                 print(islenmis_metin)
                 print("=" * 60)
@@ -319,10 +422,8 @@ if __name__ == "__main__":
 
             print(f"Görselden Okunan Metin: {islenmis_metin}\n")
         else:
-            # Görsel değilse, doğrudan metin olarak kabul et
             islenmis_metin = kullanici_girisi
 
-        # Çıkan metni LLM karar motoruna (veya orkestrasyon fonksiyonuna) gönder
         print("Yapay Zeka (LLM) karar üretiyor, lütfen bekleyin...")
         sonuc = karari_uygula(islenmis_metin)
 
