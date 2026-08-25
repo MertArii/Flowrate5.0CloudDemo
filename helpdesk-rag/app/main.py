@@ -1,3 +1,4 @@
+from langfuse import observe
 import os
 import uuid
 
@@ -6,7 +7,7 @@ from pydantic import BaseModel
 
 from app.config import settings
 from app.queue import close_pool, enqueue_ingest, job_status
-from app.rag import ingest, vision
+from app.rag import ingest, store, vision
 from app.triage import service as triage_service
 
 app = FastAPI(title="Helpdesk RAG API")
@@ -26,6 +27,23 @@ class TriageRequest(BaseModel):
     subject: str | None = None
     region: str | None = None
     min_score: float | None = None   # opsiyonel benzerlik eşiği (0-1)
+
+
+class AgentCreateRequest(BaseModel):
+    email: str
+    full_name: str
+    title: str | None = None
+    department: str | None = None
+    region: str | None = None
+    support_group: str          # grup ADI (ör. "BT Destek Ekibi") — id değil
+    uzman_kategorileri: list[str] = []   # kategori kodları (ör. ["SAP-MM"])
+
+
+class CategoryCreateRequest(BaseModel):
+    category_key: str
+    aciklama: str
+    support_group: str          # grup ADI — id değil
+    ekip_gorunum_adi: str | None = None
 
 
 @app.get("/health")
@@ -75,6 +93,7 @@ async def get_job(job_id: str):
 
 
 @app.post("/ask")
+@observe()
 async def ask(
     question: str = Form(...),
     min_score: str | None = Form(None),
@@ -84,6 +103,8 @@ async def ask(
     region: str | None = Form(None),
     file: UploadFile | None = File(None),
 ):
+    from langfuse import get_client
+    get_client().flush()
     """RAG ile soru sor -> kaynaklı cevap + L1 ataması.
 
     Opsiyonel dosya eklenebilir: görsel ise (png/jpg/webp) Tesseract ile
@@ -162,3 +183,69 @@ async def triage(req: TriageRequest):
         region=req.region,
         min_score=req.min_score,
     )
+
+
+@app.post("/admin/agents")
+async def create_agent(req: AgentCreateRequest):
+    """Yeni bir uzman (agent) ekler. Grup ADI ile çalışır (id değil) —
+    yanlış/rastgele bir grup ID'si elle kopyalanıp yanlış ekibe bağlanma
+    hatasını önler. Kategori kodları da (varsa) gerçekten var olup
+    olmadığı kontrol edilir; DB'ye yazmadan önce açık hata döner."""
+    group_id = store.get_support_group_id_by_name(req.support_group)
+    if not group_id:
+        raise HTTPException(
+            status_code=400,
+            detail=f"'{req.support_group}' adında bir destek grubu yok. "
+                   f"Mevcut gruplar: {store.get_all_group_names()}",
+        )
+
+    if req.uzman_kategorileri:
+        gecerli = set(store.get_all_category_keys())
+        gecersiz = [k for k in req.uzman_kategorileri if k not in gecerli]
+        if gecersiz:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Geçersiz kategori(ler): {gecersiz}. "
+                       f"Mevcut kategoriler: {sorted(gecerli)}",
+            )
+
+    user_id = store.create_agent(
+        email=req.email, full_name=req.full_name, title=req.title,
+        department=req.department, region=req.region,
+        support_group_id=group_id, uzman_kategorileri=req.uzman_kategorileri,
+    )
+    return {
+        "id": user_id, "email": req.email, "support_group": req.support_group,
+        "uzman_kategorileri": req.uzman_kategorileri,
+    }
+
+
+@app.get("/admin/sla-ihlaller")
+async def sla_ihlaller():
+    """Süresi geçmiş (ilk müdahale veya çözüm deadline'ı aşılmış) ve hâlâ
+    açık olan ticket'ları listeler. Anlık sorgu — periyodik bir arka plan
+    işi değil, her çağrıda taze hesaplanır."""
+    return {"ihlaller": store.get_sla_violations()}
+
+
+@app.post("/admin/categories")
+async def create_category(req: CategoryCreateRequest):
+    """Yeni bir sınıflandırma kategorisi ekler. Grup ADI ile çalışır (id
+    değil). Kategori listesi önbelleksiz, her classify() çağrısında DB'den
+    taze çekildiği için eklendiği an kullanılabilir — restart gerekmez."""
+    group_id = store.get_support_group_id_by_name(req.support_group)
+    if not group_id:
+        raise HTTPException(
+            status_code=400,
+            detail=f"'{req.support_group}' adında bir destek grubu yok. "
+                   f"Mevcut gruplar: {store.get_all_group_names()}",
+        )
+
+    category_id = store.create_category(
+        category_key=req.category_key, aciklama=req.aciklama,
+        ekip_group_id=group_id, ekip_gorunum_adi=req.ekip_gorunum_adi,
+    )
+    return {
+        "id": category_id, "category_key": req.category_key,
+        "support_group": req.support_group,
+    }
