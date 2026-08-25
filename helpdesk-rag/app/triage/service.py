@@ -6,8 +6,10 @@ eşitlik) router.route() içinde, tümüyle DB'den. Bkz. app/triage/router.py.
 """
 from __future__ import annotations
 
+from datetime import datetime, timezone
+
 from app.rag import pipeline
-from app.triage import classifier, router
+from app.triage import classifier, router, sla
 
 REFUSAL_MARK = "elimde bilgi yok"
 
@@ -55,9 +57,18 @@ async def triage(
              "sebep": f"{r['atanan_uzman']} gerçek bir kullanıcı değil — insan triyajı gerekiyor."}
 
     group_id = store.get_or_create_support_group(r["ekip"]) if otomatik else None
-    priority = _ONCELIK_MAP.get(c["oncelik"], "medium")
+    # "planli_talep" (kurulum/yetki/geliştirme gibi önceden planlanan işler)
+    # PDF'e göre kapsam/aciliyetten bağımsız her zaman Seviye 5 (planned).
+    if c["istek_turu"] == "planli_talep":
+        priority = "planned"
+    else:
+        priority = _ONCELIK_MAP.get(c["oncelik"], "medium")
     status = "assigned" if otomatik else "l1_routing"
     subj = subject or ticket_text[:60]
+
+    baslangic = datetime.now(timezone.utc)
+    sla_policy = store.get_sla_policy(priority)
+    deadlines = sla.compute_deadlines(baslangic, sla_policy) if sla_policy else {}
 
     tid, tno = store.create_ticket(
         customer_email=customer_email,
@@ -70,6 +81,10 @@ async def triage(
         priority=priority,
         assigned_group_id=group_id,
         assigned_agent_id=agent_id if otomatik else None,
+        sla_policy_id=sla_policy["id"] if sla_policy else None,
+        response_deadline=deadlines.get("response_deadline"),
+        workaround_deadline=deadlines.get("workaround_deadline"),
+        resolution_deadline=deadlines.get("resolution_deadline"),
     )
 
     store.create_routing_log(

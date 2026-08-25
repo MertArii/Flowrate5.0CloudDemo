@@ -1,0 +1,543 @@
+{
+"message_attachments": [
+	{
+		"id" : "9bb3f7bf-32c2-4700-abcb-dffddacd6e13",
+		"message_id" : "e0b58c54-9218-4908-adbd-d99b7592fae1",
+		"file_name" : "cihaz_foto.jpg",
+		"file_path" : "\/data\/attachments\/TCK-1032_cihaz_foto.jpg",
+		"file_type" : "image\/jpeg",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Monitör Görüntü Vermiyor - Sabah geldiğimde çift monitörümden sağdaki çalışmıyordu. Kabloları kontrol ettim, tak çıkar yaptım ama 'No Signal' diyor",
+		"created_at" : "2026-06-01T16:03:33.969Z"
+	},
+	{
+		"id" : "dd9e06b9-4c34-49f8-8577-3154f6a3f233",
+		"message_id" : "36a79385-f11e-428c-8f9a-b80481207a44",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1034_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Yazıcıdan Ses Geliyor - Muhasebe departmanındaki büyük fotokopi makinesinden kağıt çekerken tıkırtı şeklinde yüksek bir ses geliyor ve kağıdı ya",
+		"created_at" : "2026-07-23T01:03:33.969Z"
+	},
+	{
+		"id" : "1b795f2c-05b4-446b-b17d-b8fd1e0eaada",
+		"message_id" : "009dcc3f-2239-43ea-9471-8ccd0c42f611",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1001_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Fatura Giriş Ekranında Hata - Merhaba, FB60 ekranından satıcı faturası girmeye çalışırken 'Şirket kodu 1000 için dönem 07\/2026 kapalı' hatası alıyorum",
+		"created_at" : "2026-07-09T14:03:33.969Z"
+	},
+	{
+		"id" : "178b9972-2886-486d-afca-255b212c7d75",
+		"message_id" : "8ef71eb6-14b3-4356-80a8-39d892a0c091",
+		"file_name" : "ekran_goruntusu.png",
+		"file_path" : "\/data\/attachments\/TCK-1002_ekran_goruntusu.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Laptop Ekranında Titreme Sorunu - Günaydın, sabah bilgisayarımı açtığımdan beri ana ekranda sürekli bir titreme var. Gözlerimi çok yoruyor, harici monitör",
+		"created_at" : "2026-06-05T22:03:33.969Z"
+	},
+	{
+		"id" : "51a7a685-b526-4f94-a97f-ee78d752c7f9",
+		"message_id" : "80af26d1-0597-4ffd-856b-f898b2b32c4f",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1004_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Bağlantı Hatası - Evden çalışıyorum, VPN'e bağlanmaya çalıştığımda %10'da kalıyor ve 'Sunucu yanıt vermiyor' hatası alıyorum. Acil toplant",
+		"created_at" : "2026-07-06T08:03:33.969Z"
+	},
+	{
+		"id" : "c0d89148-951d-46d5-a214-596b61d6ee8a",
+		"message_id" : "277c44ea-29e4-4689-84bc-c8e5aab31b4b",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1006_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Sipariş Fiyatlandırma Hatası - VA01 ekranından yeni bir yurt dışı siparişi açıyorum fakat sistem navlun koşul türünü (ZNAV) otomatik getirmiyor. Manuel",
+		"created_at" : "2026-06-23T11:03:33.969Z"
+	},
+	{
+		"id" : "2f8250e4-53e9-4df4-ab1d-13b706c94b5d",
+		"message_id" : "ea316c71-9b69-4157-9a13-41f244f06061",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1009_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Yazıcıdan Çıktı Alamıyorum - Satın alma departmanındaki PRNT-03 yazıcısına gönderdiğim belgeler sıraya giriyor ama yazdırılmıyor. Ekranda 'Kağıt Sıkı",
+		"created_at" : "2026-07-09T05:03:33.969Z"
+	},
+	{
+		"id" : "4354015b-3a9c-4d0d-ad1b-551b3e60b2ab",
+		"message_id" : "2d17d019-d11a-4a29-99dc-6bb69c26b94a",
+		"file_name" : "cihaz_foto.jpg",
+		"file_path" : "\/data\/attachments\/TCK-1012_cihaz_foto.jpg",
+		"file_type" : "image\/jpeg",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Satınalma Siparişi Onaya Düşmüyor - ME21N üzerinden oluşturduğum hammadde siparişleri yöneticimin onay ekranına gitmiyor. Sistem siparişi kaydediyor ama ona",
+		"created_at" : "2026-06-21T04:03:33.969Z"
+	},
+	{
+		"id" : "76539fb8-59a9-4ced-a465-a92413323581",
+		"message_id" : "6c4ba366-72ef-4758-a64e-71242f36f168",
+		"file_name" : "ekran_goruntusu.png",
+		"file_path" : "\/data\/attachments\/TCK-1014_ekran_goruntusu.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Üretim Siparişi Teyidi Alınamıyor - CO11N ekranında üretim teyidi verirken 'Teyit miktarı planlanan miktarı aşıyor' uyarısı alıp işlemi kaydedemiyorum. Tole",
+		"created_at" : "2026-07-18T14:03:33.969Z"
+	},
+	{
+		"id" : "f4224129-bc53-435e-986c-d699ed17c163",
+		"message_id" : "9b6b05ba-e274-474f-a43c-18bd2a6d5137",
+		"file_name" : "cihaz_foto.jpg",
+		"file_path" : "\/data\/attachments\/TCK-1017_cihaz_foto.jpg",
+		"file_type" : "image\/jpeg",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Maliyet Merkezi Bütçe Aşımı Hatası - Masraf faturası kaydı yaparken '1020 nolu maliyet merkezi bütçesi aşıldı' şeklinde sistem beni engelliyor. Bütçemiz bu a",
+		"created_at" : "2026-06-05T15:03:33.969Z"
+	},
+	{
+		"id" : "757e8cfc-e3b0-494c-9059-6173f3abe712",
+		"message_id" : "1f430379-799c-4716-9c19-09b43229213b",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1020_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] İrsaliye Çıktısı Alınamıyor - VL02N ekranından teslimat kaydı yapıp irsaliye dökmek istediğimde çıktı gelmiyor. SP01'e baktığımda statü 'Hatalı' görün",
+		"created_at" : "2026-05-30T10:03:33.969Z"
+	},
+	{
+		"id" : "aec6cf16-20e6-4bc9-b4cd-4d011b521d8a",
+		"message_id" : "f5881414-e6cf-431a-9973-95d1f8ff8f1f",
+		"file_name" : "cihaz_foto.jpg",
+		"file_path" : "\/data\/attachments\/TCK-1021_cihaz_foto.jpg",
+		"file_type" : "image\/jpeg",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Bilgisayar Mavi Ekran Verip Kapanıyor - Sabah bilgisayarı açtım, tam masaüstü gelirken mavi bir ekran çıkıp (CRITICAL_PROCESS_DIED) yeniden başlıyor. Hiçbir dos",
+		"created_at" : "2026-07-18T15:03:33.969Z"
+	},
+	{
+		"id" : "22a6e886-dabb-4eb7-beb9-cdfbeb475dfa",
+		"message_id" : "abf6b70d-1e2e-4e34-b0e9-676b7676c6bb",
+		"file_name" : "ekran_goruntusu.png",
+		"file_path" : "\/data\/attachments\/TCK-1022_ekran_goruntusu.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Depo Görevi Kilitli Kaldı - Malzemeyi rafa yerleştirmek için depo görevi (Warehouse Task) onaylamaya çalışıyorum ama 'Belge başka bir kullanıcı tara",
+		"created_at" : "2026-07-22T13:03:33.969Z"
+	},
+	{
+		"id" : "ee162b92-f1a4-444b-ad6e-b37b16aa0f32",
+		"message_id" : "3be7c63f-5032-4861-a847-d3be074ed31f",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1024_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Kalite Belgesi Basılamıyor - Müşteriye sevk edilecek ürün için QC02'den kalite sertifikası (COA) oluşturduk fakat PDF olarak alamıyoruz, formattan ta",
+		"created_at" : "2026-06-21T22:03:33.969Z"
+	},
+	{
+		"id" : "abf7cad9-c85c-4caa-beea-7df530593264",
+		"message_id" : "67d8d430-a25c-4802-a0c3-b7e65060d392",
+		"file_name" : "ekran_goruntusu.png",
+		"file_path" : "\/data\/attachments\/TCK-1025_ekran_goruntusu.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Masa IP Telefonu Çalışmıyor - Masamdaki Cisco IP telefonda ekranda 'Registering' yazısı yanıp sönüyor, hat düşmüyor. Kabloyu çıkarıp taktım düzelmedi.",
+		"created_at" : "2026-07-26T06:03:33.969Z"
+	},
+	{
+		"id" : "ca4fceca-2bed-41cc-8edf-f37953647f2d",
+		"message_id" : "7c7da4f6-0977-4459-8a83-978cd7cca331",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1027_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Mouse Tekerleği Aşağı İnmiyor - Faremin scroll (orta tekerlek) tuşu bozuldu, aşağı kaydırıyorum ama ekran yukarı atlıyor. Yeni mouse alabilir miyim?",
+		"created_at" : "2026-05-29T21:03:33.969Z"
+	},
+	{
+		"id" : "b091d770-8f65-4bf5-8f18-92a480874989",
+		"message_id" : "d5dfc4c5-8892-4753-86d9-f0c18519682e",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1029_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Malzeme Deposu Bulunamıyor Hatası - Malzeme transferi (MIGO 311) yaparken 2000 nolu üretim deposunu hedef depo olarak seçiyorum ama 'Depo yeri tanımlı değil",
+		"created_at" : "2026-07-01T14:03:33.969Z"
+	},
+	{
+		"id" : "579d54bf-85e3-45f7-a381-a5d9711aef84",
+		"message_id" : "afc1b047-2238-4029-9e44-d1423616986e",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1031_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Bilgisayardan Garip Sesler Geliyor ve Açılmıyor - Merhaba, sabah işe geldim düğmeye bastım ama bilgisayar çığlık atar gibi dıııt dıııt ötüyor. Ekran da simsiyah kaldı hiç",
+		"created_at" : "2026-06-25T08:03:33.969Z"
+	},
+	{
+		"id" : "d9a39c18-0b07-4d56-84dd-f8061de7ad9e",
+		"message_id" : "dd64a94b-1cae-4a68-a68e-0150e071af22",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1034_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Malzeme Kabulünde Garip Hata - Merhaba, depoya gelen malları sisteme işliyordum ama yeşil ekran yerine önüme kocaman kırmızı bir yazı çıktı. 'QM bilmem",
+		"created_at" : "2026-06-14T22:03:33.969Z"
+	},
+	{
+		"id" : "69d19b9d-3e21-4b8a-96a0-a14397ebd39c",
+		"message_id" : "2c869a3e-65a3-49d0-8261-c9067e518ef6",
+		"file_name" : "ekran_goruntusu.png",
+		"file_path" : "\/data\/attachments\/TCK-1037_ekran_goruntusu.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Yazıcıdan Kağıt Çıkmıyor Ama Işığı Yanıyor - Bizim odadaki yazıcıya kaç kere çıktı gönderdim ama tık yok. Yanına gittim kırmızı bir ışık yanıp sönüyor ama kağıt fala",
+		"created_at" : "2026-06-28T14:03:33.969Z"
+	},
+	{
+		"id" : "035fb5c8-8979-4cfe-94ab-75d0bad98b13",
+		"message_id" : "616d0222-c8d7-4796-ba8b-efb953a1da50",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1038_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Barkod Okuyucu SAP'ye Yazmıyor - Depoda el terminaliyle kutuları okutuyorum, ışık yanıyor bip sesi geliyor ama SAP ekranındaki kutucuğa hiçbir şey yazmıy",
+		"created_at" : "2026-06-16T16:03:33.969Z"
+	},
+	{
+		"id" : "70843154-fa59-4cc2-a223-966d0b9f2fbf",
+		"message_id" : "9b60b811-ecd3-4d75-98e8-f81195ebb841",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1041_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Bilgisayarımda Sürekli Reklamlar Çıkıyor - İnternette gezinirken ekranda sürekli 'Tebrikler kazandınız' diye saçma sapan şeyler çıkmaya başladı. Kapatıyorum yine g",
+		"created_at" : "2026-07-17T15:03:33.969Z"
+	},
+	{
+		"id" : "6f59f424-3b38-4f9f-a7e2-829f1089340b",
+		"message_id" : "88672d63-58a4-422e-a719-2c9b910fd300",
+		"file_name" : "cihaz_foto.jpg",
+		"file_path" : "\/data\/attachments\/TCK-1043_cihaz_foto.jpg",
+		"file_type" : "image\/jpeg",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Şifremi Kabul Etmiyor Sinir Oldum - Her gün girdiğim şifreyi yazıyorum ama 'Hatalı şifre' deyip duruyor. Büyük küçük harfe de dikkat ediyorum ama delirtti b",
+		"created_at" : "2026-06-27T14:03:33.969Z"
+	},
+	{
+		"id" : "125d7ee0-aee7-455e-b687-4a2d3ed0cb22",
+		"message_id" : "2bf0718f-3cc3-4d0b-bf35-275030bd6052",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1046_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Fare Kendi Kendine Geziyor - Bilgisayarın faresi ben dokunmadan ekranda sağa sola titriyor. Bazen tıklayamıyorum bile, içine cin kaçmış gibi. Yenisin",
+		"created_at" : "2026-07-12T03:03:33.969Z"
+	},
+	{
+		"id" : "50b6ca2c-e51e-4cb2-984a-d0b6664e2224",
+		"message_id" : "d7aeed99-8991-4f7b-83b5-234ab3c27cd2",
+		"file_name" : "cihaz_foto.jpg",
+		"file_path" : "\/data\/attachments\/TCK-1048_cihaz_foto.jpg",
+		"file_type" : "image\/jpeg",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Ekranda Polis Amblemi Çıktı Para İstiyor - İnternette araştırma yaparken ekran birden kilitlendi. EGM logosu var, 'Bilgisayarınız kilitlendi ceza ödeyin' yazıyor. ",
+		"created_at" : "2026-06-27T22:03:33.969Z"
+	},
+	{
+		"id" : "5c8c00e7-b738-43da-be3a-e1634f6e08ee",
+		"message_id" : "943fd88b-1466-4cbc-8a7a-593636df70dd",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1051_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Şifremi Kağıda Yazmıştım Kaybettim - Bilgisayar şifremi unutmayayım diye sarı kağıda yazıp ekranın altına yapıştırmıştım, temizlikçi abla çöpe atmış galiba. ",
+		"created_at" : "2026-05-30T07:03:33.969Z"
+	},
+	{
+		"id" : "d4f6b968-7069-4295-9737-674b4f4285fa",
+		"message_id" : "24c56028-d36a-4e73-8e40-c7aa2f8d7750",
+		"file_name" : "ekran_goruntusu.png",
+		"file_path" : "\/data\/attachments\/TCK-1052_ekran_goruntusu.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Fatura Çıkmıyor Yazıcı İşareti Yok - Müşterinin malı tıra yüklendi faturasını basıcam ama SAP'de faturayı buluyorum, yukarıda yazıcı resmi çıkmıyor. Bu kamyo",
+		"created_at" : "2026-07-18T21:03:33.969Z"
+	},
+	{
+		"id" : "755dc979-6969-4041-a632-4fb560c4a01d",
+		"message_id" : "abc96a5c-b55e-494b-9fe0-5accdd535979",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1053_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Yeni Stajyer Geldi Ama Ekranı Açılmıyor - Pazarlama departmanına yeni bir stajyer kızımız geldi (Merve), masasına oturdu ama bilgisayar kullanıcı adı şifre istiyo",
+		"created_at" : "2026-06-08T23:03:33.969Z"
+	},
+	{
+		"id" : "c7378b5b-4393-4212-bae4-d415b0b79f37",
+		"message_id" : "50fe93ad-bbee-411c-bc6a-99aa9b8d4d82",
+		"file_name" : "cihaz_foto.jpg",
+		"file_path" : "\/data\/attachments\/TCK-1055_cihaz_foto.jpg",
+		"file_type" : "image\/jpeg",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Projeksiyon Pembe Gösteriyor Rezil Olduk - Toplantı odasında müdürlere sunum yapacağım ama duvardaki görüntü kıpkırmızı\/pembe. Renkler birbirine girdi, tablolar ok",
+		"created_at" : "2026-07-15T11:03:33.969Z"
+	},
+	{
+		"id" : "df865598-d9a5-4c96-99f6-2b6899b82ef7",
+		"message_id" : "96652f70-df2c-4645-81c8-c4759dc13b3e",
+		"file_name" : "ekran_goruntusu.png",
+		"file_path" : "\/data\/attachments\/TCK-1060_ekran_goruntusu.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Banka Şifresi Sordu Bir Mail Tıkladım - Muhasebeden geliyormuş gibi bir mail vardı, 'Maaş güncellemesi için banka bilgilerinizi girin' dedi. Tıkladım bir ekran ",
+		"created_at" : "2026-06-29T14:03:33.969Z"
+	},
+	{
+		"id" : "65509343-f61c-4d6e-ba44-392b34cc63d8",
+		"message_id" : "5d961374-2497-4a8a-aedd-fbf3a627b8f6",
+		"file_name" : "ekran_goruntusu.png",
+		"file_path" : "\/data\/attachments\/TCK-1062_ekran_goruntusu.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Okutunca Dıt Diye Ötüyor Koli Gitmiyor - El terminaliyle sevk edilecek kutuyu okutuyorum ekranda HU bilmem ne hatası veriyor, dıt dıt bağırıyor makine. Kamyona y",
+		"created_at" : "2026-06-10T19:03:33.969Z"
+	},
+	{
+		"id" : "4d1da5ba-9ac3-4670-a97f-d266aba28919",
+		"message_id" : "3651e0e5-a23c-46e6-b8ef-592c8c23bb0e",
+		"file_name" : "ekran_goruntusu.png",
+		"file_path" : "\/data\/attachments\/TCK-1064_ekran_goruntusu.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Kalite Tik İşareti Soluk Basamıyorum - Testleri bitirdim, kalite ekranında malzemeye onay vereceğim yeşil tike basacam ama düğme soluk renkli, tıklanmıyor. Bir",
+		"created_at" : "2026-07-11T21:03:33.969Z"
+	},
+	{
+		"id" : "18e1025f-34f9-41d8-98e6-5ea29bc485c0",
+		"message_id" : "942dc2e2-c62b-4748-b712-2a2771b0fd6c",
+		"file_name" : "cihaz_foto.jpg",
+		"file_path" : "\/data\/attachments\/TCK-1065_cihaz_foto.jpg",
+		"file_type" : "image\/jpeg",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Ekrana Kedim Bastı Masaüstü Yan Döndü - Evden çalışıyorum, ben kahve alırken kedi klavyenin üstünden geçmiş. Ekran yan döndü, diklemesine bakıyorum şu an boynum",
+		"created_at" : "2026-07-15T20:03:33.969Z"
+	},
+	{
+		"id" : "c6ef5942-c057-4142-8dad-d7614a5cc397",
+		"message_id" : "7ee4d17e-a7d7-4176-8c1c-f212edb2648d",
+		"file_name" : "ekran_goruntusu.png",
+		"file_path" : "\/data\/attachments\/TCK-1069_ekran_goruntusu.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR]  Şirket Dosyalarına Ulaşamıyorum - Şehir dışındayım, otelin internetinden sizin o kilit resimli programa basıyorum dönüp dönüp hata veriyor. Şirket dosyala",
+		"created_at" : "2026-06-24T00:03:33.969Z"
+	},
+	{
+		"id" : "7874e808-4a03-4416-9902-f632d7af5f51",
+		"message_id" : "3716a57d-a607-49d6-bb0c-e0a8ed4f8475",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1073_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Üretim Ekranı Gri Oldu Yazı Yazamıyorum - İş emrini açıyorum ama kutucukların hepsi gri renkte. Tıklıyorum imleç gelmiyor. Ben bu üretimi sisteme nasıl gireceğim,",
+		"created_at" : "2026-07-04T06:03:33.969Z"
+	},
+	{
+		"id" : "b1d6e6e7-c011-46ad-889d-93e339ce63ef",
+		"message_id" : "ddf51f7b-ba0e-4a45-be1b-a95b1fe856b0",
+		"file_name" : "ekran_goruntusu.png",
+		"file_path" : "\/data\/attachments\/TCK-1075_ekran_goruntusu.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Malzeme Yok Diyor Ama Depoda Dağ Gibi Duruyor - Satınalma siparişi açacağım, malzemenin kodunu giriyorum 'Bu malzeme mevcut değil' diye hata veriyor. Gidip depoya bakıy",
+		"created_at" : "2026-06-21T02:03:33.969Z"
+	},
+	{
+		"id" : "79414316-14ef-40a7-92a9-3ec31a8c018d",
+		"message_id" : "e1866e25-3bc8-4c6a-9d1f-fd4ef4ae05da",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1079_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Spotify Kurcam Yönetici Şifresi İstiyor - Kendi kendime müzik dinlemek için Spotify indireyim dedim, kurarken bir ekran çıkıyor benden 'Admin şifresi' istiyor. Şi",
+		"created_at" : "2026-07-07T17:03:33.969Z"
+	},
+	{
+		"id" : "1cdf5bfc-33d7-4639-bfbc-18759db0a1c2",
+		"message_id" : "19e8bb8c-7240-4bb4-8119-7f5a0065b897",
+		"file_name" : "ekran_goruntusu.png",
+		"file_path" : "\/data\/attachments\/TCK-1084_ekran_goruntusu.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Excel Dondu 3 Saattir Kaydetmedim Lütfen Kurtarın - Bütün sabah maliyet tablosu hazırladım, tam bitecekken Excel 'Yanıt Vermiyor' deyip dondu kaldı. Ekranda öylece duruyor.",
+		"created_at" : "2026-05-30T03:03:33.969Z"
+	},
+	{
+		"id" : "b35d2875-56c8-4bc0-aee7-e816de3b37e9",
+		"message_id" : "0bad9df8-e5ac-480d-a09f-9131dc3b9803",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1087_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Masa Telefonumda Network Down Yazıyor - Telefonun ekranında İngilizce 'Network Down' yazısı çıktı. Kulağıma dayıyorum çevirme sesi gelmiyor. Fişi çektim taktım ",
+		"created_at" : "2026-06-13T17:03:33.969Z"
+	},
+	{
+		"id" : "13364ea3-f7db-4659-8d22-eb2ca9aa686f",
+		"message_id" : "c32b51d8-4ab5-4e09-b9da-e54f59ffa9f9",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1088_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Sipariş Benden Masraf Yeri İstiyor O Ne Demek? - Kalem siparişi açacağım, her şeyi yazdım tam kaydedicem 'G\/L hesabı için masraf yeri gereklidir' diye hata veriyor. Masr",
+		"created_at" : "2026-06-15T21:03:33.969Z"
+	},
+	{
+		"id" : "f1f9e44e-a73f-4627-95a6-6eec3bbb88a6",
+		"message_id" : "626c122d-aaa9-4f3d-9f5d-e1b71a99e46f",
+		"file_name" : "ekran_goruntusu.png",
+		"file_path" : "\/data\/attachments\/TCK-1090_ekran_goruntusu.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Terminale Tıkladım Camı Kırıldı - Depoda mal okuturken el terminali paletin üstünden düştü. Camı boydan boya çatladı ama sorun şu ki SAP ekranı da dondu o",
+		"created_at" : "2026-06-26T02:03:33.969Z"
+	},
+	{
+		"id" : "c53cf2e1-379d-47df-bba3-8246dd3eb1dd",
+		"message_id" : "7ead09e4-a876-426c-8f7a-3d566d0f2b9a",
+		"file_name" : "cihaz_foto.jpg",
+		"file_path" : "\/data\/attachments\/TCK-1093_cihaz_foto.jpg",
+		"file_type" : "image\/jpeg",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Kırmızı Ekran Çıktı Bağlantınız Gizli Değil Diyor - Devletin ihale sitesine gireceğim, Google Chrome kocaman kırmızı bir ekran çıkardı 'Bağlantınız Gizli Değil, şifrelerini",
+		"created_at" : "2026-06-09T10:03:33.969Z"
+	},
+	{
+		"id" : "20161a12-a0a8-45bd-8380-176739838465",
+		"message_id" : "78cefb80-079d-4eee-a056-6f1a01b13918",
+		"file_name" : "cihaz_foto.jpg",
+		"file_path" : "\/data\/attachments\/TCK-1094_cihaz_foto.jpg",
+		"file_type" : "image\/jpeg",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Hoparlörden Ses Gelmiyor Eğitime Girecem - İK'nın zorunlu kıldığı eğitim videosunu izleyeceğim ama monitörün hoparlöründen zerre ses çıkmıyor. Sağ alttan sesi %100",
+		"created_at" : "2026-07-25T15:03:33.969Z"
+	},
+	{
+		"id" : "12d37dfe-71bd-45c1-a53a-35ef8bd59cdd",
+		"message_id" : "60ed417f-e9ee-4683-9039-6c84bfc2c4c3",
+		"file_name" : "hata_ekrani.png",
+		"file_path" : "\/data\/attachments\/TCK-1097_hata_ekrani.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Parti Numarası Ne Demek Benden Onu İstiyor - Kalite ekranında sonucu giriyorum, tam yeşil ışık yakacağım 'Parti (Batch) numarası zorunludur' diyor. Parti ne demek, s",
+		"created_at" : "2026-06-22T07:03:33.969Z"
+	},
+	{
+		"id" : "abef8f0e-62a9-48f3-a7bd-bca65b338c0a",
+		"message_id" : "e4d1ec93-3c20-4845-8e7f-aeec90d44339",
+		"file_name" : "cihaz_foto.jpg",
+		"file_path" : "\/data\/attachments\/TCK-1100_cihaz_foto.jpg",
+		"file_type" : "image\/jpeg",
+		"ocr_extracted_text" : "[Ekran görüntüsü OCR] Benim Ekranım Neden Siyah Beyaz Oldu? - Bilgisayarın ekranındaki bütün renkler gitti. Eski televizyonlar gibi siyah beyaz oldu her şey. Çok içim daraldı böyle ç",
+		"created_at" : "2026-07-05T01:03:33.969Z"
+	},
+	{
+		"id" : "e447aef1-eb0c-48f9-99ef-e7a36ae273a5",
+		"message_id" : "bdf47ef6-2225-446e-9122-ff72ecfe7bed",
+		"file_name" : "Screenshot 2026-07-30 at 09.08.32.png",
+		"file_path" : "data\/uploads\/0b0b9fe590004610a243615cd1a82e2f.png",
+		"file_type" : "image\/png",
+		"ocr_extracted_text" : "© Ata Yalman GUDE | TİNDİSO <yalman.gude@tindiso.com.tr>\nRequired: © Mert ARIYURT | TINDISO; © Arda TEZBAŞARAN | TİNDİSO; @ Eymen Efe ALTUN | TINDISO\n\nYesterday at 09:53\n\n29 July 2026 Wednesday at 10:30 - 12:00.\nMicrosoft Teams Toplantısı\n\nCg You have accepted this invitation. Show Meeting\n© This event occurs in the past.\n© To protect your privacy, some external images in this message... o Download external images Go to Settings\n\nRSVP to this event Email organizer @\n\nOptional message to organizer\n\n@ Accept @ Tentative © Decline © Propose New Time v",
+		"created_at" : "2026-07-30T06:18:38.498Z"
+	},
+	{
+		"id" : "db802fa3-6f19-4b82-bfde-5c6fd3d168b1",
+		"message_id" : "3285e6d2-4f71-45b1-aa9e-44731071a6c6",
+		"file_name" : "upload",
+		"file_path" : "data\/uploads\/b2a6dae00bbc45489f99f62c64e2301b",
+		"file_type" : null,
+		"ocr_extracted_text" : "",
+		"created_at" : "2026-07-30T08:08:40.508Z"
+	},
+	{
+		"id" : "8fb24870-2e7f-4598-afb4-5dae46334bcd",
+		"message_id" : "3d5d4567-0b61-4697-ab38-7d80b5482329",
+		"file_name" : "upload",
+		"file_path" : "data\/uploads\/ed835c1b9aef4281984f2ca15dca4b8c",
+		"file_type" : null,
+		"ocr_extracted_text" : "",
+		"created_at" : "2026-07-30T08:13:53.144Z"
+	},
+	{
+		"id" : "1f9e6c56-d379-4f3f-bb4a-99fb761d1b9d",
+		"message_id" : "4473dd21-0eb8-4bad-a1ec-b7965985dab9",
+		"file_name" : "upload",
+		"file_path" : "data\/uploads\/9b9704117f334915b489277ed9765c7c",
+		"file_type" : null,
+		"ocr_extracted_text" : "",
+		"created_at" : "2026-07-30T08:48:03.947Z"
+	},
+	{
+		"id" : "080693b4-d187-4bbe-ac58-7835b268685d",
+		"message_id" : "41a2c49c-ed13-42ac-9308-6a41fa079c0c",
+		"file_name" : "upload",
+		"file_path" : "data\/uploads\/c82aa0dba73e40ebbd27adf943e608ba",
+		"file_type" : null,
+		"ocr_extracted_text" : "",
+		"created_at" : "2026-07-30T11:12:58.256Z"
+	},
+	{
+		"id" : "1a13c967-c2dd-4dd7-8999-9c4720483e83",
+		"message_id" : "3ae3b247-2f54-4f66-b511-4b3787a8c556",
+		"file_name" : "upload",
+		"file_path" : "data\/uploads\/8f4a0a5a8336448fbf0c3dacfcb092bb",
+		"file_type" : null,
+		"ocr_extracted_text" : "",
+		"created_at" : "2026-07-30T11:17:31.960Z"
+	},
+	{
+		"id" : "12aba065-25b4-473b-8547-e0bed6172d06",
+		"message_id" : "b22168fe-8f6c-40a7-8f11-b66c1be83194",
+		"file_name" : "upload",
+		"file_path" : "data\/uploads\/69e6e08d2b19468b9d905e61863872ca",
+		"file_type" : null,
+		"ocr_extracted_text" : "",
+		"created_at" : "2026-07-30T11:21:54.025Z"
+	},
+	{
+		"id" : "b81e542a-46b5-4ea7-8513-d0f4112635ba",
+		"message_id" : "ac1542f7-237c-4d76-ba64-ad44bba25daf",
+		"file_name" : "upload",
+		"file_path" : "data\/uploads\/58d013a4b9bd4b628902ccb40a16a310",
+		"file_type" : null,
+		"ocr_extracted_text" : "",
+		"created_at" : "2026-07-30T11:43:54.215Z"
+	},
+	{
+		"id" : "cc5568f3-bd97-46c2-a82f-29a105e04524",
+		"message_id" : "be0f8b6f-ba90-4e34-b76c-f486e8ced99e",
+		"file_name" : "upload",
+		"file_path" : "data\/uploads\/43ee2e191a4a454bbafd1ade2a98f3da",
+		"file_type" : null,
+		"ocr_extracted_text" : "",
+		"created_at" : "2026-07-30T12:36:33.627Z"
+	},
+	{
+		"id" : "0e814f94-72dd-4ad3-aaad-ae4063944443",
+		"message_id" : "ef0c2a2a-d7d7-40fc-a817-b4a4174429a1",
+		"file_name" : "upload",
+		"file_path" : "data\/uploads\/32f85600858d4d30a528006358b3be54",
+		"file_type" : null,
+		"ocr_extracted_text" : "",
+		"created_at" : "2026-07-31T08:38:49.710Z"
+	},
+	{
+		"id" : "6c1ca981-88e8-47a5-835e-7c0259d33e7d",
+		"message_id" : "389ff742-a7c0-4fc5-b3df-ffaad638ce32",
+		"file_name" : "upload",
+		"file_path" : "data\/uploads\/2d08e248dd1d490586fc02440b1fe560",
+		"file_type" : null,
+		"ocr_extracted_text" : "",
+		"created_at" : "2026-08-03T11:11:16.173Z"
+	},
+	{
+		"id" : "4a166912-1735-4126-811d-4d68401f6822",
+		"message_id" : "ee457fa5-9467-4afd-b50d-ef45b0c52f85",
+		"file_name" : "upload",
+		"file_path" : "data\/uploads\/6a5c29791af44b9997f94062ac7b99ce",
+		"file_type" : null,
+		"ocr_extracted_text" : "",
+		"created_at" : "2026-08-03T11:14:38.530Z"
+	},
+	{
+		"id" : "6eee9504-8b6b-4827-9d67-8a035287af70",
+		"message_id" : "ae7e6c79-7acb-451e-8248-a7a9807e34cf",
+		"file_name" : "upload",
+		"file_path" : "data\/uploads\/2885abb5e02e4ce7b5d50cbe2e1ba796",
+		"file_type" : null,
+		"ocr_extracted_text" : "",
+		"created_at" : "2026-08-17T10:24:43.584Z"
+	},
+	{
+		"id" : "272437d4-12f9-4833-b86b-9882a2cdf404",
+		"message_id" : "b013807e-c983-489e-9598-95f99c275609",
+		"file_name" : "upload",
+		"file_path" : "data\/uploads\/4fe1c19a3253454f824530057716a61b",
+		"file_type" : null,
+		"ocr_extracted_text" : "",
+		"created_at" : "2026-08-17T11:10:29.832Z"
+	},
+	{
+		"id" : "84b550c6-cc6d-47fd-a4d5-ea8426adbd55",
+		"message_id" : "8b5f9cc3-afc5-43c8-9ffd-cce1e7143721",
+		"file_name" : "upload",
+		"file_path" : "data\/uploads\/0efceebee77d4bd598507d873ceaf4ad",
+		"file_type" : null,
+		"ocr_extracted_text" : "",
+		"created_at" : "2026-08-17T11:29:17.222Z"
+	}
+]}

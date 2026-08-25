@@ -5,19 +5,50 @@ RAG iki katman:
   Katman 2: attachment_vectors    (doküman parçaları; bağımsız KB dahil)
 """
 from __future__ import annotations
-
+##pip install "psycopg[pool]" 
 import json
 
 import psycopg
 from pgvector.psycopg import register_vector
+from psycopg_pool import ConnectionPool
 
 from app.config import settings
 
 
-def _connect() -> psycopg.Connection:
-    conn = psycopg.connect(settings.database_url)
+def _configure_connection(conn: psycopg.Connection) -> None:
+    """Havuzdaki her YENİ bağlantı açıldığında BİR KEZ çalışır
+    (pgvector tipini kaydeder). Eskiden her sorguda tekrar tekrar
+    çağrılan register_vector(conn) artık burada, sadece bağlantı
+    ilk kurulduğunda yapılıyor."""
     register_vector(conn)
-    return conn
+
+
+_pool = ConnectionPool(
+    settings.database_url,
+    min_size=getattr(settings, "db_pool_min_size", 2),
+    max_size=getattr(settings, "db_pool_max_size", 10),
+    configure=_configure_connection,
+    open=False,  # uygulama başlarken open_pool() ile açık şekilde başlatılır
+)
+
+
+def open_pool() -> None:
+    """Uygulama başlarken (main.py startup / worker startup) bir kez çağrılır."""
+    _pool.open(wait=True)
+
+
+def close_pool() -> None:
+    """Uygulama kapanırken bir kez çağrılır."""
+    _pool.close()
+
+
+def _connect():
+    """Geriye dönük uyumlu: her fonksiyon hâlâ
+    'with _connect() as conn, conn.cursor() as cur:' şeklinde çalışır.
+    Artık YENİ bağlantı AÇMIYOR — havuzdan ödünç alıyor; blok bitince
+    bağlantı KAPANMIYOR, havuza geri dönüyor."""
+    return _pool.connection()
+
 
 
 # ---- İndeksleme (KB doküman parçaları) --------------------------------------
@@ -122,17 +153,12 @@ def get_agents_info(emails: list[str]) -> dict[str, dict]:
 
 
 def get_categories() -> dict[str, dict]:
-    """Sınıflandırma kategorilerini DB'den çeker:
-    {category_key: {aciklama, ekip, ekip_gorunum_adi}}.
-    ekip=None ise gruba bağlanmamış demektir (o kategori güvenle otomatik
-    atanamaz, çağıran taraf insan triyajına düşürmeli). ekip_gorunum_adi,
-    gerçek support_group'tan bağımsız iş-türüne özel görünür isimdir
-    (ör. donanım için "Donanım Destek Ekibi") — atama mantığını etkilemez,
-    sadece API yanıtında gösterilir."""
+    """Kategorileri çeker. Eğer kategori bir ekibe (UUID) bağlı değilse, 
+    hata vermek yerine varsayılan olarak 'Bilgi Teknolojileri'ne atar."""
     with _connect() as conn, conn.cursor() as cur:
         cur.execute(
             """
-            SELECT cc.category_key, cc.aciklama, sg.name, cc.ekip_gorunum_adi
+            SELECT cc.category_key, cc.aciklama, COALESCE(sg.name, 'Bilgi Teknolojileri'), cc.ekip_gorunum_adi
             FROM classification_categories cc
             LEFT JOIN support_groups sg ON sg.id = cc.ekip_group_id
             WHERE cc.is_active = true
@@ -142,6 +168,68 @@ def get_categories() -> dict[str, dict]:
         rows = cur.fetchall()
     return {r[0]: {"aciklama": r[1], "ekip": r[2], "ekip_gorunum_adi": r[3] or r[2]}
             for r in rows}
+
+
+# ---- Admin: uzman/kategori yönetimi -----------------------------------------
+
+def get_support_group_id_by_name(name: str) -> str | None:
+    """Grup adından id döner; yoksa None. Elle ID kopyalama hatasını
+    (yanlış grubun ID'sini girmek) önlemek için isimle çalışılır."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute("SELECT id FROM support_groups WHERE name = %s", (name,))
+        row = cur.fetchone()
+    return str(row[0]) if row else None
+
+
+def get_all_group_names() -> list[str]:
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute("SELECT name FROM support_groups ORDER BY name")
+        return [r[0] for r in cur.fetchall()]
+
+
+def get_all_category_keys() -> list[str]:
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute("SELECT category_key FROM classification_categories WHERE is_active = true ORDER BY category_key")
+        return [r[0] for r in cur.fetchall()]
+
+
+def create_agent(
+    email: str, full_name: str, title: str | None, department: str | None,
+    region: str | None, support_group_id: str, uzman_kategorileri: list[str] | None,
+) -> str:
+    """Yeni bir uzman (agent) ekler, users.id döner."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO users (email, full_name, title, department, region, role,
+                                support_group_id, uzman_kategorileri)
+            VALUES (%s,%s,%s,%s,%s,'agent',%s,%s)
+            RETURNING id
+            """,
+            (email, full_name, title, department, region, support_group_id,
+             uzman_kategorileri or None),
+        )
+        uid = cur.fetchone()[0]
+        conn.commit()
+    return str(uid)
+
+
+def create_category(
+    category_key: str, aciklama: str, ekip_group_id: str, ekip_gorunum_adi: str | None,
+) -> str:
+    """Yeni bir sınıflandırma kategorisi ekler, id döner."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO classification_categories (category_key, aciklama, ekip_group_id, ekip_gorunum_adi)
+            VALUES (%s,%s,%s,%s)
+            RETURNING id
+            """,
+            (category_key, aciklama, ekip_group_id, ekip_gorunum_adi),
+        )
+        cid = cur.fetchone()[0]
+        conn.commit()
+    return str(cid)
 
 
 def get_agents_in_group(group_name: str) -> list[dict]:
@@ -163,22 +251,47 @@ def get_agents_in_group(group_name: str) -> list[dict]:
 
 
 def get_agents_by_category(category_key: str, group_name: str) -> list[dict]:
-    """Geçmişte bu KATEGORİYİ gerçekten çözmüş VE bu ekipte olan uzmanlar
-    (email, id, region). Boş dönerse o kategoride hiç geçmiş yok demektir —
-    çağıran taraf tüm ekibe (get_agents_in_group) düşmelidir."""
+    """UUID veya liste (array) kurallarını es geçerek, personeli doğrudan 
+    unvanında (title) geçen kelimelere göre bulur."""
+    
+    # Kategoriden aranacak anahtar kelimeyi çıkar
+    arama_kelimesi = ""
+    if "Donanim" in category_key or "Donanım" in category_key:
+        arama_kelimesi = "Donanım"
+    elif "SAP-" in category_key:
+        arama_kelimesi = category_key.split("-")[1]  # "SAP-MM" -> "MM", "SAP-SD" -> "SD" yapar
+    elif "Yazilim" in category_key or "Yazılım" in category_key:
+        arama_kelimesi = "Yazılım"
+    elif "Guvenlik" in category_key or "Güvenlik" in category_key:
+        arama_kelimesi = "Güvenlik"
+    else:
+        arama_kelimesi = "Sistem"
+
     with _connect() as conn, conn.cursor() as cur:
+        # 1. Aşama: Unvanında arama kelimesi geçenleri ILIKE ile bul
         cur.execute(
             """
-            SELECT DISTINCT u.email, u.id, u.region
-            FROM tickets t
-            JOIN users u ON u.id = t.assigned_agent_id
-            JOIN support_groups g ON g.id = u.support_group_id
-            WHERE t.extracted_category = %s AND g.name = %s AND u.role = 'agent'
-            ORDER BY u.email
+            SELECT email, id, region
+            FROM users
+            WHERE title ILIKE %s
+            ORDER BY email
             """,
-            (category_key, group_name),
+            (f"%{arama_kelimesi}%",)
         )
         rows = cur.fetchall()
+
+        # 2. Aşama: O kelimede kimse yoksa genel "Sistem Destek" uzmanlarına düş (Yedek)
+        if not rows:
+            cur.execute(
+                """
+                SELECT email, id, region
+                FROM users
+                WHERE title ILIKE '%Sistem Destek%'
+                ORDER BY email
+                """
+            )
+            rows = cur.fetchall()
+
     return [{"email": r[0], "id": str(r[1]), "region": r[2]} for r in rows]
 
 
@@ -207,6 +320,8 @@ def create_ticket(
     region: str | None, status: str, priority: str,
     assigned_group_id: str | None,
     assigned_agent_id: str | None = None,
+    sla_policy_id: str | None = None,
+    response_deadline=None, workaround_deadline=None, resolution_deadline=None,
 ) -> tuple[str, int]:
     """Ticket oluşturur, (id, ticket_number) döner."""
     with _connect() as conn, conn.cursor() as cur:
@@ -215,17 +330,78 @@ def create_ticket(
             INSERT INTO tickets
                 (customer_email, recipient_email, subject, raw_issue_description,
                  extracted_category, region, status, priority, assigned_group_id,
-                 assigned_agent_id)
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                 assigned_agent_id, sla_policy_id, response_deadline,
+                 workaround_deadline, resolution_deadline)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
             RETURNING id, ticket_number
             """,
             (customer_email, recipient_email, subject, raw_issue_description,
              extracted_category, region, status, priority, assigned_group_id,
-             assigned_agent_id),
+             assigned_agent_id, sla_policy_id, response_deadline,
+             workaround_deadline, resolution_deadline),
         )
         tid, tno = cur.fetchone()
         conn.commit()
     return str(tid), tno
+
+
+# ---- SLA ----------------------------------------------------------------
+
+def get_sla_policy(priority_key: str) -> dict | None:
+    """priority_key ('urgent'|'high'|'medium'|'low'|'planned') -> sla_policies
+    satırı. Hedefler timedelta olarak döner (psycopg interval->timedelta)."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT id, response_target, workaround_target, resolution_target,
+                   is_business_days
+            FROM sla_policies WHERE priority_key = %s
+            """,
+            (priority_key,),
+        )
+        row = cur.fetchone()
+    if not row:
+        return None
+    return {
+        "id": str(row[0]),
+        "response_target": row[1],
+        "workaround_target": row[2],
+        "resolution_target": row[3],
+        "is_business_days": row[4],
+    }
+
+
+def get_sla_violations() -> list[dict]:
+    """Süresi geçmiş ama hâlâ açık olan ticket'lar (response veya resolution
+    deadline'ı geçmiş, resolved_at boş)."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT t.id, t.ticket_number, t.subject, t.priority, t.status,
+                   t.response_deadline, t.resolution_deadline, t.first_response_at,
+                   t.assigned_agent_id, u.email
+            FROM tickets t
+            LEFT JOIN users u ON u.id = t.assigned_agent_id
+            WHERE t.resolved_at IS NULL
+              AND t.status NOT IN ('resolved', 'closed')
+              AND (
+                    (t.response_deadline IS NOT NULL AND t.first_response_at IS NULL
+                     AND now() > t.response_deadline)
+                 OR (t.resolution_deadline IS NOT NULL AND now() > t.resolution_deadline)
+              )
+            ORDER BY t.resolution_deadline NULLS LAST
+            """
+        )
+        rows = cur.fetchall()
+    return [
+        {
+            "ticket_id": str(r[0]), "ticket_number": r[1], "subject": r[2],
+            "priority": r[3], "status": r[4],
+            "response_deadline": r[5], "resolution_deadline": r[6],
+            "first_response_at": r[7], "assigned_agent_email": r[9],
+        }
+        for r in rows
+    ]
 
 
 def create_routing_log(

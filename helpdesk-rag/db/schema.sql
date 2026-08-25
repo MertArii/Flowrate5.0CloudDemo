@@ -1,4 +1,4 @@
--- AI Helpdesk & RAG - tam veritabanı şeması (10 tablo).
+-- AI Helpdesk & RAG - tam veritabanı şeması (11 tablo).
 -- NOT: Embedding boyutu bge-m3'e göre 1024'tür (doküman 768 diyordu; bge-m3
 -- 1024 ürettiği için 1024'e çekildi). Embedding modeli değişirse burayı ve
 -- app/config.py:embed_dim'i birlikte güncelleyin.
@@ -27,8 +27,26 @@ CREATE TABLE IF NOT EXISTS users (
     phone VARCHAR(50),
     role VARCHAR(20) DEFAULT 'customer' CHECK (role IN ('customer', 'agent', 'admin')),
     support_group_id UUID REFERENCES support_groups(id) ON DELETE SET NULL,
+    -- Elle beyan edilmiş uzmanlık kategorileri (ör. {'SAP-MM','SAP-SD'}).
+    -- Doluysa atama algoritması ÖNCELİKLE bunu kullanır; geçmiş-ticket
+    -- sezgisi sadece bu boşsa devreye girer (bkz. store.get_agents_by_category).
+    uzman_kategorileri TEXT[],
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+-- SLA POLICIES
+CREATE TABLE IF NOT EXISTS sla_policies (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    level_int INT NOT NULL,
+    level_name VARCHAR(100) NOT NULL,
+    priority_key VARCHAR(20) NOT NULL UNIQUE,
+    response_target INTERVAL,
+    workaround_target INTERVAL,
+    resolution_target INTERVAL NOT NULL,
+    is_business_days BOOLEAN DEFAULT FALSE,
+    description TEXT,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
 -- TICKETS
@@ -42,10 +60,18 @@ CREATE TABLE IF NOT EXISTS tickets (
     raw_issue_description TEXT NOT NULL,
     extracted_category VARCHAR(100),
     region VARCHAR(100),
-    status VARCHAR(30) DEFAULT 'new' CHECK (status IN ('new','l1_routing','assigned','in_progress','resolved','closed')),
-    priority VARCHAR(20) DEFAULT 'medium' CHECK (priority IN ('low','medium','high','urgent')),
+    status VARCHAR(30) DEFAULT 'new' CHECK (status IN ('new','l1_routing','assigned','in_progress','waiting','resolved','closed')),
+    priority VARCHAR(20) DEFAULT 'medium' CHECK (priority IN ('low','medium','high','urgent','planned')),
     assigned_group_id UUID REFERENCES support_groups(id) ON DELETE SET NULL,
     assigned_agent_id UUID REFERENCES users(id) ON DELETE SET NULL,
+    sla_policy_id UUID REFERENCES sla_policies(id) ON DELETE SET NULL,
+    response_deadline TIMESTAMPTZ,
+    workaround_deadline TIMESTAMPTZ,
+    resolution_deadline TIMESTAMPTZ,
+    first_response_at TIMESTAMPTZ,
+    sla_status VARCHAR(20) DEFAULT 'within_sla',
+    last_paused_at TIMESTAMPTZ,
+    total_paused_duration INTERVAL DEFAULT '00:00:00',
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     resolved_at TIMESTAMPTZ
@@ -160,3 +186,13 @@ CREATE TABLE IF NOT EXISTS classification_categories (
     is_active         BOOLEAN DEFAULT TRUE,
     created_at        TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
+
+-- STANDART SLA POLİTİKALARI (Varsayılan Kayıtlar)
+INSERT INTO sla_policies (id, level_int, level_name, priority_key, response_target, workaround_target, resolution_target, is_business_days, description)
+VALUES 
+    ('82ff2e38-0509-4a0e-a875-cfa1412ece9e', 1, 'Kritik Seviye', 'urgent', '00:30:00'::interval, '02:00:00'::interval, '08:00:00'::interval, false, 'Holding/Şirket genelini etkileyen kritik süreçler'),
+    ('e5e7864b-3c35-4c0d-a8dd-6b840d63e884', 2, 'Yüksek Öncelik', 'high', '01:00:00'::interval, '04:00:00'::interval, '08:00:00'::interval, false, 'Departman bazlı iş aksatan olaylar'),
+    ('89f937b6-9815-4254-86fb-fc18e18eaced', 3, 'Orta Öncelik', 'medium', NULL, NULL, '08:00:00'::interval, false, 'Bireysel kullanıcı problemleri (Aynı iş günü)'),
+    ('bea83736-8e27-4be2-b5af-ae875e04e415', 4, 'Düşük Öncelik', 'low', NULL, NULL, '2 days'::interval, true, 'İşi doğrudan durdurmayan, alternatifi olan sorunlar'),
+    ('8b72184f-0c4b-45cf-a241-ccaa2629a81f', 5, 'Planlı İş / Hizmet Talebi', 'planned', NULL, NULL, '5 days'::interval, true, 'Kurulum, yetki, donanım sağlama gibi talepler')
+ON CONFLICT (id) DO NOTHING;

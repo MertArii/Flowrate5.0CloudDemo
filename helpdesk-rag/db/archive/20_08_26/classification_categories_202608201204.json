@@ -1,0 +1,111 @@
+{
+"classification_categories": [
+	{
+		"id" : "618722f4-0ffb-4b4b-bad3-b97854a5c625",
+		"category_key" : "SAP-Yetki",
+		"aciklama" : "Kullanıcı yetkileri, rol atama, erişim engeli",
+		"ekip_group_id" : "e7d5dc65-8d42-4763-a249-4103927ff431",
+		"is_active" : true,
+		"created_at" : "2026-07-29T08:36:52.127Z",
+		"ekip_gorunum_adi" : "SAP Yetkilendirme Danışmanlığı"
+	},
+	{
+		"id" : "d5d885ab-507e-4e8c-99fc-c141fa89a5ae",
+		"category_key" : "SAP-Basis",
+		"aciklama" : "Sistem yönetimi, yetkiler, performans, transport",
+		"ekip_group_id" : "e7d5dc65-8d42-4763-a249-4103927ff431",
+		"is_active" : true,
+		"created_at" : "2026-07-29T08:36:52.127Z",
+		"ekip_gorunum_adi" : "SAP Basis Danışmanlığı"
+	},
+	{
+		"id" : "c08ff814-c14a-4b97-b93c-7a2a2834da54",
+		"category_key" : "SAP-SD",
+		"aciklama" : "Satış ve dağıtım (müşteri siparişi, teslimat, faturalama)",
+		"ekip_group_id" : "e7d5dc65-8d42-4763-a249-4103927ff431",
+		"is_active" : true,
+		"created_at" : "2026-07-29T08:36:52.127Z",
+		"ekip_gorunum_adi" : "SAP Satış\/Dağıtım Danışmanlığı"
+	},
+	{
+		"id" : "5a93737b-59d4-48b4-a5fa-dd02602c9b1d",
+		"category_key" : "SAP-MM",
+		"aciklama" : "Malzeme yönetimi \/ satınalma (sipariş, mal girişi, stok)",
+		"ekip_group_id" : "e7d5dc65-8d42-4763-a249-4103927ff431",
+		"is_active" : true,
+		"created_at" : "2026-07-29T08:36:52.127Z",
+		"ekip_gorunum_adi" : "SAP Malzeme Yönetimi Danışmanlığı"
+	},
+	{
+		"id" : "3452cbf9-f33f-42e9-8449-5f0cfea437b6",
+		"category_key" : "SAP-FI",
+		"aciklama" : "Finans ve muhasebe (fatura, hesap belirleme, mizan, kapanış)",
+		"ekip_group_id" : "e7d5dc65-8d42-4763-a249-4103927ff431",
+		"is_active" : true,
+		"created_at" : "2026-07-29T08:36:52.127Z",
+		"ekip_gorunum_adi" : "SAP Finans Danışmanlığı"
+	},
+	{
+		"id" : "bb46828a-67c1-4bc2-8a7d-461172cf7550",
+		"category_key" : "IT-Hesap",
+		"aciklama" : "Parola sıfırlama, hesap kilidi, e-posta erişimi",
+		"ekip_group_id" : "8cd82ed0-91f8-4b33-9e6d-f55af97f43f2",
+		"is_active" : true,
+		"created_at" : "2026-07-29T08:36:52.127Z",
+		"ekip_gorunum_adi" : "Hesap\/Erişim Destek Ekibi"
+	},
+	{
+		"id" : "0276762a-3b5f-4ac7-a86f-83fea03a2beb",
+		"category_key" : "IT-Donanim",
+		"aciklama" : "Bilgisayar, yazıcı, monitör, donanım arızası\/talebi",
+		"ekip_group_id" : "8cd82ed0-91f8-4b33-9e6d-f55af97f43f2",
+		"is_active" : true,
+		"created_at" : "2026-07-29T08:36:52.127Z",
+		"ekip_gorunum_adi" : "Donanım Destek Ekibi"
+	},
+	{
+		"id" : "c9c94d4c-1c01-42e1-a151-82a9b9779232",
+		"category_key" : "IT-Ag",
+		"aciklama" : "Ağ, VPN, internet erişimi bağlantı sorunları",
+		"ekip_group_id" : "8cd82ed0-91f8-4b33-9e6d-f55af97f43f2",
+		"is_active" : true,
+		"created_at" : "2026-07-29T08:36:52.127Z",
+		"ekip_gorunum_adi" : "Ağ Destek Ekibi"
+	},
+	{
+		"id" : "e2913304-c015-4e3b-a28b-fa6870ba5960",
+		"category_key" : "SAP-CO",
+		"aciklama" : "Maliyet Muhasebesi ve Maliyet Kontrol",
+		"ekip_group_id" : "e7d5dc65-8d42-4763-a249-4103927ff431",
+		"is_active" : true,
+		"created_at" : "2026-07-30T10:58:17.734Z",
+		"ekip_gorunum_adi" : "SAP CO Danışmanlığı"
+	},
+	{
+		"id" : "555596fb-1054-4128-ab41-c111221758a8",
+		"category_key" : "IT-Yazilim",
+		"aciklama" : "Web sitesi Yazılımı ve araç platformu geliştiricisi",
+		"ekip_group_id" : "8cd82ed0-91f8-4b33-9e6d-f55af97f43f2",
+		"is_active" : true,
+		"created_at" : "2026-07-30T11:05:25.371Z",
+		"ekip_gorunum_adi" : "Web sitesi Yazılımı ve araç platformu geliştiricisi"
+	},
+	{
+		"id" : "5c679cd5-ffbb-4828-81be-6ce84c2550c7",
+		"category_key" : "SAP-PP",
+		"aciklama" : "Üretim Planlama",
+		"ekip_group_id" : "e7d5dc65-8d42-4763-a249-4103927ff431",
+		"is_active" : true,
+		"created_at" : "2026-07-30T11:31:12.987Z",
+		"ekip_gorunum_adi" : "SAP PP Danışmanlığı"
+	},
+	{
+		"id" : "9249b812-f957-4d8c-a458-928f73237db1",
+		"category_key" : "SAP-WM",
+		"aciklama" : "Depo yönetimi (Warehouse Management)",
+		"ekip_group_id" : "e7d5dc65-8d42-4763-a249-4103927ff431",
+		"is_active" : true,
+		"created_at" : "2026-07-30T11:38:47.039Z",
+		"ekip_gorunum_adi" : "SAP WM Danışmanlığı"
+	}
+]}

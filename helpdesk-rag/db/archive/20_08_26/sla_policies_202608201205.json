@@ -1,0 +1,63 @@
+{
+"sla_policies": [
+	{
+		"id" : "82ff2e38-0509-4a0e-a875-cfa1412ece9e",
+		"level_int" : 1,
+		"level_name" : "Kritik Seviye",
+		"priority_key" : "urgent",
+		"response_target" : "00:30:00",
+		"workaround_target" : "02:00:00",
+		"resolution_target" : "08:00:00",
+		"is_business_days" : false,
+		"description" : "Holding\/Şirket genelini etkileyen kritik süreçler",
+		"created_at" : "2026-08-17T07:45:18.645Z"
+	},
+	{
+		"id" : "e5e7864b-3c35-4c0d-a8dd-6b840d63e884",
+		"level_int" : 2,
+		"level_name" : "Yüksek Öncelik",
+		"priority_key" : "high",
+		"response_target" : "01:00:00",
+		"workaround_target" : "04:00:00",
+		"resolution_target" : "08:00:00",
+		"is_business_days" : false,
+		"description" : "Departman bazlı iş aksatan olaylar",
+		"created_at" : "2026-08-17T07:45:18.645Z"
+	},
+	{
+		"id" : "89f937b6-9815-4254-86fb-fc18e18eaced",
+		"level_int" : 3,
+		"level_name" : "Orta Öncelik",
+		"priority_key" : "medium",
+		"response_target" : null,
+		"workaround_target" : null,
+		"resolution_target" : "08:00:00",
+		"is_business_days" : false,
+		"description" : "Bireysel kullanıcı problemleri (Aynı iş günü)",
+		"created_at" : "2026-08-17T07:45:18.645Z"
+	},
+	{
+		"id" : "bea83736-8e27-4be2-b5af-ae875e04e415",
+		"level_int" : 4,
+		"level_name" : "Düşük Öncelik",
+		"priority_key" : "low",
+		"response_target" : null,
+		"workaround_target" : null,
+		"resolution_target" : "2 days",
+		"is_business_days" : true,
+		"description" : "İşi doğrudan durdurmayan, alternatifi olan sorunlar",
+		"created_at" : "2026-08-17T07:45:18.645Z"
+	},
+	{
+		"id" : "8b72184f-0c4b-45cf-a241-ccaa2629a81f",
+		"level_int" : 5,
+		"level_name" : "Planlı İş \/ Hizmet Talebi",
+		"priority_key" : "planned",
+		"response_target" : null,
+		"workaround_target" : null,
+		"resolution_target" : "5 days",
+		"is_business_days" : true,
+		"description" : "Kurulum, yetki, donanım sağlama gibi talepler",
+		"created_at" : "2026-08-17T07:45:18.645Z"
+	}
+]}

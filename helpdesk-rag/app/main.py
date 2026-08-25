@@ -7,6 +7,7 @@ from pydantic import BaseModel
 
 from app.config import settings
 from app.queue import close_pool, enqueue_ingest, job_status
+from app.queue import close_pool as close_redis_pool, enqueue_ingest, job_status
 from app.rag import ingest, store, vision
 from app.triage import service as triage_service
 
@@ -14,10 +15,14 @@ app = FastAPI(title="Helpdesk RAG API")
 
 IMAGE_TYPES = {"image/png", "image/jpeg", "image/jpg", "image/webp"}
 
+@app.on_event("startup")
+async def _startup():
+    store.open_pool()
 
 @app.on_event("shutdown")
 async def _shutdown():
-    await close_pool()
+    await close_redis_pool()
+    store.close_pool()
 
 
 class TriageRequest(BaseModel):

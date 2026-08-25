@@ -19,15 +19,9 @@ from app.config import settings
 # SAP kategorilerinde asla uygulanmaz — SAP desteği bölgeden bağımsızdır.
 BOLGE_ESLESMESI_UYGULANAN_MODUL = "IT-Donanim"
 
-_kategoriler_cache: dict[str, dict] | None = None
-
-
 def _get_kategoriler() -> dict[str, dict]:
-    global _kategoriler_cache
-    if _kategoriler_cache is None:
-        from app.rag import store  # geç import: DB tabloları hazır olmadan yüklenmesin
-        _kategoriler_cache = store.get_categories()
-    return _kategoriler_cache
+    from app.rag import store  # geç import: DB tabloları hazır olmadan yüklenmesin
+    return store.get_categories()
 
 
 def _en_az_yuklu(store, adaylar: list[dict]) -> dict:
