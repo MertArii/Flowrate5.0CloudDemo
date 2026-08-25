@@ -107501,5 +107501,65 @@
     "sla_level_normalize": 3,
     "kayit_turu": "duzensiz_etiketli",
     "sorun_aciklamasi": "Mal cikisi YAPARKEN seri numarasi 7230 SISTEMDE taninmiyor, 'harekete uygun degil' hatasi aliyorum, siparisi kapatamiyorum."
+  },
+  {
+    "konu": "Yeni Personel SAP Hesap Açılışı",
+    "sorun_aciklamasi": "Önümüzdeki hafta pazartesi günü işe başlayacak olan yeni personelimiz için SAP MM modülü hesap tanımlamalarının yapılmasını ve sisteme giriş yetkilerinin ayarlanmasını talep ediyorum.",
+    "sla_level": 5,
+    "kayit_turu": "duzenli"
+  },
+  {
+    "konu": "Ortak Klasör Erişim Yetkisi Talebi",
+    "sorun_aciklamasi": "Muhasebe departmanı ortak alanındaki '2026_Maliyetler' klasörüne okuma ve yazma yetkimin eklenmesini, hesap ayarlarımın buna göre güncellenmesini rica ederim.",
+    "sla_level": 5,
+    "kayit_turu": "duzenli"
+  },
+  {
+    "konu": "Uzaktan Çalışma VPN Hesabı Kurulumu",
+    "sorun_aciklamasi": "Haftaya planlanan saha ziyaretim sebebiyle bilgisayarıma şirket ağına bağlanabilmem için VPN programının kurulmasını ve VPN hesabı açılışının yapılmasını rica ederim.",
+    "sla_level": 5,
+    "kayit_turu": "duzenli"
+  },
+  {
+    "konu": "SAP FI Modülü Rol ve Hesap Güncellemesi",
+    "sorun_aciklamasi": "Hesap planı görüntüleme işlemleri için SAP FI modülünde mevcut kullanıcı hesabıma Z_FI_READ rolünün tanımlanması için planlama yapılmasını talep ediyorum.",
+    "sla_level": 5,
+    "kayit_turu": "duzenli"
+  },
+  {
+    "konu": "Yeni Monitör ve Donanım Talebi",
+    "sorun_aciklamasi": "Tasarım ekibindeki bilgisayarıma bağlamak üzere stoktan 1 adet ek monitör sağlanmasını ve kurulumu için BT ekibinden destek rica ediyorum.",
+    "sla_level": 5,
+    "kayit_turu": "duzenli"
+  },
+  {
+    "konu": "Active Directory Unvan ve Hesap Bilgisi Güncellemesi",
+    "sorun_aciklamasi": "Terfi eden personelimizin unvanının sistemde güncellenmesi için Active Directory hesap bilgilerinin ve e-posta imzasının düzenlenmesini talep ediyoruz.",
+    "sla_level": 5,
+    "kayit_turu": "duzenli"
+  },
+  {
+    "konu": "Dağıtım Grubuna E-Posta Hesabı Ekleme",
+    "sorun_aciklamasi": "Satış departmanı mail grubuna (satis@) ekibe yeni katılan 3 arkadaşımızın e-posta hesaplarının dahil edilmesini rica ederim.",
+    "sla_level": 5,
+    "kayit_turu": "duzenli"
+  },
+  {
+    "konu": "Yazıcı Kurulumu ve Tanımlama",
+    "sorun_aciklamasi": "Ofisimize yeni alınan ağ yazıcısının ip tanımlamalarının yapılarak benim ve ekip arkadaşlarımın bilgisayarına kurulmasını talep ediyorum.",
+    "sla_level": 5,
+    "kayit_turu": "duzenli"
+  },
+  {
+    "konu": "Lisans Tanımlama ve Yazılım Kurulumu",
+    "sorun_aciklamasi": "Pazarlama projelerinde kullanılmak üzere bilgisayarıma Adobe Illustrator lisansı tanımlanmasını ve kurulumunun yapılmasını rica ederim.",
+    "sla_level": 5,
+    "kayit_turu": "duzenli"
+  },
+  {
+    "konu": "RAM Yükseltme Talebi",
+    "sorun_aciklamasi": "Kullandığım analiz programları çok fazla bellek tükettiği için sistem performansımı artırmak adına bilgisayarımın RAM kapasitesinin 16GB'a yükseltilmesini talep ediyorum.",
+    "sla_level": 5,
+    "kayit_turu": "duzenli"
   }
 ]

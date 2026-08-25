@@ -1,10 +1,10 @@
 """Host'ta çalışan Ollama'ya ince bir istemci (embedding + chat)."""
 from __future__ import annotations
-
+from langfuse import observe
 import httpx
 from app.config import settings
 
-
+@observe(name="ollama_embed")
 async def embed(text: str) -> list[float]:
     async with httpx.AsyncClient(timeout=60) as client:
         r = await client.post(
@@ -14,7 +14,7 @@ async def embed(text: str) -> list[float]:
         r.raise_for_status()
         return r.json()["embedding"]
 
-
+@observe(as_type="generation", name="ollama_chat")
 async def chat(
     messages: list[dict],
     tools: list[dict] | None = None,

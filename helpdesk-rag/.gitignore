@@ -1,8 +1,12 @@
 .env
 __pycache__/
 *.pyc
+*.pkl
+local_store.json
+.DS_Store
 data/docs/*
 !data/docs/.gitkeep
 .venv/
 .env.prod
 backups/
+

@@ -105,6 +105,22 @@ async def main():
     """)
     conn.commit()
 
+    # --- ensure standard sla_policies ---
+    cur.execute("""
+        INSERT INTO sla_policies (id, level_int, level_name, priority_key, response_target, workaround_target, resolution_target, is_business_days, description)
+        VALUES 
+            ('82ff2e38-0509-4a0e-a875-cfa1412ece9e', 1, 'Kritik Seviye', 'urgent', '00:30:00'::interval, '02:00:00'::interval, '08:00:00'::interval, false, 'Holding/Şirket genelini etkileyen kritik süreçler'),
+            ('e5e7864b-3c35-4c0d-a8dd-6b840d63e884', 2, 'Yüksek Öncelik', 'high', '01:00:00'::interval, '04:00:00'::interval, '08:00:00'::interval, false, 'Departman bazlı iş aksatan olaylar'),
+            ('89f937b6-9815-4254-86fb-fc18e18eaced', 3, 'Orta Öncelik', 'medium', NULL, NULL, '08:00:00'::interval, false, 'Bireysel kullanıcı problemleri (Aynı iş günü)'),
+            ('bea83736-8e27-4be2-b5af-ae875e04e415', 4, 'Düşük Öncelik', 'low', NULL, NULL, '2 days'::interval, true, 'İşi doğrudan durdurmayan, alternatifi olan sorunlar'),
+            ('8b72184f-0c4b-45cf-a241-ccaa2629a81f', 5, 'Planlı İş / Hizmet Talebi', 'planned', NULL, NULL, '5 days'::interval, true, 'Kurulum, yetki, donanım sağlama gibi talepler')
+        ON CONFLICT (id) DO NOTHING;
+    """)
+    conn.commit()
+
+    cur.execute("SELECT priority_key, id FROM sla_policies")
+    policy_ids = {row[0]: str(row[1]) for row in cur.fetchall()}
+
     # --- support_groups ---
     group_ids: dict[str, str] = {}
     for gname, gdesc in list(GROUP_BY_RECIPIENT.values()) + [DEFAULT_GROUP]:
@@ -228,10 +244,10 @@ async def main():
             """INSERT INTO tickets
                (customer_email, customer_id, recipient_email, subject, raw_issue_description,
                 extracted_category, region, status, priority, assigned_group_id,
-                assigned_agent_id, created_at, updated_at, resolved_at)
-               VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING id""",
+                assigned_agent_id, sla_policy_id, created_at, updated_at, resolved_at)
+               VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING id""",
             (e["kullanici_maili"], cid, e["kime"], e["konu"], e["sorun_aciklamasi"],
-             cat, e["bolge"], status, prio, gid, aid, created, resolved, resolved),
+             cat, e["bolge"], status, prio, gid, aid, policy_ids.get(prio), created, resolved, resolved),
         )
         tid = cur.fetchone()[0]
 

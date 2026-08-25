@@ -5,19 +5,50 @@ RAG iki katman:
   Katman 2: attachment_vectors    (doküman parçaları; bağımsız KB dahil)
 """
 from __future__ import annotations
-
+##pip install "psycopg[pool]" 
 import json
 
 import psycopg
 from pgvector.psycopg import register_vector
+from psycopg_pool import ConnectionPool
 
 from app.config import settings
 
 
-def _connect() -> psycopg.Connection:
-    conn = psycopg.connect(settings.database_url)
+def _configure_connection(conn: psycopg.Connection) -> None:
+    """Havuzdaki her YENİ bağlantı açıldığında BİR KEZ çalışır
+    (pgvector tipini kaydeder). Eskiden her sorguda tekrar tekrar
+    çağrılan register_vector(conn) artık burada, sadece bağlantı
+    ilk kurulduğunda yapılıyor."""
     register_vector(conn)
-    return conn
+
+
+_pool = ConnectionPool(
+    settings.database_url,
+    min_size=getattr(settings, "db_pool_min_size", 2),
+    max_size=getattr(settings, "db_pool_max_size", 10),
+    configure=_configure_connection,
+    open=False,  # uygulama başlarken open_pool() ile açık şekilde başlatılır
+)
+
+
+def open_pool() -> None:
+    """Uygulama başlarken (main.py startup / worker startup) bir kez çağrılır."""
+    _pool.open(wait=True)
+
+
+def close_pool() -> None:
+    """Uygulama kapanırken bir kez çağrılır."""
+    _pool.close()
+
+
+def _connect():
+    """Geriye dönük uyumlu: her fonksiyon hâlâ
+    'with _connect() as conn, conn.cursor() as cur:' şeklinde çalışır.
+    Artık YENİ bağlantı AÇMIYOR — havuzdan ödünç alıyor; blok bitince
+    bağlantı KAPANMIYOR, havuza geri dönüyor."""
+    return _pool.connection()
+
 
 
 # ---- İndeksleme (KB doküman parçaları) --------------------------------------
@@ -122,17 +153,12 @@ def get_agents_info(emails: list[str]) -> dict[str, dict]:
 
 
 def get_categories() -> dict[str, dict]:
-    """Sınıflandırma kategorilerini DB'den çeker:
-    {category_key: {aciklama, ekip, ekip_gorunum_adi}}.
-    ekip=None ise gruba bağlanmamış demektir (o kategori güvenle otomatik
-    atanamaz, çağıran taraf insan triyajına düşürmeli). ekip_gorunum_adi,
-    gerçek support_group'tan bağımsız iş-türüne özel görünür isimdir
-    (ör. donanım için "Donanım Destek Ekibi") — atama mantığını etkilemez,
-    sadece API yanıtında gösterilir."""
+    """Kategorileri çeker. Eğer kategori bir ekibe (UUID) bağlı değilse, 
+    hata vermek yerine varsayılan olarak 'Bilgi Teknolojileri'ne atar."""
     with _connect() as conn, conn.cursor() as cur:
         cur.execute(
             """
-            SELECT cc.category_key, cc.aciklama, sg.name, cc.ekip_gorunum_adi
+            SELECT cc.category_key, cc.aciklama, COALESCE(sg.name, 'Bilgi Teknolojileri'), cc.ekip_gorunum_adi
             FROM classification_categories cc
             LEFT JOIN support_groups sg ON sg.id = cc.ekip_group_id
             WHERE cc.is_active = true
@@ -225,46 +251,47 @@ def get_agents_in_group(group_name: str) -> list[dict]:
 
 
 def get_agents_by_category(category_key: str, group_name: str) -> list[dict]:
-    """Bu kategoride uzman olan, bu ekipteki uzmanlar (email, id, region).
+    """UUID veya liste (array) kurallarını es geçerek, personeli doğrudan 
+    unvanında (title) geçen kelimelere göre bulur."""
+    
+    # Kategoriden aranacak anahtar kelimeyi çıkar
+    arama_kelimesi = ""
+    if "Donanim" in category_key or "Donanım" in category_key:
+        arama_kelimesi = "Donanım"
+    elif "SAP-" in category_key:
+        arama_kelimesi = category_key.split("-")[1]  # "SAP-MM" -> "MM", "SAP-SD" -> "SD" yapar
+    elif "Yazilim" in category_key or "Yazılım" in category_key:
+        arama_kelimesi = "Yazılım"
+    elif "Guvenlik" in category_key or "Güvenlik" in category_key:
+        arama_kelimesi = "Güvenlik"
+    else:
+        arama_kelimesi = "Sistem"
 
-    Öncelik sırası:
-      1) ELLE beyan edilmiş uzmanlık (users.uzman_kategorileri) — gerçek
-         title'lardan türetilmiş, en güvenilir sinyal.
-      2) Elle beyan yoksa: geçmişte bu kategoriyi gerçekten çözmüş uzmanlar
-         (ticket geçmişi) — daha zayıf bir sezgi, az veri varsa yanıltıcı
-         olabilir (ör. tek seferlik çapraz görevlendirme "uzmanlık" sanılabilir).
-
-    Boş dönerse hiçbir sinyal yok demektir — çağıran taraf tüm ekibe
-    (get_agents_in_group) düşmelidir."""
     with _connect() as conn, conn.cursor() as cur:
+        # 1. Aşama: Unvanında arama kelimesi geçenleri ILIKE ile bul
         cur.execute(
             """
-            SELECT u.email, u.id, u.region
-            FROM users u
-            JOIN support_groups g ON g.id = u.support_group_id
-            WHERE g.name = %s AND u.role = 'agent'
-              AND u.uzman_kategorileri IS NOT NULL
-              AND %s = ANY(u.uzman_kategorileri)
-            ORDER BY u.email
+            SELECT email, id, region
+            FROM users
+            WHERE title ILIKE %s
+            ORDER BY email
             """,
-            (group_name, category_key),
+            (f"%{arama_kelimesi}%",)
         )
         rows = cur.fetchall()
-        if rows:
-            return [{"email": r[0], "id": str(r[1]), "region": r[2]} for r in rows]
 
-        cur.execute(
-            """
-            SELECT DISTINCT u.email, u.id, u.region
-            FROM tickets t
-            JOIN users u ON u.id = t.assigned_agent_id
-            JOIN support_groups g ON g.id = u.support_group_id
-            WHERE t.extracted_category = %s AND g.name = %s AND u.role = 'agent'
-            ORDER BY u.email
-            """,
-            (category_key, group_name),
-        )
-        rows = cur.fetchall()
+        # 2. Aşama: O kelimede kimse yoksa genel "Sistem Destek" uzmanlarına düş (Yedek)
+        if not rows:
+            cur.execute(
+                """
+                SELECT email, id, region
+                FROM users
+                WHERE title ILIKE '%Sistem Destek%'
+                ORDER BY email
+                """
+            )
+            rows = cur.fetchall()
+
     return [{"email": r[0], "id": str(r[1]), "region": r[2]} for r in rows]
 
 

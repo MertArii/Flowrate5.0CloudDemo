@@ -7,7 +7,7 @@ ihmal edilebilir — buna karşılık yeni eklenen bir kategori restart
 beklemeden anında devreye girer (eskiden önbellek yüzünden saatlerce fark
 edilmeyen bir yanlış-sınıflandırma hatasına yol açmıştı)."""
 from __future__ import annotations
-
+from langfuse import observe
 import json
 
 from app.rag import ollama_client
@@ -68,7 +68,7 @@ def _build_system(kategoriler: dict[str, dict]) -> str:
         "Emin değilsen modul='Diger' ve düşük guven ver. Uydurma kategori kullanma."
     )
 
-
+@observe(name="classify_ticket")
 async def classify(ticket_text: str) -> dict:
     kategoriler = _get_kategoriler()
     system = _build_system(kategoriler)

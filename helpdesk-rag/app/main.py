@@ -1,3 +1,4 @@
+from langfuse import observe
 import os
 import uuid
 
@@ -6,6 +7,7 @@ from pydantic import BaseModel
 
 from app.config import settings
 from app.queue import close_pool, enqueue_ingest, job_status
+from app.queue import close_pool as close_redis_pool, enqueue_ingest, job_status
 from app.rag import ingest, store, vision
 from app.triage import service as triage_service
 
@@ -13,10 +15,14 @@ app = FastAPI(title="Helpdesk RAG API")
 
 IMAGE_TYPES = {"image/png", "image/jpeg", "image/jpg", "image/webp"}
 
+@app.on_event("startup")
+async def _startup():
+    store.open_pool()
 
 @app.on_event("shutdown")
 async def _shutdown():
-    await close_pool()
+    await close_redis_pool()
+    store.close_pool()
 
 
 class TriageRequest(BaseModel):
@@ -92,6 +98,7 @@ async def get_job(job_id: str):
 
 
 @app.post("/ask")
+@observe()
 async def ask(
     question: str = Form(...),
     min_score: str | None = Form(None),
@@ -101,6 +108,8 @@ async def ask(
     region: str | None = Form(None),
     file: UploadFile | None = File(None),
 ):
+    from langfuse import get_client
+    get_client().flush()
     """RAG ile soru sor -> kaynaklı cevap + L1 ataması.
 
     Opsiyonel dosya eklenebilir: görsel ise (png/jpg/webp) Tesseract ile
@@ -162,7 +171,7 @@ async def ask(
         "yonlendirme": r["yonlendirme"],
     }
 
-
+@observe()
 @app.post("/triage")
 async def triage(req: TriageRequest):
     """L1 triyaj: ticket'ı sınıflandır, uzmana yönlendir, mümkünse otomatik çöz.
@@ -180,7 +189,7 @@ async def triage(req: TriageRequest):
         min_score=req.min_score,
     )
 
-
+@observe()
 @app.post("/admin/agents")
 async def create_agent(req: AgentCreateRequest):
     """Yeni bir uzman (agent) ekler. Grup ADI ile çalışır (id değil) —
@@ -215,7 +224,7 @@ async def create_agent(req: AgentCreateRequest):
         "uzman_kategorileri": req.uzman_kategorileri,
     }
 
-
+@observe()
 @app.get("/admin/sla-ihlaller")
 async def sla_ihlaller():
     """Süresi geçmiş (ilk müdahale veya çözüm deadline'ı aşılmış) ve hâlâ
@@ -223,7 +232,7 @@ async def sla_ihlaller():
     işi değil, her çağrıda taze hesaplanır."""
     return {"ihlaller": store.get_sla_violations()}
 
-
+@observe()
 @app.post("/admin/categories")
 async def create_category(req: CategoryCreateRequest):
     """Yeni bir sınıflandırma kategorisi ekler. Grup ADI ile çalışır (id
