@@ -4,7 +4,7 @@ Katman 1 (ticket_solutions) net, doğrulanmış çözümlerdir.
 Katman 2 (attachment_vectors) genel doküman bilgisidir.
 """
 from __future__ import annotations
-
+from langfuse import observe
 from app.config import settings
 from app.rag import ollama_client, store
 
@@ -18,7 +18,7 @@ SYSTEM_PROMPT = (
     "- SADECE mesaj tamamen bir selam/teşekkür ise kısa ve samimi karşılık ver."
 )
 
-
+@observe(name="rag_answer")
 async def answer(
     question: str,
     min_score: float | None = None,
