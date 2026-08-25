@@ -14,7 +14,13 @@ from app.triage import classifier, router, sla
 REFUSAL_MARK = "elimde bilgi yok"
 
 # Sınıflandırıcının Türkçe öncelik etiketini şema CHECK değerine çevir.
-_ONCELIK_MAP = {"dusuk": "low", "orta": "medium", "yuksek": "high", "kritik": "urgent"}
+_ONCELIK_MAP = {
+    "kritik": 1,        
+    "yuksek": 2,        
+    "orta": 3,          
+    "dusuk": 4,         
+    "planli": 5         
+}
 
 
 async def triage(
