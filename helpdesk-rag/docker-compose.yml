@@ -9,7 +9,7 @@ services:
     container_name: helpdesk-postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-helpdesk}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-demopw}
       POSTGRES_DB: ${POSTGRES_DB:-helpdesk}
     ports:
       # Host'ta Postgres.app 5432'de olduğu için container'ı 5433'e eşliyoruz.
@@ -19,7 +19,7 @@ services:
       - pgdata:/var/lib/postgresql/data
       - ./db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-helpdesk}"]
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-helpdesk}" ]
       interval: 5s
       timeout: 3s
       retries: 10
@@ -31,11 +31,11 @@ services:
     environment:
       # Host'taki Ollama'ya container içinden erişim
       OLLAMA_BASE_URL: http://host.docker.internal:11434
-      DATABASE_URL: postgresql://${POSTGRES_USER:-helpdesk}:${POSTGRES_PASSWORD:-changeme}@postgres:5432/${POSTGRES_DB:-helpdesk}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-helpdesk}:${POSTGRES_PASSWORD:-demopw}@postgres:5432/${POSTGRES_DB:-helpdesk}
     ports:
       - "8000:8000"
     volumes:
-      - ./app:/code/app        # geliştirme için hot-reload
+      - ./app:/code/app # geliştirme için hot-reload
       - ./data:/code/data
     extra_hosts:
       - "host.docker.internal:host-gateway"
