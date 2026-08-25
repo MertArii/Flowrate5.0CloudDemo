@@ -171,7 +171,7 @@ async def ask(
         "yonlendirme": r["yonlendirme"],
     }
 
-
+@observe()
 @app.post("/triage")
 async def triage(req: TriageRequest):
     """L1 triyaj: ticket'ı sınıflandır, uzmana yönlendir, mümkünse otomatik çöz.
@@ -189,7 +189,7 @@ async def triage(req: TriageRequest):
         min_score=req.min_score,
     )
 
-
+@observe()
 @app.post("/admin/agents")
 async def create_agent(req: AgentCreateRequest):
     """Yeni bir uzman (agent) ekler. Grup ADI ile çalışır (id değil) —
@@ -224,7 +224,7 @@ async def create_agent(req: AgentCreateRequest):
         "uzman_kategorileri": req.uzman_kategorileri,
     }
 
-
+@observe()
 @app.get("/admin/sla-ihlaller")
 async def sla_ihlaller():
     """Süresi geçmiş (ilk müdahale veya çözüm deadline'ı aşılmış) ve hâlâ
@@ -232,7 +232,7 @@ async def sla_ihlaller():
     işi değil, her çağrıda taze hesaplanır."""
     return {"ihlaller": store.get_sla_violations()}
 
-
+@observe()
 @app.post("/admin/categories")
 async def create_category(req: CategoryCreateRequest):
     """Yeni bir sınıflandırma kategorisi ekler. Grup ADI ile çalışır (id
