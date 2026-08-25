@@ -1,5 +1,6 @@
 import os
 import uuid
+from langfuse import observe
 
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from pydantic import BaseModel
@@ -96,6 +97,7 @@ async def get_job(job_id: str):
 
 
 @app.post("/ask")
+@observe("ask")
 async def ask(
     question: str = Form(...),
     min_score: str | None = Form(None),
@@ -105,6 +107,9 @@ async def ask(
     region: str | None = Form(None),
     file: UploadFile | None = File(None),
 ):
+    from langfuse import get_client
+    get_client().flush()
+
     """RAG ile soru sor -> kaynaklı cevap + L1 ataması.
 
     Opsiyonel dosya eklenebilir: görsel ise (png/jpg/webp) Tesseract ile
