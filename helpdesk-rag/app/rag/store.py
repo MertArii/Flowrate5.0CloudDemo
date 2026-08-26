@@ -7,6 +7,7 @@ RAG iki katman:
 from __future__ import annotations
 
 import json
+from datetime import datetime
 
 import psycopg
 from pgvector.psycopg import register_vector
@@ -234,6 +235,14 @@ def create_category(
     return str(cid)
 
 
+def get_user_support_group_id(user_id: str) -> str | None:
+    """Bir kullanıcının GERÇEK support_group_id'sini döner (varsa)."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute("SELECT support_group_id FROM users WHERE id = %s", (user_id,))
+        row = cur.fetchone()
+    return str(row[0]) if row and row[0] else None
+
+
 def get_agents_in_group(group_name: str) -> list[dict]:
     """Bir destek grubundaki TÜM uzmanları DB'den çeker (email, id, region).
     Elle tutulan bir liste dosyasından bağımsız — grup üyeliği
@@ -459,6 +468,57 @@ def ticket_solution_exists(ticket_id: str) -> bool:
     with _connect() as conn, conn.cursor() as cur:
         cur.execute("SELECT 1 FROM ticket_solutions WHERE ticket_id = %s LIMIT 1", (ticket_id,))
         return cur.fetchone() is not None
+
+
+def solution_exists_for_harici_no(harici_no: str) -> bool:
+    """metadata->>'harici_no' üzerinden daha önce içe aktarılmış mı kontrol eder
+    — toplu import script'lerinin yarıda kesilip güvenle tekrar çalıştırılmasını
+    (zaten işlenmiş kayıtları atlayarak) sağlar."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            "SELECT 1 FROM ticket_solutions WHERE metadata->>'harici_no' = %s LIMIT 1",
+            (harici_no,),
+        )
+        return cur.fetchone() is not None
+
+
+def backfill_ticket_history(
+    ticket_id: str, customer_id: str | None,
+    created_at: datetime, resolved_at: datetime, sla_status: str,
+) -> None:
+    """Toplu/geçmiş veri importu için: create_ticket() her zaman 'şimdi
+    açılan yeni ticket' varsayar (created_at=now, resolved_at=NULL). Geçmiş
+    tarihli, zaten çözülmüş ticket'lar için bu alanları sonradan günceller."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            UPDATE tickets
+            SET customer_id = %s, created_at = %s, updated_at = %s,
+                resolved_at = %s, first_response_at = %s, sla_status = %s
+            WHERE id = %s
+            """,
+            (customer_id, created_at, resolved_at, resolved_at, created_at, sla_status, ticket_id),
+        )
+        conn.commit()
+
+
+def get_or_create_customer(email: str, full_name: str, region: str | None) -> str:
+    """E-postadan müşteri users.id döner; yoksa role='customer' olarak oluşturur."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute("SELECT id FROM users WHERE email = %s", (email,))
+        row = cur.fetchone()
+        if row:
+            return str(row[0])
+        cur.execute(
+            """
+            INSERT INTO users (email, full_name, role, region)
+            VALUES (%s,%s,'customer',%s) RETURNING id
+            """,
+            (email, full_name, region),
+        )
+        uid = cur.fetchone()[0]
+        conn.commit()
+    return str(uid)
 
 
 def create_ai_feedback(
