@@ -11,7 +11,7 @@
 
 DB_PORT=5433
 API_PORT=8000
-REMOTE_HOST="mertariyurt16_gmail_com@34.118.86.1"
+REMOTE_HOST="mertariyurt16_gmail_com@34.158.232.8"
 INSTANCE="ai-data-prep-vm"
 ZONE="europe-central2-a"
 KEY="$HOME/.ssh/google_compute_engine"
