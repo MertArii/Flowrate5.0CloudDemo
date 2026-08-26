@@ -23,6 +23,12 @@ async def _startup():
 async def _shutdown():
     await close_redis_pool()
     store.close_pool()
+    try:
+        from langfuse import get_client
+        get_client().flush()
+    except Exception:
+        pass
+
 
 
 class TriageRequest(BaseModel):
