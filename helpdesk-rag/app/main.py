@@ -1,15 +1,13 @@
 from langfuse import observe
 import os
 import uuid
-from langfuse import observe
 
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from pydantic import BaseModel
 
 from app.config import settings
-from app.queue import close_pool, enqueue_ingest, job_status
 from app.queue import close_pool as close_redis_pool, enqueue_ingest, job_status
-from app.rag import ingest, store, vision
+from app.rag import ingest, ollama_client, store, vision
 from app.triage import service as triage_service
 
 app = FastAPI(title="Helpdesk RAG API")
@@ -50,6 +48,12 @@ class CategoryCreateRequest(BaseModel):
     aciklama: str
     support_group: str          # grup ADI — id değil
     ekip_gorunum_adi: str | None = None
+
+
+class FeedbackRequest(BaseModel):
+    agent_email: str            # puanı veren uzmanın e-postası — id değil
+    rating: int                 # 1-5
+    feedback_text: str | None = None
 
 
 @app.get("/health")
@@ -255,3 +259,57 @@ async def create_category(req: CategoryCreateRequest):
         "id": category_id, "category_key": req.category_key,
         "support_group": req.support_group,
     }
+
+
+@observe()
+@app.post("/messages/{message_id}/feedback")
+async def submit_feedback(message_id: str, req: FeedbackRequest):
+    """Bir uzmanın, AI'ın ürettiği taslak çözüme (ai_generated_draft) verdiği
+    puanı kaydeder. Puan 4 veya 5 ise VE bu ticket için henüz bir
+    ticket_solutions kaydı yoksa, ticket'ın sorun metni + AI taslağı
+    doğrulanmış bir çözüm olarak ticket_solutions'a (RAG Katman 1) embed
+    edilip eklenir — böylece gelecekteki benzer ticket'larda otomatik
+    çözüm önerisi olarak bulunabilir hale gelir.
+
+    Düşük puanlı (<=3) taslaklar KB'ye eklenmez — sadece geri bildirim
+    olarak kaydedilir; bu, RAG'in kendi hatalı cevaplarını doğrulama
+    yapılmadan tekrar tekrar önermesini (self-reinforcing hallucination)
+    önlemek içindir."""
+    if not (1 <= req.rating <= 5):
+        raise HTTPException(status_code=400, detail="rating 1-5 arasında olmalı.")
+
+    msg = store.get_ai_message(message_id)
+    if not msg:
+        raise HTTPException(status_code=404, detail=f"'{message_id}' id'sinde bir mesaj yok.")
+    if msg["sender_type"] != "ai_bot" or not msg["ai_generated_draft"]:
+        raise HTTPException(
+            status_code=400,
+            detail="Bu mesaj bir AI taslağı değil (ai_generated_draft boş) — puanlanamaz.",
+        )
+
+    agent_id = store.get_user_id_by_email(req.agent_email)
+    if not agent_id:
+        raise HTTPException(status_code=400, detail=f"'{req.agent_email}' adında bir kullanıcı yok.")
+
+    store.create_ai_feedback(
+        message_id=message_id, user_id=agent_id,
+        rating=req.rating, feedback_text=req.feedback_text,
+    )
+
+    terfi_edildi = False
+    if req.rating >= 4 and not store.ticket_solution_exists(msg["ticket_id"]):
+        ticket = store.get_ticket(msg["ticket_id"])
+        if ticket and ticket["raw_issue_description"]:
+            emb = await ollama_client.embed(ticket["raw_issue_description"])
+            store.create_ticket_solution(
+                ticket_id=msg["ticket_id"],
+                category=ticket["extracted_category"],
+                problem_text=ticket["raw_issue_description"],
+                solution_text=msg["ai_generated_draft"],
+                embedding=emb,
+                metadata={"kaynak": "ai_feedback", "rating": req.rating,
+                          "onaylayan": req.agent_email},
+            )
+            terfi_edildi = True
+
+    return {"kaydedildi": True, "ticket_solutions_eklendi": terfi_edildi}

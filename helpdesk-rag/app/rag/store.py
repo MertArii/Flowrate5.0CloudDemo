@@ -10,14 +10,42 @@ import json
 
 import psycopg
 from pgvector.psycopg import register_vector
+from psycopg_pool import ConnectionPool
 
 from app.config import settings
 
 
-def _connect() -> psycopg.Connection:
-    conn = psycopg.connect(settings.database_url)
+def _configure_connection(conn: psycopg.Connection) -> None:
+    """Havuzdaki her YENİ bağlantı açıldığında BİR KEZ çalışır
+    (pgvector tipini kaydeder). Her sorguda tekrar tekrar çağrılan
+    register_vector(conn) yerine, sadece bağlantı ilk kurulduğunda yapılır."""
     register_vector(conn)
-    return conn
+
+
+_pool = ConnectionPool(
+    settings.database_url,
+    min_size=getattr(settings, "db_pool_min_size", 2),
+    max_size=getattr(settings, "db_pool_max_size", 10),
+    configure=_configure_connection,
+    open=False,  # uygulama başlarken open_pool() ile açık şekilde başlatılır
+)
+
+
+def open_pool() -> None:
+    """Uygulama başlarken (main.py startup / worker startup) bir kez çağrılır."""
+    _pool.open(wait=True)
+
+
+def close_pool() -> None:
+    """Uygulama kapanırken bir kez çağrılır."""
+    _pool.close()
+
+
+def _connect():
+    """Her fonksiyon 'with _connect() as conn, conn.cursor() as cur:' şeklinde
+    çalışır. YENİ bağlantı AÇMAZ — havuzdan ödünç alır; blok bitince bağlantı
+    KAPANMAZ, havuza geri döner."""
+    return _pool.connection()
 
 
 # ---- İndeksleme (KB doküman parçaları) --------------------------------------
@@ -395,6 +423,84 @@ def create_routing_log(
         conn.commit()
 
 
+# ---- Geri bildirim -> doğrulanmış çözüm terfisi -----------------------
+
+def get_ai_message(message_id: str) -> dict | None:
+    """ai_bot mesajını (taslak + ait olduğu ticket) döner; yoksa None."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT ticket_id, sender_type, ai_generated_draft
+            FROM ticket_messages WHERE id = %s
+            """,
+            (message_id,),
+        )
+        row = cur.fetchone()
+    if not row:
+        return None
+    return {"ticket_id": str(row[0]), "sender_type": row[1], "ai_generated_draft": row[2]}
+
+
+def get_ticket(ticket_id: str) -> dict | None:
+    """Ticket'ın sorun metni + kategorisini döner; yoksa None."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            "SELECT raw_issue_description, extracted_category FROM tickets WHERE id = %s",
+            (ticket_id,),
+        )
+        row = cur.fetchone()
+    if not row:
+        return None
+    return {"raw_issue_description": row[0], "extracted_category": row[1]}
+
+
+def ticket_solution_exists(ticket_id: str) -> bool:
+    """Bu ticket için zaten bir ticket_solutions kaydı var mı (tekrar eklememek için)."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute("SELECT 1 FROM ticket_solutions WHERE ticket_id = %s LIMIT 1", (ticket_id,))
+        return cur.fetchone() is not None
+
+
+def create_ai_feedback(
+    message_id: str, user_id: str, rating: int, feedback_text: str | None,
+) -> str:
+    """ai_feedbacks'e bir satır ekler, feedback_id döner."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO ai_feedbacks (message_id, user_id, rating, feedback_text)
+            VALUES (%s,%s,%s,%s) RETURNING id
+            """,
+            (message_id, user_id, rating, feedback_text),
+        )
+        fid = cur.fetchone()[0]
+        conn.commit()
+    return str(fid)
+
+
+def create_ticket_solution(
+    ticket_id: str, category: str | None, problem_text: str, solution_text: str,
+    embedding: list[float], metadata: dict,
+) -> str:
+    """Doğrulanmış bir sorun/çözüm çiftini ticket_solutions'a (RAG Katman 1)
+    yazar — ileride benzer ticket'larda otomatik çözüm önerisi olarak bulunur.
+    solution_id döner."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO ticket_solutions
+                (ticket_id, category, problem_text, solution_text, embedding, metadata, is_verified)
+            VALUES (%s,%s,%s,%s,%s,%s,true)
+            RETURNING id
+            """,
+            (ticket_id, category, problem_text, solution_text, embedding,
+             json.dumps(metadata, ensure_ascii=False)),
+        )
+        sid = cur.fetchone()[0]
+        conn.commit()
+    return str(sid)
+
+
 # ---- Mesajlar / ekler --------------------------------------------------
 
 def create_ticket_message(
@@ -445,15 +551,13 @@ def add_attachment_vector(
     """Ekin metnini (görsel açıklaması / doküman metni) attachment_vectors'e
     yazar — RAG Katman 2'ye kalıcı olarak eklenmiş olur, ileride başka
     sorularda da bulunabilir."""
-    with _connect() as conn:
-        register_vector(conn)
-        with conn.cursor() as cur:
-            cur.execute(
-                """
-                INSERT INTO attachment_vectors
-                    (attachment_id, ticket_id, source, chunk_index, chunk_content, embedding)
-                VALUES (%s,%s,%s,0,%s,%s)
-                """,
-                (attachment_id, ticket_id, source, content, embedding),
-            )
-            conn.commit()
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO attachment_vectors
+                (attachment_id, ticket_id, source, chunk_index, chunk_content, embedding)
+            VALUES (%s,%s,%s,0,%s,%s)
+            """,
+            (attachment_id, ticket_id, source, content, embedding),
+        )
+        conn.commit()
