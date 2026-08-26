@@ -1,10 +1,11 @@
+from __future__ import annotations
 """L1 triyaj orkestrasyonu (yeni şema): sınıflandır -> yönlendir ->
 RAG çözüm denemesi -> tickets + routing_logs kaydı.
 
 Atama mantığının tamamı (uzmanlık uyuşması -> bölge -> iş yükü -> rastgele
 eşitlik) router.route() içinde, tümüyle DB'den. Bkz. app/triage/router.py.
 """
-from __future__ import annotations
+from langfuse import observe
 
 from datetime import datetime, timezone
 
@@ -13,6 +14,7 @@ from app.triage import classifier, router, sla
 
 REFUSAL_MARK = "elimde bilgi yok"
 
+<<<<<<< HEAD
 # Sınıflandırıcının Türkçe öncelik etiketini şema CHECK değerine çevir.
 _ONCELIK_MAP = {
     "kritik": 1,        
@@ -22,7 +24,14 @@ _ONCELIK_MAP = {
     "planli": 5         
 }
 
+=======
+# Sınıflandırıcının "1"-"5" (SLA seviyesi) çıktısını tickets.priority CHECK
+# değerine çevirir. sla_policies.level_int ile birebir aynı sıralama:
+# 1=urgent, 2=high, 3=medium, 4=low, 5=planned.
+_ONCELIK_MAP = {"1": "urgent", "2": "high", "3": "medium", "4": "low", "5": "planned"}
+>>>>>>> ed20b0a87121f848fd67023ed7d3e6a2bda82224
 
+@observe(name="triage_orchestration")
 async def triage(
     ticket_text: str,
     customer_email: str = "demo@sirket.com",
