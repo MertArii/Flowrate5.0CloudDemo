@@ -99,11 +99,7 @@ async def get_job(job_id: str):
 
 
 @app.post("/ask")
-<<<<<<< HEAD
-@observe("ask")
-=======
 @observe()
->>>>>>> ed20b0a87121f848fd67023ed7d3e6a2bda82224
 async def ask(
     question: str = Form(...),
     min_score: str | None = Form(None),
@@ -115,10 +111,6 @@ async def ask(
 ):
     from langfuse import get_client
     get_client().flush()
-<<<<<<< HEAD
-
-=======
->>>>>>> ed20b0a87121f848fd67023ed7d3e6a2bda82224
     """RAG ile soru sor -> kaynaklı cevap + L1 ataması.
 
     Opsiyonel dosya eklenebilir: görsel ise (png/jpg/webp) Tesseract ile
