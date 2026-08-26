@@ -29,9 +29,13 @@ services:
     container_name: helpdesk-api
     env_file: .env
     environment:
-      # Host'taki Ollama'ya container içinden erişim
       OLLAMA_BASE_URL: http://host.docker.internal:11434
       DATABASE_URL: postgresql://${POSTGRES_USER:-helpdesk}:${POSTGRES_PASSWORD:-demopw}@postgres:5432/${POSTGRES_DB:-helpdesk}
+      LANGFUSE_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY:-}
+      LANGFUSE_SECRET_KEY: ${LANGFUSE_SECRET_KEY:-}
+      LANGFUSE_HOST: ${LANGFUSE_HOST:-${LANGFUSE_BASE_URL:-https://cloud.langfuse.com}}
+      LANGFUSE_BASEURL: ${LANGFUSE_HOST:-${LANGFUSE_BASE_URL:-https://cloud.langfuse.com}}
+
     ports:
       - "8000:8000"
     volumes:
