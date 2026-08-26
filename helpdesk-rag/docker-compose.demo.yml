@@ -48,11 +48,12 @@ services:
     ports:
       - "127.0.0.1:5432:5432"
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U helpdesk" ]
+      test: ["CMD-SHELL", "pg_isready -U helpdesk"]
       interval: 5s
       timeout: 3s
       retries: 10
     restart: unless-stopped
+
 
   redis:
     image: redis:7.4-alpine
@@ -60,7 +61,7 @@ services:
     volumes:
       - redisdata:/data
     healthcheck:
-      test: [ "CMD", "redis-cli", "ping" ]
+      test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 3s
       retries: 5
@@ -68,9 +69,6 @@ services:
 
   api:
     build: ./app
-    env_file:
-      - path: .env
-        required: false
     environment: &api-env
       OLLAMA_BASE_URL: http://ollama:11434
       DATABASE_URL: postgresql://helpdesk:demopw@postgres:5432/helpdesk
@@ -82,11 +80,6 @@ services:
       CHUNK_SIZE: "800"
       CHUNK_OVERLAP: "120"
       TOP_K: "5"
-      LANGFUSE_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY:-}
-      LANGFUSE_SECRET_KEY: ${LANGFUSE_SECRET_KEY:-}
-      LANGFUSE_HOST: ${LANGFUSE_HOST:-${LANGFUSE_BASE_URL:-https://cloud.langfuse.com}}
-      LANGFUSE_BASEURL: ${LANGFUSE_HOST:-${LANGFUSE_BASE_URL:-https://cloud.langfuse.com}}
-
     ports:
       - "8000:8000"
     volumes:
