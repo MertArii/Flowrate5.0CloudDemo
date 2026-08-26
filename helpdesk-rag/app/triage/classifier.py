@@ -9,11 +9,8 @@ edilmeyen bir yanlış-sınıflandırma hatasına yol açmıştı)."""
 from __future__ import annotations
 from langfuse import observe
 import json
-import logging
 
 from app.rag import ollama_client
-
-logger = logging.getLogger(__name__)
 
 # 'Diger' bilerek DB'de yok: gerçek bir ekibe atanabilir kategori değil,
 # "belirsiz/eşleşmiyor -> insan triyajı" için sabit bir sinyal.
@@ -45,19 +42,9 @@ def _build_system(kategoriler: dict[str, dict]) -> str:
         '  "3" (Orta Öncelikli): Bireysel kullanıcılara ait, tek kullanıcının işini engelleyen sorun '
         "(ör. bilgisayar açılmıyor, yazıcı bağlantısı kopmuş, VPN çalışmıyor).\n"
         '  "4" (Düşük Öncelikli): İşi doğrudan durdurmayan, alternatifle devam edilebilen sorun '
-<<<<<<< HEAD
-        "(ör. bilgisayar yavaş, toner uyarısı, şifre değiştirme, yetki ve erişim talepleri, "
-        "Excel makrosu hata veriyor, mobil e-posta senkronizasyonu hatası, masaüstü kısayolları görünmüyor).\n"
-        '  "5" (Planlı İş / Hizmet Talebi): Planlı, önceden talep edilen işler '
-        "(ör. yeni çalışan için bilgisayar kurulumu, yeni yazılım kurulması, donanım sağlama).\n"
-        "ÖZEL KURAL: Ticket bir GELİŞTİRME talebiyse (mevcut/yeni bir uygulamada "
-        "değişiklik, yeni özellik veya entegrasyon geliştirme talebi), kapsamı ne "
-        "olursa olsun oncelik HER ZAMAN '5'tir — prosedürün 4.1 maddesi gereği.\n\n"
-=======
         "(ör. bilgisayar yavaş, toner uyarısı, şifre değiştirme, yetki ve erişim talepleri).\n"
         '  "5" (Planlı İş / Hizmet Talebi): Planlı, önceden talep edilen işler '
         "(ör. yeni çalışan için bilgisayar kurulumu, yeni yazılım kurulması, donanım sağlama).\n"
->>>>>>> ed20b0a87121f848fd67023ed7d3e6a2bda82224
         "ÖNEMLİ: Kullanıcılar gerçek kapsamı ne olursa olsun mailde/talepte sık sık "
         "'acil', 'ivedi', 'ASAP', çok sayıda ünlem işareti gibi kendi aciliyet "
         "iddiasını yazar. Bu ifadeleri YOK SAY — SADECE ticket metninde tarif "
@@ -77,18 +64,7 @@ def _build_system(kategoriler: dict[str, dict]) -> str:
     )
 
 
-<<<<<<< HEAD
-def _normalize_oncelik(value) -> str:
-    """'1', 1, '1.0' gibi varyasyonları tek haneli '1'..'5' string'ine indirger."""
-    text = str(value).strip()
-    if "." in text:
-        text = text.split(".", 1)[0]
-    return text
-
-
-=======
 @observe(name="classify_ticket")
->>>>>>> ed20b0a87121f848fd67023ed7d3e6a2bda82224
 async def classify(ticket_text: str) -> dict:
     kategoriler = _get_kategoriler()
     system = _build_system(kategoriler)
@@ -100,32 +76,17 @@ async def classify(ticket_text: str) -> dict:
         ],
         fmt="json",
     )
-    raw = (msg.get("content") or "{}").strip()
-    # Bazı modeller fmt="json" istense bile çıktıyı ```json ... ``` ile sarabiliyor.
-    if raw.startswith("```"):
-        raw = raw.strip("`")
-        if raw.startswith("json"):
-            raw = raw[4:]
-        raw = raw.strip()
-
+    raw = msg.get("content") or "{}"
     try:
         data = json.loads(raw)
     except json.JSONDecodeError:
-        logger.warning(
-            "classify(): model çıktısı JSON parse edilemedi, varsayılanlara düşülüyor. raw=%r",
-            raw,
-        )
         data = {}
 
     # Güvenli varsayılanlar + doğrulama
     modul = data.get("modul")
     if modul not in kategoriler:
         modul = "Diger"
-<<<<<<< HEAD
-    oncelik = _normalize_oncelik(data.get("oncelik", "3"))
-=======
     oncelik = str(data.get("oncelik", "3"))
->>>>>>> ed20b0a87121f848fd67023ed7d3e6a2bda82224
     if oncelik not in ("1", "2", "3", "4", "5"):
         oncelik = "3"
     istek_turu = data.get("istek_turu", "olay")
