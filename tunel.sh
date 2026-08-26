@@ -11,7 +11,7 @@
 
 DB_PORT=5433
 API_PORT=8000
-REMOTE_HOST="mertariyurt16_gmail_com@34.118.86.1"
+REMOTE_HOST="mertariyurt16_gmail_com@34.158.232.8"
 INSTANCE="ai-data-prep-vm"
 ZONE="europe-central2-a"
 KEY="$HOME/.ssh/google_compute_engine"
@@ -21,10 +21,9 @@ is_up() { lsof -nP -iTCP:"$1" -sTCP:LISTEN >/dev/null 2>&1; }
 
 case "$1" in
   stop)
-    pkill -f "autossh.*${DB_PORT}:localhost:5432" 2>/dev/null
-    pkill -f "autossh.*${API_PORT}:localhost:8000" 2>/dev/null
-    pkill -f "compute ssh.*${DB_PORT}:localhost:5432" 2>/dev/null
-    pkill -f "compute ssh.*${API_PORT}:localhost:8000" 2>/dev/null
+    pkill -f "${DB_PORT}:localhost:5432" 2>/dev/null
+    pkill -f "${API_PORT}:localhost:8000" 2>/dev/null
+    pkill -f "start-iap-tunnel" 2>/dev/null
     echo "Tüneller durduruldu."
     ;;
   durum)
@@ -32,11 +31,11 @@ case "$1" in
     if is_up ${API_PORT}; then echo "✅ API tüneli açık (127.0.0.1:${API_PORT})"; else echo "❌ API tüneli kapalı"; fi
     ;;
   *)
-    pkill -f "autossh.*${DB_PORT}:localhost:5432" 2>/dev/null
-    pkill -f "autossh.*${API_PORT}:localhost:8000" 2>/dev/null
-    pkill -f "compute ssh.*${DB_PORT}:localhost:5432" 2>/dev/null
-    pkill -f "compute ssh.*${API_PORT}:localhost:8000" 2>/dev/null
+    pkill -f "${DB_PORT}:localhost:5432" 2>/dev/null
+    pkill -f "${API_PORT}:localhost:8000" 2>/dev/null
+    pkill -f "start-iap-tunnel" 2>/dev/null
     sleep 1
+
 
     echo "Normal SSH deneniyor (port 22)..."
     if ssh -o ConnectTimeout=6 -o BatchMode=yes \
