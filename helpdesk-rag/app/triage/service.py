@@ -14,8 +14,10 @@ from app.triage import classifier, router, sla
 
 REFUSAL_MARK = "elimde bilgi yok"
 
-# Sınıflandırıcının Türkçe öncelik etiketini şema CHECK değerine çevir.
-_ONCELIK_MAP = {"dusuk": "low", "orta": "medium", "yuksek": "high", "kritik": "urgent"}
+# Sınıflandırıcının "1"-"5" (SLA seviyesi) çıktısını tickets.priority CHECK
+# değerine çevirir. sla_policies.level_int ile birebir aynı sıralama:
+# 1=urgent, 2=high, 3=medium, 4=low, 5=planned.
+_ONCELIK_MAP = {"1": "urgent", "2": "high", "3": "medium", "4": "low", "5": "planned"}
 
 @observe(name="triage_orchestration")
 async def triage(

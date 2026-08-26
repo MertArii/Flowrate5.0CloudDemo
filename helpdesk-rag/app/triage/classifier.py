@@ -28,45 +28,41 @@ def _build_system(kategoriler: dict[str, dict]) -> str:
         "Sen bir help desk ticket sınıflandırıcısısın. Verilen ticket metnini "
         "analiz et ve SADECE geçerli JSON döndür. Alanlar:\n"
         '  "modul": aşağıdaki kategorilerden TAM BİRİNİN anahtarı,\n'
-        '  "oncelik": "dusuk" | "orta" | "yuksek" | "kritik" (aşağıdaki kapsam '
-        'kriterlerine göre),\n'
+        '  "oncelik": "1" | "2" | "3" | "4" | "5",\n'
         '  "istek_turu": "olay" | "planli_talep",\n'
         '  "ozet": sorunun tek cümlelik Türkçe özeti,\n'
         '  "guven": 0.0-1.0 arası, sınıflandırmaya ne kadar emin olduğun.\n\n'
         "Öncelik (oncelik) — Uyar Holding BT Olay ve Talep Yönetimi Prosedürü'ndeki "
         "SLA önceliklendirme tablosuna göre KAPSAMA (kaç kişiyi/hangi süreci "
         "etkilediğine) bak, sadece kategoriye değil:\n"
-        "  kritik: Holding/şirket genelini veya kritik iş sürecini tamamen durduran "
-        "(ör. SAP tamamen erişilemez, tüm e-posta çalışmıyor, siber saldırı).\n"
-        "  yuksek: Bir departmanı veya çok sayıda kullanıcıyı etkiliyor, tüm "
-        "organizasyonu durdurmuyor (ör. bir departman SAP'e giremiyor, dosya "
-        "sunucusuna bölgesel erişilemiyor).\n"
-        "  orta: Tek bir kullanıcının üretim/iş yapmasını engelleyen sorun (ör. "
-        "bilgisayar açılmıyor, yazıcı bağlantısı kopmuş).\n"
-        "  dusuk: İşi doğrudan durdurmayan, alternatifle devam edilebilen sorun "
-        "(ör. bilgisayar yavaş, toner uyarısı, makro hatası).\n"
+        '  "1" (Kritik): Holding/şirket genelini veya kritik iş sürecini tamamen durduran '
+        "(ör. SAP tamamen erişilemez, tüm e-posta çalışmıyor, siber saldırı, firewall arızası).\n"
+        '  "2" (Yüksek Öncelikli): Bir departmanı veya çok sayıda kullanıcıyı etkiliyor, tüm '
+        "organizasyonu durdurmuyor (ör. bir departman SAP'e giremiyor, dosya sunucusuna erişilemiyor).\n"
+        '  "3" (Orta Öncelikli): Bireysel kullanıcılara ait, tek kullanıcının işini engelleyen sorun '
+        "(ör. bilgisayar açılmıyor, yazıcı bağlantısı kopmuş, VPN çalışmıyor).\n"
+        '  "4" (Düşük Öncelikli): İşi doğrudan durdurmayan, alternatifle devam edilebilen sorun '
+        "(ör. bilgisayar yavaş, toner uyarısı, şifre değiştirme, yetki ve erişim talepleri).\n"
+        '  "5" (Planlı İş / Hizmet Talebi): Planlı, önceden talep edilen işler '
+        "(ör. yeni çalışan için bilgisayar kurulumu, yeni yazılım kurulması, donanım sağlama).\n"
         "ÖNEMLİ: Kullanıcılar gerçek kapsamı ne olursa olsun mailde/talepte sık sık "
         "'acil', 'ivedi', 'ASAP', çok sayıda ünlem işareti gibi kendi aciliyet "
         "iddiasını yazar. Bu ifadeleri YOK SAY — SADECE ticket metninde tarif "
-        "edilen somut etki alanına (kaç kişi/hangi sistem/hangi süreç etkileniyor) "
-        "bak. Kullanıcı 'acil, bilgisayarım açılmıyor' derse ve bu tek bir kişiyi "
-        "etkiliyorsa oncelik yine 'orta'dır, kullanıcı 'acil' dedi diye 'kritik' "
+        "edilen somut etki alanına bak. Kullanıcı 'acil, bilgisayarım açılmıyor' derse ve bu tek "
+        "bir kişiyi etkiliyorsa oncelik yine '3'tür, kullanıcı 'acil' dedi diye '1' "
         "verme. Tersi de geçerli: kullanıcı 'acelesi yok' dese bile kapsam şirket "
-        "genelini durduruyorsa 'kritik' ver.\n\n"
+        "genelini durduruyorsa '1' ver.\n\n"
         "İstek türü (istek_turu) — SADECE şunu ayırt eder: yeni bir şey mi "
         "TALEP ediliyor, yoksa var olan bir şey mi BOZUK/ARIZALI? Metindeki "
-        "aciliyet ifadesiyle (acelesi yok / acil vb.) KARIŞTIRMA — 'acelesi "
-        "yok' demek düşük öncelik demektir, planlı talep demek DEĞİLDİR.\n"
+        "aciliyet ifadesiyle KARIŞTIRMA.\n"
         "  planli_talep: kullanıcı yeni bir şey istiyor — kurulum, yeni "
-        "yazılım/donanım temini, yetki/erişim verilmesi, geliştirme talebi "
-        "(ör. 'yeni çalışan için bilgisayar kurulumu', 'X yazılımı kurulsun', "
-        "'bu klasöre erişim yetkisi istiyorum').\n"
+        "yazılım/donanım temini, yetki/erişim verilmesi, geliştirme talebi.\n"
         "  olay: var olan bir sistem/donanım/yazılım bozuk, yavaş, çalışmıyor "
-        "veya hata veriyor — aciliyeti düşük olsa bile (ör. 'bilgisayarım "
-        "yavaş, acelesi yok' → olay + dusuk, planli_talep DEĞİL).\n\n"
+        "veya hata veriyor.\n\n"
         f"Kategoriler:\n{kategori_listesi}\n\n"
         "Emin değilsen modul='Diger' ve düşük guven ver. Uydurma kategori kullanma."
     )
+
 
 @observe(name="classify_ticket")
 async def classify(ticket_text: str) -> dict:
@@ -90,9 +86,9 @@ async def classify(ticket_text: str) -> dict:
     modul = data.get("modul")
     if modul not in kategoriler:
         modul = "Diger"
-    oncelik = data.get("oncelik", "orta")
-    if oncelik not in ("dusuk", "orta", "yuksek", "kritik"):
-        oncelik = "orta"
+    oncelik = str(data.get("oncelik", "3"))
+    if oncelik not in ("1", "2", "3", "4", "5"):
+        oncelik = "3"
     istek_turu = data.get("istek_turu", "olay")
     if istek_turu not in ("olay", "planli_talep"):
         istek_turu = "olay"
