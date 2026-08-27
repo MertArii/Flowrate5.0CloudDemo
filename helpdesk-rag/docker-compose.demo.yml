@@ -69,6 +69,7 @@ services:
 
   api:
     build: ./app
+    env_file: .env
     environment: &api-env
       OLLAMA_BASE_URL: http://ollama:11434
       DATABASE_URL: postgresql://helpdesk:demopw@postgres:5432/helpdesk
@@ -80,6 +81,12 @@ services:
       CHUNK_SIZE: "800"
       CHUNK_OVERLAP: "120"
       TOP_K: "5"
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      LOG_FORMAT: ${LOG_FORMAT:-json}
+      LANGFUSE_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY:-}
+      LANGFUSE_SECRET_KEY: ${LANGFUSE_SECRET_KEY:-}
+      LANGFUSE_HOST: ${LANGFUSE_HOST:-${LANGFUSE_BASE_URL:-https://cloud.langfuse.com}}
+      LANGFUSE_BASEURL: ${LANGFUSE_HOST:-${LANGFUSE_BASE_URL:-https://cloud.langfuse.com}}
     ports:
       - "8000:8000"
     volumes:
@@ -100,6 +107,7 @@ services:
   worker:
     build: ./app
     command: arq app.worker.WorkerSettings
+    env_file: .env
     environment: *api-env
     volumes:
       - ./app:/code/app

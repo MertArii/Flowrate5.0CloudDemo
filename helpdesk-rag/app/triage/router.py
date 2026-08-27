@@ -14,6 +14,9 @@ from __future__ import annotations
 import random
 
 from app.config import settings
+from app.logging_config import get_logger
+
+logger = get_logger(__name__)
 
 # Bölge eşleşmesi SADECE bu kategoride uygulanır (donanım = sahaya çıkan iş).
 # SAP kategorilerinde asla uygulanmaz — SAP desteği bölgeden bağımsızdır.

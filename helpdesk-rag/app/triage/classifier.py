@@ -10,7 +10,10 @@ from __future__ import annotations
 from langfuse import observe
 import json
 
+from app.logging_config import get_logger
 from app.rag import ollama_client
+
+logger = get_logger(__name__)
 
 # 'Diger' bilerek DB'de yok: gerçek bir ekibe atanabilir kategori değil,
 # "belirsiz/eşleşmiyor -> insan triyajı" için sabit bir sinyal.
@@ -80,6 +83,7 @@ async def classify(ticket_text: str) -> dict:
     try:
         data = json.loads(raw)
     except json.JSONDecodeError:
+        logger.warning("Classify JSON parse hatası — ham çıktı: %s", raw[:200])
         data = {}
 
     # Güvenli varsayılanlar + doğrulama

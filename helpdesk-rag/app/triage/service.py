@@ -9,8 +9,11 @@ from langfuse import observe
 
 from datetime import datetime, timezone
 
+from app.logging_config import get_logger
 from app.rag import pipeline
 from app.triage import classifier, router, sla
+
+logger = get_logger(__name__)
 
 REFUSAL_MARK = "elimde bilgi yok"
 
@@ -38,6 +41,10 @@ async def triage(
     from app.rag import store  # geç import: DB tabloları hazır olmadan yüklenmesin
 
     c = await classifier.classify(ticket_text)
+    logger.info(
+        "Sınıflandırma: %s (güven %.2f)",
+        c["modul"], c["guven"],
+    )
     r = router.route(c, region=region)
 
     # Bilinen sorun mu? RAG (çift katman) ile otomatik çözüm denemesi.

@@ -11,6 +11,10 @@ class Settings(BaseSettings):
     # Yüklenen dosyaların api ve worker arasında paylaşıldığı dizin.
     upload_dir: str = "data/uploads"
 
+    # Loglama
+    log_level: str = "INFO"
+    log_format: str = "json"  # "json" veya "text"
+
     llm_model: str = "qwen3.5:9b"
     embed_model: str = "bge-m3"
     embed_dim: int = 1024

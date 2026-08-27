@@ -3,6 +3,11 @@
 RAG iki katman:
   Katman 1: ticket_solutions      (net sorun/çözüm çiftleri)
   Katman 2: attachment_vectors    (doküman parçaları; bağımsız KB dahil)
+
+Hata dayanıklılığı:
+  - Pool bağlantı hataları → DatabaseConnectionError (503)
+  - IntegrityError (unique/FK ihlali) → DatabaseIntegrityError (409)
+  - Tüm DB hataları loglanır
 """
 from __future__ import annotations
 
@@ -11,9 +16,13 @@ from datetime import datetime
 
 import psycopg
 from pgvector.psycopg import register_vector
-from psycopg_pool import ConnectionPool
+from psycopg_pool import ConnectionPool, PoolTimeout
 
 from app.config import settings
+from app.exceptions import DatabaseConnectionError, DatabaseIntegrityError
+from app.logging_config import get_logger
+
+logger = get_logger(__name__)
 
 
 def _configure_connection(conn: psycopg.Connection) -> None:
@@ -33,20 +42,48 @@ _pool = ConnectionPool(
 
 
 def open_pool() -> None:
-    """Uygulama başlarken (main.py startup / worker startup) bir kez çağrılır."""
-    _pool.open(wait=True)
+    """Uygulama başlarken (main.py startup / worker startup) bir kez çağrılır.
+    Pool açıldıktan sonra basit SELECT 1 ile bağlantı testi yapar."""
+    try:
+        _pool.open(wait=True)
+        # Bağlantı testi
+        with _pool.connection() as conn, conn.cursor() as cur:
+            cur.execute("SELECT 1")
+        logger.info("DB connection pool açıldı ve bağlantı doğrulandı.")
+    except Exception as exc:
+        logger.error("DB pool açılamadı: %s", exc)
+        raise DatabaseConnectionError(
+            f"Veritabanı bağlantısı kurulamadı: {exc}"
+        ) from exc
 
 
 def close_pool() -> None:
     """Uygulama kapanırken bir kez çağrılır."""
-    _pool.close()
+    try:
+        _pool.close()
+        logger.info("DB connection pool kapatıldı.")
+    except Exception:
+        logger.exception("DB pool kapatılırken hata")
 
 
 def _connect():
     """Her fonksiyon 'with _connect() as conn, conn.cursor() as cur:' şeklinde
     çalışır. YENİ bağlantı AÇMAZ — havuzdan ödünç alır; blok bitince bağlantı
-    KAPANMAZ, havuza geri döner."""
-    return _pool.connection()
+    KAPANMAZ, havuza geri döner.
+
+    Pool tükenmiş veya bağlantı kopmuşsa DatabaseConnectionError fırlatır."""
+    try:
+        return _pool.connection()
+    except PoolTimeout as exc:
+        logger.error("DB pool tükendi — tüm bağlantılar meşgul")
+        raise DatabaseConnectionError(
+            "Veritabanı bağlantı havuzu doldu. Lütfen daha sonra tekrar deneyin."
+        ) from exc
+    except psycopg.OperationalError as exc:
+        logger.error("DB bağlantı hatası: %s", exc)
+        raise DatabaseConnectionError(
+            f"Veritabanına bağlanılamıyor: {exc}"
+        ) from exc
 
 
 # ---- İndeksleme (KB doküman parçaları) --------------------------------------
@@ -200,39 +237,53 @@ def create_agent(
     email: str, full_name: str, title: str | None, department: str | None,
     region: str | None, support_group_id: str, uzman_kategorileri: list[str] | None,
 ) -> str:
-    """Yeni bir uzman (agent) ekler, users.id döner."""
-    with _connect() as conn, conn.cursor() as cur:
-        cur.execute(
-            """
-            INSERT INTO users (email, full_name, title, department, region, role,
-                                support_group_id, uzman_kategorileri)
-            VALUES (%s,%s,%s,%s,%s,'agent',%s,%s)
-            RETURNING id
-            """,
-            (email, full_name, title, department, region, support_group_id,
-             uzman_kategorileri or None),
-        )
-        uid = cur.fetchone()[0]
-        conn.commit()
-    return str(uid)
+    """Yeni bir uzman (agent) ekler, users.id döner.
+    Aynı e-posta zaten varsa DatabaseIntegrityError (409) fırlatır."""
+    try:
+        with _connect() as conn, conn.cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO users (email, full_name, title, department, region, role,
+                                    support_group_id, uzman_kategorileri)
+                VALUES (%s,%s,%s,%s,%s,'agent',%s,%s)
+                RETURNING id
+                """,
+                (email, full_name, title, department, region, support_group_id,
+                 uzman_kategorileri or None),
+            )
+            uid = cur.fetchone()[0]
+            conn.commit()
+        return str(uid)
+    except psycopg.errors.UniqueViolation as exc:
+        logger.warning("Duplicate agent e-posta: %s", email)
+        raise DatabaseIntegrityError(
+            f"'{email}' e-postasıyla bir kullanıcı zaten mevcut."
+        ) from exc
 
 
 def create_category(
     category_key: str, aciklama: str, ekip_group_id: str, ekip_gorunum_adi: str | None,
 ) -> str:
-    """Yeni bir sınıflandırma kategorisi ekler, id döner."""
-    with _connect() as conn, conn.cursor() as cur:
-        cur.execute(
-            """
-            INSERT INTO classification_categories (category_key, aciklama, ekip_group_id, ekip_gorunum_adi)
-            VALUES (%s,%s,%s,%s)
-            RETURNING id
-            """,
-            (category_key, aciklama, ekip_group_id, ekip_gorunum_adi),
-        )
-        cid = cur.fetchone()[0]
-        conn.commit()
-    return str(cid)
+    """Yeni bir sınıflandırma kategorisi ekler, id döner.
+    Aynı category_key zaten varsa DatabaseIntegrityError (409) fırlatır."""
+    try:
+        with _connect() as conn, conn.cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO classification_categories (category_key, aciklama, ekip_group_id, ekip_gorunum_adi)
+                VALUES (%s,%s,%s,%s)
+                RETURNING id
+                """,
+                (category_key, aciklama, ekip_group_id, ekip_gorunum_adi),
+            )
+            cid = cur.fetchone()[0]
+            conn.commit()
+        return str(cid)
+    except psycopg.errors.UniqueViolation as exc:
+        logger.warning("Duplicate kategori: %s", category_key)
+        raise DatabaseIntegrityError(
+            f"'{category_key}' kategorisi zaten mevcut."
+        ) from exc
 
 
 def get_user_support_group_id(user_id: str) -> str | None:
