@@ -7948,21 +7948,6 @@
     "kaynak": "orijinal"
   },
   {
-    "ticket_id": "531",
-    "kullanici_maili": "bengisu.kara",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Bursa",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "cem.teknoloji",
-    "sla_level": 1,
-    "sla_seviyesi": "SLA Seviyesi 1 – Kritik",
-    "sla_level_normalize": 1,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
     "ticket_id": "532",
     "kullanici_maili": "tulay.yildiz@sirket.com",
     "kime": "btdestek@gmail.com",
@@ -12491,21 +12476,6 @@
     "kaynak": "orijinal"
   },
   {
-    "ticket_id": "834",
-    "kullanici_maili": "hande.tuna",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Bursa",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "barış.teknoloji",
-    "sla_level": 5,
-    "sla_seviyesi": "SLA Seviyesi 5 – Planlı İş / Hizmet Talebi",
-    "sla_level_normalize": 5,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
     "ticket_id": "835",
     "kullanici_maili": "gul.aktas@sirket.com",
     "kime": "sapdestek@gmail.com",
@@ -13421,21 +13391,6 @@
     "kaynak": "orijinal"
   },
   {
-    "ticket_id": "896",
-    "kullanici_maili": "yavuz.kor @ sirket .com",
-    "kime": "btdestek@gmail.com",
-    "bolge": "Malatya",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "selin.teknoloji",
-    "sla_level": 2,
-    "sla_seviyesi": "SLA Seviyesi 2 – Yüksek Öncelikli",
-    "sla_level_normalize": 2,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
     "ticket_id": "897",
     "kullanici_maili": "kutay.celik@sirket.com",
     "kime": "btdestek@gmail.com",
@@ -13762,21 +13717,6 @@
     "sla_level": 4,
     "sla_seviyesi": "SLA Seviyesi 4 – Düşük Öncelikli",
     "sla_level_normalize": 4,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
-    "ticket_id": "919",
-    "kullanici_maili": "kerem.aslan @ sirket .com",
-    "kime": "btdestek@gmail.com",
-    "bolge": "Fabrika",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "Ramazan.teknoloji",
-    "sla_level": 5,
-    "sla_seviyesi": "SLA Seviyesi 5 – Planlı İş / Hizmet Talebi",
-    "sla_level_normalize": 5,
     "kayit_turu": "duzenli",
     "kaynak": "orijinal"
   },
@@ -15671,21 +15611,6 @@
     "kaynak": "orijinal"
   },
   {
-    "ticket_id": "1046",
-    "kullanici_maili": "polat.degirmenci @ sirket .com",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Lojistik Merkez",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "onur.teknoloji",
-    "sla_level": 4,
-    "sla_seviyesi": "SLA Seviyesi 4 – Düşük Öncelikli",
-    "sla_level_normalize": 4,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
     "ticket_id": "1047",
     "kullanici_maili": "salih.turan@sirket.com",
     "kime": "sapdestek@gmail.com",
@@ -16879,21 +16804,6 @@
     "sorun_aciklamasi": "Bilgisayarımı yeniden başlattıktan sonra masaüstündeki tüm kısayol simgeleri kayboldu.",
     "cozum": "Windows gezgini yeniden başlatıldı ve simge önbelleği (icon cache) temizlendi. Kısayollar tekrar görünür hale geldi.",
     "atanan_kisi": "barış.teknoloji",
-    "sla_level": 4,
-    "sla_seviyesi": "SLA Seviyesi 4 – Düşük Öncelikli",
-    "sla_level_normalize": 4,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
-    "ticket_id": "1127",
-    "kullanici_maili": "hasan.sahin@sirekt.com",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Fabrika",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "mustafa.teknoloji",
     "sla_level": 4,
     "sla_seviyesi": "SLA Seviyesi 4 – Düşük Öncelikli",
     "sla_level_normalize": 4,
@@ -19571,21 +19481,6 @@
     "kaynak": "orijinal"
   },
   {
-    "ticket_id": "1306",
-    "kullanici_maili": "tuncay.celik @ sirket .com",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Adana",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "sena.teknoloji",
-    "sla_level": 2,
-    "sla_seviyesi": "SLA Seviyesi 2 – Yüksek Öncelikli",
-    "sla_level_normalize": 2,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
     "ticket_id": "1307",
     "kullanici_maili": "selin.yildirim@sirket.com",
     "kime": "btdestek@gmail.com",
@@ -20797,21 +20692,6 @@
     "sla_level": 2,
     "sla_seviyesi": "SLA Seviyesi 2 – Yüksek Öncelikli",
     "sla_level_normalize": 2,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
-    "ticket_id": "1388",
-    "kullanici_maili": "kevser.genc@sirket.com@sirket.com",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Malatya",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "oğulcan.teknoloji",
-    "sla_level": 1,
-    "sla_seviyesi": "SLA Seviyesi 1 – Kritik",
-    "sla_level_normalize": 1,
     "kayit_turu": "duzenli",
     "kaynak": "orijinal"
   },
@@ -27160,21 +27040,6 @@
     "kaynak": "orijinal"
   },
   {
-    "ticket_id": "1812",
-    "kullanici_maili": "merve.saglam@sirket.com@sirket.com",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Fabrika",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "deniz.teknoloji",
-    "sla_level": 3,
-    "sla_seviyesi": "SLA Seviyesi 3 – Orta Öncelikli",
-    "sla_level_normalize": 3,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
     "ticket_id": "1813",
     "kullanici_maili": "ali.gunes@sirket.com",
     "kime": "btdestek@gmail.com",
@@ -30294,21 +30159,6 @@
     "kaynak": "orijinal"
   },
   {
-    "ticket_id": "2021",
-    "kullanici_maili": "ULKU.AKSOY@SIRKET.COM",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "İzmir",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "turgut.teknoloji",
-    "sla_level": 1,
-    "sla_seviyesi": "SLA Seviyesi 1 – Kritik",
-    "sla_level_normalize": 1,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
     "ticket_id": "2022",
     "kullanici_maili": "ibrahim.yildiz@sirket.com",
     "kime": "btdestek@gmail.com",
@@ -31776,21 +31626,6 @@
     "sla_seviyesi": "SLA Seviyesi 3 – Orta Öncelikli",
     "sla_level_normalize": 3,
     "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
-    "ticket_id": "2120",
-    "kullanici_maili": "esra.kutlu",
-    "kime": "btdestek@gmail.com",
-    "bolge": "Adana",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "deniz.teknoloji",
-    "sla_level": null,
-    "sla_seviyesi": "",
-    "sla_level_normalize": null,
-    "kayit_turu": "duzensiz_etiketsiz",
     "kaynak": "orijinal"
   },
   {
@@ -34494,21 +34329,6 @@
     "kaynak": "orijinal"
   },
   {
-    "ticket_id": "2301",
-    "kullanici_maili": "ULKU.KAPLAN@SIRKET.COM",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Eskişehir",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "Ramazan.teknoloji",
-    "sla_level": 3,
-    "sla_seviyesi": "SLA Seviyesi 3 – Orta Öncelikli",
-    "sla_level_normalize": 3,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
     "ticket_id": "2302",
     "kullanici_maili": "lale.kurt@sirket.com",
     "kime": "btdestek@gmail.com",
@@ -34970,21 +34790,6 @@
     "sla_level": 4,
     "sla_seviyesi": "SLA Seviyesi 4 – Düşük Öncelikli",
     "sla_level_normalize": 4,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
-    "ticket_id": "2333",
-    "kullanici_maili": "elif.ozkan",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Halkalı",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "cem.teknoloji",
-    "sla_level": 1,
-    "sla_seviyesi": "SLA Seviyesi 1 – Kritik",
-    "sla_level_normalize": 1,
     "kayit_turu": "duzenli",
     "kaynak": "orijinal"
   },
@@ -41288,21 +41093,6 @@
     "kaynak": "orijinal"
   },
   {
-    "ticket_id": "2754",
-    "kullanici_maili": "furkan.duran @ sirket .com",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Denizli",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "cem.teknoloji",
-    "sla_level": null,
-    "sla_seviyesi": "",
-    "sla_level_normalize": null,
-    "kayit_turu": "duzensiz_etiketsiz",
-    "kaynak": "orijinal"
-  },
-  {
     "ticket_id": "2755",
     "kullanici_maili": "tuncay.coskun@sirket.com",
     "kime": "btdestek@gmail.com",
@@ -42710,21 +42500,6 @@
     "sla_seviyesi": "SLA Seviyesi 3 – Orta Öncelikli",
     "sla_level_normalize": 3,
     "kayit_turu": "duzensiz_etiketli",
-    "kaynak": "orijinal"
-  },
-  {
-    "ticket_id": "2849",
-    "kullanici_maili": "taner.bozkurt",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Sakarya",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "esra.teknoloji",
-    "sla_level": 3,
-    "sla_seviyesi": "SLA Seviyesi 3 – Orta Öncelikli",
-    "sla_level_normalize": 3,
-    "kayit_turu": "duzenli",
     "kaynak": "orijinal"
   },
   {
@@ -44180,21 +43955,6 @@
     "sla_seviyesi": "SLA Seviyesi 3 – Orta Öncelikli",
     "sla_level_normalize": 3,
     "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
-    "ticket_id": "2947",
-    "kullanici_maili": "kaan.cetin@sirekt.com",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Lojistik Merkez",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "yücel.teknoloji",
-    "sla_level": null,
-    "sla_seviyesi": "",
-    "sla_level_normalize": null,
-    "kayit_turu": "duzensiz_etiketsiz",
     "kaynak": "orijinal"
   },
   {
@@ -46793,21 +46553,6 @@
     "kaynak": "orijinal"
   },
   {
-    "ticket_id": "3121",
-    "kullanici_maili": "OMER.COSKUN@SIRKET.COM",
-    "kime": "btdestek@gmail.com",
-    "bolge": "Trabzon",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "oğulcan.teknoloji",
-    "sla_level": null,
-    "sla_seviyesi": "",
-    "sla_level_normalize": null,
-    "kayit_turu": "duzensiz_etiketsiz",
-    "kaynak": "orijinal"
-  },
-  {
     "ticket_id": "3122",
     "kullanici_maili": "metin.dogan@sirket.com",
     "kime": "btdestek@gmail.com",
@@ -49028,21 +48773,6 @@
     "kaynak": "orijinal"
   },
   {
-    "ticket_id": "3270",
-    "kullanici_maili": "cem.sahin",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Konya",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "faruk.teknoloji",
-    "sla_level": 3,
-    "sla_seviyesi": "SLA Seviyesi 3 – Orta Öncelikli",
-    "sla_level_normalize": 3,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
     "ticket_id": "3271",
     "kullanici_maili": "yagmur.erdem@sirket.com",
     "kime": "btdestek@gmail.com",
@@ -49324,21 +49054,6 @@
     "sla_level": 4,
     "sla_seviyesi": "SLA Seviyesi 4 – Düşük Öncelikli",
     "sla_level_normalize": 4,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
-    "ticket_id": "3290",
-    "kullanici_maili": "nihat.sahinsirket.com",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Adana",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "sena.teknoloji",
-    "sla_level": 3,
-    "sla_seviyesi": "SLA Seviyesi 3 – Orta Öncelikli",
-    "sla_level_normalize": 3,
     "kayit_turu": "duzenli",
     "kaynak": "orijinal"
   },
@@ -50464,21 +50179,6 @@
     "sla_level": 4,
     "sla_seviyesi": "SLA Seviyesi 4 – Düşük Öncelikli",
     "sla_level_normalize": 4,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
-    "ticket_id": "3366",
-    "kullanici_maili": "mert.kutlu@sirekt.com",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Lojistik Merkez",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "sena.teknoloji",
-    "sla_level": 1,
-    "sla_seviyesi": "SLA Seviyesi 1 – Kritik",
-    "sla_level_normalize": 1,
     "kayit_turu": "duzenli",
     "kaynak": "orijinal"
   },
@@ -55878,21 +55578,6 @@
     "kaynak": "orijinal"
   },
   {
-    "ticket_id": "3727",
-    "kullanici_maili": "JALE.YILDIRIM@SIRKET.COM",
-    "kime": "btdestek@gmail.com",
-    "bolge": "Mersin",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "zeynep.teknoloji",
-    "sla_level": 3,
-    "sla_seviyesi": "SLA Seviyesi 3 – Orta Öncelikli",
-    "sla_level_normalize": 3,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
     "ticket_id": "3728",
     "kullanici_maili": "esra.ozturk@sirket.com",
     "kime": "btdestek@gmail.com",
@@ -57558,21 +57243,6 @@
     "kaynak": "orijinal"
   },
   {
-    "ticket_id": "3839",
-    "kullanici_maili": "selin.kilicsirket.com",
-    "kime": "btdestek@gmail.com",
-    "bolge": "Malatya",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "barış.teknoloji",
-    "sla_level": 2,
-    "sla_seviyesi": "SLA Seviyesi 2 – Yüksek Öncelikli",
-    "sla_level_normalize": 2,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
     "ticket_id": "3840",
     "kullanici_maili": "betul.nur@sirket.com",
     "kime": "btdestek@gmail.com",
@@ -58698,21 +58368,6 @@
     "kaynak": "orijinal"
   },
   {
-    "ticket_id": "3915",
-    "kullanici_maili": "filiz.gunduz@sirekt.com",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Ankara",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "esra.teknoloji",
-    "sla_level": 1,
-    "sla_seviyesi": "SLA Seviyesi 1 – Kritik",
-    "sla_level_normalize": 1,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
     "ticket_id": "3916",
     "kullanici_maili": "tulay.yilmaz@sirket.com",
     "kime": "btdestek@gmail.com",
@@ -59744,21 +59399,6 @@
     "sla_seviyesi": "SLA Seviyesi 3 – Orta Öncelikli",
     "sla_level_normalize": 3,
     "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
-    "ticket_id": "3985",
-    "kullanici_maili": "canan.ozturk @ sirket .com",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Bursa",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "burak.teknoloji",
-    "sla_level": null,
-    "sla_seviyesi": "",
-    "sla_level_normalize": null,
-    "kayit_turu": "duzensiz_etiketsiz",
     "kaynak": "orijinal"
   },
   {
@@ -61600,21 +61240,6 @@
     "sorun_aciklamasi": "Saha ziyaretlerinde kullanmak üzere 3 adet tablet talep ediyoruz, satın alım süreci başlatılabilir mi?",
     "cozum": "Talep Departman Müdürü onayına gönderildi, onay sonrası satın alma süreci başlatıldı, cihazlar teslim alındığında kurulum planlanacak.",
     "atanan_kisi": "Gizem.teknoloji",
-    "sla_level": 5,
-    "sla_seviyesi": "SLA Seviyesi 5 – Planlı İş / Hizmet Talebi",
-    "sla_level_normalize": 5,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
-    "ticket_id": "4109",
-    "kullanici_maili": "furkan.kutlusirket.com",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Halkalı",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "yücel.teknoloji",
     "sla_level": 5,
     "sla_seviyesi": "SLA Seviyesi 5 – Planlı İş / Hizmet Talebi",
     "sla_level_normalize": 5,
@@ -73228,21 +72853,6 @@
     "kaynak": "orijinal"
   },
   {
-    "ticket_id": "4884",
-    "kullanici_maili": "YAVUZ.KAPLAN@SIRKET.COM",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Kocaeli",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "onur.teknoloji",
-    "sla_level": null,
-    "sla_seviyesi": "",
-    "sla_level_normalize": null,
-    "kayit_turu": "duzensiz_etiketsiz",
-    "kaynak": "orijinal"
-  },
-  {
     "ticket_id": "4885",
     "kullanici_maili": "merve.simsek@sirket.com",
     "kime": "btdestek@gmail.com",
@@ -73584,21 +73194,6 @@
     "sla_level": 3,
     "sla_seviyesi": "SLA Seviyesi 3 – Orta Öncelikli",
     "sla_level_normalize": 3,
-    "kayit_turu": "duzenli",
-    "kaynak": "orijinal"
-  },
-  {
-    "ticket_id": "4908",
-    "kullanici_maili": "yagmur.kaya @ sirket .com",
-    "kime": "sapdestek@gmail.com",
-    "bolge": "Lojistik Merkez",
-    "konu": "Bilgisayar Sorunu",
-    "sorun_aciklamasi": "Bilgisayarım çok yavaş açılıyor, bakabilir misiniz.",
-    "cozum": "Kullanıcıya geri dönülemedi, mail adresi geçersiz görünüyor.",
-    "atanan_kisi": "emirhan.teknoloji",
-    "sla_level": 2,
-    "sla_seviyesi": "SLA Seviyesi 2 – Yüksek Öncelikli",
-    "sla_level_normalize": 2,
     "kayit_turu": "duzenli",
     "kaynak": "orijinal"
   },
