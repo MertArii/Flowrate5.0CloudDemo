@@ -59,15 +59,10 @@ async def triage(
         r = {**r, "otomatik_atandi": False,
              "sebep": f"{r['atanan_uzman']} gerçek bir kullanıcı değil — insan triyajı gerekiyor."}
 
-    group_id = store.get_or_create_support_group(r["ekip"]) if otomatik else None
-    # "planli_talep" (kurulum/yetki/geliştirme gibi önceden planlanan işler)
-    # PDF'e göre kapsam/aciliyetten bağımsız her zaman Seviye 5 (planned).
-    if c["istek_turu"] == "planli_talep":
-        priority = "planned"
-    else:
-        priority = _ONCELIK_MAP.get(c["oncelik"], "medium")
     status = "assigned" if otomatik else "l1_routing"
     subj = subject or ticket_text[:60]
+    group_id = store.get_or_create_support_group(r["ekip"]) if otomatik else None
+    priority = _ONCELIK_MAP.get(c["oncelik"], "medium")
 
     baslangic = datetime.now(timezone.utc)
     sla_policy = store.get_sla_policy(priority)
