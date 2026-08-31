@@ -103,7 +103,12 @@ def route(classification: dict, region: str | None = None) -> dict:
     # 2) Donanım'a özel bölge önceliği (SAP'de asla uygulanmaz).
     bolge_eslesti = None
     if modul == BOLGE_ESLESMESI_UYGULANAN_MODUL and region:
-        bolge_adaylari = [a for a in pool if a["region"] == region]
+        region_norm = region.strip().lower().replace("i̇", "i").replace("ı", "i")
+        bolge_adaylari = [
+            a for a in pool
+            if a["region"]
+            and a["region"].strip().lower().replace("i̇", "i").replace("ı", "i") == region_norm
+        ]
         if bolge_adaylari:
             pool = bolge_adaylari
             bolge_eslesti = True
