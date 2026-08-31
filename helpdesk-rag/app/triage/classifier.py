@@ -62,6 +62,9 @@ def _build_system(kategoriler: dict[str, dict]) -> str:
         "yazılım/donanım temini, yetki/erişim verilmesi, geliştirme talebi.\n"
         "  olay: var olan bir sistem/donanım/yazılım bozuk, yavaş, çalışmıyor "
         "veya hata veriyor.\n\n"
+        "E-posta/dosya içeriğinde phishing, oltalama, şüpheli gönderici/link/ek gibi güvenlik ifadeleri varsa,"
+        " konu başlığında finans/ödeme/SAP gibi terimler geçse bile IT-Guvenlik'e sınıflandır,"
+        " ilgili finans/SAP kategorisine değil.\n\n"
         f"Kategoriler:\n{kategori_listesi}\n\n"
         "Emin değilsen modul='Diger' ve düşük guven ver. Uydurma kategori kullanma."
     )
