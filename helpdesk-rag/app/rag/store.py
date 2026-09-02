@@ -12,6 +12,7 @@ Hata dayanıklılığı:
 from __future__ import annotations
 
 import json
+import time
 from datetime import datetime
 
 import psycopg
@@ -41,21 +42,20 @@ _pool = ConnectionPool(
 )
 
 
-def open_pool() -> None:
-    """Uygulama başlarken (main.py startup / worker startup) bir kez çağrılır.
-    Pool açıldıktan sonra basit SELECT 1 ile bağlantı testi yapar."""
-    try:
-        _pool.open(wait=True)
-        # Bağlantı testi
-        with _pool.connection() as conn, conn.cursor() as cur:
-            cur.execute("SELECT 1")
-        logger.info("DB connection pool açıldı ve bağlantı doğrulandı.")
-    except Exception as exc:
-        logger.error("DB pool açılamadı: %s", exc)
-        raise DatabaseConnectionError(
-            f"Veritabanı bağlantısı kurulamadı: {exc}"
-        ) from exc
-
+def open_pool(retries: int = 5, delay: float = 2.0) -> None:
+    for attempt in range(1, retries + 1):
+        try:
+            if _pool.closed:
+                _pool.open(wait=True)
+            with _pool.connection() as conn, conn.cursor() as cur:
+                cur.execute("SELECT 1")
+            logger.info("DB connection pool açıldı ve bağlantı doğrulandı.")
+            return
+        except Exception as exc:
+            logger.warning("DB pool açma denemesi %d/%d başarısız: %s", attempt, retries, exc)
+            if attempt == retries:
+                raise DatabaseConnectionError(f"Veritabanı bağlantısı kurulamadı: {exc}") from exc
+            time.sleep(delay)
 
 def close_pool() -> None:
     """Uygulama kapanırken bir kez çağrılır."""
@@ -70,9 +70,11 @@ def _connect():
     """Her fonksiyon 'with _connect() as conn, conn.cursor() as cur:' şeklinde
     çalışır. YENİ bağlantı AÇMAZ — havuzdan ödünç alır; blok bitince bağlantı
     KAPANMAZ, havuza geri döner.
-
     Pool tükenmiş veya bağlantı kopmuşsa DatabaseConnectionError fırlatır."""
     try:
+        if _pool.closed:
+            logger.warning("Pool kapalı bulundu, yeniden açılmaya çalışılıyor.")
+            _pool.open(wait=True)
         return _pool.connection()
     except PoolTimeout as exc:
         logger.error("DB pool tükendi — tüm bağlantılar meşgul")
@@ -84,7 +86,6 @@ def _connect():
         raise DatabaseConnectionError(
             f"Veritabanına bağlanılamıyor: {exc}"
         ) from exc
-
 
 # ---- İndeksleme (KB doküman parçaları) --------------------------------------
 
