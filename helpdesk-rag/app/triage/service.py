@@ -75,6 +75,9 @@ async def triage(
     sla_policy = store.get_sla_policy(priority)
     deadlines = sla.compute_deadlines(baslangic, sla_policy) if sla_policy else {}
 
+    sub_category_id = store.get_alt_kategori_id(c.get("alt_kategori"), c.get("kategori_grubu"))
+    sap_module_id = store.get_sap_module_id(c.get("sap_modulu"))
+
     tid, tno = store.create_ticket(
         customer_email=customer_email,
         recipient_email=recipient_email,
@@ -90,6 +93,8 @@ async def triage(
         response_deadline=deadlines.get("response_deadline"),
         workaround_deadline=deadlines.get("workaround_deadline"),
         resolution_deadline=deadlines.get("resolution_deadline"),
+        sub_category_id=sub_category_id,
+        sap_module_id=sap_module_id,
     )
 
     store.create_routing_log(
