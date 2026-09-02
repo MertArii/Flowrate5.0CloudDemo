@@ -375,6 +375,51 @@ def get_open_ticket_counts(agent_ids: list[str]) -> dict[str, int]:
     return {str(r[0]): r[1] for r in rows}
 
 
+def get_category_hierarchy() -> list[tuple[str, str, str]]:
+    """Prompt ve doğrulama için ust_kategori, kategori_grubu ve alt_kategori hiyerarşisini çeker."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT u.name, g.name, a.name
+            FROM alt_kategoriler a
+            JOIN kategori_gruplari g ON g.id = a.grup_id
+            JOIN ust_kategoriler u ON u.id = g.ust_kategori_id
+            WHERE a.is_active = true AND g.is_active = true AND u.is_active = true
+            ORDER BY u.name, g.name, a.name
+            """
+        )
+        return cur.fetchall()
+
+def get_sap_modules() -> list[str]:
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute("SELECT code FROM sap_modules ORDER BY code")
+        return [r[0] for r in cur.fetchall()]
+
+def get_alt_kategori_id(alt_kategori_name: str, kategori_grubu_name: str) -> str | None:
+    if not alt_kategori_name or not kategori_grubu_name:
+        return None
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT a.id
+            FROM alt_kategoriler a
+            JOIN kategori_gruplari g ON g.id = a.grup_id
+            WHERE a.name = %s AND g.name = %s
+            LIMIT 1
+            """,
+            (alt_kategori_name, kategori_grubu_name)
+        )
+        row = cur.fetchone()
+        return str(row[0]) if row else None
+
+def get_sap_module_id(code: str) -> str | None:
+    if not code:
+        return None
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute("SELECT id FROM sap_modules WHERE code = %s LIMIT 1", (code,))
+        row = cur.fetchone()
+        return str(row[0]) if row else None
+
 def create_ticket(
     customer_email: str, recipient_email: str, subject: str,
     raw_issue_description: str, extracted_category: str | None,
@@ -383,6 +428,8 @@ def create_ticket(
     assigned_agent_id: str | None = None,
     sla_policy_id: str | None = None,
     response_deadline=None, workaround_deadline=None, resolution_deadline=None,
+    sub_category_id: str | None = None,
+    sap_module_id: str | None = None,
 ) -> tuple[str, int]:
     """Ticket oluşturur, (id, ticket_number) döner."""
     with _connect() as conn, conn.cursor() as cur:
@@ -392,14 +439,14 @@ def create_ticket(
                 (customer_email, recipient_email, subject, raw_issue_description,
                  extracted_category, region, status, priority, assigned_group_id,
                  assigned_agent_id, sla_policy_id, response_deadline,
-                 workaround_deadline, resolution_deadline)
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                 workaround_deadline, resolution_deadline, sub_category_id, sap_module_id)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
             RETURNING id, ticket_number
             """,
             (customer_email, recipient_email, subject, raw_issue_description,
              extracted_category, region, status, priority, assigned_group_id,
              assigned_agent_id, sla_policy_id, response_deadline,
-             workaround_deadline, resolution_deadline),
+             workaround_deadline, resolution_deadline, sub_category_id, sap_module_id),
         )
         tid, tno = cur.fetchone()
         conn.commit()
