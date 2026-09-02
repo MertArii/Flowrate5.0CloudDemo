@@ -42,8 +42,11 @@ _pool = ConnectionPool(
 
 
 def open_pool() -> None:
-    """Uygulama başlarken (main.py startup / worker startup) bir kez çağrılır.
-    Pool açıldıktan sonra basit SELECT 1 ile bağlantı testi yapar."""
+    """Uygulama başlarken (main.py startup / worker startup) bir kez çağrılır."""
+    # Havuz zaten açık durumdaysa işlemi atla, çökmesini engelle
+    if getattr(_pool, "_opened", False):
+        return
+        
     try:
         _pool.open(wait=True)
         # Bağlantı testi
