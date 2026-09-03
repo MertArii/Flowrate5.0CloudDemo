@@ -69,7 +69,10 @@ db/
 eval/
 ├── dataset.json         # değerlendirme seti
 └── run_eval.py          # retrieval recall@k + cevap doğruluğu (+ --judge)
-docker-compose.yml       # postgres(pgvector) + api + open-webui
+docker-compose.local-mac.yml  # SADECE yerel Mac/Windows geliştirme — postgres(pgvector) + api + open-webui
+docker-compose.demo.yml       # Bulut demo/prod VM'inde ÇALIŞAN gerçek stack
+docker-compose.prod.yml       # Gelecekteki tam prod dağıtımı (Caddy+SSO+backup)
+perf.override.yml             # demo.yml için düşük kaynaklı VM performans ayarı
 helpdesk-rag.postman_collection.json
 ```
 

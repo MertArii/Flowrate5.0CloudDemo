@@ -36,12 +36,45 @@ def _get_kategoriler() -> dict[str, dict]:
 
 def _build_agac(hierarchy: list[tuple[str, str, str]]) -> dict[str, dict[str, list[str]]]:
     """store.get_category_hierarchy()'nin düz (ust, grup, alt) tuple listesini
-    {ust: {grup: [alt, alt, ...]}} yapısına çevirir — hem prompt metni hem
-    doğrulama için kullanılır."""
+    {ust: {grup: [alt, alt, ...]}} yapısına çevirir — SADECE prompt metni
+    için kullanılır (orijinal, kullanıcıya/modele gösterilen yazımıyla)."""
     agac: dict[str, dict[str, list[str]]] = {}
     for ust, grup, alt in hierarchy:
         agac.setdefault(ust, {}).setdefault(grup, []).append(alt)
     return agac
+
+
+def _normalize(deger: str | None) -> str | None:
+    """Türkçe büyük/küçük harf ve baştaki/sondaki boşluk farklarına karşı
+    dayanıklı karşılaştırma anahtarı üretir (router.py'deki bölge
+    normalizasyonuyla aynı prensip). Model 'ARIZALAR', 'Arızalar' veya
+    sonunda boşlukla 'ARIZALAR ' döndürse bile aynı anahtara düşer."""
+    if not deger:
+        return None
+    d = deger.strip()
+    d = d.replace("İ", "i").replace("I", "i").replace("ı", "i")
+    return d.casefold()
+
+
+def _build_agac_norm(
+    agac: dict[str, dict[str, list[str]]],
+) -> dict[str, tuple[str, dict[str, tuple[str, dict[str, str]]]]]:
+    """agac'ı normalize edilmiş anahtarlarla indeksler:
+    {norm(ust): (orijinal_ust, {norm(grup): (orijinal_grup, {norm(alt): orijinal_alt})})}
+    Doğrulama SADECE bu yapı üzerinden yapılır; orijinal yazım (DB'deki
+    gerçek değer) sonuçta hep korunur, sadece arama normalize edilir."""
+    agac_norm: dict[str, tuple[str, dict[str, tuple[str, dict[str, str]]]]] = {}
+    for ust, gruplar in agac.items():
+        _, grup_map = agac_norm.setdefault(_normalize(ust), (ust, {}))
+        for grup, alt_liste in gruplar.items():
+            _, alt_map = grup_map.setdefault(_normalize(grup), (grup, {}))
+            for alt in alt_liste:
+                alt_map[_normalize(alt)] = alt
+    return agac_norm
+
+
+def _build_sap_norm(sap_moduller: list[str]) -> dict[str, str]:
+    return {_normalize(s): s for s in sap_moduller}
 
 
 def _build_kategori_metni(kategoriler: dict[str, dict]) -> str:
@@ -143,33 +176,73 @@ def _normalize_oncelik(value) -> str:
     return text
 
 
-def _dogrula_etiketleme(data: dict, agac: dict[str, dict[str, list[str]]], sap_moduller: list[str]) -> dict:
+def _dogrula_etiketleme(
+    data: dict,
+    agac_norm: dict[str, tuple[str, dict[str, tuple[str, dict[str, str]]]]],
+    sap_moduller_norm: dict[str, str],
+) -> dict:
     """ust_kategori/kategori_grubu/alt_kategori/sap_modulu alanlarını DB'deki
-    gerçek ağaca göre doğrular. Sadece İSİM doğrular, id çözmez — id
-    çözümlemesi service.py'de store.get_alt_kategori_id/get_sap_module_id
-    ile yapılır. Geçersiz/uydurma kombinasyonlarda, geçerli olan en geniş
-    kademeyi koruyarak None'a düşer (tamamen atmak yerine)."""
-    ust = data.get("ust_kategori")
-    gruplar = agac.get(ust)
-    if gruplar is None:
-        return {"ust_kategori": None, "kategori_grubu": None, "alt_kategori": None, "sap_modulu": None}
+    gerçek ağaca göre, NORMALİZE karşılaştırmayla doğrular. Her seviye
+    BAĞIMSIZ değerlendirilir — üst seviyede tam string eşleşmemesi (case/
+    boşluk farkı gibi) alt seviyelerdeki geçerli bir eşleşmeyi SİLMEZ:
 
-    grup = data.get("kategori_grubu")
-    alt_liste = gruplar.get(grup)
-    if alt_liste is None:
-        return {"ust_kategori": ust, "kategori_grubu": None, "alt_kategori": None, "sap_modulu": None}
+      1) ust_kategori normalize eşleşirse -> o daldan devam.
+      2) Eşleşmezse ama alt_kategori ağacın HERHANGİ bir yerinde normalize
+         eşleşiyorsa -> ust_kategori/kategori_grubu o eşleşmeden GERİ
+         KURTARILIR (model üst kategoriyi yanlış/farklı yazmış ama alt
+         kategoriyi doğru vermiş olabilir).
+      3) Hiçbiri eşleşmezse -> hepsi None (gerçek belirsizlik / uydurma).
 
-    alt_ad = data.get("alt_kategori")
-    if alt_ad not in alt_liste:
-        return {"ust_kategori": ust, "kategori_grubu": grup, "alt_kategori": None, "sap_modulu": None}
+    Sadece İSİM doğrular, id çözmez — id çözümlemesi service.py'de
+    store.get_alt_kategori_id/get_sap_module_id ile yapılır."""
+    bos = {"ust_kategori": None, "kategori_grubu": None, "alt_kategori": None, "sap_modulu": None}
 
-    sap_kod = None
-    if grup == _SAP_PROBLEMLERI_GRUBU:
-        aday = data.get("sap_modulu")
-        if aday in sap_moduller:
-            sap_kod = aday
+    def _sap_coz(grup_adi: str) -> str | None:
+        if grup_adi != _SAP_PROBLEMLERI_GRUBU:
+            return None
+        return sap_moduller_norm.get(_normalize(data.get("sap_modulu")))
 
-    return {"ust_kategori": ust, "kategori_grubu": grup, "alt_kategori": alt_ad, "sap_modulu": sap_kod}
+    ust_norm = _normalize(data.get("ust_kategori"))
+    ust_eslesme = agac_norm.get(ust_norm)
+
+    if ust_eslesme is None:
+        # (2) Kurtarma: ust eşleşmedi ama alt_kategori ağacın bir yerinde
+        # eşleşiyor mu diye tüm ağacı tara (SAP Problemleri hem grup hem
+        # alt_kategori adı olarak geçtiği için bu tarama alt_kategori'nin
+        # kendi grup_id'sine bağlı kalınarak yapılır, isim çakışması riski
+        # yok — çünkü alt_map zaten o grubun İÇİNDEKİ alt kategorilerden
+        # oluşuyor).
+        alt_norm = _normalize(data.get("alt_kategori"))
+        if alt_norm:
+            for orijinal_ust, grup_map in agac_norm.values():
+                for orijinal_grup, alt_map in grup_map.values():
+                    if alt_norm in alt_map:
+                        return {
+                            "ust_kategori": orijinal_ust,
+                            "kategori_grubu": orijinal_grup,
+                            "alt_kategori": alt_map[alt_norm],
+                            "sap_modulu": _sap_coz(orijinal_grup),
+                        }
+        return bos
+
+    orijinal_ust, grup_map = ust_eslesme
+    grup_norm = _normalize(data.get("kategori_grubu"))
+    grup_eslesme = grup_map.get(grup_norm)
+    if grup_eslesme is None:
+        return {**bos, "ust_kategori": orijinal_ust}
+
+    orijinal_grup, alt_map = grup_eslesme
+    alt_norm = _normalize(data.get("alt_kategori"))
+    orijinal_alt = alt_map.get(alt_norm)
+    if orijinal_alt is None:
+        return {**bos, "ust_kategori": orijinal_ust, "kategori_grubu": orijinal_grup}
+
+    return {
+        "ust_kategori": orijinal_ust,
+        "kategori_grubu": orijinal_grup,
+        "alt_kategori": orijinal_alt,
+        "sap_modulu": _sap_coz(orijinal_grup),
+    }
 
 
 async def classify(ticket_text: str) -> dict:
@@ -177,8 +250,10 @@ async def classify(ticket_text: str) -> dict:
 
     kategoriler = _get_kategoriler()
     agac = _build_agac(store.get_category_hierarchy())
+    agac_norm = _build_agac_norm(agac)  # doğrulama bunun üzerinden yapılır
     sap_moduller = store.get_sap_modules()
-    system = _build_system(kategoriler, agac, sap_moduller)
+    sap_moduller_norm = _build_sap_norm(sap_moduller)
+    system = _build_system(kategoriler, agac, sap_moduller)  # prompt metni orijinal yazımla
 
     msg = await ollama_client.chat(
         [
@@ -203,6 +278,12 @@ async def classify(ticket_text: str) -> dict:
         )
         data = {}
 
+    # Parse başarılı olsa bile modelin TAM olarak ne döndürdüğünü görebilmek
+    # için ham çıktıyı her zaman logla (önceden sadece parse hatasında
+    # loglanıyordu — doğrulamanın neyi neden reddettiğini teşhis etmek
+    # imkansızdı).
+    logger.debug("classify() ham model çıktısı: %r", data)
+
     modul = data.get("modul")
     if modul not in kategoriler:
         modul = "Diger"
@@ -218,7 +299,14 @@ async def classify(ticket_text: str) -> dict:
         guven = 0.0
     guven = max(0.0, min(1.0, guven))
 
-    etiketleme = _dogrula_etiketleme(data, agac, sap_moduller)
+    etiketleme = _dogrula_etiketleme(data, agac_norm, sap_moduller_norm)
+    if data.get("ust_kategori") and not etiketleme["ust_kategori"]:
+        logger.info(
+            "classify(): model ust_kategori=%r verdi ama ağaçta hiçbir seviye "
+            "eşleşmedi (normalize sonrası bile) — etiketleme boş kaldı. "
+            "kategori_grubu=%r alt_kategori=%r",
+            data.get("ust_kategori"), data.get("kategori_grubu"), data.get("alt_kategori"),
+        )
 
     return {
         "modul": modul,

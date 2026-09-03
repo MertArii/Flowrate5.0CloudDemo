@@ -1,3 +1,11 @@
+# ⚠️ SADECE YEREL Mac/Windows GELİŞTİRME İÇİNDİR — bulut demo/prod VM'inde
+# ASLA çalıştırmayın (ai-data-prep-vm gibi paylaşılan sunucularda çalışan
+# stack her zaman docker-compose.demo.yml'dir). 2026-09-02'de bu dosyanın
+# paylaşılan VM'de yanlışlıkla çalıştırılması, canlı Postgres'in farklı bir
+# şifre/volume ile yeniden oluşmasına ve tüm verinin sıfırlanmasına yol
+# açmıştı — bkz. proje geçmişi. Adı bilerek "local-mac" yapıldı (eskiden
+# düz "docker-compose.yml" idi, en kolay yanlışlıkla seçilen isimdi).
+#
 # Ollama Docker'DA DEĞİLDİR — Mac host'unda native çalışır (Metal GPU için).
 # Kurulum: `brew install ollama` -> `ollama serve` -> `ollama pull qwen3.5:9b`
 #          `ollama pull bge-m3`  (embedding modeli)
