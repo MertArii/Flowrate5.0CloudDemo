@@ -1,9 +1,14 @@
-SELECT 'support_groups' AS tbl, count(*) FROM support_groups
-UNION ALL SELECT 'sla_policies', count(*) FROM sla_policies
-UNION ALL SELECT 'classification_categories', count(*) FROM classification_categories
+SELECT 'tickets' AS tbl, count(*) FROM tickets
+UNION ALL SELECT 'ticket_solutions', count(*) FROM ticket_solutions
 UNION ALL SELECT 'users', count(*) FROM users
-UNION ALL SELECT 'routing_rules', count(*) FROM routing_rules;
-
--- ekip_group_id gercekten dolu mu (FK baglantisi saglikli mi)
-SELECT category_key, ekip_group_id IS NOT NULL AS ekibi_var
-FROM classification_categories ORDER BY category_key;
+UNION ALL SELECT 'support_groups', count(*) FROM support_groups
+UNION ALL SELECT 'classification_categories', count(*) FROM classification_categories
+UNION ALL SELECT 'sla_policies', count(*) FROM sla_policies
+UNION ALL SELECT 'routing_rules', count(*) FROM routing_rules
+UNION ALL SELECT 'routing_logs', count(*) FROM routing_logs
+UNION ALL SELECT 'ticket_messages', count(*) FROM ticket_messages
+UNION ALL SELECT 'ai_feedbacks', count(*) FROM ai_feedbacks
+UNION ALL SELECT 'alt_kategoriler', count(*) FROM alt_kategoriler
+UNION ALL SELECT 'kategori_gruplari', count(*) FROM kategori_gruplari
+UNION ALL SELECT 'ust_kategoriler', count(*) FROM ust_kategoriler
+UNION ALL SELECT 'sap_modules', count(*) FROM sap_modules;

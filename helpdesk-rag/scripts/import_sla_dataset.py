@@ -21,6 +21,12 @@ kontrol edilir, varsa atlanır (store.solution_exists_for_harici_no).
 
 Çalıştırma (api container içinde, Ollama + Postgres erişimi olan yerde):
     docker compose -f docker-compose.demo.yml exec api python scripts/import_sla_dataset.py
+    docker compose -f docker-compose.demo.yml exec api python scripts/import_sla_dataset.py --limit 100
+
+--limit N verilirse, bu ÇALIŞTIRMADA en fazla N YENİ kayıt işlenir (zaten
+işlenmiş/atlanan kayıtlar sayılmaz) ve script temiz şekilde durur. Sonraki
+çalıştırma (limitli ya da limitsiz) resumability sayesinde kaldığı yerden
+devam eder — --limit vermek "durdur/devam ettir" akışını bozmaz.
 
 NOT: 4270 kayıt için LLM sınıflandırma + embedding üretimi SAATLER
 sürebilir (her kayıt için 2 model çağrısı). İlerleme her 100 kayıtta bir
@@ -30,6 +36,7 @@ loglanır. Arkaplanda çalıştırmak isterseniz:
 """
 from __future__ import annotations
 
+import argparse
 import asyncio
 import json
 import random
@@ -213,13 +220,19 @@ async def _import_one(rec: dict) -> bool:
     return True
 
 
-async def main() -> None:
+async def main(limit: int | None) -> None:
     kayitlar = _load_temiz_kayitlar()
     print(f"[import] {len(kayitlar)} temiz kayıt bulundu (orijinal+duzenli+dolu alanlar).")
+    if limit:
+        print(f"[import] --limit {limit}: bu çalıştırmada en fazla {limit} YENİ kayıt işlenip duracak.")
     store.open_pool()
     try:
         islenen = atlanan = 0
         for i, rec in enumerate(kayitlar):
+            if limit and islenen >= limit:
+                print(f"[import] Limit'e ({limit}) ulaşıldı, temiz şekilde duruluyor. "
+                      f"Devam etmek için script'i tekrar çalıştırın (kaldığı yerden devam eder).")
+                break
             try:
                 if await _import_one(rec):
                     islenen += 1
@@ -231,10 +244,14 @@ async def main() -> None:
             if (i + 1) % 100 == 0:
                 print(f"[import] {i + 1}/{len(kayitlar)} — işlenen: {islenen}, atlanan (zaten vardı): {atlanan}")
 
-        print(f"[import] TAMAM. İşlenen: {islenen}, atlanan: {atlanan}, toplam: {len(kayitlar)}")
+        print(f"[import] TAMAM (bu çalıştırma). İşlenen: {islenen}, atlanan: {atlanan}, toplam veri seti: {len(kayitlar)}")
     finally:
         store.close_pool()
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--limit", type=int, default=None,
+                     help="Bu çalıştırmada işlenecek en fazla YENİ kayıt sayısı (verilmezse tümü).")
+    args = ap.parse_args()
+    asyncio.run(main(args.limit))

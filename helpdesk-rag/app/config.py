@@ -5,7 +5,12 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     ollama_base_url: str = "http://host.docker.internal:11434"
-    database_url: str = "postgresql://helpdesk:changeme@postgres:5432/helpdesk"
+    # BİLEREK varsayılanı yok: DATABASE_URL ortam değişkeni/.env'den
+    # sağlanmazsa uygulama net bir hatayla AÇILAMAMALI — sessizce
+    # "changeme" gibi sahte bir şifreyle yanlış bir DB'ye (ya da yanlış
+    # yapılandırılmış bir container'a) bağlanmaya çalışmamalı. Bu tam
+    # olarak 2026-09-02'deki veri kaybı olayının kök nedenlerinden biriydi.
+    database_url: str
     redis_url: str = "redis://redis:6379/0"
 
     # Yüklenen dosyaların api ve worker arasında paylaşıldığı dizin.
