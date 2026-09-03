@@ -121,6 +121,14 @@ async def _import_one(rec: dict) -> bool:
     kategoriler = store.get_categories()
     ekip = kategoriler.get(modul, {}).get("ekip")
 
+    # 1b) Alt kategori + SAP modülü — classify() zaten ust_kategori/
+    # kategori_grubu/alt_kategori/sap_modulu alanlarını hiyerarşiye karşı
+    # doğrulanmış olarak döndürüyor (geçersizse None). İsim -> id çevirimi.
+    sub_category_id = store.get_alt_kategori_id(
+        siniflandirma.get("alt_kategori"), siniflandirma.get("kategori_grubu"),
+    )
+    sap_module_id = store.get_sap_module_id(siniflandirma.get("sap_modulu"))
+
     # 2) Agent + destek grubu.
     agent_id, group_id = await _get_or_create_agent(rec["atanan_kisi"], ekip, rec["kime"])
 
@@ -162,6 +170,8 @@ async def _import_one(rec: dict) -> bool:
         response_deadline=deadlines.get("response_deadline"),
         workaround_deadline=deadlines.get("workaround_deadline"),
         resolution_deadline=res_deadline,
+        sub_category_id=sub_category_id,
+        sap_module_id=sap_module_id,
     )
     # customer_id / created_at / resolved_at / sla_status: create_ticket bu
     # alanları desteklemiyor (canlı akışta hep 'yeni' ticket açılır) — toplu
