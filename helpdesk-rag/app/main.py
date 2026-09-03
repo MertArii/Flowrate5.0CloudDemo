@@ -361,7 +361,9 @@ async def ask(
             f.write(raw)
 
         content_type = file.content_type or ""
-        if content_type in IMAGE_TYPES:
+        is_image = content_type in IMAGE_TYPES or suffix.lower() in [".png", ".jpg", ".jpeg", ".webp"]
+        
+        if is_image:
             extra_context = vision.ocr_image(raw)
         else:
             extra_context = ingest.read_file(path)
