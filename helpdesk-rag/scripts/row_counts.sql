@@ -1,9 +1,0 @@
-SELECT 'tickets' AS tbl, count(*) FROM tickets
-UNION ALL SELECT 'ticket_solutions', count(*) FROM ticket_solutions
-UNION ALL SELECT 'users', count(*) FROM users
-UNION ALL SELECT 'routing_logs', count(*) FROM routing_logs
-UNION ALL SELECT 'ticket_messages', count(*) FROM ticket_messages
-UNION ALL SELECT 'support_groups', count(*) FROM support_groups
-UNION ALL SELECT 'classification_categories', count(*) FROM classification_categories
-UNION ALL SELECT 'alt_kategoriler', count(*) FROM alt_kategoriler
-UNION ALL SELECT 'sla_policies', count(*) FROM sla_policies;

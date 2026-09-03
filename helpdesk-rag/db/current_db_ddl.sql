@@ -1,2448 +1,792 @@
--- DROP SCHEMA public;
+--
+-- PostgreSQL database dump
+--
 
-CREATE SCHEMA public AUTHORIZATION pg_database_owner;
+\restrict L8FpcQfAVCpF0GWJ0Zsrr4DyroeAYirgErQfuC9ANjFGL1NXQs0LyXgrRrxlNEW
 
-COMMENT ON SCHEMA public IS 'standard public schema';
+-- Dumped from database version 16.14 (Debian 16.14-1.pgdg12+1)
+-- Dumped by pg_dump version 16.14 (Debian 16.14-1.pgdg12+1)
 
--- DROP TYPE public.gtrgm;
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
 
-CREATE TYPE public.gtrgm (
-	INPUT = gtrgm_in,
-	OUTPUT = gtrgm_out,
-	ALIGNMENT = 4,
-	STORAGE = plain,
-	CATEGORY = U,
-	DELIMITER = ',');
+--
+-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
+--
 
--- DROP TYPE public.halfvec;
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
 
-CREATE TYPE public.halfvec (
-	INPUT = halfvec_in,
-	OUTPUT = halfvec_out,
-	RECEIVE = halfvec_recv,
-	SEND = halfvec_send,
-	TYPMOD_IN = halfvec_typmod_in,
-	ALIGNMENT = 4,
-	STORAGE = secondary,
-	CATEGORY = U,
-	DELIMITER = ',');
 
--- DROP TYPE public.sparsevec;
+--
+-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: -
+--
 
-CREATE TYPE public.sparsevec (
-	INPUT = sparsevec_in,
-	OUTPUT = sparsevec_out,
-	RECEIVE = sparsevec_recv,
-	SEND = sparsevec_send,
-	TYPMOD_IN = sparsevec_typmod_in,
-	ALIGNMENT = 4,
-	STORAGE = secondary,
-	CATEGORY = U,
-	DELIMITER = ',');
+COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
 
--- DROP TYPE public.vector;
 
-CREATE TYPE public.vector (
-	INPUT = vector_in,
-	OUTPUT = vector_out,
-	RECEIVE = vector_recv,
-	SEND = vector_send,
-	TYPMOD_IN = vector_typmod_in,
-	ALIGNMENT = 4,
-	STORAGE = secondary,
-	CATEGORY = U,
-	DELIMITER = ',');
+--
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
+--
 
--- DROP SEQUENCE public.tickets_ticket_number_seq;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
+
+
+--
+-- Name: vector; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS vector WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION vector; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION vector IS 'vector data type and ivfflat and hnsw access methods';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: ai_feedbacks; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.ai_feedbacks (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    message_id uuid,
+    user_id uuid,
+    rating integer,
+    feedback_text text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT ai_feedbacks_rating_check CHECK (((rating >= 1) AND (rating <= 5)))
+);
+
+
+--
+-- Name: alt_kategoriler; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.alt_kategoriler (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    grup_id uuid NOT NULL,
+    name text NOT NULL,
+    is_active boolean DEFAULT true,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+--
+-- Name: attachment_vectors; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.attachment_vectors (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    attachment_id uuid,
+    ticket_id uuid,
+    source character varying(255),
+    chunk_index integer NOT NULL,
+    page_number integer,
+    chunk_content text NOT NULL,
+    embedding public.vector(1024) NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+--
+-- Name: classification_categories; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.classification_categories (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    category_key text NOT NULL,
+    aciklama text NOT NULL,
+    ekip_group_id uuid,
+    is_active boolean DEFAULT true,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    ekip_gorunum_adi text
+);
+
+
+--
+-- Name: kategori_gruplari; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.kategori_gruplari (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    ust_kategori_id uuid NOT NULL,
+    name text NOT NULL,
+    is_active boolean DEFAULT true,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+--
+-- Name: message_attachments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.message_attachments (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    message_id uuid NOT NULL,
+    file_name character varying(255) NOT NULL,
+    file_path text NOT NULL,
+    file_type character varying(50),
+    ocr_extracted_text text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+--
+-- Name: routing_logs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.routing_logs (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    ticket_id uuid,
+    decision_factors jsonb NOT NULL,
+    assigned_group_id uuid,
+    assigned_agent_id uuid,
+    confidence_score double precision,
+    is_overridden_by_human boolean DEFAULT false,
+    correct_group_id uuid,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+--
+-- Name: routing_rules; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.routing_rules (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    rule_name character varying(100) NOT NULL,
+    recipient_email_pattern character varying(150),
+    keyword_triggers text[],
+    sender_domain character varying(100),
+    target_group_id uuid NOT NULL,
+    default_assigned_agent_id uuid,
+    priority_score integer DEFAULT 10,
+    is_active boolean DEFAULT true,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+--
+-- Name: sap_modules; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sap_modules (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    code text NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+--
+-- Name: sla_policies; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sla_policies (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    level_int integer NOT NULL,
+    level_name character varying(100) NOT NULL,
+    priority_key character varying(20) NOT NULL,
+    response_target interval,
+    workaround_target interval,
+    resolution_target interval NOT NULL,
+    is_business_days boolean DEFAULT false,
+    description text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+--
+-- Name: support_groups; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.support_groups (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name character varying(100) NOT NULL,
+    email_alias character varying(150),
+    description text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+--
+-- Name: ticket_messages; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.ticket_messages (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    ticket_id uuid NOT NULL,
+    sender_email character varying(150) NOT NULL,
+    sender_type character varying(20) NOT NULL,
+    message_body text NOT NULL,
+    ai_generated_draft text,
+    rag_sources_used jsonb,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT ticket_messages_sender_type_check CHECK (((sender_type)::text = ANY ((ARRAY['customer'::character varying, 'agent'::character varying, 'ai_bot'::character varying, 'system'::character varying])::text[])))
+);
+
+
+--
+-- Name: ticket_solutions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.ticket_solutions (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    ticket_id uuid,
+    category character varying(100),
+    problem_text text NOT NULL,
+    solution_text text NOT NULL,
+    embedding public.vector(1024),
+    metadata jsonb,
+    is_verified boolean DEFAULT true,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+--
+-- Name: tickets; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.tickets (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    ticket_number integer NOT NULL,
+    customer_email character varying(150) NOT NULL,
+    customer_id uuid,
+    recipient_email character varying(150) NOT NULL,
+    subject character varying(255) NOT NULL,
+    raw_issue_description text NOT NULL,
+    extracted_category character varying(100),
+    region character varying(100),
+    status character varying(30) DEFAULT 'new'::character varying,
+    priority character varying(20) DEFAULT 'medium'::character varying,
+    assigned_group_id uuid,
+    assigned_agent_id uuid,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    resolved_at timestamp with time zone,
+    sla_policy_id uuid,
+    response_deadline timestamp with time zone,
+    workaround_deadline timestamp with time zone,
+    resolution_deadline timestamp with time zone,
+    first_response_at timestamp with time zone,
+    sla_status character varying(20) DEFAULT 'within_sla'::character varying,
+    last_paused_at timestamp with time zone,
+    total_paused_duration interval DEFAULT '00:00:00'::interval,
+    sub_category_id uuid,
+    sap_module_id uuid,
+    CONSTRAINT tickets_priority_check CHECK (((priority)::text = ANY (ARRAY['low'::text, 'medium'::text, 'high'::text, 'urgent'::text, 'planned'::text]))),
+    CONSTRAINT tickets_status_check CHECK (((status)::text = ANY (ARRAY['new'::text, 'l1_routing'::text, 'assigned'::text, 'in_progress'::text, 'waiting'::text, 'resolved'::text, 'closed'::text])))
+);
+
+
+--
+-- Name: COLUMN tickets.sub_category_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.tickets.sub_category_id IS 'alt_kategoriler tablosuna işaret eder. Üst kategori/grup, alt_kategoriler -> kategori_gruplari -> ust_kategoriler JOIN''iyle elde edilir.';
+
+
+--
+-- Name: COLUMN tickets.sap_module_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.tickets.sap_module_id IS 'Opsiyonel — sadece SAP ile ilgili ticket''larda dolu. sub_category_id''den BAĞIMSIZ çapraz bir alandır (ör. Yetki Hatası + FI, Bug fix + MM gibi).';
+
+
+--
+-- Name: tickets_ticket_number_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
 
 CREATE SEQUENCE public.tickets_ticket_number_seq
-	INCREMENT BY 1
-	MINVALUE 1
-	MAXVALUE 2147483647
-	START 1
-	CACHE 1
-	NO CYCLE;
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
--- Permissions
 
-ALTER SEQUENCE public.tickets_ticket_number_seq OWNER TO helpdesk;
-GRANT ALL ON SEQUENCE public.tickets_ticket_number_seq TO helpdesk;
--- public.classification_categories definition
+--
+-- Name: tickets_ticket_number_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
 
--- Drop table
+ALTER SEQUENCE public.tickets_ticket_number_seq OWNED BY public.tickets.ticket_number;
 
--- DROP TABLE public.classification_categories;
 
-CREATE TABLE public.classification_categories ( id uuid DEFAULT uuid_generate_v4() NOT NULL, category_key text NOT NULL, aciklama text NOT NULL, ekip_group_id uuid NULL, is_active bool DEFAULT true NULL, created_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, ekip_gorunum_adi text NULL, CONSTRAINT classification_categories_category_key_key UNIQUE (category_key), CONSTRAINT classification_categories_pkey PRIMARY KEY (id));
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: -
+--
 
--- Permissions
+CREATE TABLE public.users (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    email character varying(150) NOT NULL,
+    full_name character varying(150) NOT NULL,
+    title character varying(100),
+    department character varying(100),
+    region character varying(100),
+    phone character varying(50),
+    role character varying(20) DEFAULT 'customer'::character varying,
+    support_group_id uuid,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    uzman_kategorileri text[],
+    CONSTRAINT users_role_check CHECK (((role)::text = ANY ((ARRAY['customer'::character varying, 'agent'::character varying, 'admin'::character varying])::text[])))
+);
 
-ALTER TABLE public.classification_categories OWNER TO helpdesk;
-GRANT ALL ON TABLE public.classification_categories TO helpdesk;
 
+--
+-- Name: ust_kategoriler; Type: TABLE; Schema: public; Owner: -
+--
 
--- public.sla_policies definition
+CREATE TABLE public.ust_kategoriler (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name text NOT NULL,
+    is_active boolean DEFAULT true,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
 
--- Drop table
 
--- DROP TABLE public.sla_policies;
+--
+-- Name: tickets ticket_number; Type: DEFAULT; Schema: public; Owner: -
+--
 
-CREATE TABLE public.sla_policies ( id uuid DEFAULT uuid_generate_v4() NOT NULL, level_int int4 NOT NULL, level_name varchar(100) NOT NULL, priority_key varchar(20) NOT NULL, response_target interval NULL, workaround_target interval NULL, resolution_target interval NOT NULL, is_business_days bool DEFAULT false NULL, description text NULL, created_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, CONSTRAINT sla_policies_pkey PRIMARY KEY (id));
+ALTER TABLE ONLY public.tickets ALTER COLUMN ticket_number SET DEFAULT nextval('public.tickets_ticket_number_seq'::regclass);
 
--- Permissions
 
-ALTER TABLE public.sla_policies OWNER TO helpdesk;
-GRANT ALL ON TABLE public.sla_policies TO helpdesk;
+--
+-- Name: ai_feedbacks ai_feedbacks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
+ALTER TABLE ONLY public.ai_feedbacks
+    ADD CONSTRAINT ai_feedbacks_pkey PRIMARY KEY (id);
 
--- public.support_groups definition
 
--- Drop table
+--
+-- Name: alt_kategoriler alt_kategoriler_grup_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
--- DROP TABLE public.support_groups;
+ALTER TABLE ONLY public.alt_kategoriler
+    ADD CONSTRAINT alt_kategoriler_grup_id_name_key UNIQUE (grup_id, name);
 
-CREATE TABLE public.support_groups ( id uuid DEFAULT uuid_generate_v4() NOT NULL, "name" varchar(100) NOT NULL, email_alias varchar(150) NULL, description text NULL, created_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, CONSTRAINT support_groups_name_key UNIQUE (name), CONSTRAINT support_groups_pkey PRIMARY KEY (id));
 
--- Permissions
+--
+-- Name: alt_kategoriler alt_kategoriler_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
-ALTER TABLE public.support_groups OWNER TO helpdesk;
-GRANT ALL ON TABLE public.support_groups TO helpdesk;
+ALTER TABLE ONLY public.alt_kategoriler
+    ADD CONSTRAINT alt_kategoriler_pkey PRIMARY KEY (id);
 
 
--- public.users definition
+--
+-- Name: attachment_vectors attachment_vectors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
--- Drop table
+ALTER TABLE ONLY public.attachment_vectors
+    ADD CONSTRAINT attachment_vectors_pkey PRIMARY KEY (id);
 
--- DROP TABLE public.users;
 
-CREATE TABLE public.users ( id uuid DEFAULT uuid_generate_v4() NOT NULL, email varchar(150) NOT NULL, full_name varchar(150) NOT NULL, title varchar(100) NULL, department varchar(100) NULL, region varchar(100) NULL, phone varchar(50) NULL, "role" varchar(20) DEFAULT 'customer'::character varying NULL, support_group_id uuid NULL, created_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, updated_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, uzman_kategorileri _text NULL, CONSTRAINT users_email_key UNIQUE (email), CONSTRAINT users_pkey PRIMARY KEY (id), CONSTRAINT users_role_check CHECK (((role)::text = ANY ((ARRAY['customer'::character varying, 'agent'::character varying, 'admin'::character varying])::text[]))), CONSTRAINT users_support_group_id_fkey FOREIGN KEY (support_group_id) REFERENCES public.support_groups(id) ON DELETE SET NULL);
+--
+-- Name: classification_categories classification_categories_category_key_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
--- Permissions
+ALTER TABLE ONLY public.classification_categories
+    ADD CONSTRAINT classification_categories_category_key_key UNIQUE (category_key);
 
-ALTER TABLE public.users OWNER TO helpdesk;
-GRANT ALL ON TABLE public.users TO helpdesk;
 
+--
+-- Name: classification_categories classification_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
--- public.routing_rules definition
+ALTER TABLE ONLY public.classification_categories
+    ADD CONSTRAINT classification_categories_pkey PRIMARY KEY (id);
 
--- Drop table
 
--- DROP TABLE public.routing_rules;
+--
+-- Name: kategori_gruplari kategori_gruplari_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
-CREATE TABLE public.routing_rules ( id uuid DEFAULT uuid_generate_v4() NOT NULL, rule_name varchar(100) NOT NULL, recipient_email_pattern varchar(150) NULL, keyword_triggers _text NULL, sender_domain varchar(100) NULL, target_group_id uuid NOT NULL, default_assigned_agent_id uuid NULL, priority_score int4 DEFAULT 10 NULL, is_active bool DEFAULT true NULL, created_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, CONSTRAINT routing_rules_pkey PRIMARY KEY (id), CONSTRAINT routing_rules_default_assigned_agent_id_fkey FOREIGN KEY (default_assigned_agent_id) REFERENCES public.users(id) ON DELETE SET NULL, CONSTRAINT routing_rules_target_group_id_fkey FOREIGN KEY (target_group_id) REFERENCES public.support_groups(id) ON DELETE CASCADE);
+ALTER TABLE ONLY public.kategori_gruplari
+    ADD CONSTRAINT kategori_gruplari_pkey PRIMARY KEY (id);
 
--- Permissions
 
-ALTER TABLE public.routing_rules OWNER TO helpdesk;
-GRANT ALL ON TABLE public.routing_rules TO helpdesk;
+--
+-- Name: kategori_gruplari kategori_gruplari_ust_kategori_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
+ALTER TABLE ONLY public.kategori_gruplari
+    ADD CONSTRAINT kategori_gruplari_ust_kategori_id_name_key UNIQUE (ust_kategori_id, name);
 
--- public.tickets definition
 
--- Drop table
+--
+-- Name: message_attachments message_attachments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
--- DROP TABLE public.tickets;
+ALTER TABLE ONLY public.message_attachments
+    ADD CONSTRAINT message_attachments_pkey PRIMARY KEY (id);
 
-CREATE TABLE public.tickets ( id uuid DEFAULT uuid_generate_v4() NOT NULL, ticket_number serial4 NOT NULL, customer_email varchar(150) NOT NULL, customer_id uuid NULL, recipient_email varchar(150) NOT NULL, subject varchar(255) NOT NULL, raw_issue_description text NOT NULL, extracted_category varchar(100) NULL, region varchar(100) NULL, status varchar(30) DEFAULT 'new'::character varying NULL, priority varchar(20) DEFAULT 'medium'::character varying NULL, assigned_group_id uuid NULL, assigned_agent_id uuid NULL, created_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, updated_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, resolved_at timestamptz NULL, sla_policy_id uuid NULL, response_deadline timestamptz NULL, workaround_deadline timestamptz NULL, resolution_deadline timestamptz NULL, first_response_at timestamptz NULL, sla_status varchar(20) DEFAULT 'within_sla'::character varying NULL, last_paused_at timestamptz NULL, total_paused_duration interval DEFAULT '00:00:00'::interval NULL, CONSTRAINT tickets_pkey PRIMARY KEY (id), CONSTRAINT tickets_priority_check CHECK (((priority)::text = ANY (ARRAY['low'::text, 'medium'::text, 'high'::text, 'urgent'::text, 'planned'::text]))), CONSTRAINT tickets_status_check CHECK (((status)::text = ANY (ARRAY['new'::text, 'l1_routing'::text, 'assigned'::text, 'in_progress'::text, 'waiting'::text, 'resolved'::text, 'closed'::text]))), CONSTRAINT tickets_ticket_number_key UNIQUE (ticket_number), CONSTRAINT tickets_assigned_agent_id_fkey FOREIGN KEY (assigned_agent_id) REFERENCES public.users(id) ON DELETE SET NULL, CONSTRAINT tickets_assigned_group_id_fkey FOREIGN KEY (assigned_group_id) REFERENCES public.support_groups(id) ON DELETE SET NULL, CONSTRAINT tickets_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.users(id) ON DELETE SET NULL, CONSTRAINT tickets_sla_policy_id_fkey FOREIGN KEY (sla_policy_id) REFERENCES public.sla_policies(id));
 
--- Permissions
+--
+-- Name: routing_logs routing_logs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
-ALTER TABLE public.tickets OWNER TO helpdesk;
-GRANT ALL ON TABLE public.tickets TO helpdesk;
+ALTER TABLE ONLY public.routing_logs
+    ADD CONSTRAINT routing_logs_pkey PRIMARY KEY (id);
 
 
--- public.routing_logs definition
+--
+-- Name: routing_rules routing_rules_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
--- Drop table
+ALTER TABLE ONLY public.routing_rules
+    ADD CONSTRAINT routing_rules_pkey PRIMARY KEY (id);
 
--- DROP TABLE public.routing_logs;
 
-CREATE TABLE public.routing_logs ( id uuid DEFAULT uuid_generate_v4() NOT NULL, ticket_id uuid NULL, decision_factors jsonb NOT NULL, assigned_group_id uuid NULL, assigned_agent_id uuid NULL, confidence_score float8 NULL, is_overridden_by_human bool DEFAULT false NULL, correct_group_id uuid NULL, created_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, CONSTRAINT routing_logs_pkey PRIMARY KEY (id), CONSTRAINT routing_logs_assigned_agent_id_fkey FOREIGN KEY (assigned_agent_id) REFERENCES public.users(id), CONSTRAINT routing_logs_assigned_group_id_fkey FOREIGN KEY (assigned_group_id) REFERENCES public.support_groups(id), CONSTRAINT routing_logs_correct_group_id_fkey FOREIGN KEY (correct_group_id) REFERENCES public.support_groups(id), CONSTRAINT routing_logs_ticket_id_fkey FOREIGN KEY (ticket_id) REFERENCES public.tickets(id) ON DELETE CASCADE);
+--
+-- Name: sap_modules sap_modules_code_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
--- Permissions
+ALTER TABLE ONLY public.sap_modules
+    ADD CONSTRAINT sap_modules_code_key UNIQUE (code);
 
-ALTER TABLE public.routing_logs OWNER TO helpdesk;
-GRANT ALL ON TABLE public.routing_logs TO helpdesk;
 
+--
+-- Name: sap_modules sap_modules_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
--- public.ticket_messages definition
+ALTER TABLE ONLY public.sap_modules
+    ADD CONSTRAINT sap_modules_pkey PRIMARY KEY (id);
 
--- Drop table
 
--- DROP TABLE public.ticket_messages;
+--
+-- Name: sla_policies sla_policies_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
-CREATE TABLE public.ticket_messages ( id uuid DEFAULT uuid_generate_v4() NOT NULL, ticket_id uuid NOT NULL, sender_email varchar(150) NOT NULL, sender_type varchar(20) NOT NULL, message_body text NOT NULL, ai_generated_draft text NULL, rag_sources_used jsonb NULL, created_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, CONSTRAINT ticket_messages_pkey PRIMARY KEY (id), CONSTRAINT ticket_messages_sender_type_check CHECK (((sender_type)::text = ANY ((ARRAY['customer'::character varying, 'agent'::character varying, 'ai_bot'::character varying, 'system'::character varying])::text[]))), CONSTRAINT ticket_messages_ticket_id_fkey FOREIGN KEY (ticket_id) REFERENCES public.tickets(id) ON DELETE CASCADE);
+ALTER TABLE ONLY public.sla_policies
+    ADD CONSTRAINT sla_policies_pkey PRIMARY KEY (id);
 
--- Permissions
 
-ALTER TABLE public.ticket_messages OWNER TO helpdesk;
-GRANT ALL ON TABLE public.ticket_messages TO helpdesk;
+--
+-- Name: support_groups support_groups_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
+ALTER TABLE ONLY public.support_groups
+    ADD CONSTRAINT support_groups_name_key UNIQUE (name);
 
--- public.ticket_solutions definition
 
--- Drop table
+--
+-- Name: support_groups support_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
--- DROP TABLE public.ticket_solutions;
+ALTER TABLE ONLY public.support_groups
+    ADD CONSTRAINT support_groups_pkey PRIMARY KEY (id);
 
-CREATE TABLE public.ticket_solutions ( id uuid DEFAULT uuid_generate_v4() NOT NULL, ticket_id uuid NULL, category varchar(100) NULL, problem_text text NOT NULL, solution_text text NOT NULL, embedding public.vector NULL, metadata jsonb NULL, is_verified bool DEFAULT true NULL, created_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, updated_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, CONSTRAINT ticket_solutions_pkey PRIMARY KEY (id), CONSTRAINT ticket_solutions_ticket_id_fkey FOREIGN KEY (ticket_id) REFERENCES public.tickets(id) ON DELETE SET NULL);
-CREATE INDEX idx_ticket_solutions_embedding ON public.ticket_solutions USING hnsw (embedding vector_cosine_ops);
 
--- Permissions
+--
+-- Name: ticket_messages ticket_messages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
-ALTER TABLE public.ticket_solutions OWNER TO helpdesk;
-GRANT ALL ON TABLE public.ticket_solutions TO helpdesk;
+ALTER TABLE ONLY public.ticket_messages
+    ADD CONSTRAINT ticket_messages_pkey PRIMARY KEY (id);
 
 
--- public.ai_feedbacks definition
+--
+-- Name: ticket_solutions ticket_solutions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
--- Drop table
+ALTER TABLE ONLY public.ticket_solutions
+    ADD CONSTRAINT ticket_solutions_pkey PRIMARY KEY (id);
 
--- DROP TABLE public.ai_feedbacks;
 
-CREATE TABLE public.ai_feedbacks ( id uuid DEFAULT uuid_generate_v4() NOT NULL, message_id uuid NULL, user_id uuid NULL, rating int4 NULL, feedback_text text NULL, created_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, CONSTRAINT ai_feedbacks_pkey PRIMARY KEY (id), CONSTRAINT ai_feedbacks_rating_check CHECK (((rating >= 1) AND (rating <= 5))), CONSTRAINT ai_feedbacks_message_id_fkey FOREIGN KEY (message_id) REFERENCES public.ticket_messages(id) ON DELETE CASCADE, CONSTRAINT ai_feedbacks_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE);
+--
+-- Name: tickets tickets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
--- Permissions
+ALTER TABLE ONLY public.tickets
+    ADD CONSTRAINT tickets_pkey PRIMARY KEY (id);
 
-ALTER TABLE public.ai_feedbacks OWNER TO helpdesk;
-GRANT ALL ON TABLE public.ai_feedbacks TO helpdesk;
 
+--
+-- Name: tickets tickets_ticket_number_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
--- public.message_attachments definition
+ALTER TABLE ONLY public.tickets
+    ADD CONSTRAINT tickets_ticket_number_key UNIQUE (ticket_number);
 
--- Drop table
 
--- DROP TABLE public.message_attachments;
+--
+-- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
-CREATE TABLE public.message_attachments ( id uuid DEFAULT uuid_generate_v4() NOT NULL, message_id uuid NOT NULL, file_name varchar(255) NOT NULL, file_path text NOT NULL, file_type varchar(50) NULL, ocr_extracted_text text NULL, created_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, CONSTRAINT message_attachments_pkey PRIMARY KEY (id), CONSTRAINT message_attachments_message_id_fkey FOREIGN KEY (message_id) REFERENCES public.ticket_messages(id) ON DELETE CASCADE);
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_email_key UNIQUE (email);
 
--- Permissions
 
-ALTER TABLE public.message_attachments OWNER TO helpdesk;
-GRANT ALL ON TABLE public.message_attachments TO helpdesk;
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
--- public.attachment_vectors definition
 
--- Drop table
+--
+-- Name: ust_kategoriler ust_kategoriler_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
--- DROP TABLE public.attachment_vectors;
+ALTER TABLE ONLY public.ust_kategoriler
+    ADD CONSTRAINT ust_kategoriler_name_key UNIQUE (name);
 
-CREATE TABLE public.attachment_vectors ( id uuid DEFAULT uuid_generate_v4() NOT NULL, attachment_id uuid NULL, ticket_id uuid NULL, "source" varchar(255) NULL, chunk_index int4 NOT NULL, page_number int4 NULL, chunk_content text NOT NULL, embedding public.vector NOT NULL, created_at timestamptz DEFAULT CURRENT_TIMESTAMP NULL, CONSTRAINT attachment_vectors_pkey PRIMARY KEY (id), CONSTRAINT attachment_vectors_attachment_id_fkey FOREIGN KEY (attachment_id) REFERENCES public.message_attachments(id) ON DELETE CASCADE, CONSTRAINT attachment_vectors_ticket_id_fkey FOREIGN KEY (ticket_id) REFERENCES public.tickets(id) ON DELETE CASCADE);
-CREATE INDEX idx_attachment_vectors_embedding ON public.attachment_vectors USING hnsw (embedding vector_cosine_ops);
 
--- Permissions
+--
+-- Name: ust_kategoriler ust_kategoriler_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
 
-ALTER TABLE public.attachment_vectors OWNER TO helpdesk;
-GRANT ALL ON TABLE public.attachment_vectors TO helpdesk;
+ALTER TABLE ONLY public.ust_kategoriler
+    ADD CONSTRAINT ust_kategoriler_pkey PRIMARY KEY (id);
 
 
+--
+-- Name: idx_alt_kategoriler_grup; Type: INDEX; Schema: public; Owner: -
+--
 
--- DROP FUNCTION public.array_to_halfvec(_numeric, int4, bool);
+CREATE INDEX idx_alt_kategoriler_grup ON public.alt_kategoriler USING btree (grup_id);
 
-CREATE OR REPLACE FUNCTION public.array_to_halfvec(numeric[], integer, boolean)
- RETURNS halfvec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$array_to_halfvec$function$
-;
 
--- Permissions
+--
+-- Name: idx_attachment_vectors_embedding; Type: INDEX; Schema: public; Owner: -
+--
 
-ALTER FUNCTION public.array_to_halfvec(_numeric, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.array_to_halfvec(_numeric, int4, bool) TO helpdesk;
+CREATE INDEX idx_attachment_vectors_embedding ON public.attachment_vectors USING hnsw (embedding public.vector_cosine_ops);
 
--- DROP FUNCTION public.array_to_halfvec(_int4, int4, bool);
 
-CREATE OR REPLACE FUNCTION public.array_to_halfvec(integer[], integer, boolean)
- RETURNS halfvec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$array_to_halfvec$function$
-;
+--
+-- Name: idx_kategori_gruplari_ust; Type: INDEX; Schema: public; Owner: -
+--
 
--- Permissions
+CREATE INDEX idx_kategori_gruplari_ust ON public.kategori_gruplari USING btree (ust_kategori_id);
 
-ALTER FUNCTION public.array_to_halfvec(_int4, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.array_to_halfvec(_int4, int4, bool) TO helpdesk;
 
--- DROP FUNCTION public.array_to_halfvec(_float4, int4, bool);
+--
+-- Name: idx_ticket_solutions_embedding; Type: INDEX; Schema: public; Owner: -
+--
 
-CREATE OR REPLACE FUNCTION public.array_to_halfvec(real[], integer, boolean)
- RETURNS halfvec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$array_to_halfvec$function$
-;
+CREATE INDEX idx_ticket_solutions_embedding ON public.ticket_solutions USING hnsw (embedding public.vector_cosine_ops);
 
--- Permissions
 
-ALTER FUNCTION public.array_to_halfvec(_float4, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.array_to_halfvec(_float4, int4, bool) TO helpdesk;
+--
+-- Name: idx_tickets_sap_module; Type: INDEX; Schema: public; Owner: -
+--
 
--- DROP FUNCTION public.array_to_halfvec(_float8, int4, bool);
+CREATE INDEX idx_tickets_sap_module ON public.tickets USING btree (sap_module_id);
 
-CREATE OR REPLACE FUNCTION public.array_to_halfvec(double precision[], integer, boolean)
- RETURNS halfvec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$array_to_halfvec$function$
-;
 
--- Permissions
+--
+-- Name: idx_tickets_sub_category; Type: INDEX; Schema: public; Owner: -
+--
 
-ALTER FUNCTION public.array_to_halfvec(_float8, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.array_to_halfvec(_float8, int4, bool) TO helpdesk;
+CREATE INDEX idx_tickets_sub_category ON public.tickets USING btree (sub_category_id);
 
--- DROP FUNCTION public.array_to_sparsevec(_float8, int4, bool);
 
-CREATE OR REPLACE FUNCTION public.array_to_sparsevec(double precision[], integer, boolean)
- RETURNS sparsevec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$array_to_sparsevec$function$
-;
+--
+-- Name: ai_feedbacks ai_feedbacks_message_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
--- Permissions
+ALTER TABLE ONLY public.ai_feedbacks
+    ADD CONSTRAINT ai_feedbacks_message_id_fkey FOREIGN KEY (message_id) REFERENCES public.ticket_messages(id) ON DELETE CASCADE;
 
-ALTER FUNCTION public.array_to_sparsevec(_float8, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.array_to_sparsevec(_float8, int4, bool) TO helpdesk;
 
--- DROP FUNCTION public.array_to_sparsevec(_int4, int4, bool);
+--
+-- Name: ai_feedbacks ai_feedbacks_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
-CREATE OR REPLACE FUNCTION public.array_to_sparsevec(integer[], integer, boolean)
- RETURNS sparsevec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$array_to_sparsevec$function$
-;
+ALTER TABLE ONLY public.ai_feedbacks
+    ADD CONSTRAINT ai_feedbacks_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
 
--- Permissions
 
-ALTER FUNCTION public.array_to_sparsevec(_int4, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.array_to_sparsevec(_int4, int4, bool) TO helpdesk;
+--
+-- Name: alt_kategoriler alt_kategoriler_grup_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
--- DROP FUNCTION public.array_to_sparsevec(_float4, int4, bool);
+ALTER TABLE ONLY public.alt_kategoriler
+    ADD CONSTRAINT alt_kategoriler_grup_id_fkey FOREIGN KEY (grup_id) REFERENCES public.kategori_gruplari(id) ON DELETE CASCADE;
 
-CREATE OR REPLACE FUNCTION public.array_to_sparsevec(real[], integer, boolean)
- RETURNS sparsevec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$array_to_sparsevec$function$
-;
 
--- Permissions
+--
+-- Name: attachment_vectors attachment_vectors_attachment_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
-ALTER FUNCTION public.array_to_sparsevec(_float4, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.array_to_sparsevec(_float4, int4, bool) TO helpdesk;
+ALTER TABLE ONLY public.attachment_vectors
+    ADD CONSTRAINT attachment_vectors_attachment_id_fkey FOREIGN KEY (attachment_id) REFERENCES public.message_attachments(id) ON DELETE CASCADE;
 
--- DROP FUNCTION public.array_to_sparsevec(_numeric, int4, bool);
 
-CREATE OR REPLACE FUNCTION public.array_to_sparsevec(numeric[], integer, boolean)
- RETURNS sparsevec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$array_to_sparsevec$function$
-;
+--
+-- Name: attachment_vectors attachment_vectors_ticket_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
--- Permissions
+ALTER TABLE ONLY public.attachment_vectors
+    ADD CONSTRAINT attachment_vectors_ticket_id_fkey FOREIGN KEY (ticket_id) REFERENCES public.tickets(id) ON DELETE CASCADE;
 
-ALTER FUNCTION public.array_to_sparsevec(_numeric, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.array_to_sparsevec(_numeric, int4, bool) TO helpdesk;
 
--- DROP FUNCTION public.array_to_vector(_int4, int4, bool);
+--
+-- Name: kategori_gruplari kategori_gruplari_ust_kategori_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
-CREATE OR REPLACE FUNCTION public.array_to_vector(integer[], integer, boolean)
- RETURNS vector
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$array_to_vector$function$
-;
+ALTER TABLE ONLY public.kategori_gruplari
+    ADD CONSTRAINT kategori_gruplari_ust_kategori_id_fkey FOREIGN KEY (ust_kategori_id) REFERENCES public.ust_kategoriler(id) ON DELETE CASCADE;
 
--- Permissions
 
-ALTER FUNCTION public.array_to_vector(_int4, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.array_to_vector(_int4, int4, bool) TO helpdesk;
+--
+-- Name: message_attachments message_attachments_message_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
--- DROP FUNCTION public.array_to_vector(_numeric, int4, bool);
+ALTER TABLE ONLY public.message_attachments
+    ADD CONSTRAINT message_attachments_message_id_fkey FOREIGN KEY (message_id) REFERENCES public.ticket_messages(id) ON DELETE CASCADE;
 
-CREATE OR REPLACE FUNCTION public.array_to_vector(numeric[], integer, boolean)
- RETURNS vector
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$array_to_vector$function$
-;
 
--- Permissions
+--
+-- Name: routing_logs routing_logs_assigned_agent_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
-ALTER FUNCTION public.array_to_vector(_numeric, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.array_to_vector(_numeric, int4, bool) TO helpdesk;
+ALTER TABLE ONLY public.routing_logs
+    ADD CONSTRAINT routing_logs_assigned_agent_id_fkey FOREIGN KEY (assigned_agent_id) REFERENCES public.users(id);
 
--- DROP FUNCTION public.array_to_vector(_float8, int4, bool);
 
-CREATE OR REPLACE FUNCTION public.array_to_vector(double precision[], integer, boolean)
- RETURNS vector
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$array_to_vector$function$
-;
+--
+-- Name: routing_logs routing_logs_assigned_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
--- Permissions
+ALTER TABLE ONLY public.routing_logs
+    ADD CONSTRAINT routing_logs_assigned_group_id_fkey FOREIGN KEY (assigned_group_id) REFERENCES public.support_groups(id);
 
-ALTER FUNCTION public.array_to_vector(_float8, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.array_to_vector(_float8, int4, bool) TO helpdesk;
 
--- DROP FUNCTION public.array_to_vector(_float4, int4, bool);
+--
+-- Name: routing_logs routing_logs_correct_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
-CREATE OR REPLACE FUNCTION public.array_to_vector(real[], integer, boolean)
- RETURNS vector
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$array_to_vector$function$
-;
+ALTER TABLE ONLY public.routing_logs
+    ADD CONSTRAINT routing_logs_correct_group_id_fkey FOREIGN KEY (correct_group_id) REFERENCES public.support_groups(id);
 
--- Permissions
 
-ALTER FUNCTION public.array_to_vector(_float4, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.array_to_vector(_float4, int4, bool) TO helpdesk;
+--
+-- Name: routing_logs routing_logs_ticket_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
--- DROP AGGREGATE public.avg(halfvec);
+ALTER TABLE ONLY public.routing_logs
+    ADD CONSTRAINT routing_logs_ticket_id_fkey FOREIGN KEY (ticket_id) REFERENCES public.tickets(id) ON DELETE CASCADE;
 
--- Aggregate function public.avg(halfvec)
--- ERROR: more than one function named "public.avg";
 
--- Permissions
+--
+-- Name: routing_rules routing_rules_default_assigned_agent_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
-ALTER AGGREGATE public.avg(halfvec) OWNER TO helpdesk;
-GRANT ALL ON AGGREGATE public.avg(halfvec) TO helpdesk;
+ALTER TABLE ONLY public.routing_rules
+    ADD CONSTRAINT routing_rules_default_assigned_agent_id_fkey FOREIGN KEY (default_assigned_agent_id) REFERENCES public.users(id) ON DELETE SET NULL;
 
--- DROP AGGREGATE public.avg(vector);
 
--- Aggregate function public.avg(vector)
--- ERROR: more than one function named "public.avg";
+--
+-- Name: routing_rules routing_rules_target_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
--- Permissions
+ALTER TABLE ONLY public.routing_rules
+    ADD CONSTRAINT routing_rules_target_group_id_fkey FOREIGN KEY (target_group_id) REFERENCES public.support_groups(id) ON DELETE CASCADE;
 
-ALTER AGGREGATE public.avg(vector) OWNER TO helpdesk;
-GRANT ALL ON AGGREGATE public.avg(vector) TO helpdesk;
 
--- DROP FUNCTION public.binary_quantize(halfvec);
+--
+-- Name: ticket_messages ticket_messages_ticket_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
-CREATE OR REPLACE FUNCTION public.binary_quantize(halfvec)
- RETURNS bit
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_binary_quantize$function$
-;
+ALTER TABLE ONLY public.ticket_messages
+    ADD CONSTRAINT ticket_messages_ticket_id_fkey FOREIGN KEY (ticket_id) REFERENCES public.tickets(id) ON DELETE CASCADE;
 
--- Permissions
 
-ALTER FUNCTION public.binary_quantize(halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.binary_quantize(halfvec) TO helpdesk;
+--
+-- Name: ticket_solutions ticket_solutions_ticket_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
--- DROP FUNCTION public.binary_quantize(vector);
+ALTER TABLE ONLY public.ticket_solutions
+    ADD CONSTRAINT ticket_solutions_ticket_id_fkey FOREIGN KEY (ticket_id) REFERENCES public.tickets(id) ON DELETE SET NULL;
 
-CREATE OR REPLACE FUNCTION public.binary_quantize(vector)
- RETURNS bit
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$binary_quantize$function$
-;
 
--- Permissions
+--
+-- Name: tickets tickets_assigned_agent_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
-ALTER FUNCTION public.binary_quantize(vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.binary_quantize(vector) TO helpdesk;
+ALTER TABLE ONLY public.tickets
+    ADD CONSTRAINT tickets_assigned_agent_id_fkey FOREIGN KEY (assigned_agent_id) REFERENCES public.users(id) ON DELETE SET NULL;
 
--- DROP FUNCTION public.cosine_distance(vector, vector);
 
-CREATE OR REPLACE FUNCTION public.cosine_distance(vector, vector)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$cosine_distance$function$
-;
+--
+-- Name: tickets tickets_assigned_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
--- Permissions
+ALTER TABLE ONLY public.tickets
+    ADD CONSTRAINT tickets_assigned_group_id_fkey FOREIGN KEY (assigned_group_id) REFERENCES public.support_groups(id) ON DELETE SET NULL;
 
-ALTER FUNCTION public.cosine_distance(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.cosine_distance(vector, vector) TO helpdesk;
 
--- DROP FUNCTION public.cosine_distance(halfvec, halfvec);
+--
+-- Name: tickets tickets_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
-CREATE OR REPLACE FUNCTION public.cosine_distance(halfvec, halfvec)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_cosine_distance$function$
-;
+ALTER TABLE ONLY public.tickets
+    ADD CONSTRAINT tickets_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.users(id) ON DELETE SET NULL;
 
--- Permissions
 
-ALTER FUNCTION public.cosine_distance(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.cosine_distance(halfvec, halfvec) TO helpdesk;
+--
+-- Name: tickets tickets_sap_module_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
--- DROP FUNCTION public.cosine_distance(sparsevec, sparsevec);
+ALTER TABLE ONLY public.tickets
+    ADD CONSTRAINT tickets_sap_module_id_fkey FOREIGN KEY (sap_module_id) REFERENCES public.sap_modules(id) ON DELETE SET NULL;
 
-CREATE OR REPLACE FUNCTION public.cosine_distance(sparsevec, sparsevec)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_cosine_distance$function$
-;
 
--- Permissions
+--
+-- Name: tickets tickets_sla_policy_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
-ALTER FUNCTION public.cosine_distance(sparsevec, sparsevec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.cosine_distance(sparsevec, sparsevec) TO helpdesk;
+ALTER TABLE ONLY public.tickets
+    ADD CONSTRAINT tickets_sla_policy_id_fkey FOREIGN KEY (sla_policy_id) REFERENCES public.sla_policies(id);
 
--- DROP FUNCTION public.gin_extract_query_trgm(text, internal, int2, internal, internal, internal, internal);
 
-CREATE OR REPLACE FUNCTION public.gin_extract_query_trgm(text, internal, smallint, internal, internal, internal, internal)
- RETURNS internal
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$gin_extract_query_trgm$function$
-;
+--
+-- Name: tickets tickets_sub_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
--- Permissions
+ALTER TABLE ONLY public.tickets
+    ADD CONSTRAINT tickets_sub_category_id_fkey FOREIGN KEY (sub_category_id) REFERENCES public.alt_kategoriler(id) ON DELETE SET NULL;
 
-ALTER FUNCTION public.gin_extract_query_trgm(text, internal, int2, internal, internal, internal, internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.gin_extract_query_trgm(text, internal, int2, internal, internal, internal, internal) TO helpdesk;
 
--- DROP FUNCTION public.gin_extract_value_trgm(text, internal);
+--
+-- Name: users users_support_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
 
-CREATE OR REPLACE FUNCTION public.gin_extract_value_trgm(text, internal)
- RETURNS internal
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$gin_extract_value_trgm$function$
-;
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_support_group_id_fkey FOREIGN KEY (support_group_id) REFERENCES public.support_groups(id) ON DELETE SET NULL;
 
--- Permissions
 
-ALTER FUNCTION public.gin_extract_value_trgm(text, internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.gin_extract_value_trgm(text, internal) TO helpdesk;
+--
+-- PostgreSQL database dump complete
+--
 
--- DROP FUNCTION public.gin_trgm_consistent(internal, int2, text, int4, internal, internal, internal, internal);
+\unrestrict L8FpcQfAVCpF0GWJ0Zsrr4DyroeAYirgErQfuC9ANjFGL1NXQs0LyXgrRrxlNEW
 
-CREATE OR REPLACE FUNCTION public.gin_trgm_consistent(internal, smallint, text, integer, internal, internal, internal, internal)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$gin_trgm_consistent$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.gin_trgm_consistent(internal, int2, text, int4, internal, internal, internal, internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.gin_trgm_consistent(internal, int2, text, int4, internal, internal, internal, internal) TO helpdesk;
-
--- DROP FUNCTION public.gin_trgm_triconsistent(internal, int2, text, int4, internal, internal, internal);
-
-CREATE OR REPLACE FUNCTION public.gin_trgm_triconsistent(internal, smallint, text, integer, internal, internal, internal)
- RETURNS "char"
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$gin_trgm_triconsistent$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.gin_trgm_triconsistent(internal, int2, text, int4, internal, internal, internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.gin_trgm_triconsistent(internal, int2, text, int4, internal, internal, internal) TO helpdesk;
-
--- DROP FUNCTION public.gtrgm_compress(internal);
-
-CREATE OR REPLACE FUNCTION public.gtrgm_compress(internal)
- RETURNS internal
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$gtrgm_compress$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.gtrgm_compress(internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.gtrgm_compress(internal) TO helpdesk;
-
--- DROP FUNCTION public.gtrgm_consistent(internal, text, int2, oid, internal);
-
-CREATE OR REPLACE FUNCTION public.gtrgm_consistent(internal, text, smallint, oid, internal)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$gtrgm_consistent$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.gtrgm_consistent(internal, text, int2, oid, internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.gtrgm_consistent(internal, text, int2, oid, internal) TO helpdesk;
-
--- DROP FUNCTION public.gtrgm_decompress(internal);
-
-CREATE OR REPLACE FUNCTION public.gtrgm_decompress(internal)
- RETURNS internal
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$gtrgm_decompress$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.gtrgm_decompress(internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.gtrgm_decompress(internal) TO helpdesk;
-
--- DROP FUNCTION public.gtrgm_distance(internal, text, int2, oid, internal);
-
-CREATE OR REPLACE FUNCTION public.gtrgm_distance(internal, text, smallint, oid, internal)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$gtrgm_distance$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.gtrgm_distance(internal, text, int2, oid, internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.gtrgm_distance(internal, text, int2, oid, internal) TO helpdesk;
-
--- DROP FUNCTION public.gtrgm_in(cstring);
-
-CREATE OR REPLACE FUNCTION public.gtrgm_in(cstring)
- RETURNS gtrgm
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$gtrgm_in$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.gtrgm_in(cstring) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.gtrgm_in(cstring) TO helpdesk;
-
--- DROP FUNCTION public.gtrgm_options(internal);
-
-CREATE OR REPLACE FUNCTION public.gtrgm_options(internal)
- RETURNS void
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE
-AS '$libdir/pg_trgm', $function$gtrgm_options$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.gtrgm_options(internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.gtrgm_options(internal) TO helpdesk;
-
--- DROP FUNCTION public.gtrgm_out(gtrgm);
-
-CREATE OR REPLACE FUNCTION public.gtrgm_out(gtrgm)
- RETURNS cstring
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$gtrgm_out$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.gtrgm_out(gtrgm) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.gtrgm_out(gtrgm) TO helpdesk;
-
--- DROP FUNCTION public.gtrgm_penalty(internal, internal, internal);
-
-CREATE OR REPLACE FUNCTION public.gtrgm_penalty(internal, internal, internal)
- RETURNS internal
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$gtrgm_penalty$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.gtrgm_penalty(internal, internal, internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.gtrgm_penalty(internal, internal, internal) TO helpdesk;
-
--- DROP FUNCTION public.gtrgm_picksplit(internal, internal);
-
-CREATE OR REPLACE FUNCTION public.gtrgm_picksplit(internal, internal)
- RETURNS internal
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$gtrgm_picksplit$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.gtrgm_picksplit(internal, internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.gtrgm_picksplit(internal, internal) TO helpdesk;
-
--- DROP FUNCTION public.gtrgm_same(gtrgm, gtrgm, internal);
-
-CREATE OR REPLACE FUNCTION public.gtrgm_same(gtrgm, gtrgm, internal)
- RETURNS internal
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$gtrgm_same$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.gtrgm_same(gtrgm, gtrgm, internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.gtrgm_same(gtrgm, gtrgm, internal) TO helpdesk;
-
--- DROP FUNCTION public.gtrgm_union(internal, internal);
-
-CREATE OR REPLACE FUNCTION public.gtrgm_union(internal, internal)
- RETURNS gtrgm
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$gtrgm_union$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.gtrgm_union(internal, internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.gtrgm_union(internal, internal) TO helpdesk;
-
--- DROP FUNCTION public.halfvec(halfvec, int4, bool);
-
-CREATE OR REPLACE FUNCTION public.halfvec(halfvec, integer, boolean)
- RETURNS halfvec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec(halfvec, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec(halfvec, int4, bool) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_accum(_float8, halfvec);
-
-CREATE OR REPLACE FUNCTION public.halfvec_accum(double precision[], halfvec)
- RETURNS double precision[]
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_accum$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_accum(_float8, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_accum(_float8, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_add(halfvec, halfvec);
-
-CREATE OR REPLACE FUNCTION public.halfvec_add(halfvec, halfvec)
- RETURNS halfvec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_add$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_add(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_add(halfvec, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_avg(_float8);
-
-CREATE OR REPLACE FUNCTION public.halfvec_avg(double precision[])
- RETURNS halfvec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_avg$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_avg(_float8) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_avg(_float8) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_cmp(halfvec, halfvec);
-
-CREATE OR REPLACE FUNCTION public.halfvec_cmp(halfvec, halfvec)
- RETURNS integer
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_cmp$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_cmp(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_cmp(halfvec, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_combine(_float8, _float8);
-
-CREATE OR REPLACE FUNCTION public.halfvec_combine(double precision[], double precision[])
- RETURNS double precision[]
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_combine$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_combine(_float8, _float8) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_combine(_float8, _float8) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_concat(halfvec, halfvec);
-
-CREATE OR REPLACE FUNCTION public.halfvec_concat(halfvec, halfvec)
- RETURNS halfvec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_concat$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_concat(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_concat(halfvec, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_eq(halfvec, halfvec);
-
-CREATE OR REPLACE FUNCTION public.halfvec_eq(halfvec, halfvec)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_eq$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_eq(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_eq(halfvec, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_ge(halfvec, halfvec);
-
-CREATE OR REPLACE FUNCTION public.halfvec_ge(halfvec, halfvec)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_ge$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_ge(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_ge(halfvec, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_gt(halfvec, halfvec);
-
-CREATE OR REPLACE FUNCTION public.halfvec_gt(halfvec, halfvec)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_gt$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_gt(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_gt(halfvec, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_in(cstring, oid, int4);
-
-CREATE OR REPLACE FUNCTION public.halfvec_in(cstring, oid, integer)
- RETURNS halfvec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_in$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_in(cstring, oid, int4) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_in(cstring, oid, int4) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_l2_squared_distance(halfvec, halfvec);
-
-CREATE OR REPLACE FUNCTION public.halfvec_l2_squared_distance(halfvec, halfvec)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_l2_squared_distance$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_l2_squared_distance(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_l2_squared_distance(halfvec, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_le(halfvec, halfvec);
-
-CREATE OR REPLACE FUNCTION public.halfvec_le(halfvec, halfvec)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_le$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_le(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_le(halfvec, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_lt(halfvec, halfvec);
-
-CREATE OR REPLACE FUNCTION public.halfvec_lt(halfvec, halfvec)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_lt$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_lt(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_lt(halfvec, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_mul(halfvec, halfvec);
-
-CREATE OR REPLACE FUNCTION public.halfvec_mul(halfvec, halfvec)
- RETURNS halfvec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_mul$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_mul(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_mul(halfvec, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_ne(halfvec, halfvec);
-
-CREATE OR REPLACE FUNCTION public.halfvec_ne(halfvec, halfvec)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_ne$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_ne(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_ne(halfvec, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_negative_inner_product(halfvec, halfvec);
-
-CREATE OR REPLACE FUNCTION public.halfvec_negative_inner_product(halfvec, halfvec)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_negative_inner_product$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_negative_inner_product(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_negative_inner_product(halfvec, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_out(halfvec);
-
-CREATE OR REPLACE FUNCTION public.halfvec_out(halfvec)
- RETURNS cstring
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_out$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_out(halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_out(halfvec) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_recv(internal, oid, int4);
-
-CREATE OR REPLACE FUNCTION public.halfvec_recv(internal, oid, integer)
- RETURNS halfvec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_recv$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_recv(internal, oid, int4) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_recv(internal, oid, int4) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_send(halfvec);
-
-CREATE OR REPLACE FUNCTION public.halfvec_send(halfvec)
- RETURNS bytea
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_send$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_send(halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_send(halfvec) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_spherical_distance(halfvec, halfvec);
-
-CREATE OR REPLACE FUNCTION public.halfvec_spherical_distance(halfvec, halfvec)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_spherical_distance$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_spherical_distance(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_spherical_distance(halfvec, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_sub(halfvec, halfvec);
-
-CREATE OR REPLACE FUNCTION public.halfvec_sub(halfvec, halfvec)
- RETURNS halfvec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_sub$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_sub(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_sub(halfvec, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_to_float4(halfvec, int4, bool);
-
-CREATE OR REPLACE FUNCTION public.halfvec_to_float4(halfvec, integer, boolean)
- RETURNS real[]
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_to_float4$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_to_float4(halfvec, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_to_float4(halfvec, int4, bool) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_to_sparsevec(halfvec, int4, bool);
-
-CREATE OR REPLACE FUNCTION public.halfvec_to_sparsevec(halfvec, integer, boolean)
- RETURNS sparsevec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_to_sparsevec$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_to_sparsevec(halfvec, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_to_sparsevec(halfvec, int4, bool) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_to_vector(halfvec, int4, bool);
-
-CREATE OR REPLACE FUNCTION public.halfvec_to_vector(halfvec, integer, boolean)
- RETURNS vector
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_to_vector$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_to_vector(halfvec, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_to_vector(halfvec, int4, bool) TO helpdesk;
-
--- DROP FUNCTION public.halfvec_typmod_in(_cstring);
-
-CREATE OR REPLACE FUNCTION public.halfvec_typmod_in(cstring[])
- RETURNS integer
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_typmod_in$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.halfvec_typmod_in(_cstring) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.halfvec_typmod_in(_cstring) TO helpdesk;
-
--- DROP FUNCTION public.hamming_distance(bit, bit);
-
-CREATE OR REPLACE FUNCTION public.hamming_distance(bit, bit)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$hamming_distance$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.hamming_distance(bit, bit) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.hamming_distance(bit, bit) TO helpdesk;
-
--- DROP FUNCTION public.hnsw_bit_support(internal);
-
-CREATE OR REPLACE FUNCTION public.hnsw_bit_support(internal)
- RETURNS internal
- LANGUAGE c
-AS '$libdir/vector', $function$hnsw_bit_support$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.hnsw_bit_support(internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.hnsw_bit_support(internal) TO helpdesk;
-
--- DROP FUNCTION public.hnsw_halfvec_support(internal);
-
-CREATE OR REPLACE FUNCTION public.hnsw_halfvec_support(internal)
- RETURNS internal
- LANGUAGE c
-AS '$libdir/vector', $function$hnsw_halfvec_support$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.hnsw_halfvec_support(internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.hnsw_halfvec_support(internal) TO helpdesk;
-
--- DROP FUNCTION public.hnsw_sparsevec_support(internal);
-
-CREATE OR REPLACE FUNCTION public.hnsw_sparsevec_support(internal)
- RETURNS internal
- LANGUAGE c
-AS '$libdir/vector', $function$hnsw_sparsevec_support$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.hnsw_sparsevec_support(internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.hnsw_sparsevec_support(internal) TO helpdesk;
-
--- DROP FUNCTION public.hnswhandler(internal);
-
-CREATE OR REPLACE FUNCTION public.hnswhandler(internal)
- RETURNS index_am_handler
- LANGUAGE c
-AS '$libdir/vector', $function$hnswhandler$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.hnswhandler(internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.hnswhandler(internal) TO helpdesk;
-
--- DROP FUNCTION public.inner_product(vector, vector);
-
-CREATE OR REPLACE FUNCTION public.inner_product(vector, vector)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$inner_product$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.inner_product(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.inner_product(vector, vector) TO helpdesk;
-
--- DROP FUNCTION public.inner_product(sparsevec, sparsevec);
-
-CREATE OR REPLACE FUNCTION public.inner_product(sparsevec, sparsevec)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_inner_product$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.inner_product(sparsevec, sparsevec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.inner_product(sparsevec, sparsevec) TO helpdesk;
-
--- DROP FUNCTION public.inner_product(halfvec, halfvec);
-
-CREATE OR REPLACE FUNCTION public.inner_product(halfvec, halfvec)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_inner_product$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.inner_product(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.inner_product(halfvec, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.ivfflat_bit_support(internal);
-
-CREATE OR REPLACE FUNCTION public.ivfflat_bit_support(internal)
- RETURNS internal
- LANGUAGE c
-AS '$libdir/vector', $function$ivfflat_bit_support$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.ivfflat_bit_support(internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.ivfflat_bit_support(internal) TO helpdesk;
-
--- DROP FUNCTION public.ivfflat_halfvec_support(internal);
-
-CREATE OR REPLACE FUNCTION public.ivfflat_halfvec_support(internal)
- RETURNS internal
- LANGUAGE c
-AS '$libdir/vector', $function$ivfflat_halfvec_support$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.ivfflat_halfvec_support(internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.ivfflat_halfvec_support(internal) TO helpdesk;
-
--- DROP FUNCTION public.ivfflathandler(internal);
-
-CREATE OR REPLACE FUNCTION public.ivfflathandler(internal)
- RETURNS index_am_handler
- LANGUAGE c
-AS '$libdir/vector', $function$ivfflathandler$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.ivfflathandler(internal) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.ivfflathandler(internal) TO helpdesk;
-
--- DROP FUNCTION public.jaccard_distance(bit, bit);
-
-CREATE OR REPLACE FUNCTION public.jaccard_distance(bit, bit)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$jaccard_distance$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.jaccard_distance(bit, bit) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.jaccard_distance(bit, bit) TO helpdesk;
-
--- DROP FUNCTION public.l1_distance(vector, vector);
-
-CREATE OR REPLACE FUNCTION public.l1_distance(vector, vector)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$l1_distance$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.l1_distance(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.l1_distance(vector, vector) TO helpdesk;
-
--- DROP FUNCTION public.l1_distance(sparsevec, sparsevec);
-
-CREATE OR REPLACE FUNCTION public.l1_distance(sparsevec, sparsevec)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_l1_distance$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.l1_distance(sparsevec, sparsevec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.l1_distance(sparsevec, sparsevec) TO helpdesk;
-
--- DROP FUNCTION public.l1_distance(halfvec, halfvec);
-
-CREATE OR REPLACE FUNCTION public.l1_distance(halfvec, halfvec)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_l1_distance$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.l1_distance(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.l1_distance(halfvec, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.l2_distance(sparsevec, sparsevec);
-
-CREATE OR REPLACE FUNCTION public.l2_distance(sparsevec, sparsevec)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_l2_distance$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.l2_distance(sparsevec, sparsevec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.l2_distance(sparsevec, sparsevec) TO helpdesk;
-
--- DROP FUNCTION public.l2_distance(vector, vector);
-
-CREATE OR REPLACE FUNCTION public.l2_distance(vector, vector)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$l2_distance$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.l2_distance(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.l2_distance(vector, vector) TO helpdesk;
-
--- DROP FUNCTION public.l2_distance(halfvec, halfvec);
-
-CREATE OR REPLACE FUNCTION public.l2_distance(halfvec, halfvec)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_l2_distance$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.l2_distance(halfvec, halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.l2_distance(halfvec, halfvec) TO helpdesk;
-
--- DROP FUNCTION public.l2_norm(sparsevec);
-
-CREATE OR REPLACE FUNCTION public.l2_norm(sparsevec)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_l2_norm$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.l2_norm(sparsevec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.l2_norm(sparsevec) TO helpdesk;
-
--- DROP FUNCTION public.l2_norm(halfvec);
-
-CREATE OR REPLACE FUNCTION public.l2_norm(halfvec)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_l2_norm$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.l2_norm(halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.l2_norm(halfvec) TO helpdesk;
-
--- DROP FUNCTION public.l2_normalize(sparsevec);
-
-CREATE OR REPLACE FUNCTION public.l2_normalize(sparsevec)
- RETURNS sparsevec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_l2_normalize$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.l2_normalize(sparsevec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.l2_normalize(sparsevec) TO helpdesk;
-
--- DROP FUNCTION public.l2_normalize(halfvec);
-
-CREATE OR REPLACE FUNCTION public.l2_normalize(halfvec)
- RETURNS halfvec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_l2_normalize$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.l2_normalize(halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.l2_normalize(halfvec) TO helpdesk;
-
--- DROP FUNCTION public.l2_normalize(vector);
-
-CREATE OR REPLACE FUNCTION public.l2_normalize(vector)
- RETURNS vector
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$l2_normalize$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.l2_normalize(vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.l2_normalize(vector) TO helpdesk;
-
--- DROP FUNCTION public.set_limit(float4);
-
-CREATE OR REPLACE FUNCTION public.set_limit(real)
- RETURNS real
- LANGUAGE c
- STRICT
-AS '$libdir/pg_trgm', $function$set_limit$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.set_limit(float4) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.set_limit(float4) TO helpdesk;
-
--- DROP FUNCTION public.show_limit();
-
-CREATE OR REPLACE FUNCTION public.show_limit()
- RETURNS real
- LANGUAGE c
- STABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$show_limit$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.show_limit() OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.show_limit() TO helpdesk;
-
--- DROP FUNCTION public.show_trgm(text);
-
-CREATE OR REPLACE FUNCTION public.show_trgm(text)
- RETURNS text[]
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$show_trgm$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.show_trgm(text) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.show_trgm(text) TO helpdesk;
-
--- DROP FUNCTION public.similarity(text, text);
-
-CREATE OR REPLACE FUNCTION public.similarity(text, text)
- RETURNS real
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$similarity$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.similarity(text, text) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.similarity(text, text) TO helpdesk;
-
--- DROP FUNCTION public.similarity_dist(text, text);
-
-CREATE OR REPLACE FUNCTION public.similarity_dist(text, text)
- RETURNS real
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$similarity_dist$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.similarity_dist(text, text) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.similarity_dist(text, text) TO helpdesk;
-
--- DROP FUNCTION public.similarity_op(text, text);
-
-CREATE OR REPLACE FUNCTION public.similarity_op(text, text)
- RETURNS boolean
- LANGUAGE c
- STABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$similarity_op$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.similarity_op(text, text) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.similarity_op(text, text) TO helpdesk;
-
--- DROP FUNCTION public.sparsevec(sparsevec, int4, bool);
-
-CREATE OR REPLACE FUNCTION public.sparsevec(sparsevec, integer, boolean)
- RETURNS sparsevec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.sparsevec(sparsevec, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.sparsevec(sparsevec, int4, bool) TO helpdesk;
-
--- DROP FUNCTION public.sparsevec_cmp(sparsevec, sparsevec);
-
-CREATE OR REPLACE FUNCTION public.sparsevec_cmp(sparsevec, sparsevec)
- RETURNS integer
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_cmp$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.sparsevec_cmp(sparsevec, sparsevec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.sparsevec_cmp(sparsevec, sparsevec) TO helpdesk;
-
--- DROP FUNCTION public.sparsevec_eq(sparsevec, sparsevec);
-
-CREATE OR REPLACE FUNCTION public.sparsevec_eq(sparsevec, sparsevec)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_eq$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.sparsevec_eq(sparsevec, sparsevec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.sparsevec_eq(sparsevec, sparsevec) TO helpdesk;
-
--- DROP FUNCTION public.sparsevec_ge(sparsevec, sparsevec);
-
-CREATE OR REPLACE FUNCTION public.sparsevec_ge(sparsevec, sparsevec)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_ge$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.sparsevec_ge(sparsevec, sparsevec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.sparsevec_ge(sparsevec, sparsevec) TO helpdesk;
-
--- DROP FUNCTION public.sparsevec_gt(sparsevec, sparsevec);
-
-CREATE OR REPLACE FUNCTION public.sparsevec_gt(sparsevec, sparsevec)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_gt$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.sparsevec_gt(sparsevec, sparsevec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.sparsevec_gt(sparsevec, sparsevec) TO helpdesk;
-
--- DROP FUNCTION public.sparsevec_in(cstring, oid, int4);
-
-CREATE OR REPLACE FUNCTION public.sparsevec_in(cstring, oid, integer)
- RETURNS sparsevec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_in$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.sparsevec_in(cstring, oid, int4) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.sparsevec_in(cstring, oid, int4) TO helpdesk;
-
--- DROP FUNCTION public.sparsevec_l2_squared_distance(sparsevec, sparsevec);
-
-CREATE OR REPLACE FUNCTION public.sparsevec_l2_squared_distance(sparsevec, sparsevec)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_l2_squared_distance$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.sparsevec_l2_squared_distance(sparsevec, sparsevec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.sparsevec_l2_squared_distance(sparsevec, sparsevec) TO helpdesk;
-
--- DROP FUNCTION public.sparsevec_le(sparsevec, sparsevec);
-
-CREATE OR REPLACE FUNCTION public.sparsevec_le(sparsevec, sparsevec)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_le$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.sparsevec_le(sparsevec, sparsevec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.sparsevec_le(sparsevec, sparsevec) TO helpdesk;
-
--- DROP FUNCTION public.sparsevec_lt(sparsevec, sparsevec);
-
-CREATE OR REPLACE FUNCTION public.sparsevec_lt(sparsevec, sparsevec)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_lt$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.sparsevec_lt(sparsevec, sparsevec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.sparsevec_lt(sparsevec, sparsevec) TO helpdesk;
-
--- DROP FUNCTION public.sparsevec_ne(sparsevec, sparsevec);
-
-CREATE OR REPLACE FUNCTION public.sparsevec_ne(sparsevec, sparsevec)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_ne$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.sparsevec_ne(sparsevec, sparsevec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.sparsevec_ne(sparsevec, sparsevec) TO helpdesk;
-
--- DROP FUNCTION public.sparsevec_negative_inner_product(sparsevec, sparsevec);
-
-CREATE OR REPLACE FUNCTION public.sparsevec_negative_inner_product(sparsevec, sparsevec)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_negative_inner_product$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.sparsevec_negative_inner_product(sparsevec, sparsevec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.sparsevec_negative_inner_product(sparsevec, sparsevec) TO helpdesk;
-
--- DROP FUNCTION public.sparsevec_out(sparsevec);
-
-CREATE OR REPLACE FUNCTION public.sparsevec_out(sparsevec)
- RETURNS cstring
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_out$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.sparsevec_out(sparsevec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.sparsevec_out(sparsevec) TO helpdesk;
-
--- DROP FUNCTION public.sparsevec_recv(internal, oid, int4);
-
-CREATE OR REPLACE FUNCTION public.sparsevec_recv(internal, oid, integer)
- RETURNS sparsevec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_recv$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.sparsevec_recv(internal, oid, int4) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.sparsevec_recv(internal, oid, int4) TO helpdesk;
-
--- DROP FUNCTION public.sparsevec_send(sparsevec);
-
-CREATE OR REPLACE FUNCTION public.sparsevec_send(sparsevec)
- RETURNS bytea
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_send$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.sparsevec_send(sparsevec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.sparsevec_send(sparsevec) TO helpdesk;
-
--- DROP FUNCTION public.sparsevec_to_halfvec(sparsevec, int4, bool);
-
-CREATE OR REPLACE FUNCTION public.sparsevec_to_halfvec(sparsevec, integer, boolean)
- RETURNS halfvec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_to_halfvec$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.sparsevec_to_halfvec(sparsevec, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.sparsevec_to_halfvec(sparsevec, int4, bool) TO helpdesk;
-
--- DROP FUNCTION public.sparsevec_to_vector(sparsevec, int4, bool);
-
-CREATE OR REPLACE FUNCTION public.sparsevec_to_vector(sparsevec, integer, boolean)
- RETURNS vector
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_to_vector$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.sparsevec_to_vector(sparsevec, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.sparsevec_to_vector(sparsevec, int4, bool) TO helpdesk;
-
--- DROP FUNCTION public.sparsevec_typmod_in(_cstring);
-
-CREATE OR REPLACE FUNCTION public.sparsevec_typmod_in(cstring[])
- RETURNS integer
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$sparsevec_typmod_in$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.sparsevec_typmod_in(_cstring) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.sparsevec_typmod_in(_cstring) TO helpdesk;
-
--- DROP FUNCTION public.strict_word_similarity(text, text);
-
-CREATE OR REPLACE FUNCTION public.strict_word_similarity(text, text)
- RETURNS real
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$strict_word_similarity$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.strict_word_similarity(text, text) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.strict_word_similarity(text, text) TO helpdesk;
-
--- DROP FUNCTION public.strict_word_similarity_commutator_op(text, text);
-
-CREATE OR REPLACE FUNCTION public.strict_word_similarity_commutator_op(text, text)
- RETURNS boolean
- LANGUAGE c
- STABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$strict_word_similarity_commutator_op$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.strict_word_similarity_commutator_op(text, text) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.strict_word_similarity_commutator_op(text, text) TO helpdesk;
-
--- DROP FUNCTION public.strict_word_similarity_dist_commutator_op(text, text);
-
-CREATE OR REPLACE FUNCTION public.strict_word_similarity_dist_commutator_op(text, text)
- RETURNS real
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$strict_word_similarity_dist_commutator_op$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.strict_word_similarity_dist_commutator_op(text, text) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.strict_word_similarity_dist_commutator_op(text, text) TO helpdesk;
-
--- DROP FUNCTION public.strict_word_similarity_dist_op(text, text);
-
-CREATE OR REPLACE FUNCTION public.strict_word_similarity_dist_op(text, text)
- RETURNS real
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$strict_word_similarity_dist_op$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.strict_word_similarity_dist_op(text, text) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.strict_word_similarity_dist_op(text, text) TO helpdesk;
-
--- DROP FUNCTION public.strict_word_similarity_op(text, text);
-
-CREATE OR REPLACE FUNCTION public.strict_word_similarity_op(text, text)
- RETURNS boolean
- LANGUAGE c
- STABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$strict_word_similarity_op$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.strict_word_similarity_op(text, text) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.strict_word_similarity_op(text, text) TO helpdesk;
-
--- DROP FUNCTION public.subvector(halfvec, int4, int4);
-
-CREATE OR REPLACE FUNCTION public.subvector(halfvec, integer, integer)
- RETURNS halfvec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_subvector$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.subvector(halfvec, int4, int4) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.subvector(halfvec, int4, int4) TO helpdesk;
-
--- DROP FUNCTION public.subvector(vector, int4, int4);
-
-CREATE OR REPLACE FUNCTION public.subvector(vector, integer, integer)
- RETURNS vector
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$subvector$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.subvector(vector, int4, int4) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.subvector(vector, int4, int4) TO helpdesk;
-
--- DROP AGGREGATE public.sum(vector);
-
--- Aggregate function public.sum(vector)
--- ERROR: more than one function named "public.sum";
-
--- Permissions
-
-ALTER AGGREGATE public.sum(vector) OWNER TO helpdesk;
-GRANT ALL ON AGGREGATE public.sum(vector) TO helpdesk;
-
--- DROP AGGREGATE public.sum(halfvec);
-
--- Aggregate function public.sum(halfvec)
--- ERROR: more than one function named "public.sum";
-
--- Permissions
-
-ALTER AGGREGATE public.sum(halfvec) OWNER TO helpdesk;
-GRANT ALL ON AGGREGATE public.sum(halfvec) TO helpdesk;
-
--- DROP FUNCTION public.uuid_generate_v1();
-
-CREATE OR REPLACE FUNCTION public.uuid_generate_v1()
- RETURNS uuid
- LANGUAGE c
- PARALLEL SAFE STRICT
-AS '$libdir/uuid-ossp', $function$uuid_generate_v1$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.uuid_generate_v1() OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.uuid_generate_v1() TO helpdesk;
-
--- DROP FUNCTION public.uuid_generate_v1mc();
-
-CREATE OR REPLACE FUNCTION public.uuid_generate_v1mc()
- RETURNS uuid
- LANGUAGE c
- PARALLEL SAFE STRICT
-AS '$libdir/uuid-ossp', $function$uuid_generate_v1mc$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.uuid_generate_v1mc() OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.uuid_generate_v1mc() TO helpdesk;
-
--- DROP FUNCTION public.uuid_generate_v3(uuid, text);
-
-CREATE OR REPLACE FUNCTION public.uuid_generate_v3(namespace uuid, name text)
- RETURNS uuid
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/uuid-ossp', $function$uuid_generate_v3$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.uuid_generate_v3(uuid, text) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.uuid_generate_v3(uuid, text) TO helpdesk;
-
--- DROP FUNCTION public.uuid_generate_v4();
-
-CREATE OR REPLACE FUNCTION public.uuid_generate_v4()
- RETURNS uuid
- LANGUAGE c
- PARALLEL SAFE STRICT
-AS '$libdir/uuid-ossp', $function$uuid_generate_v4$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.uuid_generate_v4() OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.uuid_generate_v4() TO helpdesk;
-
--- DROP FUNCTION public.uuid_generate_v5(uuid, text);
-
-CREATE OR REPLACE FUNCTION public.uuid_generate_v5(namespace uuid, name text)
- RETURNS uuid
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/uuid-ossp', $function$uuid_generate_v5$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.uuid_generate_v5(uuid, text) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.uuid_generate_v5(uuid, text) TO helpdesk;
-
--- DROP FUNCTION public.uuid_nil();
-
-CREATE OR REPLACE FUNCTION public.uuid_nil()
- RETURNS uuid
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/uuid-ossp', $function$uuid_nil$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.uuid_nil() OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.uuid_nil() TO helpdesk;
-
--- DROP FUNCTION public.uuid_ns_dns();
-
-CREATE OR REPLACE FUNCTION public.uuid_ns_dns()
- RETURNS uuid
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/uuid-ossp', $function$uuid_ns_dns$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.uuid_ns_dns() OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.uuid_ns_dns() TO helpdesk;
-
--- DROP FUNCTION public.uuid_ns_oid();
-
-CREATE OR REPLACE FUNCTION public.uuid_ns_oid()
- RETURNS uuid
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/uuid-ossp', $function$uuid_ns_oid$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.uuid_ns_oid() OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.uuid_ns_oid() TO helpdesk;
-
--- DROP FUNCTION public.uuid_ns_url();
-
-CREATE OR REPLACE FUNCTION public.uuid_ns_url()
- RETURNS uuid
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/uuid-ossp', $function$uuid_ns_url$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.uuid_ns_url() OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.uuid_ns_url() TO helpdesk;
-
--- DROP FUNCTION public.uuid_ns_x500();
-
-CREATE OR REPLACE FUNCTION public.uuid_ns_x500()
- RETURNS uuid
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/uuid-ossp', $function$uuid_ns_x500$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.uuid_ns_x500() OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.uuid_ns_x500() TO helpdesk;
-
--- DROP FUNCTION public.vector(vector, int4, bool);
-
-CREATE OR REPLACE FUNCTION public.vector(vector, integer, boolean)
- RETURNS vector
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector(vector, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector(vector, int4, bool) TO helpdesk;
-
--- DROP FUNCTION public.vector_accum(_float8, vector);
-
-CREATE OR REPLACE FUNCTION public.vector_accum(double precision[], vector)
- RETURNS double precision[]
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_accum$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_accum(_float8, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_accum(_float8, vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_add(vector, vector);
-
-CREATE OR REPLACE FUNCTION public.vector_add(vector, vector)
- RETURNS vector
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_add$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_add(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_add(vector, vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_avg(_float8);
-
-CREATE OR REPLACE FUNCTION public.vector_avg(double precision[])
- RETURNS vector
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_avg$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_avg(_float8) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_avg(_float8) TO helpdesk;
-
--- DROP FUNCTION public.vector_cmp(vector, vector);
-
-CREATE OR REPLACE FUNCTION public.vector_cmp(vector, vector)
- RETURNS integer
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_cmp$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_cmp(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_cmp(vector, vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_combine(_float8, _float8);
-
-CREATE OR REPLACE FUNCTION public.vector_combine(double precision[], double precision[])
- RETURNS double precision[]
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_combine$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_combine(_float8, _float8) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_combine(_float8, _float8) TO helpdesk;
-
--- DROP FUNCTION public.vector_concat(vector, vector);
-
-CREATE OR REPLACE FUNCTION public.vector_concat(vector, vector)
- RETURNS vector
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_concat$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_concat(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_concat(vector, vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_dims(halfvec);
-
-CREATE OR REPLACE FUNCTION public.vector_dims(halfvec)
- RETURNS integer
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$halfvec_vector_dims$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_dims(halfvec) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_dims(halfvec) TO helpdesk;
-
--- DROP FUNCTION public.vector_dims(vector);
-
-CREATE OR REPLACE FUNCTION public.vector_dims(vector)
- RETURNS integer
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_dims$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_dims(vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_dims(vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_eq(vector, vector);
-
-CREATE OR REPLACE FUNCTION public.vector_eq(vector, vector)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_eq$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_eq(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_eq(vector, vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_ge(vector, vector);
-
-CREATE OR REPLACE FUNCTION public.vector_ge(vector, vector)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_ge$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_ge(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_ge(vector, vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_gt(vector, vector);
-
-CREATE OR REPLACE FUNCTION public.vector_gt(vector, vector)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_gt$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_gt(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_gt(vector, vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_in(cstring, oid, int4);
-
-CREATE OR REPLACE FUNCTION public.vector_in(cstring, oid, integer)
- RETURNS vector
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_in$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_in(cstring, oid, int4) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_in(cstring, oid, int4) TO helpdesk;
-
--- DROP FUNCTION public.vector_l2_squared_distance(vector, vector);
-
-CREATE OR REPLACE FUNCTION public.vector_l2_squared_distance(vector, vector)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_l2_squared_distance$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_l2_squared_distance(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_l2_squared_distance(vector, vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_le(vector, vector);
-
-CREATE OR REPLACE FUNCTION public.vector_le(vector, vector)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_le$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_le(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_le(vector, vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_lt(vector, vector);
-
-CREATE OR REPLACE FUNCTION public.vector_lt(vector, vector)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_lt$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_lt(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_lt(vector, vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_mul(vector, vector);
-
-CREATE OR REPLACE FUNCTION public.vector_mul(vector, vector)
- RETURNS vector
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_mul$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_mul(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_mul(vector, vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_ne(vector, vector);
-
-CREATE OR REPLACE FUNCTION public.vector_ne(vector, vector)
- RETURNS boolean
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_ne$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_ne(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_ne(vector, vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_negative_inner_product(vector, vector);
-
-CREATE OR REPLACE FUNCTION public.vector_negative_inner_product(vector, vector)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_negative_inner_product$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_negative_inner_product(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_negative_inner_product(vector, vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_norm(vector);
-
-CREATE OR REPLACE FUNCTION public.vector_norm(vector)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_norm$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_norm(vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_norm(vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_out(vector);
-
-CREATE OR REPLACE FUNCTION public.vector_out(vector)
- RETURNS cstring
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_out$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_out(vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_out(vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_recv(internal, oid, int4);
-
-CREATE OR REPLACE FUNCTION public.vector_recv(internal, oid, integer)
- RETURNS vector
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_recv$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_recv(internal, oid, int4) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_recv(internal, oid, int4) TO helpdesk;
-
--- DROP FUNCTION public.vector_send(vector);
-
-CREATE OR REPLACE FUNCTION public.vector_send(vector)
- RETURNS bytea
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_send$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_send(vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_send(vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_spherical_distance(vector, vector);
-
-CREATE OR REPLACE FUNCTION public.vector_spherical_distance(vector, vector)
- RETURNS double precision
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_spherical_distance$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_spherical_distance(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_spherical_distance(vector, vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_sub(vector, vector);
-
-CREATE OR REPLACE FUNCTION public.vector_sub(vector, vector)
- RETURNS vector
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_sub$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_sub(vector, vector) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_sub(vector, vector) TO helpdesk;
-
--- DROP FUNCTION public.vector_to_float4(vector, int4, bool);
-
-CREATE OR REPLACE FUNCTION public.vector_to_float4(vector, integer, boolean)
- RETURNS real[]
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_to_float4$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_to_float4(vector, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_to_float4(vector, int4, bool) TO helpdesk;
-
--- DROP FUNCTION public.vector_to_halfvec(vector, int4, bool);
-
-CREATE OR REPLACE FUNCTION public.vector_to_halfvec(vector, integer, boolean)
- RETURNS halfvec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_to_halfvec$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_to_halfvec(vector, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_to_halfvec(vector, int4, bool) TO helpdesk;
-
--- DROP FUNCTION public.vector_to_sparsevec(vector, int4, bool);
-
-CREATE OR REPLACE FUNCTION public.vector_to_sparsevec(vector, integer, boolean)
- RETURNS sparsevec
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_to_sparsevec$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_to_sparsevec(vector, int4, bool) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_to_sparsevec(vector, int4, bool) TO helpdesk;
-
--- DROP FUNCTION public.vector_typmod_in(_cstring);
-
-CREATE OR REPLACE FUNCTION public.vector_typmod_in(cstring[])
- RETURNS integer
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/vector', $function$vector_typmod_in$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.vector_typmod_in(_cstring) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.vector_typmod_in(_cstring) TO helpdesk;
-
--- DROP FUNCTION public.word_similarity(text, text);
-
-CREATE OR REPLACE FUNCTION public.word_similarity(text, text)
- RETURNS real
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$word_similarity$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.word_similarity(text, text) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.word_similarity(text, text) TO helpdesk;
-
--- DROP FUNCTION public.word_similarity_commutator_op(text, text);
-
-CREATE OR REPLACE FUNCTION public.word_similarity_commutator_op(text, text)
- RETURNS boolean
- LANGUAGE c
- STABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$word_similarity_commutator_op$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.word_similarity_commutator_op(text, text) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.word_similarity_commutator_op(text, text) TO helpdesk;
-
--- DROP FUNCTION public.word_similarity_dist_commutator_op(text, text);
-
-CREATE OR REPLACE FUNCTION public.word_similarity_dist_commutator_op(text, text)
- RETURNS real
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$word_similarity_dist_commutator_op$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.word_similarity_dist_commutator_op(text, text) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.word_similarity_dist_commutator_op(text, text) TO helpdesk;
-
--- DROP FUNCTION public.word_similarity_dist_op(text, text);
-
-CREATE OR REPLACE FUNCTION public.word_similarity_dist_op(text, text)
- RETURNS real
- LANGUAGE c
- IMMUTABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$word_similarity_dist_op$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.word_similarity_dist_op(text, text) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.word_similarity_dist_op(text, text) TO helpdesk;
-
--- DROP FUNCTION public.word_similarity_op(text, text);
-
-CREATE OR REPLACE FUNCTION public.word_similarity_op(text, text)
- RETURNS boolean
- LANGUAGE c
- STABLE PARALLEL SAFE STRICT
-AS '$libdir/pg_trgm', $function$word_similarity_op$function$
-;
-
--- Permissions
-
-ALTER FUNCTION public.word_similarity_op(text, text) OWNER TO helpdesk;
-GRANT ALL ON FUNCTION public.word_similarity_op(text, text) TO helpdesk;
-
-
--- Permissions
-
-GRANT ALL ON SCHEMA public TO pg_database_owner;
-GRANT USAGE ON SCHEMA public TO public;
