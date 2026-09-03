@@ -40,7 +40,11 @@ async def triage(
     bulunabilir hale gelir."""
     from app.rag import store  # geç import: DB tabloları hazır olmadan yüklenmesin
 
-    c = await classifier.classify(ticket_text)
+    text_for_classification = ticket_text
+    if extra_context:
+        text_for_classification += f"\n\n[Görsel/Dosya İçeriği]:\n{extra_context}"
+
+    c = await classifier.classify(text_for_classification)
     logger.info(
         "Sınıflandırma: %s (güven %.2f)",
         c["modul"], c["guven"],
