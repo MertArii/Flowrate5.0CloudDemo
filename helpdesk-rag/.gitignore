@@ -10,3 +10,11 @@ data/docs/*
 .env.prod
 backups/
 
+
+# Yerel yedekler ve gecici dosyalar
+*.save
+*.local_yedek
+cloudflared.deb
+data/import_sla.log
+data/uploads/
+pg-expose.override.yml

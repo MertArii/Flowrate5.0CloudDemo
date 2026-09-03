@@ -216,6 +216,60 @@ def get_categories() -> dict[str, dict]:
     return {r[0]: {"aciklama": r[1], "ekip": r[2], "ekip_gorunum_adi": r[3] or r[2]}
             for r in rows}
 
+# ---- Etiketleme (ust_kategori/kategori_grubu/alt_kategori + sap_modules) ---
+# Kişi/ekip atamasıyla ilgisi yok, sadece ticket'ı ne tür bir konu olduğuna
+# göre etiketler. classify.py bu fonksiyonları çağırıp İSİM bazlı bir ağaç
+# alır (id değil); id çözümlemesi ticket gerçekten oluşturulurken
+# (service.py) get_alt_kategori_id/get_sap_module_id ile ayrıca yapılır.
+
+def get_category_hierarchy() -> list[tuple[str, str, str]]:
+    """Prompt ve doğrulama için ust_kategori, kategori_grubu ve alt_kategori hiyerarşisini çeker."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT u.name, g.name, a.name
+            FROM alt_kategoriler a
+            JOIN kategori_gruplari g ON g.id = a.grup_id
+            JOIN ust_kategoriler u ON u.id = g.ust_kategori_id
+            WHERE a.is_active = true AND g.is_active = true AND u.is_active = true
+            ORDER BY u.name, g.name, a.name
+            """
+        )
+        return cur.fetchall()
+
+
+def get_sap_modules() -> list[str]:
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute("SELECT code FROM sap_modules ORDER BY code")
+        return [r[0] for r in cur.fetchall()]
+
+
+def get_alt_kategori_id(alt_kategori_name: str, kategori_grubu_name: str) -> str | None:
+    if not alt_kategori_name or not kategori_grubu_name:
+        return None
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT a.id
+            FROM alt_kategoriler a
+            JOIN kategori_gruplari g ON g.id = a.grup_id
+            WHERE a.name = %s AND g.name = %s
+            LIMIT 1
+            """,
+            (alt_kategori_name, kategori_grubu_name)
+        )
+        row = cur.fetchone()
+        return str(row[0]) if row else None
+
+
+def get_sap_module_id(code: str) -> str | None:
+    if not code:
+        return None
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute("SELECT id FROM sap_modules WHERE code = %s LIMIT 1", (code,))
+        row = cur.fetchone()
+        return str(row[0]) if row else None
+
 
 # ---- Etiketleme (ust_kategori/kategori_grubu/alt_kategori + sap_modules) ---
 # Kişi/ekip atamasıyla ilgisi yok, sadece ticket'ı ne tür bir konu olduğuna
