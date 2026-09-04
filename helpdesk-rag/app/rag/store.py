@@ -213,7 +213,7 @@ def get_categories() -> dict[str, dict]:
             """
         )
         rows = cur.fetchall()
-    return {r[0]: {"aciklama": r[1], "ekip": r[2], "ekip_gorunum_adi": r[3] or r[2]}
+    return {r[0]: {"aciklama": r[1], "ekip": r[2], "ekip_gorunum_adi":  r[2]}
             for r in rows}
 
 # ---- Etiketleme (ust_kategori/kategori_grubu/alt_kategori + sap_modules) ---
