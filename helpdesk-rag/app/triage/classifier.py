@@ -111,7 +111,7 @@ def _build_system(
     '  "kategori_grubu": exactly ONE of the groups UNDER the chosen '
     "ust_kategori,\n"
     '  "alt_kategori": exactly ONE of the items UNDER the chosen '
-    "kategori_grubu,\n"
+    "kategori_grubu.WARNING: This field MUST NEVER be null. You MUST choose the closest matching item from the list,\n"
     '  "sap_modulu": ONLY if kategori_grubu = "SAP Problemleri", '
     "exactly ONE value from the SAP MODULES list below; null in ALL "
     "other cases,\n"
