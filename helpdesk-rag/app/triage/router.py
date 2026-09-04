@@ -117,11 +117,18 @@ def route(classification: dict, region: str | None = None) -> dict:
     # 2) Donanım'a özel bölge önceliği (Halkalı ve İstanbul normalizasyonu ile)
     bolge_eslesti = None
     if modul == BOLGE_ESLESMESI_UYGULANAN_MODUL and region:
-        region_norm = _normalize_region(region)
-        bolge_adaylari = [
-            a for a in pool
-            if a.get("region") and _normalize_region(a.get("region")) == region_norm
-        ]
+        # Gelen bölge metnini temizle, küçük harfe çevir ve i/I sorununu bypass et
+        region_norm = region.strip().lower().replace("i̇", "i")
+        bolge_adaylari = []
+        
+        for a in pool:
+            a_region = a.get("region")
+            if a_region:
+                # Veritabanından gelen bölge metnini de temizle
+                a_norm = a_region.strip().lower().replace("i̇", "i")
+                if a_norm == region_norm:
+                    bolge_adaylari.append(a)
+
         if bolge_adaylari:
             pool = bolge_adaylari
             bolge_eslesti = True
