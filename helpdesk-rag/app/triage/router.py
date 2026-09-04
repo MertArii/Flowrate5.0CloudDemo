@@ -1,12 +1,9 @@
 """Sınıflandırma sonucunu ekip/uzmana yönlendirir.
 
-Atama sırası (hepsi DB'den, elle tutulan liste yok):
-  1. ZORUNLU — kategori uyuşması: geçmişte bu kategoriyi gerçek çözmüş
-     uzmanlar arasından seçilir. Hiç geçmiş yoksa tüm ekibe düşülür.
-  2. Donanım'a özel (SAP'de asla) — bölge isteği varsa, aday havuzu içinde
-     aynı bölgedeki uzmana öncelik verilir.
-  3. Kalan adaylar arasında EN AZ İŞ YÜKÜ olan seçilir (açık ticket sayısı,
-     kapananlar sayılmaz).
+Atama sırası:
+  1. KESİN UZMANLIK ŞARTI: Uzmanın profilindeki "uzman_kategorileri" içinde modül açıkça bulunmalıdır veya geçmişte çözmüş olmalıdır. Eşleşme yoksa atama yapılmaz.
+  2. Donanım'a özel (SAP'de asla) — bölge isteği varsa, aday havuzu içinde aynı bölgedeki uzmana öncelik verilir (İstanbul/Halkalı normalizasyonu uygulanır).
+  3. Kalan adaylar arasında EN AZ İŞ YÜKÜ olan seçilir (açık ticket sayısı).
   4. Eşitlik varsa rastgele.
 """
 from __future__ import annotations
@@ -21,6 +18,17 @@ logger = get_logger(__name__)
 # Bölge eşleşmesi SADECE bu kategoride uygulanır (donanım = sahaya çıkan iş).
 # SAP kategorilerinde asla uygulanmaz — SAP desteği bölgeden bağımsızdır.
 BOLGE_ESLESMESI_UYGULANAN_MODUL = "IT-Donanim"
+
+
+def _normalize_region(region: str | None) -> str | None:
+    """Bölge ismindeki harf ve karakter farklarını giderir, Halkalı'yı İstanbul'a eşitler."""
+    if not region:
+        return None
+    r = region.strip().lower().replace("i̇", "i").replace("ı", "i")
+    if "halkal" in r or "istanbul" in r:
+        return "istanbul"
+    return r
+
 
 def _get_kategoriler() -> dict[str, dict]:
     from app.rag import store  # geç import: DB tabloları hazır olmadan yüklenmesin
@@ -80,34 +88,39 @@ def route(classification: dict, region: str | None = None) -> dict:
             "uzmanlik_eslesti": None,
         }
 
-    # 1) ZORUNLU: kategori uyuşması. Geçmişte bu kategoriyi çözmüş uzman
-    # yoksa tüm ekibe düş (boş bırakmamak için).
+    # 1) KESİN UZMANLIK ŞARTI
     uzman_havuzu = store.get_agents_in_group(ekip)
-    uzmanlik_eslesenler = store.get_agents_by_category(modul, ekip)
-    uzmanlik_eslesti = bool(uzmanlik_eslesenler)
-    pool = uzmanlik_eslesenler if uzmanlik_eslesti else uzman_havuzu
+    
+    # Kişinin özelliklerinde bu kategori tanımlı mı kontrol et (Öncelikli)
+    pool = [a for a in uzman_havuzu if modul in (a.get("uzman_kategorileri") or [])]
+    
+    # Eğer özel atama yoksa, veritabanından geçmiş kayıtlara göre kontrol et
+    if not pool:
+        pool = store.get_agents_by_category(modul, ekip)
+        
+    uzmanlik_eslesti = bool(pool)
 
+    # Eski koddaki "hiç uzman yoksa uzman_havuzu'na (tüm ekibe) düş" mantığı İPTAL edildi.
     if not pool:
         return {
             "ekip": ekip,
             "ekip_gorunum_adi": ekip_gorunum,
             "atanan_uzman": None,
-            "uzman_adaylari": [],
+            "uzman_adaylari": uzman_havuzu,
             "otomatik_atandi": False,
-            "sebep": f"{ekip} içinde uzman bulunamadı — insan triyajı gerekiyor.",
+            "sebep": f"{ekip} grubu içinde {modul} modülü için atanmış bir uzman bulunamadı — insan triyajı gerekiyor.",
             "istenen_bolge": region,
             "bolge_eslesti": None,
-            "uzmanlik_eslesti": uzmanlik_eslesti,
+            "uzmanlik_eslesti": False,
         }
 
-    # 2) Donanım'a özel bölge önceliği (SAP'de asla uygulanmaz).
+    # 2) Donanım'a özel bölge önceliği (Halkalı ve İstanbul normalizasyonu ile)
     bolge_eslesti = None
     if modul == BOLGE_ESLESMESI_UYGULANAN_MODUL and region:
-        region_norm = region.strip().lower().replace("i̇", "i").replace("ı", "i")
+        region_norm = _normalize_region(region)
         bolge_adaylari = [
             a for a in pool
-            if a["region"]
-            and a["region"].strip().lower().replace("i̇", "i").replace("ı", "i") == region_norm
+            if a.get("region") and _normalize_region(a.get("region")) == region_norm
         ]
         if bolge_adaylari:
             pool = bolge_adaylari
@@ -118,19 +131,18 @@ def route(classification: dict, region: str | None = None) -> dict:
     # 3-4) Kalan adaylar arasında en az iş yükü olan; eşitlikte rastgele.
     secilen = _en_az_yuklu(store, pool)
 
-    sebep = f"{modul} -> {ekip} (güven {guven:.2f})"
-    sebep += f" | uzmanlık eşleşti: {'evet' if uzmanlik_eslesti else 'hayır (tüm ekip)'}"
+    sebep = f"{modul} -> {ekip} (güven {guven:.2f}) | uzmanlık eşleşti: evet (kesin)"
     if bolge_eslesti is not None:
         sebep += f" | bölge eşleşti: {'evet' if bolge_eslesti else 'hayır'}"
 
     return {
-        "ekip": ekip,                        # gerçek support_group (DB/FK için)
-        "ekip_gorunum_adi": ekip_gorunum,     # iş-türüne özel görünür isim
+        "ekip": ekip,
+        "ekip_gorunum_adi": ekip_gorunum,
         "atanan_uzman": secilen["email"],
-        "uzman_adaylari": uzman_havuzu,  # tam ekip listesi (transparanlık için)
+        "uzman_adaylari": uzman_havuzu,
         "otomatik_atandi": True,
         "sebep": sebep,
         "istenen_bolge": region,
         "bolge_eslesti": bolge_eslesti,
-        "uzmanlik_eslesti": uzmanlik_eslesti,
+        "uzmanlik_eslesti": True,
     }
