@@ -238,10 +238,14 @@ def get_category_hierarchy() -> list[tuple[str, str, str]]:
         return cur.fetchall()
 
 
-def get_sap_modules() -> list[str]:
+def get_sap_module_id(code: str) -> str | None:
+    if not code:
+        return None
     with _connect() as conn, conn.cursor() as cur:
-        cur.execute("SELECT code FROM sap_modules ORDER BY code")
-        return [r[0] for r in cur.fetchall()]
+        # = operatörü yerine büyük/küçük harf duyarsız ILIKE eklendi
+        cur.execute("SELECT id FROM sap_modules WHERE code ILIKE %s LIMIT 1", (code,))
+        row = cur.fetchone()
+        return str(row[0]) if row else None
 
 
 def get_alt_kategori_id(alt_kategori_name: str, kategori_grubu_name: str) -> str | None:
@@ -464,6 +468,7 @@ def get_agents_by_category(category_key: str, group_name: str) -> list[dict]:
             JOIN users u ON u.id = t.assigned_agent_id
             JOIN support_groups g ON g.id = u.support_group_id
             WHERE t.extracted_category = %s AND g.name = %s AND u.role = 'agent'
+                AND u.uzman_kategorileri IS NOT NULL -- EKLENEN KESİN KONTROL
             ORDER BY u.email
             """,
             (category_key, group_name),
