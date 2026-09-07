@@ -240,7 +240,16 @@ def _dogrula_etiketleme(
     def _sap_coz(grup_adi: str) -> str | None:
         if grup_adi != _SAP_PROBLEMLERI_GRUBU:
             return None
-        return sap_moduller_norm.get(_normalize(data.get("sap_modulu")))
+        
+        sap_val = data.get("sap_modulu")
+        modul_val = data.get("modul")
+    
+    # Failsafe: sap_modulu boşsa ve modul "SAP-" ile başlıyorsa değerini oradan kopar
+        if not sap_val and modul_val and modul_val.startswith("SAP-"):
+            sap_val = modul_val.replace("SAP-", "")
+        
+    # Çıkarılan veya LLM'in kendi verdiği değeri normalleştirerek sözlükte eşleştir
+        return sap_moduller_norm.get(_normalize(sap_val))
 
     ust_norm = _normalize(data.get("ust_kategori"))
     ust_eslesme = agac_norm.get(ust_norm)
