@@ -97,7 +97,8 @@ def route(classification: dict, region: str | None = None) -> dict:
     # Eğer özel atama yoksa, veritabanından geçmiş kayıtlara göre kontrol et
     if not pool:
         pool = store.get_agents_by_category(modul, ekip)
-        
+
+    pool = [a for a in pool if a.get("uzman_kategorileri")]
     uzmanlik_eslesti = bool(pool)
 
     # Eski koddaki "hiç uzman yoksa uzman_havuzu'na (tüm ekibe) düş" mantığı İPTAL edildi.
