@@ -1,0 +1,3 @@
+{
+  "select * from message_attachments where message_id in (silinecek_mesajlar)": []
+}

@@ -1,0 +1,3 @@
+{
+  "select * from attachment_vectors where ticket_id/attachment_id in (silinecek)": []
+}

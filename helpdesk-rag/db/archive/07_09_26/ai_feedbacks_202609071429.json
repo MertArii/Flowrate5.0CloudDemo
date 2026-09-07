@@ -1,0 +1,3 @@
+{
+  "select * from ai_feedbacks where message_id in (silinecek_mesajlar)": []
+}
