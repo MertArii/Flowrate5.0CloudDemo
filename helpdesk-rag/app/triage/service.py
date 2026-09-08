@@ -122,14 +122,16 @@ async def triage(
             file_type=attachment.get("file_type"),
             ocr_extracted_text=attachment.get("extracted_text"),
         )
-        if attachment.get("extracted_text"):
-            from app.rag import ollama_client
-            emb = await ollama_client.embed(attachment["extracted_text"])
-            store.add_attachment_vector(
-                attachment_id=att_id, ticket_id=tid,
-                source=attachment["file_name"],
-                content=attachment["extracted_text"], embedding=emb,
-            )
+        # GELİŞTİRME ORTAMI: Test dosyalarının RAG hafızasını (Katman 2) 
+        # kirletmesini engellemek için vektör kayıt işlemi askıya alındı
+        #if attachment.get("extracted_text"):
+        #    from app.rag import ollama_client
+        #    emb = await ollama_client.embed(attachment["extracted_text"])
+        #    store.add_attachment_vector(
+        #       attachment_id=att_id, ticket_id=tid,
+        #       source=attachment["file_name"],
+        #       content=attachment["extracted_text"], embedding=emb,
+        #    )
     store.create_ticket_message(
         ticket_id=tid, sender_email="ai_bot@sirket.local", sender_type="ai_bot",
         message_body="AI tarafından çözüm taslağı hazırlandı.",

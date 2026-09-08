@@ -526,17 +526,20 @@ async def submit_feedback(message_id: str, req: FeedbackRequest):
     if req.rating >= 4 and not store.ticket_solution_exists(msg["ticket_id"]):
         ticket = store.get_ticket(msg["ticket_id"])
         if ticket and ticket["raw_issue_description"]:
-            emb = await ollama_client.embed(ticket["raw_issue_description"])
-            store.create_ticket_solution(
-                ticket_id=msg["ticket_id"],
-                category=ticket["extracted_category"],
-                problem_text=ticket["raw_issue_description"],
-                solution_text=msg["ai_generated_draft"],
-                embedding=emb,
-                metadata={"kaynak": "ai_feedback", "rating": req.rating,
-                          "onaylayan": req.agent_email},
-            )
-            terfi_edildi = True
+            # GELİŞTİRME ORTAMI: Sentetik verilerin sisteme sızmasını engellemek 
+            # için dinamik öğrenme (ticket_solutions'a ekleme) geçici olarak askıya alındı. Üretim ortamında bu blok açılabilir.
+            ##emb = await ollama_client.embed(ticket["raw_issue_description"])
+            #store.create_ticket_solution(
+                #ticket_id=msg["ticket_id"],
+                ###category=ticket["extracted_category"],
+               #### problem_text=ticket["raw_issue_description"],
+               ##### solution_text=msg["ai_generated_draft"],
+                ######embedding=emb,
+               ## metadata={"kaynak": "ai_feedback", "rating": req.rating,
+                          ##"onaylayan": req.agent_email},
+            #)
+            ##terfi_edildi = True
+            pass
 
     logger.info(
         "Feedback kaydedildi",
