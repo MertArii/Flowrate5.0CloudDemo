@@ -158,12 +158,25 @@ async def chat(
     tools: list[dict] | None = None,
     fmt: str | None = None,
     images_b64: list[str] | None = None,
+    num_ctx: int = 8192,
+    num_predict: int = 1024,
 ) -> dict:
     """Qwen3.5 native tool-calling destekler. tools verilirse model
     tool_calls döndürebilir; döndürmezse düz 'content' gelir.
     fmt='json' verilirse model geçerli JSON döndürmeye zorlanır.
     images_b64 verilirse (base64 string listesi) Qwen3.5'in multimodal
-    desteğiyle görseli doğrudan okur — ayrı bir OCR adımı gerekmez."""
+    desteğiyle görseli doğrudan okur — ayrı bir OCR adımı gerekmez.
+
+    num_ctx: bu istek için ayrılan bağlam penceresi (token). Belirtilmezse
+        Ollama'nın Modelfile varsayılanı (genelde 2048-4096) kullanılır —
+        classify.py'nin sistem prompt'u (~14.000 karakter, ~3500-4000 token)
+        bunu aşabiliyor, bu da hem 'context length exceeds' hatasına hem de
+        çıktının yarıda kesilmesine yol açtı (gözlemlenen trace'lerde JSON
+        'guven' anahtarında/ortasında kesiliyordu).
+    num_predict: üretilecek MAKSİMUM çıktı token sayısı. Belirtilmezse
+        Ollama'nın (bazı sürümlerde düşük, örn. 128 civarı) varsayılanı
+        kullanılır — JSON'un tamamlanmadan kesilmesinin muhtemel asıl
+        nedeni buydu."""
     payload: dict = {
         "model": settings.llm_model,
         "messages": messages,
@@ -171,6 +184,10 @@ async def chat(
         # Help desk için "thinking" modu kapalı: hızlı ve güvenilir düz cevap.
         # (Faz 2 tool-calling'de gerekirse açılabilir.)
         "think": False,
+        "options": {
+            "num_ctx": num_ctx,
+            "num_predict": num_predict,
+        },
     }
     if tools:
         payload["tools"] = tools
