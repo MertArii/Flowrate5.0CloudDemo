@@ -25,7 +25,7 @@ def _normalize_region(region: str | None) -> str | None:
     if not region:
         return None
     r = region.strip().lower().replace("i̇", "i").replace("ı", "i")
-    if "halkal" in r or "istanbul" in r:
+    if "halkalı" in r or "istanbul" in r:
         return "istanbul"
     return r
 
