@@ -33,11 +33,17 @@ async def triage(
     extra_context: str | None = None,
     images_b64: list[str] | None = None,
     attachment: dict | None = None,
+    is_trial: bool = False,
 ) -> dict:
     """attachment verilirse (file_name, file_path, file_type, extracted_text)
     ticket'a bağlı bir müşteri mesajına eklenip attachment_vectors'e
     (RAG Katman 2) kalıcı olarak yazılır — ileride başka sorularda da
-    bulunabilir hale gelir."""
+    bulunabilir hale gelir.
+
+    is_trial=True ise (Postman/manuel /ask testleri) yazımlar tickets/
+    routing_logs/ticket_messages/message_attachments yerine bunların
+    _trial eşlerine gider — gerçek ticket verisi kirlenmez (bkz.
+    db/008_tickets_trial.sql)."""
     from app.rag import store  # geç import: DB tabloları hazır olmadan yüklenmesin
 
     text_for_classification = ticket_text
@@ -99,6 +105,7 @@ async def triage(
         resolution_deadline=deadlines.get("resolution_deadline"),
         sub_category_id=sub_category_id,
         sap_module_id=sap_module_id,
+        trial=is_trial,
     )
 
     store.create_routing_log(
@@ -107,12 +114,14 @@ async def triage(
         assigned_group_id=group_id,
         assigned_agent_id=agent_id if otomatik else None,
         confidence_score=c["guven"],
+        trial=is_trial,
     )
 
     # Mesaj zinciri: müşteri sorusu + (varsa) ek + AI'ın taslak cevabı.
     musteri_mid = store.create_ticket_message(
         ticket_id=tid, sender_email=customer_email, sender_type="customer",
         message_body=ticket_text,
+        trial=is_trial,
     )
     if attachment:
         att_id = store.create_attachment(
@@ -121,6 +130,7 @@ async def triage(
             file_path=attachment["file_path"],
             file_type=attachment.get("file_type"),
             ocr_extracted_text=attachment.get("extracted_text"),
+            trial=is_trial,
         )
         # GELİŞTİRME ORTAMI: Test dosyalarının RAG hafızasını (Katman 2) 
         # kirletmesini engellemek için vektör kayıt işlemi askıya alındı
@@ -136,6 +146,7 @@ async def triage(
         ticket_id=tid, sender_email="ai_bot@sirket.local", sender_type="ai_bot",
         message_body="AI tarafından çözüm taslağı hazırlandı.",
         ai_generated_draft=rag["answer"], rag_sources_used=rag["sources"],
+        trial=is_trial,
     )
 
     return {

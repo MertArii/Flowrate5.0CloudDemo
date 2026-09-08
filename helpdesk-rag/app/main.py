@@ -334,7 +334,9 @@ async def ask(
     yazılır — ileride başka sorularda da bulunabilir hale gelir.
 
     Cevabın yanında soruyu sınıflandırır, doğru ekibe/uzmana yönlendirir ve
-    tickets + routing_logs tablolarına kaydeder (bkz. /triage ile aynı motor).
+    tickets_trial + routing_logs_trial tablolarına kaydeder (bkz. /triage ile
+    aynı motor, ama /ask manuel/Postman testleri gerçek tickets tablosunu
+    kirletmesin diye trial tablolara yazar — bkz. db/008_tickets_trial.sql).
     min_score gönderilirse o istek için benzerlik eşiği uygulanır."""
     # Postman/form-data boş bırakılan alanları None yerine "" gönderir;
     # float alanda bu parse hatası verir, string alanlarda da temizleyelim.
@@ -384,6 +386,7 @@ async def ask(
         min_score=parsed_min_score,
         extra_context=extra_context,
         attachment=attachment_info,
+        is_trial=True,
     )
     return {
         "answer": r["cevap_metni"],
@@ -520,6 +523,7 @@ async def submit_feedback(message_id: str, req: FeedbackRequest):
     store.create_ai_feedback(
         message_id=message_id, user_id=agent_id,
         rating=req.rating, feedback_text=req.feedback_text,
+        trial=msg["is_trial"],
     )
 
     terfi_edildi = False

@@ -456,12 +456,18 @@ def create_ticket(
     response_deadline=None, workaround_deadline=None, resolution_deadline=None,
     sub_category_id: str | None = None,
     sap_module_id: str | None = None,
+    trial: bool = False,
 ) -> tuple[str, int]:
-    """Ticket oluşturur, (id, ticket_number) döner."""
+    """Ticket oluşturur, (id, ticket_number) döner.
+
+    trial=True ise gerçek tickets tablosu yerine tickets_trial'a yazar —
+    /ask üzerinden Postman'dan yapılan manuel testler gerçek ticket verisini
+    kirletmesin diye (bkz. db/008_tickets_trial.sql)."""
+    table = "tickets_trial" if trial else "tickets"
     with _connect() as conn, conn.cursor() as cur:
         cur.execute(
-            """
-            INSERT INTO tickets
+            f"""
+            INSERT INTO {table}
                 (customer_email, recipient_email, subject, raw_issue_description,
                  extracted_category, region, status, priority, assigned_group_id,
                  assigned_agent_id, sla_policy_id, response_deadline,
@@ -542,11 +548,15 @@ def create_routing_log(
     ticket_id: str, decision_factors: dict,
     assigned_group_id: str | None, confidence_score: float,
     assigned_agent_id: str | None = None,
+    trial: bool = False,
 ) -> None:
+    """trial=True ise routing_logs_trial'a yazar (ticket_id trial ticket'a
+    ait olmalı, bkz. create_ticket)."""
+    table = "routing_logs_trial" if trial else "routing_logs"
     with _connect() as conn, conn.cursor() as cur:
         cur.execute(
-            """
-            INSERT INTO routing_logs
+            f"""
+            INSERT INTO {table}
                 (ticket_id, decision_factors, assigned_group_id, assigned_agent_id, confidence_score)
             VALUES (%s, %s, %s, %s, %s)
             """,
@@ -559,7 +569,13 @@ def create_routing_log(
 # ---- Geri bildirim -> doğrulanmış çözüm terfisi -----------------------
 
 def get_ai_message(message_id: str) -> dict | None:
-    """ai_bot mesajını (taslak + ait olduğu ticket) döner; yoksa None."""
+    """ai_bot mesajını (taslak + ait olduğu ticket) döner; yoksa None.
+
+    Önce gerçek ticket_messages'a bakar, bulamazsa ticket_messages_trial'a
+    (bkz. /ask'ın is_trial=True yazdığı tablo) — çağıran taraf (feedback
+    endpoint'i) mesajın gerçek mi trial mı olduğunu bilmek zorunda kalmaz.
+    Dönen dict'teki is_trial, create_ai_feedback'in doğru tabloya yazması
+    için kullanılır."""
     with _connect() as conn, conn.cursor() as cur:
         cur.execute(
             """
@@ -569,9 +585,23 @@ def get_ai_message(message_id: str) -> dict | None:
             (message_id,),
         )
         row = cur.fetchone()
+        is_trial = False
+        if not row:
+            cur.execute(
+                """
+                SELECT ticket_id, sender_type, ai_generated_draft
+                FROM ticket_messages_trial WHERE id = %s
+                """,
+                (message_id,),
+            )
+            row = cur.fetchone()
+            is_trial = row is not None
     if not row:
         return None
-    return {"ticket_id": str(row[0]), "sender_type": row[1], "ai_generated_draft": row[2]}
+    return {
+        "ticket_id": str(row[0]), "sender_type": row[1], "ai_generated_draft": row[2],
+        "is_trial": is_trial,
+    }
 
 
 def get_ticket(ticket_id: str) -> dict | None:
@@ -647,12 +677,15 @@ def get_or_create_customer(email: str, full_name: str, region: str | None) -> st
 
 def create_ai_feedback(
     message_id: str, user_id: str, rating: int, feedback_text: str | None,
+    trial: bool = False,
 ) -> str:
-    """ai_feedbacks'e bir satır ekler, feedback_id döner."""
+    """ai_feedbacks'e bir satır ekler, feedback_id döner.
+    trial=True ise ai_feedbacks_trial'a yazar (bkz. get_ai_message)."""
+    table = "ai_feedbacks_trial" if trial else "ai_feedbacks"
     with _connect() as conn, conn.cursor() as cur:
         cur.execute(
-            """
-            INSERT INTO ai_feedbacks (message_id, user_id, rating, feedback_text)
+            f"""
+            INSERT INTO {table} (message_id, user_id, rating, feedback_text)
             VALUES (%s,%s,%s,%s) RETURNING id
             """,
             (message_id, user_id, rating, feedback_text),
@@ -690,12 +723,15 @@ def create_ticket_solution(
 def create_ticket_message(
     ticket_id: str, sender_email: str, sender_type: str, message_body: str,
     ai_generated_draft: str | None = None, rag_sources_used: list | None = None,
+    trial: bool = False,
 ) -> str:
-    """ticket_messages'a bir satır ekler, message_id döner."""
+    """ticket_messages'a bir satır ekler, message_id döner.
+    trial=True ise ticket_messages_trial'a yazar."""
+    table = "ticket_messages_trial" if trial else "ticket_messages"
     with _connect() as conn, conn.cursor() as cur:
         cur.execute(
-            """
-            INSERT INTO ticket_messages
+            f"""
+            INSERT INTO {table}
                 (ticket_id, sender_email, sender_type, message_body,
                  ai_generated_draft, rag_sources_used)
             VALUES (%s,%s,%s,%s,%s,%s) RETURNING id
@@ -712,12 +748,15 @@ def create_ticket_message(
 def create_attachment(
     message_id: str, file_name: str, file_path: str, file_type: str | None,
     ocr_extracted_text: str | None,
+    trial: bool = False,
 ) -> str:
-    """message_attachments'a bir satır ekler, attachment_id döner."""
+    """message_attachments'a bir satır ekler, attachment_id döner.
+    trial=True ise message_attachments_trial'a yazar."""
+    table = "message_attachments_trial" if trial else "message_attachments"
     with _connect() as conn, conn.cursor() as cur:
         cur.execute(
-            """
-            INSERT INTO message_attachments
+            f"""
+            INSERT INTO {table}
                 (message_id, file_name, file_path, file_type, ocr_extracted_text)
             VALUES (%s,%s,%s,%s,%s) RETURNING id
             """,
