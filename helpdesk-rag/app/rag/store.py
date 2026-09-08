@@ -237,6 +237,13 @@ def get_category_hierarchy() -> list[tuple[str, str, str]]:
         )
         return cur.fetchall()
 
+def get_sap_modules() -> list[str]:
+    """Tüm SAP modül kodlarını (örn. FI, MM, SD...) alfabetik sırayla döner."""
+    with _connect() as conn, conn.cursor() as cur:
+        cur.execute("SELECT code FROM sap_modules ORDER BY code")
+        rows = cur.fetchall()
+    return [r[0] for r in rows]
+
 
 def get_sap_module_id(code: str) -> str | None:
     if not code:
