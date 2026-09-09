@@ -1,0 +1,902 @@
+[
+    {
+        "subject": "Kısmi Teslimat Engeli Kaldırılamıyor",
+        "content": "Müşteri siparişteki 100 ürünün acil olan 20 tanesini istiyor ama kısmi teslimat engeli var. Bu 20 ürün için kısmi teslimatı açar mısınız?",
+        "siniflandirma": {
+            "modul": "SAP-SD",
+            "oncelik": "1",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Ana Veri",
+            "sap_modulu": "SD",
+            "ozet": "Kısmi teslimat kısıtlaması nedeniyle müşteri siparişinde talep edilen ürünlerin kısmen teslim edilememesi"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "gizem.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Fatura İptalinde VF11 Muhasebe Belgesi Hatası",
+        "content": "VF11 ile hatalı kesilen e-arşiv faturasını iptal etmek istediğimde 'Dönem 08/2026 kapalı' uyarısı alıyorum ve ters kayıt oluşmuyor.",
+        "siniflandirma": {
+            "modul": "SAP-SD",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Faturalama",
+            "sap_modulu": "SD",
+            "ozet": "Kapalı mali dönem uyarısı sebebiyle satış faturası ters kaydının oluşturulamaması"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "faruk.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Yeni Müşteri İçin Kredi Limiti Tanımlama",
+        "content": "Yeni bayimiz ABC Dağıtım A.Ş. için FD32 işlem kodundan 500.000 TL kredi limiti açılması ve risk sınıfının B olarak atanması gerekmektedir.",
+        "siniflandirma": {
+            "modul": "SAP-SD",
+            "oncelik": "3",
+            "istek_turu": "talep",
+            "ust_kategori": "TALEPLER",
+            "alt_kategori": "Ana Veri",
+            "sap_modulu": "SD",
+            "ozet": "Yeni bayi hesabı için kredi limiti ve risk sınıfı tanımlama talebi"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "gizem.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "MIGO Mal Girişi Esnasında Hesap Tayin Hatası",
+        "content": "1004523 numaralı satınalma siparişine istinaden irsaliye girişi (101) yaparken 'WRX hesabı belirlenemedi' hatası alıyorum.",
+        "siniflandirma": {
+            "modul": "SAP-MM",
+            "oncelik": "1",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Malzeme Girişi",
+            "sap_modulu": "MM",
+            "ozet": "Satınalma siparişi mal kabulünde WRX otomatik hesap tayini eksikliği hatası"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "burak.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Yeni Hammadde Malzeme Kartı Açılması",
+        "content": "Üretimde kullanılacak yeni kimyasal hammadde (KOD: HAM-9904) için MM01 üzerinden ilgili fabrika ve depo yeri genişletmelerinin yapılması rica olunur.",
+        "siniflandirma": {
+            "modul": "SAP-MM",
+            "oncelik": "3",
+            "istek_turu": "talep",
+            "ust_kategori": "TALEPLER",
+            "alt_kategori": "Ana Veri",
+            "sap_modulu": "MM",
+            "ozet": "Yeni hammadde kartı oluşturma ve ilgili üretim tesislerine genişletme işlemi"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "burak.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "ME21N Satınalma Siparişi Onay Stratejisi Tetiklenmiyor",
+        "content": "Genel müdürlük bütçesinden açılan 75.000 TL üzeri satınalma siparişlerinde seviye 2 onay kutusu açılmıyor, doğrudan onaysız kaydediliyor.",
+        "siniflandirma": {
+            "modul": "SAP-MM",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Satınalma",
+            "sap_modulu": "MM",
+            "ozet": "Satınalma siparişinde tutar bazlı onay stratejisinin çalışmaması"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "burak.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "FB60 Satıcı Fatura Kaydında KDV Oranı Uyuşmazlığı",
+        "content": "Tedarikçiden gelen %20 KDV'li faturayı FB60 ile girerken sistem otomatik olarak %10 hesaplıyor, vergi göstergesi güncellenmiyor.",
+        "siniflandirma": {
+            "modul": "SAP-FI",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Genel Muhasebe",
+            "sap_modulu": "FI",
+            "ozet": "Satıcı faturası girişinde vergi göstergesi ve hesaplanan KDV uyuşmazlığı"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "faruk.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Ay Sonu Amortisman Çalıştırma (AFAB) Hatası",
+        "content": "Ağustos ayı sabit kıymet amortisman çalıştırmasında 1000 şirket kodu için 'Duran varlık 400102 için değer hatası' vererek program kesiliyor.",
+        "siniflandirma": {
+            "modul": "SAP-FI",
+            "oncelik": "1",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Duran Varlık",
+            "sap_modulu": "FI",
+            "ozet": "Dönem sonu AFAB amortisman programında tekil duran varlık takılması ve sürecin durması"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "faruk.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Yeni Masraf Merkezi ve Kar Merkezi Tanımlanması",
+        "content": "Yeni kurulan Dijital Pazarlama departmanı için KS01 üzerinden 44100 masraf merkezinin açılması ve KE51 kar merkeziyle ilişkilendirilmesi gerekiyor.",
+        "siniflandirma": {
+            "modul": "SAP-CO",
+            "oncelik": "3",
+            "istek_turu": "talep",
+            "ust_kategori": "TALEPLER",
+            "alt_kategori": "Maliyet Muhasebesi",
+            "sap_modulu": "CO",
+            "ozet": "Departman yapılanması kapsamında masraf ve kar merkezi açılışı"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "faruk.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "CO01 Üretim Emri Açarken Ürün Ağacı (BOM) Çekilemiyor",
+        "content": "Montaj hattı için CO01'de üretim emri oluşturmaya çalıştığımda 'Geçerli ürün ağacı bulunamadı' uyarısı alıyorum, alternatif 1 tanımlı olmasına rağmen gelmiyor.",
+        "siniflandirma": {
+            "modul": "SAP-PP",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Üretim Planlama",
+            "sap_modulu": "PP",
+            "ozet": "Üretim siparişi oluşturma sırasında reçete/BOM eşleşme arızası"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "burak.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "SAP SU01 Yetki Talebi - VA02 ve VL02N Yetkisi",
+        "content": "Satış operasyon ekibine yeni katılan Mehmet Kaya için sipariş değiştirme (VA02) ve teslimat düzenleme (VL02N) işlem kodlarının tanımlanması rica olunur.",
+        "siniflandirma": {
+            "modul": "SAP-Basis",
+            "oncelik": "3",
+            "istek_turu": "talep",
+            "ust_kategori": "ERİŞİM & YETKİ",
+            "alt_kategori": "Kullanıcı Yetkilendirme",
+            "sap_modulu": "Basis",
+            "ozet": "Yeni personelin SAP satış ve sevkiyat işlem kodlarına yetkilendirilmesi"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "selin.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "SAP GUI Girişinde 'SNC Bağlantı Hatası' Alıyorum",
+        "content": "Sabah SAP Logon üzerinden Canlı sisteme bağlanmak istediğimde 'SNC communication error - GSS-API error' veriyor ve login ekranı açılmıyor.",
+        "siniflandirma": {
+            "modul": "SAP-Basis",
+            "oncelik": "1",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Bağlantı & Client",
+            "sap_modulu": "Basis",
+            "ozet": "SAP GUI Single Sign-On SNC kimlik doğrulama arızası"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "selin.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Laptop Ekranı Açılmıyor ve Fan Sürekli Yüksek Hızda Dönüyor",
+        "content": "Şirket bilgisayarımı (Dell Latitude 5420) açma tuşuna bastığımda klavye ışıkları yanıyor, fan son hızda çalışıyor ancak ekrana hiçbir görüntü gelmiyor.",
+        "siniflandirma": {
+            "modul": "IT-Donanım",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Bilgisayar Donanımı",
+            "sap_modulu": "N/A",
+            "ozet": "Dizüstü bilgisayarda siyah ekran ve POST aşamasını geçememe arızası"
+        },
+        "yonlendirme": {
+            "ekip": "BT Destek Ekibi",
+            "ekip_gorunum_adi": "BT Destek Ekibi",
+            "atanan_uzman": "yucel.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Ofis İçi Harici Monitörde 'Sinyal Yok' Sorunu",
+        "content": "Masamdaki HDMI bağlantılı ikinci ekran bugün birden gitti. Kabloyu çıkarıp taktım, başka Type-C adaptörü denedim ama algılamıyor.",
+        "siniflandirma": {
+            "modul": "IT-Donanım",
+            "oncelik": "3",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Çevre Birimleri",
+            "sap_modulu": "N/A",
+            "ozet": "İkinci monitör sinyal kesintisi ve kablo/adaptör arızası"
+        },
+        "yonlendirme": {
+            "ekip": "BT Destek Ekibi",
+            "ekip_gorunum_adi": "BT Destek Ekibi",
+            "atanan_uzman": "yucel.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Depo Zebra Barkod Yazıcı Sürekli Kırmızı Işık Yakıyor",
+        "content": "Sevkiyat alanındaki Zebra ZT411 barkod yazıcı etiket basarken sürekli ribbon error kırmızı ışık verip duruyor. Kalibrasyon yapmamıza rağmen düzelmedi.",
+        "siniflandirma": {
+            "modul": "IT-Donanım",
+            "oncelik": "1",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Yazıcı & Barkod",
+            "sap_modulu": "N/A",
+            "ozet": "Sevkiyat barkod yazıcısının sensör ve ribon hatası nedeniyle etiket basamaması"
+        },
+        "yonlendirme": {
+            "ekip": "BT Destek Ekibi",
+            "ekip_gorunum_adi": "BT Destek Ekibi",
+            "atanan_uzman": "yusuf.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Muhasebe Departmanı İçin Çift Monitör Kurulum Talebi",
+        "content": "Yoğun veri analizi ve raporlama yapan finans uzmanımız Ece Hanım'ın çalışma masasına ek 27 inç monitör ve stand kurulumu rica olunur.",
+        "siniflandirma": {
+            "modul": "IT-Donanım",
+            "oncelik": "4",
+            "istek_turu": "talep",
+            "ust_kategori": "TALEPLER",
+            "alt_kategori": "Donanım Temini",
+            "sap_modulu": "N/A",
+            "ozet": "Kullanıcıya ikinci harici ekran tahsis ve kurulum talebi"
+        },
+        "yonlendirme": {
+            "ekip": "BT Destek Ekibi",
+            "ekip_gorunum_adi": "BT Destek Ekibi",
+            "atanan_uzman": "yucel.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Evden Çalışırken FortiClient VPN Bağlantısı Kopuyor",
+        "content": "Ev internetinden VPN'e bağlanıyorum fakat yaklaşık 5 dakikada bir 'Tunnel connection down (code -455)' hatasıyla düşüyorum.",
+        "siniflandirma": {
+            "modul": "IT-Ağ & Altyapı",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "VPN & Uzaktan Erişim",
+            "sap_modulu": "N/A",
+            "ozet": "Uzaktan çalışan personelde periyodik VPN tünel düşmesi ve oturum sonlanması"
+        },
+        "yonlendirme": {
+            "ekip": "Sistem & Ağ Ekibi",
+            "ekip_gorunum_adi": "Sistem & Ağ Ekibi",
+            "atanan_uzman": "emre.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "3. Kat Toplantı Odasında Wi-Fi Sinyali Çok Zayıf",
+        "content": "A Blok 3. kat Bosphorus toplantı odasında iç ağ (Corporate-WiFi) sürekli kopuyor ve video konferanslar donuyor. AP kontrolü yapılabilir mi?",
+        "siniflandirma": {
+            "modul": "IT-Ağ & Altyapı",
+            "oncelik": "3",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Kablosuz Ağ (Wi-Fi)",
+            "sap_modulu": "N/A",
+            "ozet": "Toplantı salonunda kablosuz erişim noktası sinyal kapsama sorunu"
+        },
+        "yonlendirme": {
+            "ekip": "Sistem & Ağ Ekibi",
+            "ekip_gorunum_adi": "Sistem & Ağ Ekibi",
+            "atanan_uzman": "emre.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Yeni Şube İçin Statik IP ve Port Yönlendirme",
+        "content": "Bursa Nilüfer yeni lojistik merkezimizin NVR güvenlik kamerası izleme sistemi için firewall üzerinde gerekli port yönlendirmelerinin açılması rica edilir.",
+        "siniflandirma": {
+            "modul": "IT-Ağ & Altyapı",
+            "oncelik": "3",
+            "istek_turu": "talep",
+            "ust_kategori": "TALEPLER",
+            "alt_kategori": "Firewall & Port",
+            "sap_modulu": "N/A",
+            "ozet": "Şube kamera kayıt cihazı için güvenlik duvarı kuralı ve port yönlendirme"
+        },
+        "yonlendirme": {
+            "ekip": "Sistem & Ağ Ekibi",
+            "ekip_gorunum_adi": "Sistem & Ağ Ekibi",
+            "atanan_uzman": "emre.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Outlook Açılırken Sürekli Şifre Penceresi Çıkıyor",
+        "content": "Domain şifremi dün güncelledikten sonra Outlook her açılışta ve 10 dakikada bir parolanızı girin kutucuğu çıkarıyor, hatırla seçeneği işlemiyor.",
+        "siniflandirma": {
+            "modul": "IT-Yazılım",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "E-Posta & İstemci",
+            "sap_modulu": "N/A",
+            "ozet": "Credential Manager önbellek uyuşmazlığı nedeniyle Outlook sürekli kimlik sorma hatası"
+        },
+        "yonlendirme": {
+            "ekip": "BT Destek Ekibi",
+            "ekip_gorunum_adi": "BT Destek Ekibi",
+            "atanan_uzman": "aylin.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Ortak Ağ Paylaşım Klasörüne (Z Sürücüsü) Erişim İzni",
+        "content": "Pazarlama ekibinden Ali Vural'ın '\\\\srv-files\\Pazarlama_2026' klasörüne yazma ve okuma yetkisiyle eklenmesini talep ediyoruz. Yönetici onayı ektedir.",
+        "siniflandirma": {
+            "modul": "IT-Sistem",
+            "oncelik": "3",
+            "istek_turu": "talep",
+            "ust_kategori": "ERİŞİM & YETKİ",
+            "alt_kategori": "Dosya Sunucusu",
+            "sap_modulu": "N/A",
+            "ozet": "Dosya sunucusu departman klasörüne NTFS ve Paylaşım yetkisi tanımlama"
+        },
+        "yonlendirme": {
+            "ekip": "Sistem & Ağ Ekibi",
+            "ekip_gorunum_adi": "Sistem & Ağ Ekibi",
+            "atanan_uzman": "ogulcan.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Bilgisayar Açılışında BitLocker Kurtarma Anahtarı İstiyor",
+        "content": "Sabah bilgisayarı başlattığımda mavi ekranda BitLocker Recovery Key soruyor. Kendi Active Directory şifremle açamıyorum, acil yardım gerek.",
+        "siniflandirma": {
+            "modul": "IT-Güvenlik",
+            "oncelik": "1",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Disk Şifreleme",
+            "sap_modulu": "N/A",
+            "ozet": "TPM/BIOS değişikliği sonrası cihazın BitLocker kurtarma moduna düşmesi"
+        },
+        "yonlendirme": {
+            "ekip": "BT Destek Ekibi",
+            "ekip_gorunum_adi": "BT Destek Ekibi",
+            "atanan_uzman": "yucel.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Şüpheli Oltalama (Phishing) E-postası Bildirimi",
+        "content": "'Fatura Bildirimi - Acil Ödeme' başlıklı ve ekinde zip dosyası olan şüpheli bir e-posta aldım. Linke tıklamadım, domain adresinin kontrol edilmesini rica ederim.",
+        "siniflandirma": {
+            "modul": "IT-Güvenlik",
+            "oncelik": "1",
+            "istek_turu": "olay",
+            "ust_kategori": "GÜVENLİK",
+            "alt_kategori": "Siber Güvenlik",
+            "sap_modulu": "N/A",
+            "ozet": "Kullanıcıya gelen sahte fatura e-postasının incelenmesi ve mail gateway engellemesi"
+        },
+        "yonlendirme": {
+            "ekip": "Bilgi Güvenliği Ekibi",
+            "ekip_gorunum_adi": "Bilgi Güvenliği Ekibi",
+            "atanan_uzman": "merve.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Microsoft Teams Mikrofon ve Kamera Algılamıyor",
+        "content": "Dell Type-C kulaklığımı taktığım halde Teams arama ayarlarında 'Aygıt bulunamadı' diyor. Windows ses ayarlarında çalışıyor ama Teams'te görünmüyor.",
+        "siniflandirma": {
+            "modul": "IT-Yazılım",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "İletişim & Konferans",
+            "sap_modulu": "N/A",
+            "ozet": "MS Teams uygulamasında ses/mikrofon çevre birimi tanıma ve izin problemi"
+        },
+        "yonlendirme": {
+            "ekip": "BT Destek Ekibi",
+            "ekip_gorunum_adi": "BT Destek Ekibi",
+            "atanan_uzman": "aylin.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Yeni İşe Başlayan Personel İçin Kurumsal Hesap Açılışı",
+        "content": "01.10.2026 tarihinde İnsan Kaynakları departmanında Uzman olarak başlayacak olan Zeynep Arslan için kurumsal e-posta, AD hesabı ve Teams hesabı açılması rica olunur.",
+        "siniflandirma": {
+            "modul": "IT-Sistem",
+            "oncelik": "3",
+            "istek_turu": "talep",
+            "ust_kategori": "TALEPLER",
+            "alt_kategori": "Kullanıcı Yönetimi",
+            "sap_modulu": "N/A",
+            "ozet": "Yeni başlayan personel için Active Directory ve M365 hesap oluşturma süreci"
+        },
+        "yonlendirme": {
+            "ekip": "Sistem & Ağ Ekibi",
+            "ekip_gorunum_adi": "Sistem & Ağ Ekibi",
+            "atanan_uzman": "ogulcan.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "İşten Ayrılan Personel Hesaplarının Askıya Alınması",
+        "content": "Bugün itibarıyla şirketimizden ayrılan Serkan Yıldız'ın e-posta, VPN ve SAP hesaplarının dondurulması ve maillerinin departman yöneticisine yönlendirilmesi gerekmektedir.",
+        "siniflandirma": {
+            "modul": "IT-Sistem",
+            "oncelik": "1",
+            "istek_turu": "talep",
+            "ust_kategori": "ERİŞİM & YETKİ",
+            "alt_kategori": "Offboarding",
+            "sap_modulu": "N/A",
+            "ozet": "Ayrılan çalışanın tüm erişim yetkilerinin kapatılması ve mail forward tanımlanması"
+        },
+        "yonlendirme": {
+            "ekip": "Sistem & Ağ Ekibi",
+            "ekip_gorunum_adi": "Sistem & Ağ Ekibi",
+            "atanan_uzman": "ogulcan.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Kurumsal Mobil Cihaza MDM (Intune) Kurulumu",
+        "content": "Şirket tarafından tahsis edilen iPhone cihaza kurumsal maillerin ve güvenlik profillerinin tanımlanması için Microsoft Intune kaydının yapılması rica olunur.",
+        "siniflandirma": {
+            "modul": "IT-Güvenlik",
+            "oncelik": "3",
+            "istek_turu": "talep",
+            "ust_kategori": "TALEPLER",
+            "alt_kategori": "Mobil Cihaz Yönetimi",
+            "sap_modulu": "N/A",
+            "ozet": "Yeni teslim edilen şirket akıllı telefonuna MDM Intune konfigürasyonu"
+        },
+        "yonlendirme": {
+            "ekip": "BT Destek Ekibi",
+            "ekip_gorunum_adi": "BT Destek Ekibi",
+            "atanan_uzman": "yucel.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Adobe Acrobat Pro Lisans Talebi",
+        "content": "Hukuk departmanındaki sözleşmelerin dijital imza ve PDF düzenleme işlemleri için 1 adet Adobe Acrobat Pro lisansı atanmasını talep ediyorum.",
+        "siniflandirma": {
+            "modul": "IT-Yazılım",
+            "oncelik": "4",
+            "istek_turu": "talep",
+            "ust_kategori": "TALEPLER",
+            "alt_kategori": "Yazılım Lisansı",
+            "sap_modulu": "N/A",
+            "ozet": "Kullanıcıya Adobe Creative Cloud Acrobat Pro lisansı tahsis talebi"
+        },
+        "yonlendirme": {
+            "ekip": "BT Destek Ekibi",
+            "ekip_gorunum_adi": "BT Destek Ekibi",
+            "atanan_uzman": "aylin.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Excel Açılırken 'Eklenti Yanıt Vermiyor' Uyarısıyla Çöküyor",
+        "content": "Büyük veri içeren raporlarımı açarken Power Query eklentisi Excel'i kilitliyor ve 'Program yanıt vermiyor' diyerek kendini kapatıyor.",
+        "siniflandirma": {
+            "modul": "IT-Yazılım",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Office Uygulamaları",
+            "sap_modulu": "N/A",
+            "ozet": "Microsoft Excel COM eklentisi çakışması ve bellek aşımı arızası"
+        },
+        "yonlendirme": {
+            "ekip": "BT Destek Ekibi",
+            "ekip_gorunum_adi": "BT Destek Ekibi",
+            "atanan_uzman": "aylin.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Departman Ağ Yazıcısından Kağıt Sıkışması Uyarısı",
+        "content": "2. kat operasyon yazıcısı (HP LaserJet E87650) kaset 2'de sürekli 'Kağıt Sıkıştı' hatası veriyor, sıkışan kağıdı çıkardık fakat sensör hatası devam ediyor.",
+        "siniflandirma": {
+            "modul": "IT-Donanım",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Yazıcı & Çevre Birimleri",
+            "sap_modulu": "N/A",
+            "ozet": "Kat yazıcısında mekanik silindir aşınması veya sahte sıkışma sensör arızası"
+        },
+        "yonlendirme": {
+            "ekip": "BT Destek Ekibi",
+            "ekip_gorunum_adi": "BT Destek Ekibi",
+            "atanan_uzman": "yusuf.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "SAP PA30 Personel Kartında Bordro Alanı Kilitli",
+        "content": "İnsan kaynakları PA30 işlem kodunda yeni terfi eden çalışanın maaş ve tazminat bilgi tipini (IT0008) güncellerken alanlar gri ve değiştirilemez geliyor.",
+        "siniflandirma": {
+            "modul": "SAP-HR",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Personel Yönetimi",
+            "sap_modulu": "HR",
+            "ozet": "SAP HCM infotype 0008 temel ücret düzenleme yetki ve kilit sorunu"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "gizem.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "SAP ME51N Satınalma Talebinde Masraf Yeri Doğrulama Hatası",
+        "content": "Hizmet alımı için ME51N'de SAS oluştururken 'Masraf yeri 10200 aktif değil veya bütçe yetersiz' hatası alıyorum.",
+        "siniflandirma": {
+            "modul": "SAP-MM",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Satınalma Talebi",
+            "sap_modulu": "MM",
+            "ozet": "Satınalma talebinde masraf merkezi geçerlilik tarihi veya bütçe blokajı uyarısı"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "burak.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "F-03 Açık Kalem Denkleştirme Yapılamıyor",
+        "content": "Müşteriden gelen havale ile açık faturayı F-03 işleminde eşleştirmek istediğimde kur farkı hesabı tayin edilmediği için işlem tamamlanamıyor.",
+        "siniflandirma": {
+            "modul": "SAP-FI",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Müşteriler Muhasebesi",
+            "sap_modulu": "FI",
+            "ozet": "Dövizli açık kalem denkleştirmede kur farkı gelir/gider hesap tayini eksikliği"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "faruk.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Kullanıcı Şifre Sıfırlama ve MFA Kilidi Kaldırma",
+        "content": "Telefonumu değiştirdiğim için Microsoft Authenticator uygulamam sıfırlandı. Hesabıma giriş yapamıyorum, MFA yöntemimin sıfırlanmasını rica ederim.",
+        "siniflandirma": {
+            "modul": "IT-Güvenlik",
+            "oncelik": "1",
+            "istek_turu": "talep",
+            "ust_kategori": "ERİŞİM & YETKİ",
+            "alt_kategori": "MFA & Parola",
+            "sap_modulu": "N/A",
+            "ozet": "Kullanıcının çok faktörlü kimlik doğrulama (MFA) metodunun sıfırlanması talebi"
+        },
+        "yonlendirme": {
+            "ekip": "BT Destek Ekibi",
+            "ekip_gorunum_adi": "BT Destek Ekibi",
+            "atanan_uzman": "yucel.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Toplantı Odası ClickShare Kablosuz Sunum Cihazı Çalışmıyor",
+        "content": "Yönetim kurulu toplantı odasındaki Barco ClickShare butonu bilgisayara takıldığında eşleşmiyor ve ekrana görüntü aktarmıyor.",
+        "siniflandirma": {
+            "modul": "IT-Donanım",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Toplantı Odası Sistemleri",
+            "sap_modulu": "N/A",
+            "ozet": "Toplantı odası kablosuz görüntü aktarım donanımı firmware veya bağlantı arızası"
+        },
+        "yonlendirme": {
+            "ekip": "BT Destek Ekibi",
+            "ekip_gorunum_adi": "BT Destek Ekibi",
+            "atanan_uzman": "yusuf.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "SAP QM01 Kalite Bildirimi Oluşturulamıyor",
+        "content": "Giriş kalite kontrolde reddedilen parti için QM01 üzerinden hata bildirimi kaydederken katalog kod grubu boş geliyor ve zorunlu alan geçilemiyor.",
+        "siniflandirma": {
+            "modul": "SAP-QM",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Kalite Yönetimi",
+            "sap_modulu": "QM",
+            "ozet": "Kalite kontrol hata bildirimi katalog eşleşme konfigürasyonu arızası"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "burak.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "IP Santral Dahili Numara Değişikliği Talebi",
+        "content": "Finans departmanından Satınalma'ya geçiş yapan Seda Yılmaz'ın masa telefonu dahili numarasının (Ext: 1420) yeni masasına aktarılması rica olunur.",
+        "siniflandirma": {
+            "modul": "IT-Telekom",
+            "oncelik": "3",
+            "istek_turu": "talep",
+            "ust_kategori": "TALEPLER",
+            "alt_kategori": "IP Telefon / Santral",
+            "sap_modulu": "N/A",
+            "ozet": "VoIP IP telefon dahili numara ve port yönlendirme talebi"
+        },
+        "yonlendirme": {
+            "ekip": "Sistem & Ağ Ekibi",
+            "ekip_gorunum_adi": "Sistem & Ağ Ekibi",
+            "atanan_uzman": "emre.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "SAP VA05 Sipariş Listesi Raporunda Zaman Aşımı Hatası",
+        "content": "Tüm satış organizasyonunu kapsayan son 1 yıllık sipariş listesini çekerken program 10 dakika sonra 'TIME_OUT' dump vererek kapanıyor.",
+        "siniflandirma": {
+            "modul": "SAP-SD",
+            "oncelik": "3",
+            "istek_turu": "olay",
+            "ust_kategori": "PERFORMANS",
+            "alt_kategori": "Raporlama & Dump",
+            "sap_modulu": "SD",
+            "ozet": "Yüksek veri hacimli sipariş listesi sorgusunda ABAP runtime time-out arızası"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "selin.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "USB Bellek Salt Okunur Erişim İzni Talebi",
+        "content": "Fabrika otomasyon PLC yedeklerini taşımak amacıyla harici USB depolama birimi kullanım izninin 1 ay süreyle tanımlanmasını talep ediyorum.",
+        "siniflandirma": {
+            "modul": "IT-Güvenlik",
+            "oncelik": "3",
+            "istek_turu": "talep",
+            "ust_kategori": "ERİŞİM & YETKİ",
+            "alt_kategori": "DLP / Veri Güvenliği",
+            "sap_modulu": "N/A",
+            "ozet": "DLP politikası kapsamında USB çıkarılabilir medya istisna izni talebi"
+        },
+        "yonlendirme": {
+            "ekip": "Bilgi Güvenliği Ekibi",
+            "ekip_gorunum_adi": "Bilgi Güvenliği Ekibi",
+            "atanan_uzman": "merve.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Power BI Raporu Otomatik Yenileme (Refresh) Hatası",
+        "content": "Günlük yönetim paneli Power BI raporumuz bu sabah 'Gateway connection failed' uyarısıyla veri yenileyemedi, panolar güncel değil.",
+        "siniflandirma": {
+            "modul": "IT-Yazılım",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "İş Zekası & Raporlama",
+            "sap_modulu": "N/A",
+            "ozet": "Power BI On-Premises Data Gateway bağlantı kopması ve veri akışı kesintisi"
+        },
+        "yonlendirme": {
+            "ekip": "Yazılım Destek Ekibi",
+            "ekip_gorunum_adi": "Yazılım Destek Ekibi",
+            "atanan_uzman": "faruk.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "SAP IW31 Bakım Siparişi Oluşturulamıyor",
+        "content": "Enjeksiyon pres hattı arızası için IW31 ile acil bakım siparişi açarken 'Teknik birim 10-PR-02 kullanım dışı' uyarısı alıyorum.",
+        "siniflandirma": {
+            "modul": "SAP-PM",
+            "oncelik": "1",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Bakım & Onarım",
+            "sap_modulu": "PM",
+            "ozet": "Teknik birim statü kilidi sebebiyle acil bakım iş emri oluşturulamaması"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "burak.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Bilgisayar Klavyesinde Bazı Tuşlar Basmıyor",
+        "content": "Masaüstü bilgisayarıma bağlı Logitech kablosuz klavyede 'Enter', 'Boşluk' ve 'Shift' tuşları tutukluk yapıyor, pil değişimi sorunu çözmedi.",
+        "siniflandirma": {
+            "modul": "IT-Donanım",
+            "oncelik": "3",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Klavye / Mouse",
+            "sap_modulu": "N/A",
+            "ozet": "Kullanıcı donanımında mekanik klavye arızası ve değişim ihtiyacı"
+        },
+        "yonlendirme": {
+            "ekip": "BT Destek Ekibi",
+            "ekip_gorunum_adi": "BT Destek Ekibi",
+            "atanan_uzman": "yucel.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "SAP İntranet Web Portal Girişinde 502 Bad Gateway",
+        "content": "Çalışan izin ve avans taleplerini girdiğimiz Fiori / Portal sayfasına bağlanmak istediğimizde tüm departman 502 Bad Gateway hatası alıyor.",
+        "siniflandirma": {
+            "modul": "SAP-Basis",
+            "oncelik": "1",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Web Dispatcher / Fiori",
+            "sap_modulu": "Basis",
+            "ozet": "Fiori web dispatcher veya backend uygulama sunucusu servis kesintisi"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "selin.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Müşteri E-Fatura GİB Entegrasyonunda Hata",
+        "content": "Satış faturaları kesildiğinde özel entegratöre iletilirken 'Schematron doğrulaması başarısız - VKN eksik' hatasıyla kuyrukta bekliyor.",
+        "siniflandirma": {
+            "modul": "SAP-SD",
+            "oncelik": "1",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "E-Fatura & Entegrasyon",
+            "sap_modulu": "SD",
+            "ozet": "E-Fatura XML oluşturma ve Gelir İdaresi Başkanlığı şema doğrulama arızası"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "faruk.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Yedekleme Sunucusu (Veeam) Günlük Backup Uyarısı",
+        "content": "Gece 03:00'te çalışan SQL-PROD sanal sunucu imaj yedeği 'VSS snapshot timed out' uyarısıyla 'Warning' statüsünde tamamlandı.",
+        "siniflandirma": {
+            "modul": "IT-Altyapı",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Yedekleme & Depolama",
+            "sap_modulu": "N/A",
+            "ozet": "Üretim veritabanı sanal makine gölge kopya (VSS) yedekleme zaman aşımı"
+        },
+        "yonlendirme": {
+            "ekip": "Sistem & Ağ Ekibi",
+            "ekip_gorunum_adi": "Sistem & Ağ Ekibi",
+            "atanan_uzman": "ogulcan.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Toplantı Odası HDMI Çoklayıcı Görüntü Titremesi",
+        "content": "Pazarlama sunum odasındaki projeksiyona bağlı HDMI switch cihazında ekran sürekli 3 saniyede bir kararıp geri geliyor.",
+        "siniflandirma": {
+            "modul": "IT-Donanım",
+            "oncelik": "3",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Toplantı Odası Sistemleri",
+            "sap_modulu": "N/A",
+            "ozet": "Görüntü çoklayıcı donanımında sinyal kaybı ve arayüz titreme problemi"
+        },
+        "yonlendirme": {
+            "ekip": "BT Destek Ekibi",
+            "ekip_gorunum_adi": "BT Destek Ekibi",
+            "atanan_uzman": "yusuf.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Kullanıcıya İkinci E-posta Takma Adı (Alias) Tanımlanması",
+        "content": "Kurumsal İletişim Müdürü Elif Hanım için gelen basın bültenlerini takip etmek üzere 'basin@sirketi.com' alias adresinin tanımlanmasını rica ederiz.",
+        "siniflandirma": {
+            "modul": "IT-Sistem",
+            "oncelik": "4",
+            "istek_turu": "talep",
+            "ust_kategori": "TALEPLER",
+            "alt_kategori": "E-Posta Yönetimi",
+            "sap_modulu": "N/A",
+            "ozet": "Kullanıcı M365 posta kutusuna alternatif e-posta takma adı eklenmesi"
+        },
+        "yonlendirme": {
+            "ekip": "Sistem & Ağ Ekibi",
+            "ekip_gorunum_adi": "Sistem & Ağ Ekibi",
+            "atanan_uzman": "ogulcan.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "SAP MM Stok Sayım Belgesi (MI01) Kapatılamıyor",
+        "content": "Yıl sonu depo sayımı sonrası MI07 ile fark kaydı girmeye çalışırken 'Fark toleransı aşıldı, yönetici onayı gerekli' mesajı ile işlem duruyor.",
+        "siniflandirma": {
+            "modul": "SAP-MM",
+            "oncelik": "2",
+            "istek_turu": "olay",
+            "ust_kategori": "ARIZALAR",
+            "alt_kategori": "Envanter Yönetimi",
+            "sap_modulu": "MM",
+            "ozet": "Fiziksel envanter sayım farklarının tolerans sınırını aşması sebebiyle muhasebeleştirilememesi"
+        },
+        "yonlendirme": {
+            "ekip": "SAP Danışman Ekibi",
+            "ekip_gorunum_adi": "SAP Danışman Ekibi",
+            "atanan_uzman": "burak.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Şirket İçi SQL Veritabanı Okuma Yetkisi Talebi",
+        "content": "Veri Analitiği ekibine yeni katılan Caner Bey için CRM_Reporting veritabanında 'db_datareader' rolünün atanması talep edilmektedir.",
+        "siniflandirma": {
+            "modul": "IT-Yazılım",
+            "oncelik": "3",
+            "istek_turu": "talep",
+            "ust_kategori": "ERİŞİM & YETKİ",
+            "alt_kategori": "Veritabanı Yetkisi",
+            "sap_modulu": "N/A",
+            "ozet": "Raporlama amacıyla MS SQL veritabanında salt-okunur kullanıcı yetkilendirmesi"
+        },
+        "yonlendirme": {
+            "ekip": "Yazılım Destek Ekibi",
+            "ekip_gorunum_adi": "Yazılım Destek Ekibi",
+            "atanan_uzman": "faruk.teknoloji@sirketi.com"
+        }
+    },
+    {
+        "subject": "Güvenlik Duvarında (Firewall) SSL Sertifika Süresi Dolumu Uyarısı",
+        "content": "Dışarıya açık müşteri portalımızın SSL sertifikasının geçerlilik süresinin bitmesine 5 gün kaldı. Yeni wildcard sertifikanın yüklenmesi gerekmektedir.",
+        "siniflandirma": {
+            "modul": "IT-Güvenlik",
+            "oncelik": "1",
+            "istek_turu": "talep",
+            "ust_kategori": "TALEPLER",
+            "alt_kategori": "Sertifika & SSL",
+            "sap_modulu": "N/A",
+            "ozet": "Kurumsal web servisleri için SSL/TLS sertifika yenileme ve yükleme işlemi"
+        },
+        "yonlendirme": {
+            "ekip": "Bilgi Güvenliği Ekibi",
+            "ekip_gorunum_adi": "Bilgi Güvenliği Ekibi",
+            "atanan_uzman": "merve.teknoloji@sirketi.com"
+        }
+    }
+]
