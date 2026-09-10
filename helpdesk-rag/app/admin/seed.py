@@ -23,7 +23,6 @@ DÜZ (nested obje yok):
     "priority": "medium",
     "assigned_group_name": "BT Destek Ekibi",
     "assigned_agent_email": "emirhan.teknoloji@sirket.com",
-    "alt_kategori_adi": "Ofis Uygulamaları",
     "sap_module_code": null,
     "sla_level": 3,
     "ozet": "..."
@@ -38,11 +37,8 @@ yok, sessizce atlanır.
 kullanılır (_ONCELIK_MAP ile priority string'ine çevrilir). "priority"
 geldiyse doğrudan o kullanılır, sla_level'a bakılmaz.
 
-BİLİNEN KISIT: "alt_kategori_adi" tek başına geliyor, kategori_grubu YOK.
-store.get_alt_kategori_id() ikisini birden istiyor (JOIN ile eşleştiriyor),
-bu yüzden bu veri setiyle sub_category_id şu an HİÇBİR ZAMAN eşleşmeyecek —
-her ticket için uyarı düşecek. Kalıcı çözüm için store.py'ye isimle tek
-başına arayan bir fonksiyon eklenmesi gerekiyor (bkz. modül sonu TODO).
+Bu veri setinde alt kategori bilgisi yok — sub_category_id her zaman None
+yazılır.
 
 assigned_agent_email / assigned_group_name DB'de bulunamazsa ticket YİNE DE
 eklenir (ilgili id NULL kalır) — tek bir eşleşmeme tüm batch'i durdurmaz,
@@ -88,24 +84,8 @@ async def _import_one(store, ticket: dict) -> list[str]:
     if not priority:
         priority = _sla_level_to_priority(ticket.get("sla_level", "3"))
 
-    # sub_category_id: alt_kategori_adi + kategori_grubu isminden çözülür.
-    # BİLİNEN KISIT: bu veri setinde kategori_grubu yok, bu yüzden lookup
-    # şu an hep None dönecek (bkz. modül başındaki not).
-    alt_kategori = ticket.get("alt_kategori_adi")
-    kategori_grubu = ticket.get("kategori_grubu_adi")  # bu alan veri setinde yok
+    # sub_category_id: bu veri setinde alt kategori bilgisi yok, hep None.
     sub_category_id = None
-    if alt_kategori:
-        if kategori_grubu:
-            sub_category_id = store.get_alt_kategori_id(alt_kategori, kategori_grubu)
-            if not sub_category_id:
-                uyarilar.append(
-                    f"alt_kategori_adi='{alt_kategori}' / kategori_grubu_adi='{kategori_grubu}' eşleşmedi."
-                )
-        else:
-            uyarilar.append(
-                f"alt_kategori_adi='{alt_kategori}' verildi ama kategori_grubu_adi yok, "
-                "sub_category_id eşleştirilemedi (store.get_alt_kategori_id ikisini de istiyor)."
-            )
 
     # sap_module_id: sap_module_code'dan çözülür
     sap_module_id = None
@@ -233,18 +213,3 @@ async def seed(
         "toplam": len(payload),
         "uyarilar": tum_uyarilar,
     }
-
-
-# TODO: alt_kategori_adi tek başına gelirse kesin eşleşme sağlamak için
-# store.py'ye şuna benzer bir fonksiyon eklenmesi önerilir:
-#
-# def get_alt_kategori_id_by_name(name: str) -> str | None:
-#     """Sadece alt kategori adına göre arar. Birden fazla grupta aynı isim
-#     varsa ilk bulduğunu döner — isim çakışması varsa çağıran taraf
-#     kategori_grubu_adi ile birlikte get_alt_kategori_id()'yi kullanmalı."""
-#     if not name:
-#         return None
-#     with _connect() as conn, conn.cursor() as cur:
-#         cur.execute("SELECT id FROM alt_kategoriler WHERE name = %s LIMIT 1", (name,))
-#         row = cur.fetchone()
-#         return str(row[0]) if row else None
