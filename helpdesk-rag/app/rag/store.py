@@ -281,6 +281,7 @@ def get_sap_module_id(code: str) -> str | None:
         row = cur.fetchone()
         return str(row[0]) if row else None
 
+        return None
 
 def get_support_group_id_by_name(name: str) -> str | None:
     """Grup adından id döner; yoksa None. Elle ID kopyalama hatasını
