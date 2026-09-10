@@ -118,12 +118,11 @@ async def _import_one(store, ticket: dict) -> list[str]:
             group_id = store.get_user_support_group_id(agent_id)
 
     sla_policy_id = None
-    ham_sla = siniflandirma.get("sla_policy_id", ticket.get("sla_policy_id"))
-    if ham_sla is not None:
-        try:
-            sla_policy_id = int(str(ham_sla).split(".")[0])
-        except (TypeError, ValueError):
-            uyarilar.append(f"sla_policy_id='{ham_sla}' geçersiz, boş bırakıldı.")
+    sla = store.get_sla_policy(priority)
+    if sla:
+        sla_policy_id = sla["id"]
+    else:
+        uyarilar.append(f"priority='{priority}' için sla_policies eşleşmedi, sla_policy_id boş kaldı.")
 
     tid, tno = store.create_ticket(
         customer_email=ticket.get("customer_email", _VARSAYILAN_MUSTERI_EMAIL),
