@@ -184,28 +184,24 @@ async def seed(
 
     from app.rag import store  # geç import
 
-    store.open_pool()
-    try:
-        eklenen = 0
-        basarisiz = 0
-        tum_uyarilar: dict[int, list[str]] = {}
-
-        for i, ticket in enumerate(payload):
-            if not isinstance(ticket, dict):
-                tum_uyarilar[i] = ["Liste elemanı bir obje değil, atlandı."]
-                basarisiz += 1
-                continue
-            try:
-                uyarilar = await _import_one(store, ticket)
-                if uyarilar:
-                    tum_uyarilar[i] = uyarilar
-                eklenen += 1
-            except Exception as e:
-                basarisiz += 1
-                tum_uyarilar[i] = [f"Eklenemedi: {e}"]
-                logger.warning("seed(): ticket[%d] eklenemedi: %s", i, e)
-    finally:
-        store.close_pool()
+    eklenen = 0
+    basarisiz = 0
+    tum_uyarilar: dict[int, list[str]] = {}
+ 
+    for i, ticket in enumerate(payload):
+        if not isinstance(ticket, dict):
+            tum_uyarilar[i] = ["Liste elemanı bir obje değil, atlandı."]
+            basarisiz += 1
+            continue
+        try:
+            uyarilar = await _import_one(store, ticket)
+            if uyarilar:
+                tum_uyarilar[i] = uyarilar
+            eklenen += 1
+        except Exception as e:
+            basarisiz += 1
+            tum_uyarilar[i] = [f"Eklenemedi: {e}"]
+            logger.warning("seed(): ticket[%d] eklenemedi: %s", i, e)
 
     return {
         "eklenen": eklenen,
