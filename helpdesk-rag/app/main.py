@@ -7,6 +7,7 @@ Stabilite ve hata dayanıklılığı:
   - Health check: bağımlılık durumlarını gerçekten test eder
   - Langfuse: izleme dekoratörleri doğru sırada
 """
+from app.admin.seed import router as seed_router
 from langfuse import observe
 import os
 import time
@@ -29,6 +30,7 @@ setup_logging()
 logger = get_logger(__name__)
 
 app = FastAPI(title="Helpdesk RAG API")
+app.include_router(seed_router)
 
 IMAGE_TYPES = {"image/png", "image/jpeg", "image/jpg", "image/webp"}
 
