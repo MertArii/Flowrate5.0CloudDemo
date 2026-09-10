@@ -11,7 +11,6 @@
         "status": "assigned",
         "assigned_agent_email": "ogulcan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Fiyatlama / Muhasebe / Vergi / Rapor Uyuşmazlığı",
         "sap_module_code": "FI",
         "cozum": "Satıcı ana verisinde vergi göstergesi kontrol edildi. Doğru vergi kodu atanarak FB60 faturası muhasebeleştirildi."
     },
@@ -27,7 +26,6 @@
         "status": "in_progress",
         "assigned_agent_email": "ogulcan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Dönem Açılış / Kapanış",
         "sap_module_code": "FI",
         "cozum": "400102 numaralı duran varlık kartındaki amortisman anahtarı düzeltildi ve AFAB yeniden başlatılarak dönem başarıyla kapatıldı."
     },
@@ -43,7 +41,6 @@
         "status": "assigned",
         "assigned_agent_email": "ogulcan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Entegrasyon Hataları",
         "sap_module_code": "FI",
         "cozum": "OB09 işlem kodu üzerinden ilgili döviz cinsi için kur farkı gelir/gider hesap tayini tanımlandı."
     },
@@ -59,7 +56,6 @@
         "status": "assigned",
         "assigned_agent_email": "ogulcan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Şirket / Şube / Tesis Tanımı",
         "sap_module_code": "FI",
         "cozum": "FS00 ile 102.04.015 ana hesabı açıldı ve FI-12 üzerinden Ziraat Bankası Yozgat şubesi hesap parametreleri bağlandı."
     },
@@ -75,7 +71,6 @@
         "status": "resolved",
         "assigned_agent_email": "ogulcan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Fiyatlama / Muhasebe / Vergi / Rapor Uyuşmazlığı",
         "sap_module_code": "FI",
         "cozum": "OB58 bilanço/gelir tablosu yapısına ilgili 600'lü hesaplar eklenerek raporlama hiyerarşisi güncellendi."
     },
@@ -91,7 +86,6 @@
         "status": "assigned",
         "assigned_agent_email": "omer.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Entegrasyon Hataları",
         "sap_module_code": "MM",
         "cozum": "OBYC üzerinden WRX (fatura/mal girişi takas hesabı) tayini yapılarak mal kabul işlemi tamamlatıldı."
     },
@@ -107,7 +101,6 @@
         "status": "assigned",
         "assigned_agent_email": "sena.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Geliştirme / Uyarlama Hatası",
         "sap_module_code": "MM",
         "cozum": "CL20N sınıflandırma koşulları ve onay stratejisi matrisi güncellenerek 100.000 TL üzeri siparişlere direktör onay zorunluluğu getirildi."
     },
@@ -123,7 +116,6 @@
         "status": "resolved",
         "assigned_agent_email": "omer.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Şirket / Şube / Tesis Tanımı",
         "sap_module_code": "MM",
         "cozum": "MM01 üzerinden Sakarya tesisine (1020) ait depolama ve muhasebe görünümleri açılarak malzeme kullanıma hazırlandı."
     },
@@ -139,7 +131,6 @@
         "status": "assigned",
         "assigned_agent_email": "sena.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Fiyatlama / Muhasebe / Vergi / Rapor Uyuşmazlığı",
         "sap_module_code": "MM",
         "cozum": "Sayım farkı yöneticisi onayı alınarak tolerans limiti geçici olarak genişletildi ve MI07 fark kaydı işlendi."
     },
@@ -155,7 +146,6 @@
         "status": "assigned",
         "assigned_agent_email": "omer.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Eğitim Talebi",
         "sap_module_code": "MM",
         "cozum": "Fason üretim malzeme hareketleri ve alt yüklenici süreç dokümanı paylaşılarak online eğitim planlandı."
     },
@@ -171,7 +161,6 @@
         "status": "assigned",
         "assigned_agent_email": "gizem.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Veri Düzeltme",
         "sap_module_code": "SD",
         "cozum": "Siparişteki kısmi teslimat göstergesi 'Bölünemez' statüsünden 'Kısmi teslime izin ver' olarak güncellendi."
     },
@@ -187,7 +176,6 @@
         "status": "assigned",
         "assigned_agent_email": "sena.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Dönem Açılış / Kapanış",
         "sap_module_code": "SD",
         "cozum": "Ters kayıt tarihi güncel açık döneme yönlendirilerek VF11 iptal kaydı başarıyla oluşturuldu."
     },
@@ -201,9 +189,8 @@
         "priority": "urgent",
         "sla_level": 1,
         "status": "assigned",
-        "assigned_agent_email": "gizem.teknoloji@sirket.com",
+        "assigned_agent_email": "hakan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "E-Dönüşüm Hataları (E-Fatura, E-İrsaliye vb.)",
         "sap_module_code": "SD",
         "cozum": "Müşteri ana verisindeki vergi numarası kontrol edildi, baştaki boşluk karakteri silinip e-irsaliye kuyruğu tekrar tetiklendi."
     },
@@ -219,7 +206,6 @@
         "status": "resolved",
         "assigned_agent_email": "sena.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Geliştirme / Ekip Talebi",
         "sap_module_code": "SD",
         "cozum": "VK11 üzerinden PR00 ve ZDIS koşul türleri bölgesel müşteri grubuna tanımlandı."
     },
@@ -235,7 +221,6 @@
         "status": "assigned",
         "assigned_agent_email": "gizem.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Geliştirme / Ekip Talebi",
         "sap_module_code": "SD",
         "cozum": "Kredi komitesi onayı doğrultusunda FD32'de 750.000 TL limit açılarak risk sınıfı 'B' olarak tanımlandı."
     },
@@ -251,7 +236,6 @@
         "status": "in_progress",
         "assigned_agent_email": "mustafa.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Server / Sanallaştırma Arızası",
         "sap_module_code": "Basis",
         "cozum": "Askıda kalan uzun süreli arka plan job kilitleri SM12'den temizlendi ve enqueue bellek parametresi optimize edildi."
     },
@@ -267,7 +251,6 @@
         "status": "resolved",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Geliştirme / Ekip Talebi",
         "sap_module_code": "Basis",
         "cozum": "STMS üzerinden kalite onayı doğrulanmış TRK900452 talebi PRD sistemine import edildi."
     },
@@ -283,7 +266,6 @@
         "status": "assigned",
         "assigned_agent_email": "mustafa.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Şirket / Şube / Tesis Tanımı",
         "sap_module_code": "Basis",
         "cozum": "SPAD üzerinde 'YOZ_ZEBRA_01' çıktı aygıtı access method U ve IP adresi ile tanımlanarak test çıktısı alındı."
     },
@@ -299,7 +281,6 @@
         "status": "assigned",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Active Directory Arızası",
         "sap_module_code": "Basis",
         "cozum": "Kullanıcı bilgisayarındaki Kerberos bilet önbelleği temizlendi ve sncgss32.dll kütüphanesi yeniden kaydedildi."
     },
@@ -315,7 +296,6 @@
         "status": "resolved",
         "assigned_agent_email": "mustafa.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yedekleme / Snapshot Talebi",
         "sap_module_code": "Basis",
         "cozum": "QAS sanal sunucusu üzerinde VMware snapshot ve HANA tam DB backup işlemi tamamlandı."
     },
@@ -331,7 +311,6 @@
         "status": "assigned",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yetki Hatası",
         "sap_module_code": "SD",
         "cozum": "PFCG üzerinden Z_SD_SATIS rolündeki V_VBAK_AAT nesnesine Ankara satış organizasyonu yetkisi eklenip kullanıcıya yeniden üretildi."
     },
@@ -347,7 +326,6 @@
         "status": "assigned",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Yetki / Rol Talebi",
         "sap_module_code": "FI",
         "cozum": "SU01 üzerinde kullanıcı açılarak Z_FI_MUHASEBE_UZMAN rolü ve ilgili şirket kodu yetkileri atandı."
     },
@@ -363,7 +341,6 @@
         "status": "resolved",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Yetki / Rol Talebi",
         "sap_module_code": "MM",
         "cozum": "M_MSEG_BWA nesnesine 311 ve 312 hareket türleri eklenerek depo amiri rolü güncellendi."
     },
@@ -379,7 +356,6 @@
         "status": "assigned",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yetki Hatası",
         "sap_module_code": "QM",
         "cozum": "Q_INSP_RES nesnesi ve QA11/QA32 işlem yetkileri kalite uzmanı kullanıcısına atandı."
     },
@@ -395,7 +371,6 @@
         "status": "resolved",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Yetki / Rol Talebi",
         "sap_module_code": "Basis",
         "cozum": "SU01 üzerinde kullanıcı kilitlendi, geçerlilik tarihi bugüne çekildi ve tüm yetki rolleri kaldırıldı."
     },
@@ -411,25 +386,23 @@
         "status": "in_progress",
         "assigned_agent_email": "yucel.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "İnternet Kesintisi",
         "sap_module_code": "N/A",
         "cozum": "Servis sağlayıcı (ISP) ile irtibata geçilerek bölgedeki fiber kablo kopması tespit edildi ve yedek LTE hattı devreye alındı."
     },
     {
         "customer_email": "pelin.kaya@sirket.com",
         "recipient_email": "btdestek@sirket.com",
-        "subject": "FortiClient SSL-VPN Bağlantı Kopması (Error 455)",
-        "raw_issue_description": "Ankara ofisinden uzaktan çalışan mühendislerimiz VPN bağlantısı kurduktan sonra 5 dakika içinde oturumun koptuğunu bildirmektedir.",
+        "subject": "DLP Güvenlik İhlali: Harici Belleğe Yetkisiz Veri Aktarımı Engellemesi",
+        "raw_issue_description": "Ankara ofisinde görevli personelin şirket laptopuna taktığı harici diske kurumsal veri kopyalama girişimi DLP (Veri Sızıntısı Önleme) güvenlik politikası tarafından bloke edilmiştir. Bilgi güvenliği prosedürleri kapsamında güvenlik değerlendirmesi yapılması rica olunur.",
         "region": "Ankara",
-        "extracted_category": "IT-Ag",
+        "extracted_category": "IT-Guvenlik",
         "priority": "high",
         "sla_level": 2,
         "status": "assigned",
-        "assigned_agent_email": "yucel.teknoloji@sirket.com",
+        "assigned_agent_email": "turgut.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "VPN Bağlantı Sorunları",
         "sap_module_code": "N/A",
-        "cozum": "FortiGate firewall üzerindeki VPN idle-timeout süresi 8 saate çıkarıldı ve istemci MTU boyutu 1350 olarak ayarlandı."
+        "cozum": "Kullanıcının departman yöneticisinden resmi onay belgesi alındı. USB cihazı siber güvenlik taramasından geçirilerek yalnızca şifreli kurumsal bellek kullanımına izin veren geçici bir DLP istisna kuralı tanımlandı."
     },
     {
         "customer_email": "tarik.yildiz@sirket.com",
@@ -443,25 +416,23 @@
         "status": "assigned",
         "assigned_agent_email": "yucel.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Erişim Yavaşlığı",
         "sap_module_code": "N/A",
         "cozum": "3. kattaki Access Point (AP) kanalları çakışmaya karşı yeniden yapılandırıldı ve yayın gücü artırıldı."
     },
     {
         "customer_email": "hasan.koc@sirket.com",
         "recipient_email": "btdestek@sirket.com",
-        "subject": "Yozgat Fabrika NVR Güvenlik Kamerası İçin Statik IP ve Port İzni",
-        "raw_issue_description": "Yozgat depoya kurulan yeni kamera kayıt cihazının merkez güvenlik birimince izlenebilmesi için firewall üzerinde port yönlendirmesi talep edilmektedir.",
+        "subject": "Kullanıcı Bilgisayarında EDR Tehdit Algılama ve Fidye Yazılımı (Ransomware) Alarmı",
+        "raw_issue_description": "Yozgat fabrikasındaki bir personelin bilgisayarında EDR (Uç Nokta Tehdit Algılama) yazılımı tarafından şüpheli şifreleme ve zararlı yazılım çalıştırma aktivitesi tespit edilmiştir. Cihazın ağ izolasyonuna alınarak siber güvenlik müdahalesinin yapılması talep edilmektedir.",
         "region": "Yozgat",
-        "extracted_category": "IT-Ag",
+        "extracted_category": "IT-Guvenlik",
         "priority": "medium",
         "sla_level": 3,
         "status": "resolved",
-        "assigned_agent_email": "yucel.teknoloji@sirket.com",
+        "assigned_agent_email": "turgut.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Firma Dışı Erişim / Port Talebi",
         "sap_module_code": "N/A",
-        "cozum": "Firewall üzerinde NVR cihazı için VIP ve port yönlendirme kuralı açılarak merkez güvenlik erişimi sağlandı."
+        "cozum": "Etkilenen cihaz derhal ağdan izole edildi. EDR ajanından alınan bellek ve dosya dökümü incelendi, zararlı script temizlendi. Ağdaki diğer istemciler taranarak herhangi bir yayılma olmadığı doğrulandı ve cihaz güvenli şekilde yeniden ağa dahil edildi."
     },
     {
         "customer_email": "zeynep.avci@sirket.com",
@@ -475,7 +446,6 @@
         "status": "resolved",
         "assigned_agent_email": "yucel.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Wi-Fi / Misafir Ağı Talebi",
         "sap_module_code": "N/A",
         "cozum": "Guest portal üzerinden 3 günlük süreli 5 adet misafir kullanıcı hesabı açılarak denetim ekibine teslim edildi."
     },
@@ -491,7 +461,6 @@
         "status": "assigned",
         "assigned_agent_email": "faruk.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Laptop Arızası",
         "sap_module_code": "N/A",
         "cozum": "Ankara yerinde destek uzmanı cihazın RAM modülünü söküp temizleyerek statik elektriği boşalttı, görüntü sağlandı."
     },
@@ -507,7 +476,6 @@
         "status": "in_progress",
         "assigned_agent_email": "salih.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Yazıcı Arızası",
         "sap_module_code": "N/A",
         "cozum": "Yozgat yerinde destek uzmanı yazıcının ribon sensörünü alkolle temizledi ve mekanik kalibrasyon yaparak çalışır duruma getirdi."
     },
@@ -523,7 +491,6 @@
         "status": "assigned",
         "assigned_agent_email": "emirhan.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Monitör Arızası",
         "sap_module_code": "N/A",
         "cozum": "İstanbul destek uzmanı masadaki kırık HDMI kablosunu yeni DisplayPort-HDMI kablosuyla değiştirerek görüntüyü sağladı."
     },
@@ -539,7 +506,6 @@
         "status": "resolved",
         "assigned_agent_email": "yusuf.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Bilgisayar Çevre Birimleri Talebi",
         "sap_module_code": "N/A",
         "cozum": "Depo stoğundan Zebra TC21 el terminali hazırlanarak Wi-Fi ve SAP mobil istemcisi kurulup teslim edildi."
     },
@@ -555,7 +521,6 @@
         "status": "assigned",
         "assigned_agent_email": "yucel.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Yazıcı Arızası",
         "sap_module_code": "N/A",
         "cozum": "Sakarya BT sorumlusu yazıcının kağıt çekme patenlerini temizledi ve kaset ayarlarını düzeltti."
     },
@@ -571,7 +536,6 @@
         "status": "resolved",
         "assigned_agent_email": "mustafa.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Kullanıcı Hesabı Talebi",
         "sap_module_code": "N/A",
         "cozum": "Active Directory üzerinden hesap kilidi kaldırıldı ve geçici parola oluşturularak kullanıcıya SMS ile iletildi."
     },
@@ -585,9 +549,8 @@
         "priority": "urgent",
         "sla_level": 1,
         "status": "resolved",
-        "assigned_agent_email": "turgut.teknoloji@sirket.com",
+        "assigned_agent_email": "mustafa.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Kullanıcı Hesabı Talebi",
         "sap_module_code": "N/A",
         "cozum": "Entra ID (Azure AD) üzerinden eski MFA cihaz kaydı silindi ve kullanıcıya yeni Authenticator eşleme QR kodu üretildi."
     },
@@ -603,7 +566,6 @@
         "status": "assigned",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Kullanıcı Hesabı Talebi",
         "sap_module_code": "N/A",
         "cozum": "İnsan Kaynakları işe giriş formu doğrultusunda Active Directory hesabı ve M365 Business Standard lisansı tanımlandı."
     },
@@ -619,7 +581,6 @@
         "status": "resolved",
         "assigned_agent_email": "mustafa.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "E-Posta / Dağıtım Grubu Talebi",
         "sap_module_code": "N/A",
         "cozum": "Exchange Online yönetim merkezinden ilgili dağıtım grubuna kullanıcı üye olarak eklendi."
     },
@@ -633,9 +594,8 @@
         "priority": "urgent",
         "sla_level": 1,
         "status": "resolved",
-        "assigned_agent_email": "turgut.teknoloji@sirket.com",
+        "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Kullanıcı Hesabı Talebi",
         "sap_module_code": "N/A",
         "cozum": "Kullanıcı hesabı AD'de devre dışı bırakıldı, oturumları sonlandırıldı ve e-postaları birim yöneticisine forward edildi."
     },
@@ -651,7 +611,6 @@
         "status": "assigned",
         "assigned_agent_email": "ogulcan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Fiyatlama / Muhasebe / Vergi / Rapor Uyuşmazlığı",
         "sap_module_code": "FI",
         "cozum": "FBL5N rapor varyantındaki referans tarih alanı kontrol edilerek yaşlandırma başlangıç tarihi düzeltildi."
     },
@@ -667,7 +626,6 @@
         "status": "in_progress",
         "assigned_agent_email": "ogulcan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Entegrasyon Hataları",
         "sap_module_code": "FI",
         "cozum": "OBPM4 üzerinden ilgili ödeme yöntemi için DME ağacı (DMEE) formatı yeniden atanarak havale dosyası üretildi."
     },
@@ -683,7 +641,6 @@
         "status": "assigned",
         "assigned_agent_email": "ogulcan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Veri Düzeltme",
         "sap_module_code": "FI",
         "cozum": "FB03 ile eksik fiş numaraları bulunarak iptal edilen 3 belge FBR2 referansıyla yeniden girildi."
     },
@@ -699,7 +656,6 @@
         "status": "assigned",
         "assigned_agent_email": "ogulcan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Geliştirme / Uyarlama Hatası",
         "sap_module_code": "FI",
         "cozum": "İç ticaret ortağı (Trading Partner) alanı eksik belgeler tespit edilerek düzeltildi ve eliminasyon tekrar çalıştırıldı."
     },
@@ -715,7 +671,6 @@
         "status": "assigned",
         "assigned_agent_email": "ogulcan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Geliştirme / Ekip Talebi",
         "sap_module_code": "FI",
         "cozum": "Workflow Builder'da duran varlık transfer belgesi tipi için onay iş akışı tanımlanarak aktif edildi."
     },
@@ -731,7 +686,6 @@
         "status": "assigned",
         "assigned_agent_email": "sena.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Fiyatlama / Muhasebe / Vergi / Rapor Uyuşmazlığı",
         "sap_module_code": "MM",
         "cozum": "OMR6 tolerans grubunda fiyat farkı eşiği kontrol edildi, satınalma müdürü onayıyla fark muhasebeleştirildi."
     },
@@ -747,7 +701,6 @@
         "status": "in_progress",
         "assigned_agent_email": "omer.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Veri Düzeltme",
         "sap_module_code": "MM",
         "cozum": "COGI üzerindeki askıda kalan üretim teyitleri temizlendi ve MB1A/MB1C düzeltme hareketleriyle stok bakiyeleri eşitlendi."
     },
@@ -763,7 +716,6 @@
         "status": "assigned",
         "assigned_agent_email": "omer.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Şirket / Şube / Tesis Tanımı",
         "sap_module_code": "MM",
         "cozum": "LS01N üzerinden C-01-01 ile C-04-10 arası 40 raf yeri tanımlanarak depo yapısı güncellendi."
     },
@@ -779,7 +731,6 @@
         "status": "assigned",
         "assigned_agent_email": "sena.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yetki Hatası",
         "sap_module_code": "MM",
         "cozum": "M_BEST_EKG ve M_BEST_WRK yetki nesnelerinde satınalma grubu ve tesis kısıtlaması eklenerek rapor erişimi daraltıldı."
     },
@@ -795,7 +746,6 @@
         "status": "assigned",
         "assigned_agent_email": "omer.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Entegrasyon Hataları",
         "sap_module_code": "MM",
         "cozum": "OBYC üzerinden konsinyasyon stok değerleme sınıfına ait hesap tayini tanımlanarak hareket tamamlandı."
     },
@@ -811,7 +761,6 @@
         "status": "assigned",
         "assigned_agent_email": "gizem.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Fiyatlama / Muhasebe / Vergi / Rapor Uyuşmazlığı",
         "sap_module_code": "SD",
         "cozum": "VK13 ile kontrol edildiğinde ilgili müşteri/malzeme kombinasyonu için fiyat kaydının süresi dolmuştu, VK11 ile yeni tarih aralığı girildi."
     },
@@ -827,7 +776,6 @@
         "status": "assigned",
         "assigned_agent_email": "sena.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Geliştirme / Uyarlama Hatası",
         "sap_module_code": "SD",
         "cozum": "OVL2 konfigürasyonunda Yozgat tesisi için sevkiyat noktası ve yükleme grubu eşleşmesi kontrol edilerek eksik kayıt tamamlandı."
     },
@@ -841,9 +789,8 @@
         "priority": "urgent",
         "sla_level": 1,
         "status": "in_progress",
-        "assigned_agent_email": "gizem.teknoloji@sirket.com",
+        "assigned_agent_email": "hakan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "E-Dönüşüm Hataları (E-Fatura, E-İrsaliye vb.)",
         "sap_module_code": "SD",
         "cozum": "Fatura tipine bağlı ödeme koşulu alanı müşteri ana verisinden otomatik çekilecek şekilde düzeltildi ve kuyruk yeniden tetiklendi."
     },
@@ -859,7 +806,6 @@
         "status": "assigned",
         "assigned_agent_email": "sena.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Geliştirme / Ekip Talebi",
         "sap_module_code": "SD",
         "cozum": "VBO1 ile geriye dönük iade/iskonto belgesi oluşturuldu ve VK11 üzerinden bayi özel ZDIS koşulu tanımlandı."
     },
@@ -875,7 +821,6 @@
         "status": "resolved",
         "assigned_agent_email": "gizem.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Performans / Zaman Aşımı",
         "sap_module_code": "SD",
         "cozum": "Rapor parametrelerine tarih ve satış organizasyonu filtreleri eklenerek veri seti daraltıldı, runtime parametresi de 1800 saniyeye çıkarıldı."
     },
@@ -891,7 +836,6 @@
         "status": "assigned",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Server / Sanallaştırma Arızası",
         "sap_module_code": "Basis",
         "cozum": "SM37 loglarında batch iş sürecinin bellek aşımı (ABAP memory) ile düştüğü tespit edildi, RZ11 parametresi artırılarak job yeniden planlandı."
     },
@@ -907,7 +851,6 @@
         "status": "in_progress",
         "assigned_agent_email": "mustafa.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Performans / Zaman Aşımı",
         "sap_module_code": "Basis",
         "cozum": "ST03N ve SM66 analiziyle yoğun SQL sorgusu çalıştıran bir Z-rapor tespit edildi, rapor durdurularak ve DB indexleri optimize edilerek performans normale döndü."
     },
@@ -923,7 +866,6 @@
         "status": "assigned",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Yetki / Rol Talebi",
         "sap_module_code": "Basis",
         "cozum": "USMM üzerinden mevcut lisans kullanımı kontrol edildi, yeterli kontenjandan 3 Professional lisans atanarak SU01 ile kullanıcılar açıldı."
     },
@@ -939,7 +881,6 @@
         "status": "assigned",
         "assigned_agent_email": "mustafa.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Entegrasyon Hataları",
         "sap_module_code": "Basis",
         "cozum": "SM59 RFC bağlantısındaki gateway host IP adresi güncel sunucu migrasyonuna göre düzeltildi ve timeout süresi 300 saniyeye çıkarıldı."
     },
@@ -955,7 +896,6 @@
         "status": "resolved",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Geliştirme / Uyarlama Hatası",
         "sap_module_code": "Basis",
         "cozum": "STMS transport rotası incelendiğinde DEV→PRD kısa yol tanımı bulundu, silinerek DEV→QAS→PRD doğru akış yeniden kuruldu."
     },
@@ -971,7 +911,6 @@
         "status": "assigned",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yetki Hatası",
         "sap_module_code": "FI",
         "cozum": "F_BKPF_BUK yetki nesnesindeki şirket kodu değerleri '*' olarak genişletilerek tüm kodlara okuma yetkisi verildi."
     },
@@ -987,7 +926,6 @@
         "status": "assigned",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Yetki / Rol Talebi",
         "sap_module_code": "PP",
         "cozum": "SU10 toplu kullanıcı bakımı ile 8 kullanıcıya Z_PP_OPERATOR rolü ve Yozgat tesis yetkisi eş zamanlı atandı."
     },
@@ -1003,7 +941,6 @@
         "status": "assigned",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Geliştirme / Ekip Talebi",
         "sap_module_code": "Basis",
         "cozum": "SUIM raporuyla kullanıcısız kalan 12 rol tespit edildi, PFCG'den silinerek AGR_1251/AGR_USERS tabloları temizlendi."
     },
@@ -1019,7 +956,6 @@
         "status": "resolved",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yetki Hatası",
         "sap_module_code": "MM",
         "cozum": "Z_WM_DEPO rolüne LT01, LT02, LT03 işlem kodları ve L_TCODE yetki nesnesi eklenerek kullanıcıya atandı."
     },
@@ -1035,7 +971,6 @@
         "status": "resolved",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Yetki / Rol Talebi",
         "sap_module_code": "Basis",
         "cozum": "Z_AUDIT_READONLY rolü ile geçici kullanıcı açıldı, SU01 geçerlilik bitiş tarihi 2 hafta sonrasına ayarlandı."
     },
@@ -1051,7 +986,6 @@
         "status": "assigned",
         "assigned_agent_email": "yucel.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Erişim Engeli",
         "sap_module_code": "N/A",
         "cozum": "Ankara ofisindeki yerel DNS forwarder servisinin çöktüğü tespit edildi, servis yeniden başlatılarak ve yedek DNS eklenerek erişim sağlandı."
     },
@@ -1067,7 +1001,6 @@
         "status": "in_progress",
         "assigned_agent_email": "yucel.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "İnternet Kesintisi",
         "sap_module_code": "N/A",
         "cozum": "Kat switch cihazı (HP 2530) üzerinde POE modülü arıza verdiği tespit edildi, yedek switch ile değiştirildi."
     },
@@ -1083,7 +1016,6 @@
         "status": "assigned",
         "assigned_agent_email": "yucel.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "VPN Bağlantı Sorunları",
         "sap_module_code": "N/A",
         "cozum": "FortiGate üzerinde Phase1/Phase2 IPsec tünel parametreleri tanımlandı ve SD-WAN failover testi başarıyla geçildi."
     },
@@ -1099,25 +1031,23 @@
         "status": "resolved",
         "assigned_agent_email": "yucel.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Firma Dışı Erişim / Port Talebi",
         "sap_module_code": "N/A",
         "cozum": "VLAN 50 (OT_Network) oluşturuldu, switch portları ilgili VLAN'a atandı ve inter-VLAN routing ACL kuralları ile kısıtlandı."
     },
     {
         "customer_email": "selin.yurt@sirket.com",
         "recipient_email": "btdestek@sirket.com",
-        "subject": "İstanbul Ofis Genel İnternet Hızı Düşük",
-        "raw_issue_description": "İstanbul genel merkezde son 3 gündür internet hızı normal seviyenin yarısına düşmüş, dosya indirme ve bulut uygulamalar çok yavaş açılıyor.",
+        "subject": "Kurumsal Web Portalı İzin ve Masraf Formu Onay Hatası (HTTP 500)",
+        "raw_issue_description": "İstanbul genel merkez intranet portalında çalışanlar masraf ve izin formlarını onaylamak istediğinde HTTP 500 Dahili Sunucu Hatası ile karşılaşmaktadır. Arka uç API servisinde oluşan hatanın giderilmesi rica olunur.",
         "region": "İstanbul",
-        "extracted_category": "IT-Ag",
+        "extracted_category": "IT-Yazilim",
         "priority": "high",
         "sla_level": 2,
         "status": "assigned",
-        "assigned_agent_email": "yucel.teknoloji@sirket.com",
+        "assigned_agent_email": "yalman.gude@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Erişim Yavaşlığı",
         "sap_module_code": "N/A",
-        "cozum": "Firewall trafik analiziyle bir kullanıcının büyük boyutlu dosya senkronizasyonu yaptığı tespit edildi, QoS band limiti uygulandı."
+        "cozum": "Portal backend servis logları incelendi; son yayınlanan sürümdeki veritabanı bağlantı havuzu (connection pool) sızıntısı tespit edildi. Connection leak giderilerek API servisi yeniden yayına alındı ve form gönderimleri test edilerek doğrulandı."
     },
     {
         "customer_email": "kemal.arslan@sirket.com",
@@ -1131,7 +1061,6 @@
         "status": "assigned",
         "assigned_agent_email": "salih.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Yazıcı Arızası",
         "sap_module_code": "N/A",
         "cozum": "Yozgat destek uzmanı toner kartuşunu çıkarıp drum ünitesini temizledi, çizgi kalkmasına rağmen kartuş ömrü dolduğu için yenisiyle değiştirildi."
     },
@@ -1147,7 +1076,6 @@
         "status": "assigned",
         "assigned_agent_email": "faruk.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Bilgisayar Çevre Birimleri Arızası",
         "sap_module_code": "N/A",
         "cozum": "Ankara destek uzmanı docking station firmware güncellemesi yaparak ve USB-C kablosunu değiştirerek sorun giderildi."
     },
@@ -1163,7 +1091,6 @@
         "status": "in_progress",
         "assigned_agent_email": "emirhan.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Bilgisayar Arızası",
         "sap_module_code": "N/A",
         "cozum": "İstanbul destek uzmanı Event Viewer loglarından termal kapanma olduğunu belirledi, işlemci termal macunu yenilenerek fan temizlendi."
     },
@@ -1179,7 +1106,6 @@
         "status": "assigned",
         "assigned_agent_email": "yucel.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Bilgisayar Çevre Birimleri Arızası",
         "sap_module_code": "N/A",
         "cozum": "Sakarya BT sorumlusu projeksiyon cihazının lamba kullanım saatinin ömrünü aştığını tespit etti, yedek lamba ile değiştirildi."
     },
@@ -1195,7 +1121,6 @@
         "status": "resolved",
         "assigned_agent_email": "yusuf.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Laptop Talebi",
         "sap_module_code": "N/A",
         "cozum": "Envanter stoğundan Dell Latitude 5540 hazırlanarak Windows imajı yüklendi, AD'ye eklendi ve Office + SAP GUI kurularak teslim edildi."
     },
@@ -1211,7 +1136,6 @@
         "status": "assigned",
         "assigned_agent_email": "mustafa.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "E-Posta / Dağıtım Grubu Talebi",
         "sap_module_code": "N/A",
         "cozum": "Bozuk Outlook profili Denetim Masası'ndan silinerek yeni profil oluşturuldu ve Autodiscover ile hesap yeniden yapılandırıldı."
     },
@@ -1227,7 +1151,6 @@
         "status": "resolved",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Kullanıcı Hesabı Talebi",
         "sap_module_code": "N/A",
         "cozum": "Active Directory'den eski güvenlik grupları kaldırıldı, yeni Finans OU ve dağıtım gruplarına eklenerek file share yetkileri güncellendi."
     },
@@ -1241,9 +1164,8 @@
         "priority": "medium",
         "sla_level": 3,
         "status": "assigned",
-        "assigned_agent_email": "turgut.teknoloji@sirket.com",
+        "assigned_agent_email": "mustafa.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "E-Posta / Dağıtım Grubu Talebi",
         "sap_module_code": "N/A",
         "cozum": "Exchange Online yönetim panelinden shared mailbox iznine 2 yeni kullanıcı Send As ve Full Access yetkisiyle eklendi."
     },
@@ -1259,25 +1181,23 @@
         "status": "assigned",
         "assigned_agent_email": "mustafa.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Kullanıcı Hesabı Talebi",
         "sap_module_code": "N/A",
         "cozum": "AD'de kiosk kullanıcısı oluşturuldu, GPO ile kiosk modu kısıtlamaları ve web filtresi uygulanarak teslim edildi."
     },
     {
         "customer_email": "buse.kara@sirket.com",
         "recipient_email": "btdestek@sirket.com",
-        "subject": "VPN Uzaktan Erişim Hesabı Açılması Talebi",
-        "raw_issue_description": "İstanbul merkez ofis çalışanının evden çalışma günlerinde kurumsal ağa bağlanabilmesi için FortiClient VPN hesabı açılması rica olunur.",
+        "subject": "Şüpheli Dış IP VPN Oturum Açma Denemesi ve Brute-Force Uyarısı",
+        "raw_issue_description": "Güvenlik izleme sistemlerinde (SIEM) Ankara lokasyonundan şirket VPN ağımıza yönelik kısa sürede çok sayıda başarısız oturum açma ve kaba kuvvet (brute-force) denemesi tespit edilmiştir. İlgili dış IP adresinin firewall seviyesinde engellenmesi ve hesap güvenliğinin doğrulanması rica olunur.",
         "region": "İstanbul",
-        "extracted_category": "IT-Hesap",
+        "extracted_category": "IT-Guvenlik",
         "priority": "medium",
         "sla_level": 3,
         "status": "resolved",
         "assigned_agent_email": "turgut.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Kullanıcı Hesabı Talebi",
         "sap_module_code": "N/A",
-        "cozum": "FortiGate VPN Local User olarak tanımlandı, SSL-VPN grubuna eklendi ve kullanıcıya bağlantı profili dosyası gönderildi."
+        "cozum": "Tespit edilen dış kaynaklı şüpheli IP adresi firewall üzerinde derhal kara listeye alındı ve engellendi. Hedef alınan kullanıcı hesabının parolası sıfırlandı, 2FA oturumu sonlandırılarak yeni doğrulama zorunlu kılındı. Log incelemelerinde yetkisiz bir erişimin gerçekleşmediği teyit edildi."
     },
     {
         "customer_email": "cemre.ozturk@sirket.com",
@@ -1291,7 +1211,6 @@
         "status": "assigned",
         "assigned_agent_email": "ogulcan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Fiyatlama / Muhasebe / Vergi / Rapor Uyuşmazlığı",
         "sap_module_code": "FI",
         "cozum": "FK10N rapor varyantında şirket kodu seçim parametresi tek kodla sınırlanmıştı, tüm kodlar eklenerek varyant güncellendi."
     },
@@ -1307,7 +1226,6 @@
         "status": "in_progress",
         "assigned_agent_email": "ogulcan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Dönem Açılış / Kapanış",
         "sap_module_code": "FI",
         "cozum": "FAGLGVTR bakiye aktarım programı çalıştırıldığında kar/zarar aktarım hesabının eksik olduğu tespit edildi, OBY2 ile hesap atanarak aktarım tamamlandı."
     },
@@ -1321,9 +1239,8 @@
         "priority": "medium",
         "sla_level": 3,
         "status": "assigned",
-        "assigned_agent_email": "ogulcan.teknoloji@sirket.com",
+        "assigned_agent_email": "erdem.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Şirket / Şube / Tesis Tanımı",
         "sap_module_code": "FI",
         "cozum": "KS01 ile ANK-DPZ masraf yeri oluşturularak OKEON hiyerarşisinde Ankara Bölge düğümü altına bağlandı."
     },
@@ -1339,7 +1256,6 @@
         "status": "assigned",
         "assigned_agent_email": "ogulcan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Geliştirme / Uyarlama Hatası",
         "sap_module_code": "FI",
         "cozum": "OBA7 belge tipi konfigürasyonunda SA tipi için izin verilen hesap gruplarına ilgili GL hesap grubu eklendi."
     },
@@ -1355,7 +1271,6 @@
         "status": "resolved",
         "assigned_agent_email": "ogulcan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Dönem Açılış / Kapanış",
         "sap_module_code": "FI",
         "cozum": "OB52 dönem kontrol tablosunda yeni yıl dönemi tüm hesap tipleri için açılarak kayıt girişi sağlandı."
     },
@@ -1371,7 +1286,6 @@
         "status": "assigned",
         "assigned_agent_email": "sena.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Geliştirme / Uyarlama Hatası",
         "sap_module_code": "MM",
         "cozum": "SWI1 workflow logunda koşul ifadesindeki döngü tespit edildi, onay şemasının 2. adıma geçiş koşulu düzeltilerek akış normale döndü."
     },
@@ -1387,7 +1301,6 @@
         "status": "assigned",
         "assigned_agent_email": "omer.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Veri Düzeltme",
         "sap_module_code": "MM",
         "cozum": "İlgili malzemelerin MM02 MRP-1 görünümünde MRP tipi 'ND' olarak ayarlanmıştı, 'PD' (planlama) olarak değiştirilerek önerilere dahil edildi."
     },
@@ -1403,7 +1316,6 @@
         "status": "resolved",
         "assigned_agent_email": "sena.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Şirket / Şube / Tesis Tanımı",
         "sap_module_code": "MM",
         "cozum": "XK01 ile satıcı genel verileri, satınalma organizasyonu ve muhasebe verileri girilerek vergi ve ödeme koşulları tanımlandı."
     },
@@ -1419,7 +1331,6 @@
         "status": "in_progress",
         "assigned_agent_email": "omer.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Entegrasyon Hataları",
         "sap_module_code": "MM",
         "cozum": "Hareket tipinde depo yeri atama kuralı kontrol edildi, 122 hareketi için stok güncelleme göstergesi aktif edilerek işlem tekrarlandı."
     },
@@ -1435,7 +1346,6 @@
         "status": "assigned",
         "assigned_agent_email": "sena.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Eğitim Talebi",
         "sap_module_code": "MM",
         "cozum": "MB5L, ME2M açık sipariş ve MMPV dönem kapanış adımlarını kapsayan eğitim materyali hazırlanarak online eğitim verildi."
     },
@@ -1451,7 +1361,6 @@
         "status": "assigned",
         "assigned_agent_email": "gizem.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Geliştirme / Uyarlama Hatası",
         "sap_module_code": "SD",
         "cozum": "Eksik teslimatların fatura bloku aktif olduğu tespit edildi, VL02N ile blok kaldırılarak fatura havuzuna düşmesi sağlandı."
     },
@@ -1467,7 +1376,6 @@
         "status": "assigned",
         "assigned_agent_email": "sena.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Veri Düzeltme",
         "sap_module_code": "SD",
         "cozum": "FD33 üzerinden bayinin kredi limiti güncellendi ve UKM_RELEASED ile bekleyen siparişlerin blokajı kaldırıldı."
     },
@@ -1483,7 +1391,6 @@
         "status": "assigned",
         "assigned_agent_email": "gizem.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Entegrasyon Hataları",
         "sap_module_code": "SD",
         "cozum": "Siparişteki teslimat göstergesinde 'Tam teslimat' ayarlıydı, 'Kısmi teslimat izin' olarak değiştirilip bakiye teslimat oluşturuldu."
     },
@@ -1499,7 +1406,6 @@
         "status": "assigned",
         "assigned_agent_email": "sena.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Geliştirme / Ekip Talebi",
         "sap_module_code": "SD",
         "cozum": "OVRO güzergah belirleme kurallarına yeni hat eklendi ve VK11 ile nakliye koşul kaydı (KF00) tanımlandı."
     },
@@ -1515,7 +1421,6 @@
         "status": "resolved",
         "assigned_agent_email": "gizem.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Eğitim Talebi",
         "sap_module_code": "SD",
         "cozum": "VA01→VL01N→VF01 akışını adım adım gösteren eğitim dokümanı ve video kaydı hazırlanarak online eğitim gerçekleştirildi."
     },
@@ -1531,7 +1436,6 @@
         "status": "in_progress",
         "assigned_agent_email": "mustafa.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Server / Sanallaştırma Arızası",
         "sap_module_code": "Basis",
         "cozum": "Yeni kernel sürümünde ICM parametrelerinin uyumsuz olduğu tespit edildi, icm/server_port_0 parametresi düzeltilerek ICM başlatıldı."
     },
@@ -1547,7 +1451,6 @@
         "status": "assigned",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Geliştirme / Ekip Talebi",
         "sap_module_code": "Basis",
         "cozum": "SCCM üzerinden SAP GUI 7.80 paketi hazırlanarak Ankara OU'sundaki bilgisayarlara sıralı dağıtım planlandı ve uygulandı."
     },
@@ -1563,7 +1466,6 @@
         "status": "assigned",
         "assigned_agent_email": "mustafa.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yedekleme / Snapshot Talebi",
         "sap_module_code": "Basis",
         "cozum": "Eski backup catalog girişleri temizlendi, trace dosyaları silinerek ve data volume genişletilerek doluluk %72'ye düşürüldü."
     },
@@ -1579,7 +1481,6 @@
         "status": "resolved",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Active Directory Arızası",
         "sap_module_code": "Basis",
         "cozum": "Merkezi SAP Logon XML konfigürasyon dosyasındaki message server IP adresi güncellenerek GPO ile dağıtıldı."
     },
@@ -1595,7 +1496,6 @@
         "status": "assigned",
         "assigned_agent_email": "mustafa.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Entegrasyon Hataları",
         "sap_module_code": "Basis",
         "cozum": "SM59 ile çift yönlü RFC bağlantısı kuruldu, SOLMAN_SETUP üzerinden managed system olarak kayıt tamamlandı."
     },
@@ -1609,9 +1509,8 @@
         "priority": "high",
         "sla_level": 2,
         "status": "assigned",
-        "assigned_agent_email": "esra.teknoloji@sirket.com",
+        "assigned_agent_email": "ramazan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yetki Hatası",
         "sap_module_code": "PP",
         "cozum": "Z_PP_PLANNER rolüne C_AFKO_WRK ve C_AFKO_AUF yetki nesneleri Yozgat tesis değeriyle eklenerek kullanıcıya atandı."
     },
@@ -1627,7 +1526,6 @@
         "status": "assigned",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yetki Hatası",
         "sap_module_code": "SD",
         "cozum": "PFCG'de Z_SD_SATIS rolüne V_KONH_VKO yetki nesnesinde koşul tablosu ve değiştirme aktivitesi eklenerek yetki üretildi."
     },
@@ -1643,7 +1541,6 @@
         "status": "in_progress",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Geliştirme / Ekip Talebi",
         "sap_module_code": "Basis",
         "cozum": "SUIM raporlarıyla çakışan roller belirlendi, 5 kullanıcıdan biri sipariş diğeri fatura rolüne ayrılarak SOD ihlalleri giderildi."
     },
@@ -1657,9 +1554,8 @@
         "priority": "medium",
         "sla_level": 3,
         "status": "assigned",
-        "assigned_agent_email": "esra.teknoloji@sirket.com",
+        "assigned_agent_email": "ramazan.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yeni Yetki / Rol Talebi",
         "sap_module_code": "QM",
         "cozum": "PFCG'de Z_QM_LAB_SONUC rolü oluşturularak QE01, QE02, QA02, QA03 işlem kodları ve Q_INSP yetki nesneleri tanımlandı."
     },
@@ -1675,7 +1571,6 @@
         "status": "resolved",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "SAP Danışman Ekibi",
-        "alt_kategori_adi": "Yetki Hatası",
         "sap_module_code": "PM",
         "cozum": "Z_PM_TEKNISYEN rolüne I_AUFK_IWK, I_AUFK_ART yetki nesneleri ve Yozgat planlama tesisi eklenerek iş emri teyidi sağlandı."
     },
@@ -1691,7 +1586,6 @@
         "status": "assigned",
         "assigned_agent_email": "yucel.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "İnternet Kesintisi",
         "sap_module_code": "N/A",
         "cozum": "DHCP scope genişletilerek /23 subnet'e çıkarıldı, eski lease kayıtları temizlenerek yeni cihazlar IP alabilir hale getirildi."
     },
@@ -1707,25 +1601,23 @@
         "status": "assigned",
         "assigned_agent_email": "yucel.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Erişim Yavaşlığı",
         "sap_module_code": "N/A",
         "cozum": "Kamera trafiği ayrı VLAN'a taşınarak QoS ile bant genişliği sınırlandırıldı, ofis ağı performansı normale döndü."
     },
     {
         "customer_email": "cemre.ozturk@sirket.com",
         "recipient_email": "btdestek@sirket.com",
-        "subject": "İstanbul Ofis Firewall Firmware Güncelleme Talebi",
-        "raw_issue_description": "İstanbul merkez FortiGate firewall'un firmware sürümü 2 major versiyon geride kaldı, güvenlik açıkları nedeniyle güncelleme planlanması gerekmektedir.",
+        "subject": "Güvenlik Duvarı (Firewall) Şüpheli Veri Çıkışı ve Port Güvenlik Uyarısı",
+        "raw_issue_description": "İstanbul genel merkez güvenlik duvarında iç ağdaki bir uç noktadan dışarıdaki bilinmeyen bir IP adresine şüpheli port üzerinden yüksek hacimli veri transferi denemesi algılanmıştır. Güvenlik duvarı loglarının incelenerek tehdit analizi yapılması talep edilmektedir.",
         "region": "İstanbul",
-        "extracted_category": "IT-Ag",
+        "extracted_category": "IT-Guvenlik",
         "priority": "medium",
         "sla_level": 3,
         "status": "assigned",
-        "assigned_agent_email": "yucel.teknoloji@sirket.com",
+        "assigned_agent_email": "turgut.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Firma Dışı Erişim / Port Talebi",
         "sap_module_code": "N/A",
-        "cozum": "Mesai sonrası bakım penceresinde FortiGate firmware v7.4'e güncellendi, konfigürasyon yedeklenerek tüm policy kuralları doğrulandı."
+        "cozum": "İlgili uç noktanın ağ iletişimi güvenlik duvarında anında kısıtlandı. Trafiğin meşru bir bulut yedekleme servisinin güncellenmiş yeni IP bloğu olduğu doğrulandı, yetkisiz veri sızıntısı olmadığı teyit edilerek firewall kuralı kontrollü olarak güncellendi."
     },
     {
         "customer_email": "ozan.demirel@sirket.com",
@@ -1739,25 +1631,23 @@
         "status": "resolved",
         "assigned_agent_email": "yucel.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Wi-Fi / Misafir Ağı Talebi",
         "sap_module_code": "N/A",
         "cozum": "RADIUS sunucusundaki SSL sertifikası süresinin dolduğu tespit edildi, yeni sertifika yüklenerek Wi-Fi erişimi normale döndü."
     },
     {
         "customer_email": "nalan.efe@sirket.com",
         "recipient_email": "btdestek@sirket.com",
-        "subject": "İstanbul Ofis Belirli Web Sitelerine Erişim Engeli Kaldırma",
-        "raw_issue_description": "İstanbul pazarlama departmanı sosyal medya yönetim araçlarına (Hootsuite, Buffer) erişmek istiyor ancak web filtresi tarafından engellenmektedir.",
+        "subject": "Finans Departmanına Gelen Sahte Fatura Başlıklı Oltalama (Phishing) E-Postası",
+        "raw_issue_description": "İstanbul genel merkez ve şube finans çalışanlarına \"Gecikmiş Fatura Bildirimi\" konulu, içerisinde makro içeren zararlı Excel eki barındıran sahte e-postalar ulaşmıştır. E-posta ağ geçidinde (Email Gateway) ilgili alan adının ve zararlı hash değerinin engellenmesi rica olunur.",
         "region": "İstanbul",
-        "extracted_category": "IT-Ag",
+        "extracted_category": "IT-Guvenlik",
         "priority": "low",
         "sla_level": 4,
         "status": "resolved",
-        "assigned_agent_email": "yucel.teknoloji@sirket.com",
+        "assigned_agent_email": "turgut.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Erişim Engeli",
         "sap_module_code": "N/A",
-        "cozum": "FortiGate web filter profilinde pazarlama departmanı IP grubuna özel whitelist kuralı eklenerek ilgili URL'lere erişim açıldı."
+        "cozum": "Gönderici domain ve zararlı dosya hash değeri Microsoft Defender for Office 365 ve e-posta güvenlik ağ geçidinde global olarak engellendi. Kullanıcıların gelen kutularına düşmüş olan tüm kopyalar sistemden otomatik olarak temizlendi ve çalışanlara bilgilendirme uyarısı iletildi."
     },
     {
         "customer_email": "tarik.yildiz@sirket.com",
@@ -1771,7 +1661,6 @@
         "status": "assigned",
         "assigned_agent_email": "faruk.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Server Donanımı Arızası",
         "sap_module_code": "N/A",
         "cozum": "Ankara destek uzmanı UPS bataryalarının ömrünü tamamladığını tespit etti, yedek batarya takılarak cihaz normal moda alındı."
     },
@@ -1787,7 +1676,6 @@
         "status": "assigned",
         "assigned_agent_email": "emirhan.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Bilgisayar Çevre Birimleri Arızası",
         "sap_module_code": "N/A",
         "cozum": "İstanbul destek uzmanı USB hub firmware güncellemesi yaparak ve kamera sürücüsünü yeniden yükleyerek görüntü sorununu çözdü."
     },
@@ -1803,7 +1691,6 @@
         "status": "in_progress",
         "assigned_agent_email": "yucel.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Bilgisayar Arızası",
         "sap_module_code": "N/A",
         "cozum": "Sakarya BT sorumlusu mevcut disk imajını yedekledikten sonra yeni SSD'ye klonlayarak üretim hattı kesintisi minimize edildi."
     },
@@ -1819,7 +1706,6 @@
         "status": "assigned",
         "assigned_agent_email": "salih.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Bilgisayar Çevre Birimleri Arızası",
         "sap_module_code": "N/A",
         "cozum": "Yozgat destek uzmanı şişmiş bataryayı güvenli şekilde çıkardı ve garanti kapsamında yeni batarya takarak cihazı devreye aldı."
     },
@@ -1835,7 +1721,6 @@
         "status": "resolved",
         "assigned_agent_email": "yusuf.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Yazıcı Talebi",
         "sap_module_code": "N/A",
         "cozum": "Yazıcı statik IP ile ağa bağlanarak print server üzerinde paylaşım ve GPO ile sürücü dağıtımı yapıldı."
     },
@@ -1849,9 +1734,8 @@
         "priority": "high",
         "sla_level": 2,
         "status": "assigned",
-        "assigned_agent_email": "turgut.teknoloji@sirket.com",
+        "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Kullanıcı Hesabı Talebi",
         "sap_module_code": "N/A",
         "cozum": "OneDrive istemcisi sıfırlanarak çakışan dosyalar manuel olarak birleştirildi ve eşitleme yeniden başlatıldı."
     },
@@ -1867,7 +1751,6 @@
         "status": "assigned",
         "assigned_agent_email": "esra.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Kullanıcı Hesabı Talebi",
         "sap_module_code": "N/A",
         "cozum": "Entra ID (Azure AD) üzerinden 6 kullanıcıya toplu lisans ataması yapılarak Teams, OneDrive ve Exchange Online erişimleri açıldı."
     },
@@ -1883,25 +1766,23 @@
         "status": "resolved",
         "assigned_agent_email": "mustafa.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "E-Posta / Dağıtım Grubu Talebi",
         "sap_module_code": "N/A",
         "cozum": "Exchange Online'da dağıtım listesinin ownership'i yeni üretim müdürüne aktarıldı, eski personel listeden çıkarıldı."
     },
     {
         "customer_email": "tayfun.bilgin@sirket.com",
         "recipient_email": "btdestek@sirket.com",
-        "subject": "Yozgat Personeli Azure AD Conditional Access Blokajı",
-        "raw_issue_description": "Yozgat fabrikasında kişisel telefonundan e-postaya erişmeye çalışan personel 'Koşullu erişim politikası tarafından engellendi' hatası almaktadır.",
+        "subject": "Azure AD Şüpheli Konumdan Oturum Açma ve Conditional Access Blokajı",
+        "raw_issue_description": "Yozgat fabrikasında görevli bir personelin kurumsal hesabına yurt dışı kaynaklı şüpheli bir lokasyondan oturum açılmaya çalışıldığı tespit edilmiş ve Azure AD Conditional Access kuralları gereğince hesap otomatik kilitlenmiştir. Güvenlik analizi yapılarak hesabın güvenli hale getirilmesi rica olunur.",
         "region": "Yozgat",
-        "extracted_category": "IT-Hesap",
+        "extracted_category": "IT-Guvenlik",
         "priority": "high",
         "sla_level": 2,
         "status": "assigned",
         "assigned_agent_email": "turgut.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "Kullanıcı Hesabı Talebi",
         "sap_module_code": "N/A",
-        "cozum": "Intune uyumluluk politikası incelendi, cihaz Intune'a kaydedilerek compliant hale getirildi ve erişim sağlandı."
+        "cozum": "Kullanıcı ile doğrudan irtibata geçilerek oturum açma girişiminin kendisi tarafından yapılmadığı teyit edildi. İlgili oturumlar tüm cihazlardan sonlandırıldı, riskli kullanıcı durumu Azure AD Identity Protection üzerinden temizlendi ve güvenli parola sıfırlama prosedürü işletildi."
     },
     {
         "customer_email": "ik@sirket.com",
@@ -1915,7 +1796,6 @@
         "status": "resolved",
         "assigned_agent_email": "mustafa.teknoloji@sirket.com",
         "assigned_group_name": "BT Destek Ekibi",
-        "alt_kategori_adi": "E-Posta / Dağıtım Grubu Talebi",
         "sap_module_code": "N/A",
         "cozum": "Exchange Online üzerinden mail flow transport rule ile otomatik yönlendirme kuralı 4 aylık bitiş tarihiyle oluşturuldu."
     }
