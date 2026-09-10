@@ -117,6 +117,14 @@ async def _import_one(store, ticket: dict) -> list[str]:
             # ekip verilmediyse ya da bulunamadıysa, agent'ın GERÇEK grubunu kullan.
             group_id = store.get_user_support_group_id(agent_id)
 
+    sla_policy_id = None
+    ham_sla = siniflandirma.get("sla_policy_id", ticket.get("sla_policy_id"))
+    if ham_sla is not None:
+        try:
+            sla_policy_id = int(str(ham_sla).split(".")[0])
+        except (TypeError, ValueError):
+            uyarilar.append(f"sla_policy_id='{ham_sla}' geçersiz, boş bırakıldı.")
+
     tid, tno = store.create_ticket(
         customer_email=ticket.get("customer_email", _VARSAYILAN_MUSTERI_EMAIL),
         recipient_email=ticket.get("recipient_email", _VARSAYILAN_ALICI_EMAIL),
@@ -128,7 +136,7 @@ async def _import_one(store, ticket: dict) -> list[str]:
         priority=priority,
         assigned_group_id=group_id,
         assigned_agent_id=agent_id,
-        sla_policy_id=None,
+        sla_policy_id=sla_policy_id,
         response_deadline=None,
         workaround_deadline=None,
         resolution_deadline=None,
