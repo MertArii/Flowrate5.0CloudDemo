@@ -307,21 +307,31 @@ def create_agent(
     email: str, full_name: str, title: str | None, department: str | None,
     region: str | None, support_group_id: str, uzman_kategorileri: list[str] | None,
 ) -> str:
-    """Yeni bir uzman (agent) ekler, users.id döner.
+    """Yeni bir uzman (agent) ekler, users.id döner. Uzmanlık kategorileri
+    1NF gereği ayrı agent_expertise tablosuna yazılır (bkz.
+    db/010_uzman_kategorileri_1nf.sql), users'ta dizi sütunu tutulmaz.
     Aynı e-posta zaten varsa DatabaseIntegrityError (409) fırlatır."""
     try:
         with _connect() as conn, conn.cursor() as cur:
             cur.execute(
                 """
                 INSERT INTO users (email, full_name, title, department, region, role,
-                                    support_group_id, uzman_kategorileri)
-                VALUES (%s,%s,%s,%s,%s,'agent',%s,%s)
+                                    support_group_id)
+                VALUES (%s,%s,%s,%s,%s,'agent',%s)
                 RETURNING id
                 """,
-                (email, full_name, title, department, region, support_group_id,
-                 uzman_kategorileri or None),
+                (email, full_name, title, department, region, support_group_id),
             )
             uid = cur.fetchone()[0]
+            if uzman_kategorileri:
+                cur.execute(
+                    """
+                    INSERT INTO agent_expertise (user_id, category_id)
+                    SELECT %s, cc.id FROM classification_categories cc
+                    WHERE cc.category_key = ANY(%s)
+                    """,
+                    (uid, uzman_kategorileri),
+                )
             conn.commit()
         return str(uid)
     except psycopg.errors.UniqueViolation as exc:
@@ -365,29 +375,39 @@ def get_user_support_group_id(user_id: str) -> str | None:
 
 
 def get_agents_in_group(group_name: str) -> list[dict]:
-    """Bir destek grubundaki TÜM uzmanları DB'den çeker (email, id, region).
-    Elle tutulan bir liste dosyasından bağımsız — grup üyeliği
-    değiştiğinde (yeni uzman eklendiğinde) otomatik günceldir."""
+    """Bir destek grubundaki TÜM uzmanları DB'den çeker (email, id, region,
+    uzman_kategorileri). Elle tutulan bir liste dosyasından bağımsız — grup
+    üyeliği değiştiğinde (yeni uzman eklendiğinde) otomatik günceldir.
+    uzman_kategorileri artık agent_expertise köprü tablosundan (1NF,
+    bkz. db/010_uzman_kategorileri_1nf.sql) array_agg ile toplanıyor.
+    Tabloda category_id (UUID) tutulduğu için classification_categories
+    ile join edip uygulamanın çalıştığı category_key string'ine çeviriyoruz."""
     with _connect() as conn, conn.cursor() as cur:
         cur.execute(
             """
-            SELECT u.email, u.id, u.region
-            FROM users u JOIN support_groups g ON g.id = u.support_group_id
+            SELECT u.email, u.id, u.region,
+                   COALESCE(array_agg(cc.category_key) FILTER (WHERE cc.category_key IS NOT NULL), '{}')
+            FROM users u
+            JOIN support_groups g ON g.id = u.support_group_id
+            LEFT JOIN agent_expertise ae ON ae.user_id = u.id
+            LEFT JOIN classification_categories cc ON cc.id = ae.category_id
             WHERE g.name = %s AND u.role = 'agent'
+            GROUP BY u.email, u.id, u.region
             ORDER BY u.email
             """,
             (group_name,),
         )
         rows = cur.fetchall()
-    return [{"email": r[0], "id": str(r[1]), "region": r[2]} for r in rows]
+    return [{"email": r[0], "id": str(r[1]), "region": r[2], "uzman_kategorileri": r[3]} for r in rows]
 
 
 def get_agents_by_category(category_key: str, group_name: str) -> list[dict]:
     """Bu kategoride uzman olan, bu ekipteki uzmanlar (email, id, region).
 
     Öncelik sırası:
-      1) ELLE beyan edilmiş uzmanlık (users.uzman_kategorileri) — gerçek
-         title'lardan türetilmiş, en güvenilir sinyal.
+      1) ELLE beyan edilmiş uzmanlık (agent_expertise köprü tablosu,
+         bkz. db/010_uzman_kategorileri_1nf.sql) — gerçek title'lardan
+         türetilmiş, en güvenilir sinyal.
       2) Elle beyan yoksa: geçmişte bu kategoriyi gerçekten çözmüş uzmanlar
          (ticket geçmişi) — daha zayıf bir sezgi, az veri varsa yanıltıcı
          olabilir (ör. tek seferlik çapraz görevlendirme "uzmanlık" sanılabilir).
@@ -400,9 +420,9 @@ def get_agents_by_category(category_key: str, group_name: str) -> list[dict]:
             SELECT u.email, u.id, u.region
             FROM users u
             JOIN support_groups g ON g.id = u.support_group_id
-            WHERE g.name = %s AND u.role = 'agent'
-              AND u.uzman_kategorileri IS NOT NULL
-              AND %s = ANY(u.uzman_kategorileri)
+            JOIN agent_expertise ae ON ae.user_id = u.id
+            JOIN classification_categories cc ON cc.id = ae.category_id
+            WHERE g.name = %s AND u.role = 'agent' AND cc.category_key = %s
             ORDER BY u.email
             """,
             (group_name, category_key),
@@ -417,8 +437,8 @@ def get_agents_by_category(category_key: str, group_name: str) -> list[dict]:
             FROM tickets t
             JOIN users u ON u.id = t.assigned_agent_id
             JOIN support_groups g ON g.id = u.support_group_id
+            JOIN agent_expertise ae ON ae.user_id = u.id -- EKLENEN KESİN KONTROL
             WHERE t.extracted_category = %s AND g.name = %s AND u.role = 'agent'
-                AND u.uzman_kategorileri IS NOT NULL -- EKLENEN KESİN KONTROL
             ORDER BY u.email
             """,
             (category_key, group_name),

@@ -34,15 +34,18 @@ TABLES = [
       "created_at", "ekip_gorunum_adi"]),
     ("users", "users_202608201521.json",
      ["id", "email", "full_name", "title", "department", "region", "phone",
-      "role", "support_group_id", "created_at", "updated_at",
-      "uzman_kategorileri"]),
+      "role", "support_group_id", "created_at", "updated_at"]),
     ("routing_rules", "routing_rules_202608201205.json",
      ["id", "rule_name", "recipient_email_pattern", "keyword_triggers",
       "sender_domain", "target_group_id", "default_assigned_agent_id",
       "priority_score", "is_active", "created_at"]),
 ]
 
-ARRAY_COLUMNS = {"uzman_kategorileri", "keyword_triggers"}
+# uzman_kategorileri artik users'ta degil, ayri agent_expertise koprü
+# tablosunda (1NF, bkz. db/010_uzman_kategorileri_1nf.sql) -- users.json
+# arsivindeki dizi alani asagida restore_agent_expertise() ile
+# geri yuklenir, buradaki genel TABLES dongusune dahil degil.
+ARRAY_COLUMNS = {"keyword_triggers"}
 INTERVAL_COLUMNS = {"response_target", "workaround_target", "resolution_target"}
 
 
@@ -59,6 +62,40 @@ def _cast(col: str) -> str:
     if col in INTERVAL_COLUMNS:
         return "::interval"
     return ""
+
+
+def restore_agent_expertise(cur, conn) -> None:
+    """users_202608201521.json arşivindeki uzman_kategorileri dizisini
+    agent_expertise köprü tablosuna (1NF) geri yükler. Tabloda category_id
+    (UUID) tutulduğu için category_key -> id çevirisi classification_categories
+    üzerinden yapılır."""
+    cur.execute("SELECT count(*) FROM agent_expertise")
+    if cur.fetchone()[0] > 0:
+        print("[atla] agent_expertise: zaten kayıt var, üzerine yazmıyorum.")
+        return
+
+    records = _load("users_202608201521.json")
+    eklendi = 0
+    for rec in records:
+        kategoriler = rec.get("uzman_kategorileri")
+        if not kategoriler:
+            continue
+        for kat in kategoriler:
+            try:
+                cur.execute(
+                    """
+                    INSERT INTO agent_expertise (user_id, category_id)
+                    SELECT %s, cc.id FROM classification_categories cc WHERE cc.category_key = %s
+                    ON CONFLICT DO NOTHING
+                    """,
+                    (rec["id"], kat),
+                )
+                conn.commit()
+                eklendi += 1
+            except Exception as e:
+                conn.rollback()
+                print(f"[hata] agent_expertise ({rec.get('id')}, {kat}): {e}")
+    print(f"[+] agent_expertise: {eklendi} kayıt yüklendi.")
 
 
 def main() -> None:
@@ -87,6 +124,8 @@ def main() -> None:
                 conn.rollback()
                 print(f"[hata] {table} kaydı ({rec.get('id')}): {e}")
         print(f"[+] {table}: {eklendi}/{len(records)} kayıt yüklendi.")
+
+    restore_agent_expertise(cur, conn)
 
     cur.close()
     conn.close()

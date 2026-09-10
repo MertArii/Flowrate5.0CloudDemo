@@ -1,7 +1,11 @@
 -- 16 gercek agent: kimlik, ekip, elle beyan edilmis uzmanlik
-SELECT u.id, u.email, u.full_name, sg.name AS ekip, u.uzman_kategorileri
+-- (uzman_kategorileri artik agent_expertise kopru tablosunda, 1NF -- bkz. db/010_uzman_kategorileri_1nf.sql)
+SELECT u.id, u.email, u.full_name, sg.name AS ekip,
+       COALESCE(array_agg(cc.category_key) FILTER (WHERE cc.category_key IS NOT NULL), '{}') AS uzman_kategorileri
 FROM users u
 LEFT JOIN support_groups sg ON sg.id = u.support_group_id
+LEFT JOIN agent_expertise ae ON ae.user_id = u.id
+LEFT JOIN classification_categories cc ON cc.id = ae.category_id
 WHERE u.role = 'agent'
   AND u.id NOT IN (
     '1f31b7ad-852a-4282-b872-9c63bb73193e','64a4c27c-e82f-4e7a-8197-ba93b084c58c',
@@ -10,6 +14,7 @@ WHERE u.role = 'agent'
     '98d9db18-fc84-4221-9830-2be35f83afcd','f6db68a8-f3ff-4030-be4b-60e354de603d',
     'a0df5f07-ad44-4392-8d2f-d90fb70a9c5d'
   )
+GROUP BY u.id, u.email, u.full_name, sg.name
 ORDER BY sg.name, u.full_name;
 
 -- kategori -> ekip eslemesi
