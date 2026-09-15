@@ -78,7 +78,17 @@ async def triage(
 
     status = "assigned" if otomatik else "l1_routing"
     subj = subject or ticket_text[:60]
-    group_id = store.get_or_create_support_group(r["ekip"]) if otomatik else None
+    # Grup, kategorinin NOMİNAL ekibinden değil, seçilen uzmanın GERÇEK
+    # support_group_id'sinden alınır — aksi halde uzman kendi asıl ekibinden
+    # farklı bir gruba bağlı bir ticket'la eşleşebilir (ör. "SAP-Yetki"
+    # kategorisi "SAP Danışman Ekibi"ne bağlı ama uzmanı "BT Destek
+    # Ekibi"nde ise, ticket.assigned_group_id yine de uzmanın gerçek
+    # grubunu göstermeli).
+    group_id = None
+    if otomatik:
+        group_id = (
+            store.get_user_support_group_id(agent_id) if agent_id else None
+        ) or store.get_or_create_support_group(r["ekip"])
     priority = _ONCELIK_MAP.get(c["oncelik"], "medium")
 
     baslangic = datetime.now(timezone.utc)

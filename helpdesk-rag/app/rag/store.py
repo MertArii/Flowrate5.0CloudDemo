@@ -403,15 +403,24 @@ def get_agents_in_group(group_name: str) -> list[dict]:
 
 
 def get_agents_by_category(category_key: str, group_name: str) -> list[dict]:
-    """Bu kategoride uzman olan, bu ekipteki uzmanlar (email, id, region).
+    """Bu kategoride uzman olan uzmanlar (email, id, region).
 
     Öncelik sırası:
       1) ELLE beyan edilmiş uzmanlık (agent_expertise köprü tablosu,
          bkz. db/010_uzman_kategorileri_1nf.sql) — gerçek title'lardan
-         türetilmiş, en güvenilir sinyal.
+         türetilmiş, en güvenilir sinyal. KASITLI OLARAK group_name'e göre
+         FİLTRELENMEZ: bir kategorinin classification_categories.ekip_group_id
+         alanı ile o kategorinin gerçek uzmanının users.support_group_id'si
+         her zaman aynı grup olmayabilir (ör. "SAP-Yetki" kategorisi "SAP
+         Danışman Ekibi"ne bağlı ama tek uzmanı "BT Destek Ekibi"nde) —
+         agent_expertise DB'deki en güvenilir sinyal olduğu için grup
+         üyeliğinin bunu geçersiz kılmasına izin verilmez.
       2) Elle beyan yoksa: geçmişte bu kategoriyi gerçekten çözmüş uzmanlar
          (ticket geçmişi) — daha zayıf bir sezgi, az veri varsa yanıltıcı
          olabilir (ör. tek seferlik çapraz görevlendirme "uzmanlık" sanılabilir).
+         Bu adım hâlâ group_name'e göre daraltılır (kategori için hiç ELLE
+         beyan edilmiş uzman yoksa, en azından o ekipten geçmişte bakan biri
+         aranır).
 
     Boş dönerse hiçbir sinyal yok demektir — çağıran taraf tüm ekibe
     (get_agents_in_group) düşmelidir."""
@@ -420,13 +429,12 @@ def get_agents_by_category(category_key: str, group_name: str) -> list[dict]:
             """
             SELECT u.email, u.id, u.region
             FROM users u
-            JOIN support_groups g ON g.id = u.support_group_id
             JOIN agent_expertise ae ON ae.user_id = u.id
             JOIN classification_categories cc ON cc.id = ae.category_id
-            WHERE g.name = %s AND u.role = 'agent' AND cc.category_key = %s
+            WHERE u.role = 'agent' AND cc.category_key = %s
             ORDER BY u.email
             """,
-            (group_name, category_key),
+            (category_key,),
         )
         rows = cur.fetchall()
         if rows:
