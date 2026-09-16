@@ -204,7 +204,7 @@ async def chat(
         "POST",
         f"{settings.ollama_base_url}/api/chat",
         json=payload,
-        timeout=300,
+        timeout=900,
         operation="chat",
     )
     msg = data.get("message", {})
