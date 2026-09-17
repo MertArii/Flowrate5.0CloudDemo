@@ -158,8 +158,8 @@ async def chat(
     tools: list[dict] | None = None,
     fmt: str | None = None,
     images_b64: list[str] | None = None,
-    num_ctx: int = 8192,
-    num_predict: int = 1024,
+    num_ctx: int = 4096,
+    num_predict: int = 350,
 ) -> dict:
     """Qwen3.5 native tool-calling destekler. tools verilirse model
     tool_calls döndürebilir; döndürmezse düz 'content' gelir.
