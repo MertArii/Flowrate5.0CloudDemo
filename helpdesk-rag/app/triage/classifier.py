@@ -90,125 +90,93 @@ def _build_etiketleme_metni(agac: dict[str, dict[str, list[str]]]) -> str:
     return "\n".join(satirlar)
 
 
-def _build_system(
-    kategoriler: dict[str, dict],
+def _build_topic_system(
     agac: dict[str, dict[str, list[str]]],
     sap_moduller: list[str],
 ) -> str:
-    kategori_metni = _build_kategori_metni(kategoriler)
+    """Aşama 1: yalnızca ticket konusu/etiketleme sınıflandırması."""
     etiketleme_metni = _build_etiketleme_metni(agac)
     sap_modul_metni = ", ".join(sap_moduller)
 
     return (
-    "You are a help desk ticket classifier. Analyze the given ticket "
-    "text and return ONLY valid JSON. Fields:\n"
-    '  "modul": exactly ONE key from the CATEGORIES list below (this '
-    "determines which team/specialist will resolve the ticket),\n"
-    '  "oncelik": "1" | "2" | "3" | "4" | "5",\n'
-    '  "istek_turu": "olay" | "planli_talep",\n'
-    '  "ust_kategori": exactly ONE of the three top-level headings in '
-    "the TAGGING TREE below (ARIZALAR / TALEPLER / TINDISO BAKIM),\n"
-    '  "kategori_grubu": exactly ONE of the groups UNDER the chosen '
-    "ust_kategori,\n"
-    '  "alt_kategori": exactly ONE of the items UNDER the chosen '
-    ' kategori_grubu. \n\n WARNING: This field MUST NEVER be null.'
-    ' You MUST choose the closest matching item from the list,\n'
-    '  "sap_modulu": ONLY if kategori_grubu = "SAP Problemleri", '
-    "exactly ONE value from the SAP MODULES list below; null in ALL "
-    "other cases,\n"
-    '  "ozet": a one-sentence summary of the issue, WRITTEN IN '
-    "TURKISH,\n"
-    '  "guven": a number between 0.0 and 1.0 indicating how confident '
-    "you are in the classification.\n\n"
-    "Priority (oncelik) — follow the SLA prioritization table from the "
-    "Uyar Holding IT Incident and Request Management Procedure. Base "
-    "the priority on SCOPE (how many people / which process is "
-    "affected), not just on the category:\n"
-    '  "1" (Critical): an incident that completely stops the entire '
-    "Holding/company or a critical business process and requires "
-    "immediate action. Examples: SAP is completely inaccessible; the "
-    "entire company's email is down; a critical network device "
-    "(firewall, router, or switch) has failed; all internet "
-    "connectivity is down; a confirmed cyberattack, data breach, or "
-    "ransomware incident; hardware failure on a critical server (DC, "
-    "DNS, DB servers, etc.). Security incidents that have NOT actually "
-    "happened yet and are only SUSPECTED (e.g. 'I received a "
-    "suspicious email') do NOT belong at this level — give them '2' or "
-    "'3' depending on scope instead.\n"
-    '  "2" (High): affects a specific department or a large number of '
-    "users, without stopping the whole organization. Examples: a "
-    "department cannot log into SAP; the accounting department cannot "
-    "connect to the e-invoice system; a file server is unreachable "
-    "(regionally or department-wide); a critical piece of software has "
-    "an error (e.g. the stock-control module is down); the backup "
-    "system has failed (active business continuity is at risk); a "
-    "confirmed/verified but limited-scope security incident.\n"
-    '  "3" (Medium): affects an individual user and blocks that one '
-    "user's work. Examples: a single employee's computer won't turn "
-    "on; Outlook isn't sending email (webmail still works); a printer "
-    "connection is lost; a network access issue affecting only one "
-    "user; VPN not working for one user; a single user reporting a "
-    "suspicious/phishing email.\n"
-    '  "4" (Low): does not directly stop work and a workaround exists. '
-    "Examples: a slow computer; a low-toner warning; an Excel macro "
-    "error; mobile email sync errors; missing desktop shortcuts; "
-    "password-change requests; ACCESS/AUTHORIZATION REQUESTS "
-    "(including for SAP).\n"
-    '  "5" (Planned Work / Service Request): planned, pre-requested '
-    "work. Examples: setting up a computer and opening an email "
-    "account for a new employee; installing new software for a user; "
-    "setting up a new printer and its network connection; granting "
-    "share permissions on a specific file/folder; a request for "
-    "technical/equipment support for a training session or meeting "
-    "room; software purchase or development requests.\n\n"
-    "SPECIAL RULE: if the ticket is a DEVELOPMENT request (a change to "
-    "an existing or new application, a new feature, or an integration "
-    "development request), oncelik is ALWAYS '5' regardless of scope — "
-    "per section 4.1 of the procedure.\n\n"
-    "IMPORTANT: users frequently state their own claimed urgency in "
-    "the email/request — words like 'acil' (urgent), 'ivedi', 'ASAP', "
-    "or lots of exclamation marks — regardless of the actual scope. "
-    "IGNORE these claims — base the priority ONLY on the concrete "
-    "impact described in the ticket text.\n\n"
-    "TOPIC-TRAP WARNING: If the user requests USB access, port unlocking,"
-    " or data transfer permissions, do NOT classify it as a standard access/authorization request."
-    " You MUST classify it as modul='IT-Guvenlik', kategori_grubu='Güvenlik Talepleri', "
-    "and alt_kategori='Dosya Paylaşımı (DLP) Talebia ticket's stated subject (e.g. finance, "
-    "payment, SAP) can differ from its TRUE nature (e.g. "
-    "Masraf merkezi / maliyet merkezi arası aktarım, bütçe kontrolü → SAP-CO. "
-    "Fatura, ödeme, cari hesap, genel muhasebe kaydı → SAP-FI."
-    "Satınalma, stok, mal girişi → SAP-MM."
-    "security/phishing). If the text contains SECURITY language — "
-    "phishing, oltalama (phishing), a suspicious sender/link/"
-    "attachment — you MUST classify it as modul='IT-Guvenlik' and "
-    "kategori_grubu='Guvenlik Arizalari' (or 'Guvenlik Talepleri' if "
-    "it's a request), even if the subject line mentions terms like "
-    "finance/payment/SAP — do NOT classify it under a finance category "
-    "like SAP-FI.\n\n"
-    "Request type (istek_turu) — this ONLY distinguishes whether "
-    "something NEW is being requested, or whether something that "
-    "already exists is BROKEN:\n"
-    "  planli_talep: the user wants something new — an installation, "
-    "new software/hardware provisioning, granting of access/"
-    "authorization, or a development request.\n"
-    "  olay: an existing system/hardware/software is broken, slow, not "
-    "working, or throwing an error.\n\n"
-    "TAGGING (ust_kategori / kategori_grubu / alt_kategori) — this is "
-    "UNRELATED to who the ticket is assigned to; it only tags what "
-    "kind of topic the ticket is about. If istek_turu='olay', "
-    "ust_kategori is usually 'ARIZALAR'; if istek_turu='planli_talep', "
-    "it is usually 'TALEPLER'; use 'TINDISO BAKIM' for "
-    "onboarding/offboarding and camera-maintenance processes. "
-    "kategori_grubu and alt_kategori MUST be a combination that "
-    "ACTUALLY EXISTS in the tree below — never invent a value:\n\n"
-    f"{etiketleme_metni}\n\n"
-    f'SAP MODULES (used only when kategori_grubu="SAP Problemleri"): '
-    f"{sap_modul_metni}\n\n"
-    f"CATEGORIES (for the modul field):\n{kategori_metni}\n\n"
-    "If you are not sure, use modul='Diger' and give a low guven "
-    "score. Never invent a category that doesn't exist in the lists "
-    "above."
+        "You are an IT help desk topic classifier. "
+        "Analyze the ticket and return ONLY valid JSON. No markdown.\n\n"
+        'OUTPUT: {"istek_turu":"olay|planli_talep",'
+        '"ust_kategori":"...", "kategori_grubu":"...", '
+        '"alt_kategori":"...", "sap_modulu":"..."|null}\n\n'
+        "REQUEST TYPE:\n"
+        "- olay = an existing system, hardware, software or service is "
+        "broken, unavailable, slow, or gives an error.\n"
+        "- planli_talep = something new is requested: installation, "
+        "provisioning, access/authorization, new hardware/software, "
+        "or development.\n\n"
+        "TAGGING:\n"
+        "- olay normally uses ust_kategori='ARIZALAR'.\n"
+        "- planli_talep normally uses ust_kategori='TALEPLER'.\n"
+        "- Use 'TINDISO BAKIM' for onboarding/offboarding and "
+        "camera-maintenance processes.\n"
+        "- kategori_grubu and alt_kategori MUST exactly exist in the tree.\n"
+        "- alt_kategori MUST NEVER be null.\n\n"
+        "SECURITY OVERRIDE:\n"
+        "If the ticket concerns phishing, oltalama, suspicious sender, "
+        "suspicious link, or suspicious attachment:\n"
+        "- olay -> kategori_grubu='Guvenlik Arizalari'\n"
+        "- planli_talep -> kategori_grubu='Guvenlik Talepleri'\n\n"
+        "USB / PORT / DATA TRANSFER:\n"
+        "Requests for USB access, port unlocking, or data-transfer "
+        "permissions MUST use kategori_grubu='Güvenlik Talepleri' and "
+        "alt_kategori='Dosya Paylaşımı (DLP) Talebi'.\n\n"
+        "SAP:\n"
+        "If kategori_grubu='SAP Problemleri', sap_modulu MUST be one "
+        "of the SAP MODULES below. Otherwise sap_modulu MUST be null.\n"
+        "- cost/expense center, controlling, budget -> SAP-CO\n"
+        "- invoice, payment, accounting -> SAP-FI\n"
+        "- purchasing, inventory, goods receipt -> SAP-MM\n\n"
+        "Do not let the subject override the actual meaning of the ticket.\n"
+        "Never invent a category.\n\n"
+        f"TAGGING TREE:\n{etiketleme_metni}\n\n"
+        f"SAP MODULES:\n{sap_modul_metni}"
     )
+
+
+def _build_routing_system(
+    kategoriler: dict[str, dict],
+) -> str:
+    """Aşama 2: sorumlu modul ve routing için gerekli bilgiler."""
+    kategori_metni = _build_kategori_metni(kategoriler)
+
+    return (
+        "You are an IT help desk routing classifier. "
+        "Analyze the ticket and Stage 1 classification. "
+        "Return ONLY valid JSON. No markdown.\n\n"
+        'OUTPUT: {"modul":"...", "scope":"company|department|large_group|individual|access_request", "blocked":true|false, "development":true|false, "ozet":"...", "guven":0.0}\n\n'
+        "MODUL:\n"
+        "- Select exactly one value from CATEGORIES.\n"
+        "- modul is the team/specialist responsible for resolving the ticket.\n"
+        "- If genuinely unclear, use 'Diger'.\n\n"
+        "SECURITY:\n"
+        "If the ticket contains phishing, oltalama, suspicious sender, "
+        "suspicious link, or suspicious attachment, the responsible "
+        "modul MUST be 'IT-Guvenlik'.\n"
+        "USB access, port unlocking, and data-transfer permission requests "
+        "also belong to 'IT-Guvenlik'.\n\n"
+        "Use the actual technical/business meaning, not merely the subject.\n"
+        "The Stage 1 result is the topic classification and should be used "
+        "as context, not replaced without evidence.\n\n"
+        f"CATEGORIES:\n{kategori_metni}\n\n"
+        "SCOPE: determine the concrete impact described by the ticket: "
+        "company = entire organization/critical process; "
+        "department = department or large group; "
+        "large_group = many users; "
+        "individual = one user; "
+        "access_request = new authorization/access request.\n"
+        "blocked=true only when the affected work/process is actually blocked.\n"
+        "development=true for application change, new feature, or integration development.\n"
+        "Do not infer scope from words such as acil/ivedi/ASAP.\n\n"
+        "Return guven between 0.0 and 1.0. "
+        "ozet must be exactly one sentence in Turkish."
+    )
+
 
 
 def _normalize_oncelik(value) -> str:
@@ -298,73 +266,165 @@ def _dogrula_etiketleme(
 
 
 async def classify(ticket_text: str) -> dict:
+    """
+    İki aşamalı sınıflandırma:
+      1) Konu / tagging / SAP
+      2) Sorumlu modul / özet / güven
+
+    Priority, Stage 1 ve Stage 2 sonuçlarından sonra deterministik olarak
+    Python tarafında hesaplanır.
+    """
     from app.rag import store  # geç import
 
+    # DB'den her çağrıda taze veriyi al.
     kategoriler = _get_kategoriler()
     agac = _build_agac(store.get_category_hierarchy())
-    agac_norm = _build_agac_norm(agac)  # doğrulama bunun üzerinden yapılır
+    agac_norm = _build_agac_norm(agac)
     sap_moduller = store.get_sap_modules()
     sap_moduller_norm = _build_sap_norm(sap_moduller)
-    system = _build_system(kategoriler, agac, sap_moduller)  # prompt metni orijinal yazımla
 
-    msg = await ollama_client.chat(
+    # ============================================================
+    # AŞAMA 1 — TOPIC / TAGGING
+    # ============================================================
+    topic_system = _build_topic_system(agac, sap_moduller)
+
+    topic_msg = await ollama_client.chat(
         [
-            {"role": "system", "content": system},
+            {"role": "system", "content": topic_system},
             {"role": "user", "content": ticket_text},
         ],
         fmt="json",
     )
-    raw = (msg.get("content") or "{}").strip()
-    if raw.startswith("```"):
-        raw = raw.strip("`")
-        if raw.startswith("json"):
-            raw = raw[4:]
-        raw = raw.strip()
+
+    topic_raw = (topic_msg.get("content") or "{}").strip()
+    if topic_raw.startswith("```"):
+        topic_raw = topic_raw.strip("`")
+        if topic_raw.startswith("json"):
+            topic_raw = topic_raw[4:]
+        topic_raw = topic_raw.strip()
 
     try:
-        data = json.loads(raw)
+        topic_data = json.loads(topic_raw)
     except json.JSONDecodeError:
         logger.warning(
-            "classify(): model çıktısı JSON parse edilemedi, varsayılanlara düşülüyor. raw=%r",
-            raw,
+            "classify(): Stage 1 JSON parse edilemedi. raw=%r",
+            topic_raw,
         )
-        data = {}
+        topic_data = {}
 
-    # Parse başarılı olsa bile modelin TAM olarak ne döndürdüğünü görebilmek
-    # için ham çıktıyı her zaman logla (önceden sadece parse hatasında
-    # loglanıyordu — doğrulamanın neyi neden reddettiğini teşhis etmek
-    # imkansızdı).
-    logger.debug("classify() ham model çıktısı: %r", data)
+    logger.debug("classify() Stage 1 ham çıktı: %r", topic_data)
 
-    modul = data.get("modul")
-    if modul not in kategoriler:
-        modul = "Diger"
-    oncelik = _normalize_oncelik(data.get("oncelik", "3"))
-    if oncelik not in ("1", "2", "3", "4", "5"):
-        oncelik = "3"
-    istek_turu = data.get("istek_turu", "olay")
+    istek_turu = topic_data.get("istek_turu", "olay")
     if istek_turu not in ("olay", "planli_talep"):
         istek_turu = "olay"
+
+    # Stage 1 tagging'i mevcut güvenli DB doğrulamasından geçir.
+    etiketleme = _dogrula_etiketleme(
+        topic_data,
+        agac_norm,
+        sap_moduller_norm,
+    )
+
+    # ============================================================
+    # AŞAMA 2 — ROUTING / MODUL
+    # ============================================================
+    # Stage 2'ye yalnızca doğrulanmış topic sonucu gönderilir.
+    topic_for_routing = {
+        "istek_turu": istek_turu,
+        **etiketleme,
+    }
+
+    routing_system = _build_routing_system(kategoriler)
+
+    routing_user = (
+        "TICKET:\n"
+        f"{ticket_text}\n\n"
+        "STAGE 1 CLASSIFICATION:\n"
+        f"{json.dumps(topic_for_routing, ensure_ascii=False)}"
+    )
+
+    routing_msg = await ollama_client.chat(
+        [
+            {"role": "system", "content": routing_system},
+            {"role": "user", "content": routing_user},
+        ],
+        fmt="json",
+    )
+
+    routing_raw = (routing_msg.get("content") or "{}").strip()
+    if routing_raw.startswith("```"):
+        routing_raw = routing_raw.strip("`")
+        if routing_raw.startswith("json"):
+            routing_raw = routing_raw[4:]
+        routing_raw = routing_raw.strip()
+
     try:
-        guven = float(data.get("guven", 0.0))
+        routing_data = json.loads(routing_raw)
+    except json.JSONDecodeError:
+        logger.warning(
+            "classify(): Stage 2 JSON parse edilemedi. raw=%r",
+            routing_raw,
+        )
+        routing_data = {}
+
+    logger.debug("classify() Stage 2 ham çıktı: %r", routing_data)
+
+    # Modul doğrulaması Python tarafında.
+    modul = routing_data.get("modul")
+    if modul not in kategoriler:
+        modul = "Diger"
+
+    # ============================================================
+    # İSTEK TÜRÜNE DAYALI DETERMINISTIC PRIORITY
+    # ============================================================
+    #
+    # LLM'den priority istemiyoruz. Çünkü "acil", "ASAP", "!!!" gibi
+    # kelimeler priority'yi yanlış yükseltebilir.
+    #
+    # Scope bilgisini Stage 2 çıktısında istemek yerine, mevcut ticket
+    # metninden güvenli varsayılanı 3/4/5 üzerinden belirlemek için
+    # aşağıdaki kurallar uygulanır.
+    #
+    # NOT: Department/company-wide scope gibi semantik bilgiler henüz
+    # ayrı bir Stage 2 alanı olarak modellenmediği için, bu sürümde
+    # priority'nin 1/2 ayrımı için LLM'den explicit "scope" alınır.
+    #
+    # Bu nedenle routing prompt'una scope eklenmiştir ve aşağıda okunur.
+    scope = routing_data.get("scope", "individual")
+    blocked = bool(routing_data.get("blocked", False))
+    development = bool(routing_data.get("development", False))
+
+    if development:
+        oncelik = "5"
+    elif istek_turu == "planli_talep":
+        # Yetkilendirme/access talepleri prosedürde 4;
+        # planlı provisioning/service request 5 olarak ayrılır.
+        if scope == "access_request":
+            oncelik = "4"
+        else:
+            oncelik = "5"
+    elif scope == "company" and blocked:
+        oncelik = "1"
+    elif scope == "department" and blocked:
+        oncelik = "2"
+    elif scope == "large_group" and blocked:
+        oncelik = "2"
+    elif scope == "individual" and blocked:
+        oncelik = "3"
+    else:
+        oncelik = "4"
+
+    try:
+        guven = float(routing_data.get("guven", 0.0))
     except (TypeError, ValueError):
         guven = 0.0
     guven = max(0.0, min(1.0, guven))
-
-    etiketleme = _dogrula_etiketleme(data, agac_norm, sap_moduller_norm)
-    if data.get("ust_kategori") and not etiketleme["ust_kategori"]:
-        logger.info(
-            "classify(): model ust_kategori=%r verdi ama ağaçta hiçbir seviye "
-            "eşleşmedi (normalize sonrası bile) — etiketleme boş kaldı. "
-            "kategori_grubu=%r alt_kategori=%r",
-            data.get("ust_kategori"), data.get("kategori_grubu"), data.get("alt_kategori"),
-        )
 
     return {
         "modul": modul,
         "oncelik": oncelik,
         "istek_turu": istek_turu,
-        **etiketleme,  # ust_kategori, kategori_grubu, alt_kategori, sap_modulu (hepsi isim, id değil)
-        "ozet": data.get("ozet", ""),
+        **etiketleme,
+        "ozet": routing_data.get("ozet", ""),
         "guven": guven,
     }
