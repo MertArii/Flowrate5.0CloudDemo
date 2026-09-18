@@ -29,7 +29,12 @@ async def answer(
     doküman içeriği), bu tek cevap için bağlama eklenir.
     images_b64: verilirse Qwen3.5 görseli bu cevapta doğrudan da okur
     (multimodal) — extra_context'teki açıklamaya ek bir doğrulama katmanı."""
-    q_emb = await ollama_client.embed(question)
+
+    search_query = question
+    if extra_context:
+        search_query = f"{question} {extra_context}"
+
+    q_emb = await ollama_client.embed(search_query)
 
     # İki katmanı birlikte getir; skora göre birleştir.
     hits = store.search_solutions(q_emb, settings.top_k)
