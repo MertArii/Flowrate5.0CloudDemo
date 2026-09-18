@@ -73,8 +73,29 @@ def ocr_image(image_bytes: bytes) -> str:
         logger.warning("OCR sırasında hata: %s", exc)
         raise OCRError(f"OCR işlemi başarısız oldu: {exc}")
 
-    result = text.strip()
+    raw_text = text.strip()
+    
+    stop_words = [
+        "açıklama", "kime:", "tasnif dışı", "unclassified", "merhaba", 
+        "daha fazlasını gör", "tümünü yanitla", "cevapla", "ilet", "konuşmalar", 
+        "e-posta", "sistem bildirmleri", "notlar", "iyi çalışmalar", "acil"
+    ]
+    
+    cleaned_lines = []
+    for line in raw_text.split('\n'):
+        line_lower = line.lower().strip()
+        
+        if not line_lower:
+            continue
+            
+        if any(sw in line_lower for sw in stop_words) and len(line_lower) < 60:
+            continue
+            
+        cleaned_lines.append(line.strip())
+
+    result = " | ".join(cleaned_lines)
+
     if not result:
-        logger.info("OCR sonucu boş — görselde okunabilir metin bulunamadı")
+        logger.info("OCR sonucu boş veya tamamı filtrelendi")
 
     return result
